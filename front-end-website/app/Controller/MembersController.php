@@ -4,19 +4,24 @@
 	*/
 	class MembersController extends AppController{
 		public $uses = array('Account');
-		var $layout="home";
 
 		public function login(){
 
 		}
 
 		public function register(){
-
+			$this->set('title_for_layout', 'Đăng kí tài khoản');
+			if($this->request->is('Post')){
+				pr($this->request->data);die;
+			}
 		}
 
 		public function forgetpass(){
 
 		}
 
+		public function index(){
+
+		}
 	}
 ?>

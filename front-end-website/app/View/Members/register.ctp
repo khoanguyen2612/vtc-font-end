@@ -8,81 +8,81 @@
     <div class="tab-content">
       <p>Quý khách vui lòng điền đầy đủ thông tin Tiếng Việt có dấu</p>
       <div id="person" class="tab-pane fade in active">
-        <form class="form-horizontal" action="/action_page.php">
+        <form class="form-horizontal" action="" method="post">
           <div class="form-group required">
-            <label class="control-label col-sm-3" for="email">Nhập tên đăng nhập:</label>
+            <label class="control-label col-sm-3" for="nickname">Nhập tên đăng nhập:</label>
             <div class="col-sm-8">
-              <input type="email" class="form-control" id="email" placeholder="Nhập tên đăng nhập" name="email" required="required">
+              <input type="text" class="form-control" id="nickname" placeholder="Nhập tên đăng nhập" name="nickname" required="required">
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Nhập họ tên:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập họ tên" name="pwd">
+              <input type="text" class="form-control" id="pwd" placeholder="Nhập họ tên" name="pwd" required>
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Nhập email:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập email" name="pwd">
+              <input type="text" class="form-control" id="email" placeholder="Nhập email" name="email">
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Số CMTND:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder=" Nhập số CMTND" name="pwd">
+              <input type="number" class="form-control" id="CMTND" placeholder=" Nhập số CMTND" name="CMTND">
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Tỉnh, thành phố:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder="Tỉnh, thành phố" name="pwd">
+              <input type="text" class="form-control" id="address" placeholder="Tỉnh, thành phố" name="address">
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Nhập mật khẩu:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="pwd">
+              <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu" name="password">
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Xác nhận mật khẩu:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder="Xác nhận mật khẩu" name="pwd">
+              <input type="password" class="form-control" id="confirm_password" placeholder="Xác nhận mật khẩu" name="confirm_password">
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Giới tính:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder="Giới tính" name="pwd">
+              <input type="text" class="form-control" id="sex" placeholder="Giới tính" name="sex">
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Số điện thoại:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập số điện thoại" name="pwd">
+              <input type="number" class="form-control" id="phonenumber" placeholder="Nhập số điện thoại" name="phonenumber">
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Địa chỉ liên hệ:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập địa chỉ liên hệ" name="pwd">
+              <input type="text" class="form-control" id="add_contact" placeholder="Nhập địa chỉ liên hệ" name="add_contact">
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Ngày tháng năm sinh:</label>
             <div class="col-sm-8">          
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập ngày tháng năm sinh" name="pwd">
+              <input type="text" class="form-control" id="birthday" placeholder="Nhập ngày tháng năm sinh" name="birthday">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-3" for="pwd">Bạn đã có domain hay hosting chưa?</label>
             <div class="col-sm-8">          
               <label class="radio-inline">
-                  <input type="radio" name="optradio"> Đã có
+                  <input type="radio" name="optradio1" value= '1' > Đã có
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="optradio"> Chưa có
+                  <input type="radio" name="optradio1" value='0'> Chưa có
                 </label>
             </div>
           </div>
@@ -90,24 +90,24 @@
             <label class="control-label col-sm-3" for="pwd">Bạn có muốn tạo domain mới không?:</label>
             <div class="col-sm-8">   
                  <label class="radio-inline">
-                  <input type="radio" name="optradio"> Có
+                  <input type="radio" name="optradio" value= '1'> Có
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="optradio">Không
+                  <input type="radio" name="optradio" value= '0'>Không
                 </label>
             </div>
           </div>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="code-secure"> Nhập mã bảo vệ</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="code-secure" name="">
+              <input type="text" class="form-control" id="code-secure" name="p-code">
               <span class="p-code"><i> ABCDEF </i></span>
             </div>
           </div>
           <div class="row">
             <div class="form-group">        
               <div class="col-sm-offset-3 col-sm-8">
-                <input type="button" class="btn-back" value="Quay lại">
+                <button type="submit" class="btn">Đăng ký</button>
               </div>
           </div>
         </div>
@@ -213,3 +213,46 @@
       </div>
     </div>
   </div>
+<style type="text/css">
+  .form-register{
+    margin: auto;
+    max-width: 900px;
+  }
+  .form-register h3{
+    color: #f37636;
+  }
+  .tab-content{
+    padding: 10px 10px;
+  }
+  .form-register .nav li.active a{
+    background: #f37636;
+    border:0px;
+    color:#ffffff;
+  }
+  .form-register .nav li a{
+    border:0px;
+    color:black;
+  }
+
+  .form-register li.active{
+    border: 0px solid #f37636;
+    background: #f37636;
+  }
+  .form-register .tab-content p{
+    color: #f37636;
+    margin:20px;
+  }
+  .tab-content{
+    border: 1px solid #f37636;
+  }
+  body{
+    font-family: Arial;
+  }
+  .tab-content button{
+    text-align: center;
+    background: #f37636;
+    color:#ffffff;
+    width: 145px;
+    padding:10px 10px;
+  }
+</style>

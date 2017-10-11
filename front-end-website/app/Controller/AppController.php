@@ -31,4 +31,28 @@ App::uses('Controller', 'Controller');
  * @link		https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    var $components = array('Session', 'Cookie', 'Paginator','Auth');
+    public $helpers = array('Session','Html');
+    var $uses = array('Account');
+
+    
+    public function beforeFilter() {
+        // setup authentication
+		$this->__configAuth();
+        parent::beforeFilter();
+        $this->Auth->allow();
+        // setup layout
+        $this->__configLayout();
+       
+        
+    }
+
+    private function __configAuth(){
+        
+    }
+
+    private function __configLayout(){
+        $this->layout = "home";
+    }
+
 }
