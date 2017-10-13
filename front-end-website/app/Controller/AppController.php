@@ -48,11 +48,32 @@ class AppController extends Controller {
     }
 
     private function __configAuth(){
-        
+        $this->Auth->loginAction = array('controller' => 'members', 'action' => 'login');
+        $this->Auth->loginRedirect = array('controller' => 'home', 'action' => 'index');
+        $this->Auth->logoutRedirect = array('controller' => 'members', 'action' => 'login');
+        $this->Auth->authenticate = array(
+            'Form' => array(
+                // 'passwordHasher' => 'Blowfish',
+                // 'fields' => array(
+                //     'username' => 'nickname',
+                //     'password' => 'login_password'
+                // )
+            ),
+        );
+        // $this->Auth->authorize = array(
+        //     'Actions' => array('actionPath' => 'controllers', 'userModel' => 'Account')
+        // );
+        $this->Auth->fields = array('username' => 'username', 'password' => 'password');
+        $this->Auth->userModel = 'Account';
+        // $this->Auth->fields = array('nickname' => 'nickname', 'login_password' => 'login_password');
+        $this->Auth->authorize = 'controller';
+        $this->Auth->unauthorizedRedirect = false;
+
     }
 
     private function __configLayout(){
         $this->layout = "home";
     }
+
 
 }
