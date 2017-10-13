@@ -30,9 +30,10 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
+App::uses('CakeEmail', 'Network/Email');
 class AppController extends Controller {
     var $components = array('Session', 'Cookie', 'Paginator','Auth');
-    public $helpers = array('Session','Html');
+    public $helpers = array('Session','Html','Form');
     var $uses = array('Account');
 
     
@@ -41,6 +42,8 @@ class AppController extends Controller {
 		$this->__configAuth();
         parent::beforeFilter();
         $this->Auth->allow();
+
+        $this->set('current_user',$this->Auth->user());
         // setup layout
         $this->__configLayout();
        
@@ -54,17 +57,18 @@ class AppController extends Controller {
         $this->Auth->authenticate = array(
             'Form' => array(
                 // 'passwordHasher' => 'Blowfish',
-                // 'fields' => array(
-                //     'username' => 'nickname',
-                //     'password' => 'login_password'
-                // )
+                'userModel' => 'Account',
+                'fields' => array(
+                    'username' => 'nickname',
+                    'password' => 'login_password'
+                )
             ),
         );
         // $this->Auth->authorize = array(
         //     'Actions' => array('actionPath' => 'controllers', 'userModel' => 'Account')
         // );
-        $this->Auth->fields = array('username' => 'username', 'password' => 'password');
-        $this->Auth->userModel = 'Account';
+        // $this->Auth->fields = array('username' => 'username', 'password' => 'password');
+        // $this->Auth->userModel = 'Account';
         // $this->Auth->fields = array('nickname' => 'nickname', 'login_password' => 'login_password');
         $this->Auth->authorize = 'controller';
         $this->Auth->unauthorizedRedirect = false;
