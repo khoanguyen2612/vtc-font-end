@@ -20,6 +20,7 @@
  */
 
 App::uses('Controller', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Application Controller
@@ -30,9 +31,8 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-App::uses('CakeEmail', 'Network/Email');
 class AppController extends Controller {
-    var $components = array('Session', 'Cookie', 'Paginator','Auth');
+    var $components = array('Session', 'Cookie', 'Paginator','Auth','Email');
     public $helpers = array('Session','Html','Form');
     var $uses = array('Account');
 

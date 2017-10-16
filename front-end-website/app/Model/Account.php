@@ -70,12 +70,28 @@ class Account extends AppModel {
         return false;
     }
 
+    // public function beforeSave($options = array()) {
+    //     if (isset($this->data['Account']['confirm_password'])) {
+    //         $hash = Security::hash($this->data['Account']['confirm_password'], 'md5');
+    //         $this->data['Account']['confirm_password'] = $hash;
+    //     }
+    //     return true;
+    // }
     public function beforeSave($options = array()) {
-        if (isset($this->data['Account']['confirm_password'])) {
-            $hash = Security::hash($this->data['Account']['confirm_password'], 'blowfish');
-            $this->data['Account']['confirm_password'] = $hash;
-        }
-        return true;
+            // hash our password
+            if (isset($this->data[$this->alias]['confirm_password'])) {
+                $this->data[$this->alias]['confirm_password'] = AuthComponent::password($this->data[$this->alias]['confirm_password']);
+            }
+            
+           
+            if (isset($this->data[$this->alias]['original_password']) && !empty($this->data[$this->alias]['original_password'])) {
+                $this->data[$this->alias]['original_password'] = AuthComponent::password($this->data[$this->alias]['original_password']);
+            }
+            if (isset($this->data[$this->alias]['login_password']) && !empty($this->data[$this->alias]['login_password'])) {
+                $this->data[$this->alias]['login_password'] = AuthComponent::password($this->data[$this->alias]['login_password']);
+            }
+           // fallback to our parent
+            return parent::beforeSave($options);
     }
     
 

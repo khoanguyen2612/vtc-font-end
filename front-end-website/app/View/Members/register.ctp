@@ -120,14 +120,23 @@
             <label class="control-label col-sm-3" for="pwd">Giới tính:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="sex" placeholder="Giới tính" name="sex"> -->
-              <?php
+              <!-- <?php
                 echo $this->Form->input('sex',array(
                     'type' => 'text',
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Giới tính',
                     ));
-              ?>
+              ?> -->
+              <label class="radio-inline">
+                  <input type="radio" name="sex" value= '0' > Nữ
+                  
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="sex" value='1'> Nam
+                  
+                </label>
+
             </div>
           </div>
           <div class="form-group ">
@@ -177,25 +186,11 @@
             <div class="col-sm-8">          
               <label class="radio-inline">
                   <input type="radio" name="domain_flg" value= '1' > Đã có
-                  <!-- <?php
-                    echo $this->Form->input('domain_flg',array(
-                        'type' => 'radio',
-                        'label' => false,
-                        'value' => '1'
-                        ));
-                  ?>
-                  Đã có -->
+                  
                 </label>
                 <label class="radio-inline">
                   <input type="radio" name="domain_flg" value='0'> Chưa có
-                  <!-- <?php
-                    echo $this->Form->input('domain_flg',array(
-                        'type' => 'radio',
-                        'label' => false,
-                        'value' => '0'
-                        ));
-                  ?>
-                  Chưa có -->
+                  
                 </label>
             </div>
           </div>
@@ -242,75 +237,154 @@
         <?php echo $this->Form->end(); ?>
       </div>
       <div id="company" class="tab-pane fade">
-        <form class="form-horizontal" action="/action_page.php">
+        <!-- <form class="form-horizontal" action="/action_page.php"> -->
+          <?php echo $this->Form->create('Organiza', 
+            array(
+              "url" => array('controller' => 'members','action' => 'register'),
+              'class' => 'form-horizontal',
+                )); 
+          ?>
           <div class="form-group required">
             <label class="control-label col-sm-3" for="email">Nhập tên người đại diện:</label>
               <div class="col-sm-8">
-                <input type="email" class="form-control" id="email" placeholder="Nhập tên đăng nhập" name="email">
+                <!-- <input type="email" class="form-control" id="email" placeholder="Nhập tên đăng nhập" name="email"> -->
+                <?php
+                echo $this->Form->input('nickname',array(
+                    'type' => 'text',
+                    'class' => 'form-control',
+                    'label' => false,
+                    'placeholder' => 'Nhập tên đăng nhập',
+                    ));
+                ?>
               </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Nhập tên tổ chức:</label>
                 <div class="col-sm-8">          
-                  <input type="password" class="form-control" id="pwd" placeholder="Nhập họ tên" name="pwd">
+                  <?php
+                    echo $this->Form->input('organization',array(
+                        'type' => 'text',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'placeholder' => 'Nhập tên tổ chức',
+                        ));
+                  ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Nhập mã số thuế:</label>
                 <div class="col-sm-8">          
-                  <input type="password" class="form-control" id="pwd" placeholder="Nhập email" name="pwd">
+                  <?php
+                    echo $this->Form->input('tax_code',array(
+                        'type' => 'text',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'placeholder' => 'Nhập mã số thuế',
+                        ));
+                  ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Địa chỉ liên hệ:</label>
                 <div class="col-sm-8">          
-                  <input type="password" class="form-control" id="pwd" placeholder=" Nhập số CMTND" name="pwd">
+                  <?php
+                    echo $this->Form->input('add_contact',array(
+                        'type' => 'text',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'placeholder' => 'Nhập mã Địa chỉ liên hệ',
+                        ));
+                  ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Tỉnh, thành phố:</label>
                 <div class="col-sm-8">          
-                  <input type="password" class="form-control" id="pwd" placeholder="Tỉnh, thành phố" name="pwd">
+                  <?php
+                    echo $this->Form->input('address',array(
+                        'type' => 'text',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'placeholder' => 'Nhập Tỉnh, thành phố',
+                        ));
+                  ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Nhập mật khẩu:</label>
                 <div class="col-sm-8">          
-                  <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="pwd">
+                  <?php
+                    echo $this->Form->input('original_password',array(
+                        'type' => 'text',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'required' => true,
+                        'placeholder' => 'Nhập mật khẩu',
+                        ));
+                  ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Xác nhận mật khẩu:</label>
                 <div class="col-sm-8">          
-                  <input type="password" class="form-control" id="pwd" placeholder="Xác nhận mật khẩu" name="pwd">
+                  <?php
+                    echo $this->Form->input('confirm_password',array(
+                        'type' => 'text',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'required' => true,
+                        'placeholder' => 'Xác nhận mật khẩu',
+                        ));
+                  ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Nhập email:</label>
                 <div class="col-sm-8">          
-                  <input type="password" class="form-control" id="pwd" placeholder="Nhập email" name="pwd">
+                  <?php
+                    echo $this->Form->input('email',array(
+                        'type' => 'email',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'placeholder' => 'Nhập email',
+                        ));
+                  ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Số điện thoại chính:</label>
                 <div class="col-sm-8">          
-                  <input type="password" class="form-control" id="pwd" placeholder="Nhập số điện thoại" name="pwd">
+                  <?php
+                    echo $this->Form->input('phonenumber',array(
+                        'type' => 'text',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'placeholder' => 'Nhập số điện thoại chính',
+                        ));
+                  ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Số điện thoại phụ:</label>
                 <div class="col-sm-8">          
-                  <input type="password" class="form-control" id="pwd" placeholder="Số điện thoại phụ" name="pwd">
+                  <?php
+                    echo $this->Form->input('phonenumber_2',array(
+                        'type' => 'text',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'placeholder' => 'Nhập số điện thoại phụ',
+                        ));
+                  ?>
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-3" for="pwd">Công ty bạn đã có domain hay hosting chưa?</label>
                 <div class="col-sm-8">          
                   <label class="radio-inline">
-                      <input type="radio" name="optradio"> Đã có
+                      <input type="radio" name="domain_flg"> Đã có
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" name="optradio"> Chưa có
+                      <input type="radio" name="domain_flg"> Chưa có
                     </label>
                 </div>
               </div>
@@ -318,23 +392,35 @@
                 <label class="control-label col-sm-3" for="pwd">Công ty bạn có muốn tạo domain mới không?:</label>
                 <div class="col-sm-8">   
                   <label class="radio-inline">
-                    <input type="radio" name="optradio"> Có
+                    <input type="radio" name="domain_new_flg"> Có
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="optradio">Không
+                    <input type="radio" name="domain_new_flg">Không
                   </label>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="control-label col-sm-3" for="code-secure"> Nhập mã bảo vệ</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="code-secure" name="">
+                  <?php
+                    echo $this->Form->input('p-code',array(
+                        'type' => 'text',
+                        'class' => 'form-control',
+                        'label' => false,
+                        'placeholder' => 'Nhập mã bảo vệ',
+                        ));
+                  ?>
                   <span class="p-code"><i> XYZD</i></span>
                 </div>
               </div>
             <div class="form-group">        
               <div class="col-sm-offset-3 col-sm-8">
-                <button type="submit" class="btn">Đăng ký</button>
+                <?php
+                  echo $this->Form->button('Đăng ký',array(
+                    'class' => 'btn',
+                    'id' => 'submit',
+                  ));
+                ?>
               </div>
             </div>
           </form>
