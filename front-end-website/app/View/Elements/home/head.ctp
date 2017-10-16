@@ -11,4 +11,5 @@
 	<link href='http://fonts.googleapis.com/css?family=Ruge+Boogie' rel='stylesheet' type='text/css'>
 	<?php echo $this->Html->css('style'); ?>
     <?php echo $this->fetch('css'); ?>
+
 </head>
