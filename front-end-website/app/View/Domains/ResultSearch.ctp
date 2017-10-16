@@ -62,25 +62,24 @@
 
 									<tr>
 
-										<td><?php echo $request['search'] ?></td>
-										<td>
-											<?php 
-												 	if ($output['status'] == "available")
-												 	{
-												 		echo "Có thể đăng ký";
-												 	}
-												 	else
-												 	{
-												 		echo "Tên miền đã tồn tại";
-												 	}
+										<?php if ($output['status'] == "available"){ ?>
+											<td><?php echo $request['search'] ?></td>
+											<td><?php echo "Có thể đăng ký"; ?></td>
+											<td><?php echo $prod_name['Domain']['price'] ?></td>
+											<td><?php echo $prod_name['Domain']['bk_price'] ?></td>
+											<td><?php echo $prod_name['Domain']['price_transfer'] ?></td>
+											<td><a class="btn btn-success" href="#" role="button">Đặt mua</a></td>
 
+										<?php } else { ?>
+											<td><?php echo $request['search'] ?></td>
+											<td><?php echo "Tên miền đã tồn tại"; ?></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
 
-											 ?>
-										</td>
-										<td><?php echo $prod_name['Domain']['price'] ?></td>
-										<td><?php echo $prod_name['Domain']['bk_price'] ?></td>
-										<td><?php echo $prod_name['Domain']['price_transfer'] ?></td>
-										<td><a class="btn btn-success" href="#" role="button">Đặt mua</a></td>
+										<?php } ?>
+										
 
 									</tr>
 
