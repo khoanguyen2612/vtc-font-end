@@ -57,26 +57,24 @@
 									Hỗ trợ
 								</a>
 							</li>
-							<?php if(isset($login)){?>
-							<li class="dropdown btn-group" role="group">
-								<div >
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-										<?php echo $login; echo $this->Html->image('user-icon.png');?>
-										<span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu">
-										<li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => 'logout' ), true); ?>">LOGOUT</a></li>
-									</ul>
-								</div>
-							</li>
-							<?php }else{?>
-							<li>
-								<a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => 'login' ), true); ?>">
-									<?php echo $this->Html->image('user-icon.png');?>
-									Đăng nhập
-								</a>
-							</li>
-							<?php } ?>
+								<?php if(isset($login)){?>
+									<li class="dropdown btn-group" role="group">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											<?php echo $login; echo $this->Html->image('user-icon.png');?>
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => 'logout' ), true); ?>">LOGOUT</a></li>
+										</ul>
+								</li>
+								<?php }else{?>
+								<li>
+									<a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => 'login' ), true); ?>">
+										<?php echo $this->Html->image('user-icon.png');?>
+										Đăng nhập
+									</a>
+								</li>
+								<?php } ?>
 
 							<li>
 								<a href="">

@@ -15,7 +15,7 @@
               'class' => 'form-horizontal',
                 )); 
           ?>
-          <div class="form-group">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="nickname">Nhập tên đăng nhập:</label>
             <div class="col-sm-8">
               <!-- <input type="text" class="form-control" id="nickname" placeholder="Nhập tên đăng nhập" name="nickname"> -->
@@ -25,11 +25,12 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập tên đăng nhập',
+                    'required' => true,
                     ));
               ?>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Nhập họ tên:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="name" placeholder="Nhập họ tên" name="name" > -->
@@ -39,11 +40,12 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập họ tên',
+                    'required' => true,
                     ));
               ?>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Nhập email:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="email" placeholder="Nhập email" name="email"> -->
@@ -53,12 +55,13 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập email',
+                    'required' => true,
                     ));
               ?>
 
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Số CMTND:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="CMTND" placeholder=" Nhập số CMTND" name="CMTND"> -->
@@ -68,11 +71,12 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập số CMTND',
+                    'required' => true,
                     ));
               ?>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Tỉnh, thành phố:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="address" placeholder="Tỉnh, thành phố" name="address"> -->
@@ -82,11 +86,12 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Tỉnh, thành phố',
+                    'required' => true,
                     ));
               ?>
             </div>
           </div>
-          <div class="form-group ">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Nhập mật khẩu:</label>
             <div class="col-sm-8">          
               <!-- <input type="password" class="form-control" id="original_password" placeholder="Nhập mật khẩu" name="original_password" required> -->
@@ -101,7 +106,7 @@
               ?>
             </div>
           </div>
-          <div class="form-group ">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Xác nhận mật khẩu:</label>
             <div class="col-sm-8">          
               <!-- <input type="password" class="form-control" id="confirm_password" placeholder="Xác nhận mật khẩu" name="confirm_password" required> -->
@@ -116,7 +121,7 @@
               ?>
             </div>
           </div>
-          <div class="form-group ">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Giới tính:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="sex" placeholder="Giới tính" name="sex"> -->
@@ -129,17 +134,17 @@
                     ));
               ?> -->
               <label class="radio-inline">
-                  <input type="radio" name="sex" value= '0' > Nữ
+                  <input type="radio" name="sex" value= '0' required> Nữ
                   
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="sex" value='1'> Nam
+                  <input type="radio" name="sex" value='1' required> Nam
                   
                 </label>
 
             </div>
           </div>
-          <div class="form-group ">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Số điện thoại:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="phonenumber" placeholder="Nhập số điện thoại" name="phonenumber"> -->
@@ -149,11 +154,12 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập số điện thoại',
+                    'required' => true,
                     ));
               ?>
             </div>
           </div>
-          <div class="form-group ">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Địa chỉ liên hệ:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="add_contact" placeholder="Nhập địa chỉ liên hệ" name="add_contact"> -->
@@ -163,25 +169,52 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập địa chỉ liên hệ',
+                    'required' => true,
                     ));
               ?>
             </div>
           </div>
-          <div class="form-group ">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Ngày tháng năm sinh:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="birthday" placeholder="Nhập ngày tháng năm sinh" name="birthday"> -->
-              <?php
-                echo $this->Form->input('birthday',array(
-                    'type' => 'text',
-                    'class' => 'form-control',
-                    'label' => false,
-                    'placeholder' => 'Nhập ngày tháng năm sinh',
-                    ));
-              ?>
+          
+                <select name="day">
+                    <?php
+                    for($i=1;$i<=31;$i++)
+                    {
+                        echo '<option value='.$i.'>'.$i.'</option>';
+                    }?>
+                </select>
+
+
+                <select name="month">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">Mars</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <select name="year">
+                  <?php
+                    for($i=2010;$i>=1950;$i--)
+                    {
+                        echo '<option value='.$i.'>'.$i.'</option>';
+                    }
+
+                  ?>
+                </select>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Bạn đã có domain hay hosting chưa?</label>
             <div class="col-sm-8">          
               <label class="radio-inline">
@@ -194,7 +227,7 @@
                 </label>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Bạn có muốn tạo domain mới không?:</label>
             <div class="col-sm-8">   
                  <label class="radio-inline">
@@ -205,7 +238,7 @@
                 </label>
             </div>
           </div>
-          <div class="form-group ">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="code-secure"> Nhập mã bảo vệ</label>
             <div class="col-sm-8">
               <!-- <input type="text" class="form-control" id="code-secure" name="p-code"> -->
@@ -215,6 +248,7 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập mã bảo vệ',
+                    'required' => true,
                     ));
               ?>
               <span class="p-code"><i> ABCDEF </i></span>
@@ -226,7 +260,7 @@
                 <!-- <button type="submit" class="btn">Đăng ký</button> -->
                 <?php
                   echo $this->Form->button('Đăng ký',array(
-                    'class' => 'btn',
+                    'class' => 'btn btn-login',
                     'id' => 'submit',
                   ));
                 ?>
@@ -238,7 +272,7 @@
       </div>
       <div id="company" class="tab-pane fade">
         <!-- <form class="form-horizontal" action="/action_page.php"> -->
-          <?php echo $this->Form->create('Organiza', 
+          <?php echo $this->Form->create('Account', 
             array(
               "url" => array('controller' => 'members','action' => 'register'),
               'class' => 'form-horizontal',
@@ -254,6 +288,7 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập tên đăng nhập',
+                    'required' => true,
                     ));
                 ?>
               </div>
@@ -262,11 +297,12 @@
                 <label class="control-label col-sm-3" for="pwd">Nhập tên tổ chức:</label>
                 <div class="col-sm-8">          
                   <?php
-                    echo $this->Form->input('organization',array(
+                    echo $this->Form->input('organ_name',array(
                         'type' => 'text',
                         'class' => 'form-control',
                         'label' => false,
                         'placeholder' => 'Nhập tên tổ chức',
+                        'required' => true,
                         ));
                   ?>
                 </div>
@@ -280,6 +316,7 @@
                         'class' => 'form-control',
                         'label' => false,
                         'placeholder' => 'Nhập mã số thuế',
+                        'required' => true,
                         ));
                   ?>
                 </div>
@@ -293,6 +330,7 @@
                         'class' => 'form-control',
                         'label' => false,
                         'placeholder' => 'Nhập mã Địa chỉ liên hệ',
+                        'required' => true,
                         ));
                   ?>
                 </div>
@@ -306,6 +344,7 @@
                         'class' => 'form-control',
                         'label' => false,
                         'placeholder' => 'Nhập Tỉnh, thành phố',
+                        'required' => true,
                         ));
                   ?>
                 </div>
@@ -347,6 +386,7 @@
                         'class' => 'form-control',
                         'label' => false,
                         'placeholder' => 'Nhập email',
+                        'required' => true,
                         ));
                   ?>
                 </div>
@@ -360,6 +400,7 @@
                         'class' => 'form-control',
                         'label' => false,
                         'placeholder' => 'Nhập số điện thoại chính',
+                        'required' => true,
                         ));
                   ?>
                 </div>
@@ -368,34 +409,35 @@
                 <label class="control-label col-sm-3" for="pwd">Số điện thoại phụ:</label>
                 <div class="col-sm-8">          
                   <?php
-                    echo $this->Form->input('phonenumber_2',array(
+                    echo $this->Form->input('phonenumber2',array(
                         'type' => 'text',
                         'class' => 'form-control',
                         'label' => false,
                         'placeholder' => 'Nhập số điện thoại phụ',
+                        'required' => true,
                         ));
                   ?>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Công ty bạn đã có domain hay hosting chưa?</label>
                 <div class="col-sm-8">          
                   <label class="radio-inline">
-                      <input type="radio" name="domain_flg"> Đã có
+                      <input type="radio" name="domain_flg" value= '1' required > Đã có
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" name="domain_flg"> Chưa có
+                      <input type="radio" name="domain_flg" value= '0' required> Chưa có
                     </label>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group required">
                 <label class="control-label col-sm-3" for="pwd">Công ty bạn có muốn tạo domain mới không?:</label>
                 <div class="col-sm-8">   
                   <label class="radio-inline">
-                    <input type="radio" name="domain_new_flg"> Có
+                    <input type="radio" name="domain_new_flg" value= '1' required> Có
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="domain_new_flg">Không
+                    <input type="radio" name="domain_new_flg" value= '0' required> Không
                   </label>
                 </div>
               </div>
@@ -408,6 +450,7 @@
                         'class' => 'form-control',
                         'label' => false,
                         'placeholder' => 'Nhập mã bảo vệ',
+                        'required' => true,
                         ));
                   ?>
                   <span class="p-code"><i> XYZD</i></span>
@@ -417,7 +460,7 @@
               <div class="col-sm-offset-3 col-sm-8">
                 <?php
                   echo $this->Form->button('Đăng ký',array(
-                    'class' => 'btn',
+                    'class' => 'btn btn-login',
                     'id' => 'submit',
                   ));
                 ?>
@@ -428,6 +471,7 @@
     </div>
   </div>
 <style type="text/css">
+/*register.ctp*/
   .form-register{
     margin: auto;
     max-width: 900px;
@@ -467,7 +511,6 @@
     background: #f37636;
     color:#ffffff;
     width: 145px;
-    padding:10px 10px;
   }
 </style>
 <style type="text/css">
