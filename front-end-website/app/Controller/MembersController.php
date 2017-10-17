@@ -3,7 +3,7 @@
 	App::uses('CakeEmail', 'Network/Email');
 	
 	class MembersController extends AppController{
-		public $uses = array('Account');
+		public $uses = array('Account','Organization');
 		public $components = array('Email');
 
 		public function login(){
@@ -29,27 +29,68 @@
 			$this->redirect($this->Auth->logout());
 		}
 
+		// public function register_personal(){
+		// 	$this->set('title_for_layout', 'Đăng kí tài khoản');
+
+  //       	if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
+		// 	if($this->request->is('post')||$this->request->is('put')){
+
+		// 		// pr($this->request->data);die;
+		// 		$Data_Form=$this->request->data;
+		// 		if(isset($Data_Form['sex'])){$Data_Form['Account']['sex'] =$Data_Form['sex'];}
+		// 		$Data_Form['Account']['domain_flg'] =$Data_Form['domain_flg'];
+		// 		$Data_Form['Account']['domain_news_flg'] =$Data_Form['domain_news_flg'];
+		// 		$Data_Form['Account']['login_password']=$Data_Form['Account']['original_password'];
+		// 		// $Data_Form['Account']['username']=$Data_Form['Account']['nickname'];
+		// 		// $Data_Form['Account']['password']=$Data_Form['Account']['original_password'];
+		// 		// $Data_Form['Account']['original_password']=$Data_Form['Account']['original_password'];
+		// 		$Data_Form['Account']['login_id']=$Data_Form['Account']['nickname'];
+		// 		$this->Account->set($Data_Form['Account']);
+  //   			if ($this->Account->validates()) {
+		// 			if($this->Account->save($Data_Form)){
+		// 				$this->Session->setFlash('Tài khoản đã của bạn đã được kích hoạt, vui lòng đăng nhập','default',array('class'=>'alert alert-success'));
+		// 				$this->redirect(array('action'=>'login'));
+		// 			}
+		// 		}
+				
+
+		// 	}
+		// }
+
 		public function register(){
 			$this->set('title_for_layout', 'Đăng kí tài khoản');
-
         	if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
 			if($this->request->is('post')||$this->request->is('put')){
-
-				// pr($this->request->data);die;
 				$Data_Form=$this->request->data;
-				$Data_Form['Account']['sex'] =$Data_Form['sex'];
 				$Data_Form['Account']['domain_flg'] =$Data_Form['domain_flg'];
 				$Data_Form['Account']['domain_news_flg'] =$Data_Form['domain_news_flg'];
 				$Data_Form['Account']['login_password']=$Data_Form['Account']['original_password'];
-				// $Data_Form['Account']['username']=$Data_Form['Account']['nickname'];
-				// $Data_Form['Account']['password']=$Data_Form['Account']['original_password'];
-				// $Data_Form['Account']['original_password']=$Data_Form['Account']['original_password'];
 				$Data_Form['Account']['login_id']=$Data_Form['Account']['nickname'];
-				$this->Account->set($Data_Form['Account']);
-    			if ($this->Account->validates()) {
-					if($this->Account->save($Data_Form)){
+				if(isset($Data_Form['sex'])){
+					$Data_Form['Account']['sex'] =$Data_Form['sex'];
+					$Data_Form['Account']['birthday']=$Data_Form['year'].'-'.$Data_Form['month'].'-'.$Data_Form['day'];
+					$this->Account->set($Data_Form['Account']);
+				}else{
+					$Data_Form['Organization']['organ_name']=$Data_Form['Account']['organ_name'];
+					$Data_Form['Organization']['tax_code']=$Data_Form['Account']['tax_code'];
+					$Data_Form['Organization']['phonenumber2']=$Data_Form['Account']['phonenumber2'];
+					$this->Account->set($Data_Form['Account']);
+					$this->Organization->set($Data_Form['Organization']);
+				}
+				if(isset($Data_Form['Organization'])){
+	    			if ($this->Account->validates()&&$this->Organization->validates()) {
+						$this->Account->save($Data_Form);
+						$Data_Form['Organization']['account_id']=$this->Account->id;
+						$this->Organization->save($Data_Form);
+						$this->Session->setFlash('Tài khoản đã của bạn đã được kích hoạt, vui lòng đăng nhập','default',array('class'=>'alert alert-success'));
 						$this->redirect(array('action'=>'login'));
+							
 					}
+				}
+				elseif ($this->Account->validates()) {
+					$this->Account->save($Data_Form);
+					$this->Session->setFlash('Tài khoản đã của bạn đã được kích hoạt, vui lòng đăng nhập','default',array('class'=>'alert alert-success'));
+					$this->redirect(array('action'=>'login'));
 				}
 				
 
@@ -153,11 +194,11 @@
 		            }
 		            else
 		            {
-		                $this->Session->setFlash('Token Corrupted,,Please Retry.the reset link work only for once.');
+		                $this->Session->setFlash('Email xác nhận đã hết hạn hoặc mã số sai, xin vui lòng gửi yêu cầu một lần nữa.','default',array('class'=>'alert alert-danger'));
 		            }
 		        }
 		        else{
-		            $this->Session->setFlash('error','default',array('class'=>'alert alert-danger'));
+		            $this->Session->setFlash('ERROR! ','default',array('class'=>'alert alert-danger'));
 		            $this->redirect($this->referer());
 		        }
 		}	
