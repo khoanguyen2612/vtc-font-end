@@ -62,9 +62,9 @@
 													$i++;
 
 											 ?></td>
-											<td><p class="p-name"><?php echo ($test = $request['add-domain'].$item['product_price']['product_name']); ?></p></td>
-											<td><p class="p-money"><?php echo $item['product_price']['price'] ?>VNĐ</p></td>
-											<td><p class="img-fee"><?php echo $item['product_price']['bk_price'] ?>VNĐ</p></td>
+											<td><p class="p-name"><?php echo ($test = $request['add-domain'].$item['ProductPrice']['product_name']); ?></p></td>
+											<td><p class="p-money"><?php echo $item['ProductPrice']['price'] ?>VNĐ</p></td>
+											<td><p class="img-fee"><?php echo $item['ProductPrice']['bk_price'] ?>VNĐ</p></td>
 											<td></td>
 											<td>
 												<input type="checkbox" class="add-domain-checkbox" checked="true" name="">

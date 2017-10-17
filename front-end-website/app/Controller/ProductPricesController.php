@@ -1,22 +1,22 @@
 <?php 
-	class DomainsController extends AppController
+	class ProductPricesController extends AppController
 	{	
 		public $use = array
 		(
-			'Domain',
+			'ProductPrice',
 		);
 		
 		public function ResultSearch() 
 		  {
-		  	$sql = "select * from product_price";
-			$data = $this->Domain->query($sql);
+		 //  	
+			$data=$this->ProductPrice->find('all');
 			$this->set('data',$data);
 			if($this->request->is('post'))
 			{
 				$request = ($this->request->data);
-				$prod_name=$this->Domain->find('first',array(
-					'conditions'=> array('Domain.id'=>$request['product_id'])));
-				$request['search']=$request['search'].$prod_name['Domain']['product_name'];
+				$prod_name=$this->ProductPrice->find('first',array(
+					'conditions'=> array('ProductPrice.id'=>$request['product_id'])));
+				$request['search']=$request['search'].$prod_name['ProductPrice']['product_name'];
 				$this->set('prod_name',$prod_name);
 				$this->set('request',$request);
 
@@ -60,22 +60,23 @@
 		}
         public function RegisterDomain()
         {
-        	$sql = "select * from product_price";
-			$data = $this->Domain->query($sql);
+        	$data=$this->ProductPrice->find('all');
 			$this->set('data',$data);
+			
         	if($this->request->is('post'))
         	{
         		$request = ($this->request->data);
-				echo $request['add-domain'];
+				//echo $request['add-domain'];
 				$this->set('request',$request);	
 
 //-------------------------------------------------------------------------------------------------------------------------------------
-				$sql1 = "select * from product_price";
-				$data1 = $this->Domain->query($sql1);	
+				
+				$data1=$this->ProductPrice->find('all');
+				$this->set('data1',$data1);
 				$i=0;
 				foreach($data1 as $item)
 				{
-					$test = $request['add-domain'].$item['product_price']['product_name'];
+					$test = $request['add-domain'].$item['ProductPrice']['product_name'];
 
 					
 //--------------------------------------------------------------------------------------------------------------------------------------
