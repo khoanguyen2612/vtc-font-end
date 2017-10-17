@@ -59,8 +59,36 @@ class Account extends AppModel {
                     'rule' => 'notBlank',
                     'message' => 'Vui lòng nhập họ tên'
                 )
-            )
+            ),
+            'phonenumber' => array(
+                'numeric' => array(
+                    'rule' => 'numeric',
+                    'message' => 'Vui lòng nhập số',
+                ),
+                'too long'=>array(
+                    'rule' => array('between', 10, 12),
+                    'message' => 'Số điện thoại không hợp lệ',
+                ),
+            ),
+            'CMTND' => array(
+                'numeric' => array(
+                    'rule' => 'numeric',
+                    'message' => 'Vui lòng nhập số',
+                ),
+                'too long'=>array(
+                    'rule' => array('between', 9, 10),
+                    'message' => 'Số CMT không hợp lệ',
+                ),
+            ),
+
         );
+
+    var $hasOne = array(
+        'Organization' => array(
+            'className' => 'Organization',
+            'foreignKey' => 'account_id'
+        )
+    );
 
 	public function matchPasswords($data){
         if($this->data['Account']['original_password']==$this->data['Account']['confirm_password']){

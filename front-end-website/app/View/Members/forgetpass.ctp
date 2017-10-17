@@ -24,7 +24,7 @@
 			    <!-- <button type="submit" class="btn">Xác nhận</button> -->
 			    <?php
                   echo $this->Form->button('Xác nhận',array(
-                    'class' => 'btn',
+                    'class' => 'btn btn-login',
                     'id' => 'submit',
                   ));
                 ?>
@@ -37,6 +37,7 @@
 	</div>
 
 <style type="text/css">
+/*css forgetpass.ctp*/
 .forget-form > div > h3{
 	margin:100px 0px 30px 0px;
 	padding-bottom: 10px;
