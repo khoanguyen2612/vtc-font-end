@@ -16,6 +16,13 @@ class CartsController extends AppController
      * @var array
      */
     public $uses = array('Product', 'Cart');
+    //var $layout = 'cart';
+
+
+    function beforeFilter() {
+        parent::beforeFilter();
+        $this->layout = 'cart';
+    }
 
     public function add()
     {
@@ -38,6 +45,7 @@ class CartsController extends AppController
             }
         }
         $this->set(compact('products'));
+
     }
 
     public function update()

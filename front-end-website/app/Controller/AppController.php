@@ -28,29 +28,32 @@ App::uses('CakeEmail', 'Network/Email');
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
  *
- * @package		app.Controller
- * @link		https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
+ * @package        app.Controller
+ * @link        https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
-    var $components = array('Session', 'Cookie', 'Paginator','Auth','Email');
-    public $helpers = array('Session','Html','Form');
+class AppController extends Controller
+{
+    var $components = array('Session', 'Cookie', 'Paginator', 'Auth', 'Email');
+    public $helpers = array('Session', 'Html', 'Form');
     var $uses = array('Account');
 
-    
-    public function beforeFilter() {
+
+    public function beforeFilter()
+    {
         // setup authentication
-		$this->__configAuth();
+        $this->__configAuth();
         parent::beforeFilter();
         $this->Auth->allow();
 
-        $this->set('current_user',$this->Auth->user());
+        $this->set('current_user', $this->Auth->user());
         // setup layout
         $this->__configLayout();
-       
-        
+
+
     }
 
-    private function __configAuth(){
+    private function __configAuth()
+    {
         $this->Auth->loginAction = array('controller' => 'members', 'action' => 'login');
         $this->Auth->loginRedirect = array('controller' => 'home', 'action' => 'index');
         $this->Auth->logoutRedirect = array('controller' => 'members', 'action' => 'login');
@@ -75,7 +78,8 @@ class AppController extends Controller {
 
     }
 
-    private function __configLayout(){
+    private function __configLayout()
+    {
         $this->layout = "home";
     }
 

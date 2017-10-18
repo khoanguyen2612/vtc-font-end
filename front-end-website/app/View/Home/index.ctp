@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-					<h2>CLOUD SERVER GIÁ SIÊU RẺ</h2>
+					<h2>CLOUD SERVER GIÁ SIÊU RẺ CLOUD SERVER GIÁ SIÊU RẺ CLOUD SERVER GIÁ SIÊU RẺ</h2>
 					<h1><span>KHÔNG GIỚI HẠN</span> CLOUD SERVER</h1>
 					<p><i class="stick"></i>Cloud Server số 1 Việt Nam</p>
 					<p><i class="stick"></i>Domain cực rẻ</p>
