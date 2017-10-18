@@ -78,15 +78,22 @@ div.sale_info  img.thumb,div.tech_info img.thumb{
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
+
 div.sale_info h4,div.tech_info h4 {
 	font-size: 30px;
-	padding-bottom: 35px;
+	position: absolute;
+	top: 20px;
+}
+div.sale_info h4{
+	left: 90px;
+}
+div.tech_info h4{
+	left: 95px;
+}
+p.south_area{
+	margin-top: 120px;
 }
 
-.contact_area > p:nth-child(4),.contact_area > p:nth-child(5){
-	margin-bottom: 40px;
-	font-size: 26px;
-}
 .contact_area p:last-child{
 	margin-top: 150px;
 	margin-left: 15px;
@@ -106,13 +113,6 @@ div.sale_info h4,div.tech_info h4 {
 		margin-top: 10px;
 	}
 }
-@media screen and (max-width: 1570px){
-	.contact_area h4{
-		margin-top: 40px;
-		text-align: center;
-		font-size: 24px !important;
-	}
-}
 @media screen and (min-width: 1919px){
 	.sale_info,.tech_info{
 		padding-left: 68px;
@@ -130,14 +130,22 @@ div.sale_info h4,div.tech_info h4 {
 	color: #fff;
 }
 
-div.action ul li a{
+div.action > ul > li > a, div.action > ul > li > ul > li >a{
 	color: #fff;
 	padding: 8px 4px 10px 4px;
 	border-radius: 4px;
 	margin: 0px 2px;
-	float: right;
 }
-
+div.action > ul > li{
+	vertical-align: middle;
+	margin: 4px 0px;
+}
+div.action .open > a{
+	background-color: #1a70b7 !important;
+}
+div.action ul.menu-user{
+	top: 40px;
+}
 .action ul{
 	float: right;
 }

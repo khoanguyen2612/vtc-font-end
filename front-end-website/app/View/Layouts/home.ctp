@@ -6,6 +6,7 @@
 	<?php echo $this->html->meta('icon','img/vtc-logo.png', array('type' =>'icon')); ?>
 	<meta charset="utf-8" >	
 	<?php echo $this->Html->css('bootstrap.min'); ?>
+	<?php echo $this->Html->css('fileinput.min'); ?>
     <?php echo $this->Html->script('jquery.min'); ?> 
 	
     <?php echo $this->Html->script('bootstrap.min'); ?> 
@@ -39,7 +40,7 @@
 				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<div class="action">
 						<ul class="list-inline">
-							<li style="height: 41px;">
+							<li >
 								<a href="" class="phone">
 									<?php echo $this->Html->image('phone-icon.png');?>
 									(04) 4450 5566
@@ -58,7 +59,7 @@
 								</a>
 							</li>
 								<?php if(isset($login)){?>
-									<li class="dropdown btn-group" role="group">
+									<!-- <li class="dropdown btn-group" role="group">
 										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 											<?php echo $login; echo $this->Html->image('user-icon.png');?>
 											<span class="caret"></span>
@@ -66,6 +67,19 @@
 										<ul class="dropdown-menu">
 											<li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => 'logout' ), true); ?>">LOGOUT</a></li>
 										</ul>
+								</li> -->
+								<li>
+									<ul class="nav pull-right">
+										<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<?php echo $login; echo $this->Html->image('user-icon.png');?><b class="caret"></b></a>
+											<ul class="dropdown-menu menu-user">
+												
+													<li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => $profile ), true); ?>"> <span class="glyphicon glyphicon-wrench"></span> Cài đặt</a></li>
+													<li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ hỗ trợ</a></li>
+													<li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => 'logout' ), true); ?>"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 								<?php }else{?>
 								<li>

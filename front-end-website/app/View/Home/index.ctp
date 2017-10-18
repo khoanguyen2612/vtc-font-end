@@ -194,8 +194,8 @@
 						<img src="img/sale-header-icon.png" class="pull-left hidden-xs icon">
 						<p class="hidden-xs">LIÊN HỆ</p>
 						<h4>NHÂN VIÊN KINH DOANH</h4>
-						<p><img src="img/vector-icon.png"> <span>Miền Nam: </span><strong>(08) 4450 3077</strong></p>
-						<p><img src="img/vector-icon.png"> <span>Miền Bắc: </span><strong>(04) 4450 5566</strong> </p>
+						<p class="south_area"><img src="img/vector-icon.png"> <span>Miền Nam: </span><strong>(08) 4450 3077</strong></p>
+						<p class="nouth_area"><img src="img/vector-icon.png"> <span>Miền Bắc: </span><strong>(04) 4450 5566</strong> </p>
 						<p>Tư vấn vào tất cả các ngày trong tuần</p>
 					</div>
 				</div>
@@ -208,8 +208,8 @@
 						<img src="img/tech-header-icon.png" class="pull-left hidden-xs icon">
 						<p class="hidden-xs">LIÊN HỆ</p>
 						<h4>NHÂN VIÊN KỸ THUẬT</h4>
-						<p><img src="img/vector-icon.png"> <span>Miền Nam: </span><strong>(08) 4450 3077</strong></p>
-						<p><img src="img/vector-icon.png"> <span>Miền Bắc: </span><strong>(04) 4450 5566</strong> </p>
+						<p class="south_area"><img src="img/vector-icon.png"> <span>Miền Nam: </span><strong>(08) 4450 3077</strong></p>
+						<p class="nouth_area"><img src="img/vector-icon.png"> <span>Miền Bắc: </span><strong>(04) 4450 5566</strong> </p>
 						<p>Tư vấn vào tất cả các ngày trong tuần</p>
 					</div>
 				</div>
