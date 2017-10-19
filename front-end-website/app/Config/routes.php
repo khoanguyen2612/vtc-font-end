@@ -1,4 +1,8 @@
 <?php
+/******************************************************************************
+ * tue.phpmailer@gmail.com                                                    *
+ ******************************************************************************/
+
 /**
  * Routes configuration
  *
@@ -30,6 +34,10 @@
  * ...and connect the rest of 'Pages' controller's URLs.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+
+	/* tue.phpmailer@gmail.com config route URL */
+	Router::connect('/cart/*', array('controller' => 'Carts', 'action' => 'view', 'index', 'home'));
+	Router::connect('/domain/*', array('controller' => 'Domains', 'action' => 'view', 'index', 'home'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

@@ -70,11 +70,6 @@ div.tech_info{
 	padding: 92px 0px 20px 0px;
 	color: #fff;
 }
-<<<<<<< HEAD
-div.sale_info > div >img, div.tech_info > div >img{
-	padding-right: 20px;
-	padding-bottom: 10px;
-=======
 div.sale_info img.icon, div.tech_info img.icon{
 	padding-right: 20px;
 }
@@ -82,23 +77,23 @@ div.sale_info  img.thumb,div.tech_info img.thumb{
 	padding-left: 65px;
 	margin-top: 40px;
 	margin-bottom: 40px;
->>>>>>> 9baa358929426eec42e41a5d82b50f541d9900a6
-}
-div.sale_info h4,div.tech_info h4 {
-	font-size: 30px;
-	padding-bottom: 35px;
-<<<<<<< HEAD
-}
-div.contact_area{
-	margin-top: -45px;
-=======
->>>>>>> 9baa358929426eec42e41a5d82b50f541d9900a6
 }
 
-.contact_area > p:nth-child(4),.contact_area > p:nth-child(5){
-	margin-bottom: 40px;
-	font-size: 26px;
+div.sale_info h4,div.tech_info h4 {
+	font-size: 30px;
+	position: absolute;
+	top: 20px;
 }
+div.sale_info h4{
+	left: 90px;
+}
+div.tech_info h4{
+	left: 95px;
+}
+p.south_area{
+	margin-top: 120px;
+}
+
 .contact_area p:last-child{
 	margin-top: 150px;
 	margin-left: 15px;
@@ -118,13 +113,6 @@ div.contact_area{
 		margin-top: 10px;
 	}
 }
-@media screen and (max-width: 1570px){
-	.contact_area h4{
-		margin-top: 40px;
-		text-align: center;
-		font-size: 24px !important;
-	}
-}
 @media screen and (min-width: 1919px){
 	.sale_info,.tech_info{
 		padding-left: 68px;
@@ -142,14 +130,22 @@ div.contact_area{
 	color: #fff;
 }
 
-div.action ul li a{
+div.action > ul > li > a, div.action > ul > li > ul > li >a{
 	color: #fff;
 	padding: 8px 4px 10px 4px;
 	border-radius: 4px;
 	margin: 0px 2px;
-	float: right;
 }
-
+div.action > ul > li{
+	vertical-align: middle;
+	margin: 4px 0px;
+}
+div.action .open > a{
+	background-color: #1a70b7 !important;
+}
+div.action ul.menu-user{
+	top: 40px;
+}
 .action ul{
 	float: right;
 }
@@ -946,6 +942,7 @@ div.search-domain > div > ul{
 	font-size: 15px;
 	font-weight: 500;
 	margin-top: 1px;
+	padding: 0px 15px;
 }
 div.search-domain ul li a:hover{
 	color: #fff;
@@ -1076,85 +1073,8 @@ div.result table tr th:first-child,div.result table tr td:first-child{
 	width: 22%;
 }
 
-<<<<<<< HEAD
-/*=====css domain_cart============*/
-=======
 
->>>>>>> 9baa358929426eec42e41a5d82b50f541d9900a6
-
-
-@media (min-width: 1900px)
-{
-.cart .container {
-    width: 1620px;
-    padding: 0px;
-}
-}
-<<<<<<< HEAD
-.process {
-	background-color: #2a363f;
-}
-/*fix reponsive process*/
-@media screen and (max-width: 1199px) {
-	.process .row{
-		height: 136px;
-	}
-	.process .col-md-2,.process .col-sm-2{
-		height: 100%;
-	}
-}
-.process .active{
-	background-color: #f37636 !important;
-}
-.process .step_area{
-	width: 66%;
-	text-align: center;
-	height: 100%;
-	color: #fff;
-}
-.process .step_area h3{
-	margin: 0px;
-	font-size: 43px;
-	padding-top: 17px;
-}
-.process .step_area p{
-	font-size: 14px;
-	font-weight: 600;
-	text-align: center;
-	text-transform: uppercase;
-}
-
-=======
-.process{
-	background-color: #2a363f;
-}
-.step{
-	width: 20%;
-	display: inline-grid;
-	float: left;
-	color: #fff;
-}
-.step > div{
-	width: 165px;
-	text-align: center;
-	padding-top: 12px;
-}
-.step div h2 {
-	font-size: 45px;
-	line-height: 17px;
-	font-weight: 600;
-}
-.step div p{
-	text-align: center;
-	font-weight: 500;
-	padding-top: 2px;
-}
-
-div.step.processing > div{
-		background-color: #f37636;
-}
->>>>>>> 9baa358929426eec42e41a5d82b50f541d9900a6
-div.cart div.info{
+div.cart div.content{
 	background-color: #f1f1f1;
 }
 
@@ -1176,11 +1096,8 @@ div.cart th,div.cart td{
 .customer-code span{
 	color: blue;
 }
-
-h3.step-1{
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 9%;
+.cart .domain-domain{
+	padding: 0px;
 }
 
 .domain-domain >.table > tbody > tr > td,
@@ -1189,7 +1106,7 @@ h3.step-1{
 .domain-domain >.table > tfoot > tr > th,
 .domain-domain >.table > thead > tr > td,
 .domain-domain >.table > thead > tr > th {
-    border-bottom: 2px dotted #eee;
+	border-bottom: 2px dotted #eee;
 }
 
 .thead-cart{
@@ -1207,7 +1124,7 @@ h3.step-1{
 	height: 100px;
 }
 
-.add-cloud > tbody > tr > td > h4, p {
+.add-cloud > tbody > tr > td > h4, .add-cloud  p {
 	text-align: left;
 	padding-left: 10px;
 }
@@ -1281,10 +1198,11 @@ img.trash{
 	padding-top: 30px;
 }
 
-.input-group > .form-control{
-	width: 400px;
+.domain-domain .form-control{
+	width: 100%;
 	border-radius: 0px;
 	height: 45px;
+	margin-bottom: 20px;
 }
 
 .btn-ok{
@@ -1307,11 +1225,7 @@ img.trash{
 	font-size: 18px;
 }
 
-<<<<<<< HEAD
-.btn-continue{
-=======
 .total-money .btn-continue{
->>>>>>> 9baa358929426eec42e41a5d82b50f541d9900a6
 	background-color: #f37636; 
 	border: none;
 	color: white;
@@ -1324,23 +1238,15 @@ img.trash{
 	border-radius: 0px;
 	width: 85%;
 }
-<<<<<<< HEAD
-
-=======
 .total-money .btn-continue a{
 	color: #fff;
 	text-decoration: none;
 }
->>>>>>> 9baa358929426eec42e41a5d82b50f541d9900a6
 .btn-continue:hover{
 	color: #fff;
 }
 
-<<<<<<< HEAD
-.btn-buy{
-=======
 .btn-buy, .btn-buy:hover{
->>>>>>> 9baa358929426eec42e41a5d82b50f541d9900a6
 	background-color: #2a363f; 
 	border: none;
 	color: white;
@@ -1381,13 +1287,13 @@ img.trash{
 
 @media (max-width: 735px)
 {
- span.input-group-btn{
- 	display: block !important;
- }
+	span.input-group-btn{
+		display: block !important;
+	}
 }
 
 @media (max-width: 1300px) {
-	div.cart div.info input.form-control{
+	div.cart div.content input.form-control{
 		width: 70%;
 	}
 }
@@ -1396,17 +1302,6 @@ img.trash{
 	text-align: right;
 }
 
-/*div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(2) > table > tbody > tr:nth-child(2) > td:nth-child(2),
-div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(1) > table > thead > tr > th.money,
-div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(2),
-div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(3),
-div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(3) > p,
-div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(1) > table > tbody > tr:nth-child(2) > td:nth-child(3),
-div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(1) > table > tbody > tr:nth-child(2) > td:nth-child(3) > p,
-div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(2) > table > thead > tr > th:nth-child(2){
-	text-align: right;
-}
-*/
 .domain-cart th:last-child,.domain-cart td:last-child,.domain-cart td:last-child p,
 .add-cloud th:last-child, .add-cloud td:last-child{
 	text-align: right;
@@ -1429,15 +1324,15 @@ div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(2) > table > thead > tr
 
 .btn-login{
 	background-color: #ea7836;
-  border: none;
-  color: white;
-  padding: 6px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  height: 50px;
-  border-radius: 0px;
+	border: none;
+	color: white;
+	padding: 6px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	border-radius: 0px;
 }
 
 .form-control{
@@ -1462,16 +1357,16 @@ div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(2) > table > thead > tr
 
 .btn-add-domain{
 	background-color: #ea7836;
-  border: none;
-  color: white;
-  padding: 6px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  height: 50px;
-  border-radius: 0px;
-  width: 173px;
+	border: none;
+	color: white;
+	padding: 6px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	height: 50px;
+	border-radius: 0px;
+	width: 173px;
 }
 
 .search-add{
@@ -1479,8 +1374,8 @@ div.col-xs-12.col-sm-8.col-md-8.col-lg-6 > div:nth-child(2) > table > thead > tr
 }
 
 .search-add table {
-  border-collapse: collapse;
-  width: 100%;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 
@@ -1525,30 +1420,30 @@ div.search-domain > div.container > div > form > div > div.col-xs-12.col-sm-12.c
 
 .btn-all{
 	background-color: #0060af;
-  border: none;
-  color: white;
-  padding: 6px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  height: 50px;
-  border-radius: 0px;
-  width: 173px;
+	border: none;
+	color: white;
+	padding: 6px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	height: 50px;
+	border-radius: 0px;
+	width: 173px;
 }
 
 .btn-add-continue{
 	background-color: #ea7836;
-  border: none;
-  color: white;
-  padding: 6px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  height: 50px;
-  border-radius: 0px;
-  width: 173px;
+	border: none;
+	color: white;
+	padding: 6px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	height: 50px;
+	border-radius: 0px;
+	width: 173px;
 }
 
 @media (max-width: 500px;) {
@@ -1595,41 +1490,15 @@ div.contac_info{
 }
 /*======= checkbox add-domain====*/
 
-/*input[type="checkbox"].hidden {
-  display: none;
-}
-
-.demoCheck {
-  border: 1px solid #ddd;
-  width: 25px;
-  height: 25px;
-  display: block;
-}
-
-input[type="checkbox"]:checked.hidden+label {
-  background: #fff;
-}
-
-input[type="checkbox"]:checked.hidden+label:after {
-  content: '';
-  display: block;
-  width: 10px;
-  height: 1px;
-  background: #fff;
-  margin: 12px auto;
-}
-*/
-
-
 button.remove-item{
-  background-image: url('../img/icon-trash.png');
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  /* put the height and width of your image here */
-  height: 25px;
-  width: 20px;
-  border: none;
-  background-color: #fff;
+	background-image: url('../img/icon-trash.png');
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	/* put the height and width of your image here */
+	height: 25px;
+	width: 20px;
+	border: none;
+	background-color: #fff;
 }
 
 
@@ -1639,12 +1508,12 @@ button.remove-item{
 }
 
 .modal-content {
-  border-radius: 0;
-  padding-left: 1%;
-  text-align: center;
-  height: 250px;
-  padding-top: 35px;
-  width: 400px;
+	border-radius: 0;
+	padding-left: 1%;
+	text-align: center;
+	height: 250px;
+	padding-top: 35px;
+	width: 400px;
 }
 
 div.modal-content > div.modal-body > .btn{
@@ -1656,8 +1525,6 @@ div.modal-content > div.modal-body > .btn{
 	border-radius: 0;
 	margin-left: 10%;
 }
-<<<<<<< HEAD
-=======
 
 
 /* css register account personal*/
@@ -1665,7 +1532,7 @@ div.modal-content > div.modal-body > .btn{
 fix reponsive mobile
 */
 @media screen and (max-width: 520px) {
-	.user_cart_action div.tab-content{
+	.content div.tab-content{
 		padding: 5px !important;
 	}
 }
@@ -1687,7 +1554,7 @@ fix reponsive mobile
 	height: 40px;
 }
 #register{
-		font-size: 18px;
+	font-size: 18px;
 }
 #register label{
 	display: inline-block;
@@ -1743,26 +1610,23 @@ p.required{
 	color: #fff;
 	margin-bottom: 70px;
 }
-.user_cart_action h3.step-1{
-	padding-bottom: 20px;
-}
 
-.user_cart_action div[role="tabpanel"]{
+.content div[role="tabpanel"]{
 	background-color: #fff;
 }
-.user_cart_action div[role="tabpanel"] div.tab-content{
+.content div[role="tabpanel"] div.tab-content{
 	padding: 32px 70px 5px 70px;
 }
 .user_cart_action{
 	background-color: #f1f1f1;
 	padding-top: 27px;
 }
-.user_cart_action li[role=presentation]{
+.content li[role=presentation]{
 	width: 50%;
 	background-color: #bdbdbd;
 	margin:0px;
 }
-.user_cart_action li[role=presentation] a{
+.content li[role=presentation] a{
 	text-align: center;
 	font-size: 26px;
 	font-weight: 700;
@@ -1770,7 +1634,7 @@ p.required{
 	margin-right: 0px;
 	border: none;
 }
-div.user_cart_action a.btn-back{
+div.content a.btn-back{
 	margin-left: 0px;
 	margin-top: 22px;
 	margin-bottom: 160px;
@@ -1782,15 +1646,15 @@ div.user_cart_action a.btn-back{
 	font-weight: 700;\
 	font-size: 18px;
 }
-.user_cart_action li[role=presentation].active a{
+.content li[role=presentation].active a{
 	color: #f37636;
 	padding-right: 0px !important;
 	border: none !important;
 }
-.user_cart_action ul[role=tablist]{
+.content ul[role=tablist]{
 	border: none;
 }
-.user_cart_action li[role=presentation].active{
+.content li[role=presentation].active{
 	border-top: solid 4px #e77237;
 }
 .cart_info table{
@@ -1798,15 +1662,20 @@ div.user_cart_action a.btn-back{
 	background-color: #ffffff;
 
 }
+.cart_info img{
+	vertical-align: sub;
+}
 .cart_info table tr td:first-child{
 	text-align: left;
 	font-size: 18px;
-	padding-left: 50px;
+	padding-left: 22px;
+	padding-top:20px;
 }
 .cart_info table tr td:last-child{
 	text-align: right;
 	font-size: 18px;
-	padding-right: 50px;
+	padding-right: 22px;
+	padding-top:20px;
 }
 .cart_info table tr td{
 	padding-bottom: 15px;
@@ -1817,6 +1686,7 @@ div.user_cart_action a.btn-back{
 .cart_info table h3{
 	font-weight: 600;
 	font-size: 24px;
+	display: inline;
 }
 .cart_info table tr:first-child h2{
 	font-weight: 600;
@@ -1881,39 +1751,185 @@ div.user_cart_action a.btn-back{
 	display: none;
 }
 
+/*css for domain info owner */
 
-/*css process */
-.process {
+div.info_owner{
+	background-color: #f1f1f1;
+	padding-top: 30px;
+}
+.content h3{
+	padding: 0px 15px 35px 15px;
+	font-size: 24px;
+	font-weight: 600;
+}
+.info_owner ul{
+	height: 100px;
+}
+.info_owner ul li,.info_owner ul li a{
+	height: 100%;
+}
+.info_owner ul li a,.info_owner ul li.active a{
+	padding-top: 28px;
+	font-size: 28px;
+}
+.info_owner .select_info_save,.info_owner .get_account_info{
+	background-color: #eeefef;
+	height: auto;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	margin-bottom: 20px;
+}
+.get_account_info button{
+	background-color: #e77237;
+	color: #fff;
+	font-size: 15px;
+	height: 25px;
+	padding-right: 7px;
+	padding-left: 7px;
+	border: none;
+	float: right;
+	margin-left: 15px;
+}
+.get_account_info label{
+	font-size: 15px;
+}
+.get_account_info label i{
+	display: inline-block;
+	width: 25px;
+	height: 24px;
+	vertical-align: middle;
+	background: url('../img/icon-dotted.png');
+}
+.info_owner .form-group{
+	height: 56px;
+}
+.info_owner .form-group input[type=text]{
+	height: 35px;
+}
+.info_owner .form-group label{
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.info_owner .gender label:last-child{
+	margin-left: 28px;
+}
+.comfirm p{
+	color: #dc070b;
+	margin-top: 50px;
+	font-style: italic;
+}
+.comfirm label input[type=checkbox]{
+	position: absolute;
+	clip: rect(0px 0px 0px 0px);
+	left: 5px;
+	top: 8px;
+	width: 18px;
+	height: 18px;
+}
+.comfirm label.agree{
+	background-image: url('../img/check-ticked-icon.png');
+}
+.comfirm label{
+	display: block;
+	padding: 10px 0px 60px 32px;
+	font-size: 15px;
+	font-weight: 400;
+	position: relative;
+	background-image: url('../img/check-icon.png');
+	background-repeat: no-repeat;
+	background-position: 3px 4px;
+	margin-top: 25px;
+}
+.info_owner .action {
+	float: none;
+	margin:auto;
+	padding-bottom: 140px;
+}
+.info_owner .action a{
+	height: 55px;
+	font-size: 20px;
+	padding:12px 55px;
 	background-color: #2a363f;
 }
-/*fix reponsive process*/
-@media screen and (max-width: 1199px) {
-	.process .row{
-		height: 136px;
+.info_owner .action button{
+	padding:12px 55px;
+	width: auto;
+	height: 55px;
+	font-size: 20px;
+	float: right;
+	background-color: #f37636;
+	border: none;
+	border-radius: 4px;
+}
+.info_owner div.gender label{
+	position: relative;
+
+}
+.info_owner div.gender label span{
+	background-image: url('../img/radio_icon_default.png');
+	background-repeat: no-repeat;
+	padding:3px 0px 3px 25px;
+	cursor: pointer;
+	background-position: 0px 0px;
+}
+.info_owner div.gender input[type=radio]{
+	position: absolute;
+	left: 0px;
+	clip:rect(0px, 0px, 0px, 0px);
+	width: 20px;
+	height: 20px;
+	bottom: 3px;
+}
+.info_owner div.gender input[type=radio]:checked + span{
+	background-image: url('../img/input_radio_tick_icon.png');
+	background-repeat: no-repeat;
+	padding:3px 0px 3px 25px;
+	cursor: pointer;
+	background-position: 0px 0px;
+}
+@media screen and (max-width: 767px) {
+	.get_account_info button{
+		float: left;
 	}
-	.process .col-md-2,.process .col-sm-2{
-		height: 100%;
+	.info_owner .action button,.info_owner .action a{
+		display: block;
+		float: none !important;
+		margin: auto;
+		width: 40%;
+		margin-bottom: 20px;
+		padding: 10px;
 	}
-}
-.process .active{
-	background-color: #f37636 !important;
-}
-.process .step_area{
-	width: 66%;
-	text-align: center;
-	height: 100%;
-	color: #fff;
-}
-.process .step_area h3{
-	margin: 0px;
-	font-size: 43px;
-	padding-top: 17px;
-}
-.process .step_area p{
-	text-align: center;
-	font-size: 14px;
-	font-weight: 600;
-	text-transform: uppercase;
 }
 
->>>>>>> 9baa358929426eec42e41a5d82b50f541d9900a6
+/*css for step process cart*/
+.process{
+	background-color: #2a363f;
+}
+.process h3,.process p{
+	margin: 0px;
+}
+.process .step{
+	color: #fff;
+	text-align: center;	
+}
+.processing{
+	background-color: #f37636;
+}
+
+.process h3{
+	font-size: 45px;
+	font-weight: 500;
+	padding-top: 12px;
+}
+.process p{
+	font-size: 14px;
+	font-weight: 500;
+	text-transform: uppercase;
+	padding-bottom: 15px;
+}
+@media screen and (max-height: 570px) {
+	.process .step{
+		height: 120px;
+	}
+}
