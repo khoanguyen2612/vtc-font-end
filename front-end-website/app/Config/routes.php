@@ -36,7 +36,8 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 	/* tue.phpmailer@gmail.com config route URL */
-	Router::connect('/cart/*', array('controller' => 'Carts', 'action' => 'view', 'index', 'home'));
+	Router::connect('/cart/', array('controller' => 'Carts', 'action' => 'view'));
+	Router::connect('/cart/update', array('controller' => 'Carts', 'action' => 'update'));
 	Router::connect('/domain/*', array('controller' => 'Domains', 'action' => 'view', 'index', 'home'));
 
 /**

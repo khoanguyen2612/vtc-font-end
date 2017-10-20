@@ -5,6 +5,8 @@
  ******************************************************************************/
 
 App::uses('AppController', 'Controller');
+App::uses('CakeSession', 'Model/Datasource');
+App::import('Model', 'CakeSession');
 
 /**
  * Class CartsController
@@ -15,8 +17,9 @@ class CartsController extends AppController
     /**
      * @var array
      */
-    public $uses = array('Product', 'Cart', 'Order');
+    public $uses = array('Product', 'Cart', 'Order', 'OrderDetail');
     //var $layout = 'cart';
+    var  $components = array('Acl',  'Session');
 
 
     function beforeFilter() {
@@ -27,9 +30,13 @@ class CartsController extends AppController
     public function add()
     {
         $this->autoRender = false;
+
         if ($this->request->is('post')) {
-            $this->Cart->addProduct($this->request->data['Cart']['product_id']);
+
+            $this->Cart->addProduct($this->request->data['cart']);
+
         }
+
         echo $this->Cart->getCount();
     }
 
@@ -37,29 +44,33 @@ class CartsController extends AppController
     {
 
         ini_set('memory_limit', '-1');
-        //Debugger::dump($this->Product->find('first'));
 
-        $order_schema = $this->Order->find('first',
-            array( 'order' => array('Order.id' => 'desc') )
-        );
+        /* tue.phpmailer@gmail.com get data for first */
+        /*$order_schema = $this->Order->find('first',
+            //array( 'order' => array('Order.id' => 'desc') )
+            array( 'order' => array('Order.id' => 'asc') )
+        );*/
 
-        /*Debugger::dump();*/
-        //Debugger::dump($order_schema);
+        /*Debugger::dump($this->Cart->readProduct());
+        Debugger::dump(CakeSession::read('cart'));
+        Debugger::dump($this->Session->read('cart'));
+        Debugger::dump("------------------------------");*/
+
+        $order_schema = $this->Order->findById('1430'); // 1430, 614 high total cost money
 
         $order = $order_schema['Order'];
         $order_code = $order['order_code'];
+        $order_id = $order['id'];
         $p = $order_schema['OrderDetail'];
 
         $total_money = 0 ;
+
+
         foreach ($p as $product) {
 
             $tmp_p = $this->Product->findById($product['product_id']);
 
             //(1:domain, 2:window hosting, 3:linux hosting, 4:other)
-            /*$p_type = ($tmp_p['Product']['product_type'] == 1) ? 'domain' : 'other';
-            $p_type = ($tmp_p['Product']['product_type'] == 2) ? 'window hosting' : 'other';
-            $p_type = ($tmp_p['Product']['product_type'] == 3) ? 'linux hosting' : 'other';*/
-            //Debugger::dump($tmp_p['Product']['product_type']);
 
             $type = $tmp_p['Product']['product_type'];
             switch ($type)
@@ -86,37 +97,55 @@ class CartsController extends AppController
 
         }
 
+        $conditions = array(
+            'OR' => array(
+                array('product_type' => '2'),
+                array('product_type' => '3')
+            )
+        );
 
-        /*$carts = $this->Cart->readProduct();
-        $products = array();
-        if (null != $carts) {
-            foreach ($carts as $productId => $count) {
-                $product = $this->Product->read(null, $productId);
-                $product['Product']['count'] = $count;
-                $products[] = $product;
-            }
-        }*/
+        $hosts = $this->Product->find('all', array(
+                    'fields' => array( 'id', 'product_key', 'product_type', 'product_name', 'price', 'price_1', 'price_2',),
+                    'conditions' => $conditions,
+                    'recursive' => 0,
+                    'limit' => 10,
+             )
+        );
+
+        foreach ($hosts as $host) {
+            $list_hosting[] = $host['Product'];
+        }
 
         $this->set(compact('products'));
+        $this->set(compact('order_id'));
         $this->set(compact('order'));
         $this->set(compact('order_code'));
+        $this->set(compact('list_hosting'));
 
     }
 
     public function update()
     {
+
+        $this->autoRender = false;
+        $cart = array();
+
+        $request = $this->request->data;
+
+        Debugger::dump($request);
+        Debugger::dump($this->Order->findById($request['cart']['order']['id']));
+
+        $cart = $request['cart'] ;
+        $this->Cart->saveProduct($cart);
+
         if ($this->request->is('post')) {
-            if (!empty($this->request->data)) {
-                $cart = array();
-                foreach ($this->request->data['Cart']['count'] as $index => $count) {
-                    if ($count > 0) {
-                        $productId = $this->request->data['Cart']['product_id'][$index];
-                        $cart[$productId] = $count;
-                    }
-                }
-                $this->Cart->saveProduct($cart);
+            if (!empty($request) && count($request) > 0 && count($request['cart'] > 0)) {
+        //        $this->Cart->saveProduct($cart);
             }
         }
+
+        //Debugger::dump();
+
         $this->redirect(array('action' => 'view'));
     }
 

@@ -5,11 +5,13 @@
 
 App::uses('AppModel', 'Model');
 App::uses('CakeSession', 'Model/Datasource');
+App::import('Model', 'CakeSession');
 
 class Cart extends AppModel
 {
 
     public $useTable = false;
+    var  $components = array('Acl', 'Mail', 'Session');
 
     /*
      * add a product to cart
@@ -55,6 +57,7 @@ class Cart extends AppModel
     public function saveProduct($data)
     {
         return CakeSession::write('cart', $data);
+        //return $this->Session->write('cart', $data);
     }
 
     /*
@@ -62,6 +65,7 @@ class Cart extends AppModel
      */
     public function readProduct()
     {
+        //return $this->Session->read('cart');
         return CakeSession::read('cart');
     }
 
