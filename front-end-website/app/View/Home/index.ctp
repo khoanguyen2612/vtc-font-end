@@ -1,8 +1,24 @@
-
-	<div class="slide">
-		
+<?php $this->start('css')?>
+<?php echo $this->Html->css('style'); ?>
+<?php $this->end()?>
+	<div class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+					<h2>CLOUD SERVER GIÁ SIÊU RẺ CLOUD SERVER GIÁ SIÊU RẺ CLOUD SERVER GIÁ SIÊU RẺ</h2>
+					<h1><span>KHÔNG GIỚI HẠN</span> CLOUD SERVER</h1>
+					<p><i class="stick"></i>Cloud Server số 1 Việt Nam</p>
+					<p><i class="stick"></i>Domain cực rẻ</p>
+					<p><i class="stick"></i>Cloud Server cấu hình cực khủng</p>
+					<p><i class="stick"></i>Storage cực lớn</p>
+					<button class="btn btn-primary"><a href="">DÙNG THỬ NGAY</a></button>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+					<img src="img/banner.jpeg" class="img-responsive">
+				</div>
+			</div>
+		</div>
 	</div>
-
 	<div class="select-domain">
 		<div class="container-fluid search-block">
 			<div class="container">
@@ -12,7 +28,7 @@
 							<label for="search-dm">TÌM KIẾM TÊN MIỀN CỦA BẠN:</label>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-							<form action="" method="get">
+							<form action="Domain_search.html" method="get">
 								<input type="text" name="" id="search-dm" placeholder="Viết tên miền của bạn vào đây....">
 								<button type="submit" class="btn_search">TÌM KIỂM</button>
 							</form>
@@ -39,8 +55,6 @@
 			</div>
 		</div>
 	</div>
-	
-
 	<div class="clouds-plan">
 		<div class="container">
 			<div class="row">
@@ -52,8 +66,25 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 text-center">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
 					<span class="top-sell-icon">Best Seller</span>
+					<div class="cloud-item best_seller">
+						<h4>CLOUD SERVER 2</h4>
+						<div class="cloud-register">
+							<h3>510.000<small>VND/THÁNG</small></h3>
+							<p>Regularly $16.99</p>
+							<a href="" class="btn btn-default">ĐĂNG KÝ</a>
+						</div>
+						<div class="cloud-config">
+							<p>1 CPU</p>
+							<p>1 RAM</p>
+							<p>20 Dung lượng ổ cứng</p>
+							<p class="cpu">1 Địa chỉ Internet</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
+					
 					<div class="cloud-item">
 						<h4>CLOUD SERVER 2</h4>
 						<div class="cloud-register">
@@ -69,8 +100,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 text-center">
-					<span class="top-sell-icon">Best Seller</span>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
+					
 					<div class="cloud-item">
 						<h4>CLOUD SERVER 2</h4>
 						<div class="cloud-register">
@@ -86,25 +117,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 text-center">
-					<span class="top-sell-icon">Best Seller</span>
-					<div class="cloud-item">
-						<h4>CLOUD SERVER 2</h4>
-						<div class="cloud-register">
-							<h3>510.000<small>VND/THÁNG</small></h3>
-							<p>Regularly $16.99</p>
-							<a href="" class="btn btn-default">ĐĂNG KÝ</a>
-						</div>
-						<div class="cloud-config">
-							<p>1 CPU</p>
-							<p>1 RAM</p>
-							<p>20 Dung lượng ổ cứng</p>
-							<p class="cpu">1 Địa chỉ Internet</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 	col-sm-6 col-md-3 col-lg-3 text-center">
-					<span class="top-sell-icon">Best Seller</span>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
+					
 					<div class="cloud-item">
 						<h4>CLOUD SERVER 2</h4>
 						<div class="cloud-register">
@@ -127,8 +141,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<h3 class="text-center">DỊCH VỤ CỦA CHÚNG TÔI</h3>
-				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 cloud-server">
-					<img src="img/our_service_icon1.png">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 cloud-server">
+					<img src="img/our_service_icon1.png" class="img-responsive">
 					<h4 class="text-left">VTC Cloud Server</h4>
 					<p class="text-left">
 						Cloud server cung cấp một server riêng ảo giống như VPS
@@ -138,8 +152,8 @@
 						sẽ không thể có được khi sử dụng các VPS thông thường.
 					</p>
 				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 cloud-strorage">
-					<img src="img/our_service_icon2.png">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 cloud-strorage">
+					<img src="img/our_service_icon2.png" class="img-responsive">
 					<h4 class="text-left">VTC Cloud Storage</h4>
 					<p class="text-left">
 						Dịch vụ VTC Cloud Storage cung cấp cho người dùng không gian
@@ -151,8 +165,8 @@
 						truy xuất dữ liệu với dung lượng bất kỳ, mọi lúc, mọi nơi.
 					</p>
 				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 cloud-small">
-					<img src="img/our_service_icon3.png">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 cloud-small">
+					<img src="img/our_service_icon3.png" class="img-responsive">
 					<h4 class="text-left">VTC Cloud Storage</h4>
 					<p class="text-left">
 						Các doanh nghiệp vừa và nhỏ (SME - Small and Medium Enterperises)
@@ -171,53 +185,43 @@
 		<div class="container-fluid">
 			<h3 class="text-center">LIÊN HỆ VỚI CHÚNG TÔI</h3>
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 contact-sale">
-					<i class="service1-icon hidden-xs hidden-sm"></i>
-					<img src="img/sale.png" class="pull-left img-responsive	">
-					<div class="header-contact">
-						<img src="img/sale-header-icon.png" class="pull-left">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 sale_info">
+					<i class="service1-icon hidden-xs"></i>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+						<img src="img/sale.png" class="img-responsive hidden-xs thumb">
 					</div>
-					<div class="sale_detail">
-						<p>LIÊN HỆ</p>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 contact_area">
+						<img src="img/sale-header-icon.png" class="pull-left hidden-xs icon">
+						<p class="hidden-xs">LIÊN HỆ</p>
 						<h4>NHÂN VIÊN KINH DOANH</h4>
-					</div>
-					<br/>
-					<div class="sale_phone">
 						<p><img src="img/vector-icon.png"> <span>Miền Nam: </span><strong>(08) 4450 3077</strong></p>
 						<p><img src="img/vector-icon.png"> <span>Miền Bắc: </span><strong>(04) 4450 5566</strong> </p>
+						<p>Tư vấn vào tất cả các ngày trong tuần</p>
 					</div>
-					<div class="clearfix"></div>
-					<p class="support">Tư vấn vào tất cả các ngày trong tuần</p>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 technical-staff">
-					<i class="service2-icon hidden-xs hidden-sm"></i>
-					<img src="img/technical.png" class="pull-left img-responsive	">
-					<div class="header-contact">
-						<img src="img/tech-header-icon.png" class="pull-left">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 tech_info">
+					<i class="service2-icon hidden-xs"></i>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+						<img src="img/technical.png" class="img-responsive hidden-xs thumb">
 					</div>
-					<div class="technical_detail">
-						<p>LIÊN HỆ</p>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 contact_area">
+						<img src="img/tech-header-icon.png" class="pull-left hidden-xs icon">
+						<p class="hidden-xs">LIÊN HỆ</p>
 						<h4>NHÂN VIÊN KỸ THUẬT</h4>
-					</div>
-					<br/>
-					<div class="technical_phone">
 						<p><img src="img/vector-icon.png"> <span>Miền Nam: </span><strong>(08) 4450 3077</strong></p>
-						<p><img src="img/vector-icon.png"> <span>Miền Bắc: </span><strong>(04) 4450 5566</strong></p>
+						<p><img src="img/vector-icon.png"> <span>Miền Bắc: </span><strong>(04) 4450 5566</strong> </p>
+						<p>Tư vấn vào tất cả các ngày trong tuần</p>
 					</div>
-						<div class="clearfix"></div>
-					<p class="support">Tư vấn vào tất cả các ngày trong tuần</p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="video-block">
-		<h3 class="text-center">VideoBlock</h3>
+	<div class="embeded_video">
+		<img src="img/embed_video.jpeg" class="img-responsive">
 	</div>
-
 	<div class="news">
 		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 slider">
+			<div class="row"><div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 slider">
 				<ol class="breadcrumb">
 					<li><a href="#">TIN TỨC</a></li>
 					<li><a href="#">BLOGS</a></li>
@@ -229,36 +233,31 @@
 						<li data-target="#myCarousel" data-slide-to="1"></li>
 						<li data-target="#myCarousel" data-slide-to="2"></li>
 					</ol>
-
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner">
 						<div class="item active">
-							<img src="img/slide_blog_pic.png" alt="">
+							<img src="img/slide2.jpg" alt="">
 						</div>
 
 						<div class="item">
-							<img src="img/slide_blog_pic.png" alt="">
+							<img src="img/slide3.jpg" alt="" >
 						</div>
 
 						<div class="item">
-							<img src="img/slide_blog_pic.png" alt="">
+							<img src="img/slide1.jpg" alt="" >
 						</div>
 					</div>
-
-
 				</div>
 				<div class="slide-caption">
 					<div class="calendar pull-left">
-						12
-						<br>
-						Aug
+						<p>12</p><span>AUG</span>
 					</div>
-					<h4>Trải nghiệm cấu hình cực khủng chỉ có tại VTC</h4>
+					<p>Trải nghiệm cấu hình cực khủng chỉ có tại VTC</p>
 					<span class="line"></span>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ques_block">
-				<h3>Câu  hỏi dành cho chúng tôi ?</h3>
+				<h3>CÂU  HỎI DÀNH CHO CHÚNG TÔI ?</h3>
 				<div class="question">
 					<h5><i class="item-list"></i> 14 Diffrent Creative Header Styles</h5>
 					<p class="para">
@@ -281,18 +280,16 @@
 						It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
 					</p>
 				</div>
-			</div>
+			</div></div>
 		</div>
 	</div>
-
 	<div class="join_us">
 		<div class="container-fluid text-center">
-			<h5>Mọi người đã tự tạo cho mình một trang web cá tính, còn bạn thì sao ?</h5>
+			<h5>MỌI NGƯỜI ĐÃ TỰ TẠO CHO MÌNH MỘT TRANG WEB CÁ TÍNH, CÒN BẠN THÌ SAO ?</h5>
 			<h3>HÃY THAM GIA CÙNG CHÚNG TÔI!</h3>
 
 		</div>
 		<!-- slide div -->
-
 		<div class="slide_box" id="jssor_1">
 			<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1920px;height:500px;overflow:hidden;">
 				<div class="item-slide active">
@@ -307,9 +304,7 @@
 				<div class="item-slide">
 					<img data-u="image" src="img/pic2.jpg" />
 				</div>
-
 			</div>
-
 			<!-- Arrow Navigator -->
 			<div data-u="arrowleft" class="jssora051 prev" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
 				<svg viewbox="0 0 16000 16000">
@@ -322,14 +317,12 @@
 				</svg>
 			</div>
 		</div>
-
 		<!-- end slide div -->
-
 	</div>
 	<div class="contac_info">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contact_vtc">
 					<h3>VTC CLOUD Nhà cung cấp tên miền và Cloud server số 1 Việt Nam</h3>
 					<p>
 						Nhà cung cấp tên miền và Cloud server số 1 Việt Nam <br>
@@ -356,204 +349,4 @@
 			</div>
 		</div>
 	</div>
-	<footer class="footer">
-		<div class="tfoot">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<h3>HOTLINE </h3>
-						<strong>(04) 4450 5566</strong>
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<form action="" method="POST" role="form">
-							<label for="send_mail">Đăng ký nhận  email</label for="email">
 
-								<div class="form-group">
-									<input type="text" class="form-control" id="send_mail" placeholder="Vui lòng ghi địa chỉ email tại đây!.....">
-								</div>
-
-
-
-								<button type="submit" class="btn btn-primary">SUBMIT</button>
-							</form>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-		<div class="bfoot">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-						<section class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-							<h4>Hosting Packages</h4>
-							<ul class="list-group">
-								<li class="list-group-item"><a href="">Web Hosting</a></li>
-								<li class="list-group-item"><a href="">Reseller Hosting</a></li>
-								<li class="list-group-item"><a href="">VPS Hosting</a></li>
-								<li class="list-group-item"><a href="">Dedicated Servers</a></li>
-								<li class="list-group-item"><a href="">Windows Hosting</a></li>
-								<li class="list-group-item"><a href="">Cloud Hosting</a></li>
-								<li class="list-group-item"><a href="">Linux Servers</a></li>
-							</ul>
-						</section>
-						<section class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-							<h4>Our Products</h4>
-							<ul class="list-group">
-								<li class="list-group-item"><a href="">Website Builder</a></li>
-								<li class="list-group-item"><a href="">Web Design</a></li>
-								<li class="list-group-item"><a href="">Logo Design</a></li>
-								<li class="list-group-item"><a href="">Register Domains</a></li>
-								<li class="list-group-item"><a href="">Traffic Booster</a></li>
-								<li class="list-group-item"><a href="">Search Advertising</a></li>
-								<li class="list-group-item"><a href="">Email Marketing</a></li>
-							</ul>
-						</section>
-						<section class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-							<h4>Hosting Packages</h4>
-							<ul class="list-group">
-								<li class="list-group-item"><a href="">About Us</a></li>
-								<li class="list-group-item"><a href="">Press & Media</a></li>
-								<li class="list-group-item"><a href="">News / Blogs</a></li>
-								<li class="list-group-item"><a href="">Careers</a></li>
-								<li class="list-group-item"><a href="">Awards & Reviews</a></li>
-								<li class="list-group-item"><a href="">Testimonials</a></li>
-								<li class="list-group-item"><a href="">Affiliate Program</a></li>
-							</ul>
-						</section>
-						<section class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-							<h4>Follow Us</h4>
-							<ul class="list-inline">
-								<li class="list-group-item"><a href="">About Us</a></li>
-								<li class="list-group-item"><a href="">Press & Media</a></li>
-
-							</ul>
-						</section>
-						<section class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-							<h4>Resources</h4>
-							<ul class="list-group">
-								<li class="list-group-item"><a href="">How to Create a Website</a></li>
-								<li class="list-group-item"><a href="">How to Transfer a Website</a></li>
-								<li class="list-group-item"><a href="">Start a Web Hosting Business</a></li>
-								<li class="list-group-item"><a href="">How to Start a Blog</a></li>
-
-							</ul>
-						</section>
-						<section class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-							<h4>Support</h4>
-							<ul class="list-group">
-								<li class="list-group-item"><a href="">Product Support</a></li>
-								<li class="list-group-item"><a href="">Contact Us</a></li>
-								<li class="list-group-item"><a href="">Knowledge Base</a></li>
-								<li class="list-group-item"><a href="">Tutorials</a></li>
-							</ul>
-						</section>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-right">
-						<img src="img/logo_footer.png">
-						<ul class="list-unstyled">
-							<li class="list-group-item">Toà nhà VTC,</li>
-							<li class="list-group-item"> 23 Phố Lạc Trung, </li>
-							<li class="list-group-item">Vĩnh Tuy, Hai Bà Trưng, Hà Nội</li>
-							<li class="list-group-item">Phone: (04) 4450 5566</li>
-							<li class="list-group-item">Mail: cloud.info@vtc.vn</li>
-							<li class="list-group-item">View Directions</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="coppyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						Copyright © 2015 ARKAHOST. All rights reserved.
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<ul class="list-inline text-right">
-							<li class="list-group-item"><a href="">Terms of Service </a></li>
-							<li class="list-group-item"><a href="">Privacy Policy</a></li>
-							<li class="list-group-item"><a href="">Site Map	</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-
-	<script src="js/jssor.slider-26.3.0.min.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function ($) {
-
-			var jssor_1_options = {
-				$AutoPlay: 1,
-				$SlideWidth: 770,
-				$ArrowNavigatorOptions: {
-					$Class: $JssorArrowNavigator$
-				},
-				$BulletNavigatorOptions: {
-					$Class: $JssorBulletNavigator$
-				}
-			};
-
-			var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-
-
-			jssor_1_slider.$On($JssorSlider$.$EVT_PARK,function(slideIndex, fromIndex){
-
-				var slide_item = document.getElementsByClassName("item-slide");
-
-				if(slide_item[slideIndex].classList.toggle('active')){
-					slide_item[fromIndex].classList.remove('active');
-				}
-
-
-			});
-			/*#region responsive code begin*/
-
-			var MAX_WIDTH = 1920;
-
-			function ScaleSlider() {
-				var containerElement = jssor_1_slider.$Elmt.parentNode;
-				var containerWidth = containerElement.clientWidth;
-
-				if (containerWidth) {
-
-					var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
-
-					jssor_1_slider.$ScaleWidth(expectedWidth);
-				}
-				else {
-					window.setTimeout(ScaleSlider, 30);
-				}
-			}
-
-
-
-			ScaleSlider();
-
-			$(window).bind("load", ScaleSlider);
-			$(window).bind("resize", ScaleSlider);
-			$(window).bind("orientationchange", ScaleSlider);
-			/*#endregion responsive code end*/
-		});
-	</script>
-
-	<script> 
-		$(document).ready(function(){
-			$("i.item-list").click(function(){
-				// console.log($(this).siblings());
-				if($(this).hasClass("active")){
-					$(this).removeClass("active");
-				}else{
-					$(this).addClass("active");
-				}
-
-				$(this).parent().next().slideToggle("slow");
-			});
-		});
-	</script>
