@@ -14,7 +14,7 @@ class Organization extends AppModel {
                 ),
                 'too long'=>array(
                     'rule' => array('between', 10, 12),
-                    'message' => 'Số điện thoại không hợp lệ',
+                    'message' => 'Số điện thoại không hợp lệ....',
                 ),
         ),
         'tax_code' => array(

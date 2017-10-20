@@ -4,8 +4,6 @@
 <head>
 	<title><?php echo $title_for_layout?></title>
 
-    <!--/ tue.phpmailer@gmail.com /-->
-
     <?php echo $this->html->meta('icon',
         'vtc-logo.png',
         array('type' =>'icon'));
@@ -14,7 +12,8 @@
     <?php echo $this->Html->charset() . "\n"; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php echo $this->Html->css('bootstrap.min.css'). "\n"; ?>
-    <?php echo $this->Html->script('jquery.min.js'). "\n"; ?>
+    <?php //echo $this->Html->script('jquery.min.js'). "\n"; ?>
+    <?php echo $this->Html->script('jquery-1.11.3.min'); ?>
     <?php echo $this->Html->script('bootstrap.min.js'). "\n"; ?>
     <?php echo $this->Html->css('style'). "\n"; ?>
     <link href='http://fonts.googleapis.com/css?family=Ruge+Boogie' rel='stylesheet' type='text/css'>
@@ -67,18 +66,20 @@
                                 </a>
                             </li>
                             <?php if (isset($login)) { ?>
-                                <li class="dropdown btn-group" role="group">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                        <?php echo $login;
-                                        echo $this->Html->image('user-icon.png'); ?>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'logout'), true); ?>">LOGOUT</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                               
+                                <li>
+									<ul class="nav pull-right">
+										<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<?php echo $login; echo $this->Html->image('user-icon.png');?><b class="caret"></b></a>
+											<ul class="dropdown-menu menu-user">
+												
+													<li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => $profile ), true); ?>"> <span class="glyphicon glyphicon-wrench"></span> Cài đặt</a></li>
+													<li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ hỗ trợ</a></li>
+													<li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => 'logout' ), true); ?>"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
                             <?php } else { ?>
                                 <li>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'login'), true); ?>">
@@ -358,11 +359,11 @@
         </div>
     </footer>
 
-    <?php echo $this->Html->script('jquery-1.11.3.min'); ?>
-    <?php echo $this->Html->script('jssor.slider-26.3.0.min'); ?>
-    <?php echo $this->Html->script('custom'); ?>
+    
+  <!--   <?php echo $this->Html->script('jssor.slider-26.3.0.min'); ?>
+    <?php echo $this->Html->script('custom'); ?> -->
 
-    <?php /*echo $this->fetch('script'); */?>
+    <?php echo $this->fetch('script'); ?>
 
 </body>
 

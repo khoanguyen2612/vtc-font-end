@@ -29,33 +29,6 @@
 			$this->redirect($this->Auth->logout());
 		}
 
-		// public function register_personal(){
-		// 	$this->set('title_for_layout', 'Đăng kí tài khoản');
-
-  //       	if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
-		// 	if($this->request->is('post')||$this->request->is('put')){
-
-		// 		// pr($this->request->data);die;
-		// 		$Data_Form=$this->request->data;
-		// 		if(isset($Data_Form['sex'])){$Data_Form['Account']['sex'] =$Data_Form['sex'];}
-		// 		$Data_Form['Account']['domain_flg'] =$Data_Form['domain_flg'];
-		// 		$Data_Form['Account']['domain_news_flg'] =$Data_Form['domain_news_flg'];
-		// 		$Data_Form['Account']['login_password']=$Data_Form['Account']['original_password'];
-		// 		// $Data_Form['Account']['username']=$Data_Form['Account']['nickname'];
-		// 		// $Data_Form['Account']['password']=$Data_Form['Account']['original_password'];
-		// 		// $Data_Form['Account']['original_password']=$Data_Form['Account']['original_password'];
-		// 		$Data_Form['Account']['login_id']=$Data_Form['Account']['nickname'];
-		// 		$this->Account->set($Data_Form['Account']);
-  //   			if ($this->Account->validates()) {
-		// 			if($this->Account->save($Data_Form)){
-		// 				$this->Session->setFlash('Tài khoản đã của bạn đã được kích hoạt, vui lòng đăng nhập','default',array('class'=>'alert alert-success'));
-		// 				$this->redirect(array('action'=>'login'));
-		// 			}
-		// 		}
-				
-
-		// 	}
-		// }
 
 		public function register(){
 			$this->set('title_for_layout', 'Đăng kí tài khoản');
@@ -79,9 +52,9 @@
 				}
 				if(isset($Data_Form['Organization'])){
 	    			if ($this->Account->validates()&&$this->Organization->validates()) {
-						$this->Account->save($Data_Form);
+						// $this->Account->save($Data_Form);
 						$Data_Form['Organization']['account_id']=$this->Account->id;
-						$this->Organization->save($Data_Form);
+						// $this->Organization->save($Data_Form);
 						$this->Session->setFlash('Tài khoản đã của bạn đã được kích hoạt, vui lòng đăng nhập','default',array('class'=>'alert alert-success'));
 						$this->redirect(array('action'=>'login'));
 							
@@ -202,5 +175,108 @@
 		            $this->redirect($this->referer());
 		        }
 		}	
+		public function profile_group(){
+
+			$user=$this->Account->find('first', array('conditions' => ['Account.id'=>$this->Auth->user('id')], ));
+			// pr($user);die;			
+			$this->set('user',$user);
+			if($this->request->is('post')){
+				$this->Account->create();
+
+				if(!empty($this->request->data['Account']['avatar']['name'])){
+					$Image=$this->request->data['Account']['avatar']['name'];
+					$Image=sha1($this->request->data['Account']['avatar']['name'].rand(0,100)).'-'.$Image;
+					$filename = WWW_ROOT. 'uploads/images'.DS.$Image; 
+					$tmp_name=$this->request->data['Account']['avatar']['tmp_name'];
+					$this->request->data['Account']['avatar']=$Image;
+				}
+				else{
+					unset($this->request->data['Account']['avatar']);
+				}
+
+				$this->request->data['Account']['id']=$user['Account']['id'];
+
+				$this->request->data['Organization']['id']=$user['Organization']['id'];
+				$this->request->data['Organization']['organ_name']=$this->request->data['Account']['organ_name'];
+				$this->request->data['Organization']['tax_code']=$this->request->data['Account']['tax_code'];
+				$this->request->data['Organization']['phonenumber2']=$this->request->data['Account']['phonenumber2'];
+				if($this->request->data['Account']['email']==$user['Account']['email']){unset($this->request->data['Account']['email']);}
+				// pr($this->request->data);die;
+					$this->Account->set($this->request->data['Account']);
+					$this->Organization->set($this->request->data['Organization']);
+
+					// if ($this->Organization->validates()){
+					// 	$this->Organization->save($this->request->data);
+						
+					// 	$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
+					// }
+					// // else{
+					// 	foreach ($this->Organization->validationErrors as $key => $value) {
+			  //                   pr($value[0]);
+			  //                }
+			  //                die; 
+					// }
+
+
+
+				if ($this->Organization->validates()&&$this->Account->validates()){
+					$this->Account->save($this->request->data);
+					$this->Organization->save($this->request->data);
+					if(isset($filename)){
+						move_uploaded_file($tmp_name,$filename);
+					}
+					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
+				}
+
+			}
+
+		}
+		public function profile_user(){
+			$user=$this->Account->find('first', array('conditions' => ['Account.id'=>$this->Auth->user('id')], ));
+			$this->set('user',$user['Account']);
+			if($this->request->is('post')){
+				$this->Account->create();
+				// pr($this->request->data);die;
+
+				if(!empty($this->request->data['Account']['avatar']['name'])){
+					$Image=$this->request->data['Account']['avatar']['name'];
+					$Image=sha1($this->request->data['Account']['avatar']['name'].rand(0,100)).'-'.$Image;
+					$filename = WWW_ROOT. 'uploads/images'.DS.$Image; 
+					$tmp_name=$this->request->data['Account']['avatar']['tmp_name'];
+					$this->request->data['Account']['avatar']=$Image;
+				}
+				else{
+					unset($this->request->data['Account']['avatar']);
+				}
+				$this->request->data['Account']['id']=$user['Account']['id'];
+
+				if($this->request->data['Account']['nickname']==$user['Account']['nickname']){unset($this->request->data['Account']['nickname']);}
+				if($this->request->data['Account']['email']==$user['Account']['email']){unset($this->request->data['Account']['email']);}
+
+				if($this->Account->save($this->request->data)){
+					if(isset($filename)){
+	          			move_uploaded_file($tmp_name,$filename);
+	          		}
+					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
+		            // $this->redirect($this->referer());
+				}
+
+			}
+
+		}
+		// public function filedemo(){
+		// 		$whois = array("domainName" => "thang.com");
+		// 		$ch = curl_init("https://dms.inet.vn/api/public/whois/v1/whois/directly");
+
+		// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// 		curl_setopt($ch, CURLOPT_POST, true);
+		// 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($whois));
+
+		// 		$data = curl_exec($ch);
+		// 		$data = json_decode($data, true);
+		// 		pr($data);die;
+
+		// 		$this->set('data',$data);
+		// }
 	}
 ?>
