@@ -264,5 +264,19 @@
 			}
 
 		}
+		public function filedemo(){
+				$whois = array("domainName" => "baloonline.com");
+				$ch = curl_init("https://dms.inet.vn/api/public/whois/v1/whois/directly");
+
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_POST, true);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($whois));
+
+				$data = curl_exec($ch);
+				$data = json_decode($data, true);
+				// pr($data);die;
+
+				$this->set('data',$data);
+		}
 	}
 ?>

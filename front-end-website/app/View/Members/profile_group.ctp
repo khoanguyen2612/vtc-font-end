@@ -1,7 +1,5 @@
-<?php $this->start('css')?>
 	<?php echo $this->Html->css('fileinput.min');?>
 	<?php echo $this->Html->css('profile');?>
-<?php $this->end()?>
 	<div class="container">
 		<div class="row">
 			<?php 
@@ -164,7 +162,6 @@
 		</div>
 	</div>
 
-<?php $this->start('script')?>
 <?php echo $this->Html->script('fileinput.min');?>
 <script>
 	$("#avatar-2").fileinput({
@@ -191,4 +188,4 @@
 	    allowedFileExtensions: ["jpg", "png", "gif"]
 	});
 </script>
-<?php $this->end()?>
+<?php echo $this->fetch('script'); ?>
