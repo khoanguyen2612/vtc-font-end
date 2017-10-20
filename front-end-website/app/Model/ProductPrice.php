@@ -1,5 +1,5 @@
 <?php 
-	Class Domain extends AppModel
+	Class ProductPrice extends AppModel
 	{
 		public $useTable="product_price";
 

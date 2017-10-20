@@ -1,4 +1,4 @@
-<section>
+section>
     <!--/ tue.phpmailer@gmail.com  fix to DieuBT header /-->
     <div class="top-nav">
         <div class="container">
@@ -105,4 +105,3 @@
     <!--/ end tue.phpmailer@gmail.com  fix to DieuBT header /-->
 
 </section>
-
