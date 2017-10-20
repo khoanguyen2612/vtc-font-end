@@ -1,30 +1,29 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Product Model
+ * Order Model
  *
- * @property Plan $Plan
+ * @property Account $Account
+ * @property PaymentMethod $PaymentMethod
+ * @property Contact $Contact
  * @property OrderDetail $OrderDetail
- * @property PacketPoint $PacketPoint
- * @property Tld $Tld
- * @property Vp $Vp
- * @property VpsOrder $VpsOrder
  */
-class Product extends AppModel {
+class Order extends AppModel {
 
 /**
- * Use table
- *
- * @var mixed False or table name
- */
-	public $useTable = 'product';
+  * Use table
+  *
+  * @var mixed False or table name
+  */
+    public $useTable = 'orders';
+
 
 /**
  * Display field
  *
  * @var string
  */
-	public $displayField = 'product_name';
+	public $displayField = 'name';
 
 /**
  * Validation rules
@@ -32,9 +31,9 @@ class Product extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'id' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
+		'account_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -42,7 +41,47 @@ class Product extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'product_key' => array(
+		'order_type' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'order_code' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'order_datetime' => array(
+			'datetime' => array(
+				'rule' => array('datetime'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'order_status' => array(
+			'decimal' => array(
+				'rule' => array('decimal'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'payment_method_id' => array(
 			'blank' => array(
 				'rule' => array('blank'),
 				//'message' => 'Your custom message here',
@@ -52,9 +91,9 @@ class Product extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'product_type' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+		'address_payment' => array(
+			'blank' => array(
+				'rule' => array('blank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -62,19 +101,9 @@ class Product extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'plan_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'product_name' => array(
-			'alphaNumeric' => array(
-				'rule' => array('alphaNumeric'),
+		'name' => array(
+			'blank' => array(
+				'rule' => array('blank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -91,77 +120,45 @@ class Product extends AppModel {
  *
  * @var array
  */
-	/*public $belongsTo = array(
-		'Plan' => array(
-			'className' => 'Plan',
-			'foreignKey' => 'plan_id',
+	public $belongsTo = array(
+		'Account' => array(
+			'className' => 'Account',
+			'foreignKey' => 'account_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'PaymentMethod' => array(
+			'className' => 'PaymentMethod',
+			'foreignKey' => 'payment_method_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		)
-	);*/
+	);
 
 /**
  * hasMany associations
  *
  * @var array
  */
-	/*public $hasMany = array(
+	public $hasMany = array(
+		'Contact' => array(
+			'className' => 'Contact',
+			'foreignKey' => 'order_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'OrderDetail' => array(
 			'className' => 'OrderDetail',
-			'foreignKey' => 'product_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'PacketPoint' => array(
-			'className' => 'PacketPoint',
-			'foreignKey' => 'product_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Tld' => array(
-			'className' => 'Tld',
-			'foreignKey' => 'product_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Vp' => array(
-			'className' => 'Vp',
-			'foreignKey' => 'product_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'VpsOrder' => array(
-			'className' => 'VpsOrder',
-			'foreignKey' => 'product_id',
+			'foreignKey' => 'order_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -172,6 +169,6 @@ class Product extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		)
-	);*/
+	);
 
 }
