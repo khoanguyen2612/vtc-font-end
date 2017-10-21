@@ -6,30 +6,22 @@
 App::uses('AppModel', 'Model');
 App::uses('CakeSession', 'Model/Datasource');
 App::import('Model', 'CakeSession');
+App::import('Component', 'SessionComponent');
 
 class Cart extends AppModel
 {
 
     public $useTable = false;
-    var  $components = array('Acl', 'Mail', 'Session');
+    public $components = array('Session');
 
     /*
      * add a product to cart
      */
-    public function addProduct($productId)
+    public function addProduct($cart_item)
     {
-        $allProducts = $this->readProduct();
-        if (null != $allProducts) {
-            if (array_key_exists($productId, $allProducts)) {
-                $allProducts[$productId]++;
-            } else {
-                $allProducts[$productId] = 1;
-            }
-        } else {
-            $allProducts[$productId] = 1;
-        }
-
-        $this->saveProduct($allProducts);
+        $all_cart = $this->readProduct();
+        $all_cart[] = $cart_item;
+        $this->saveProduct($all_cart);
     }
 
     /*
@@ -37,15 +29,17 @@ class Cart extends AppModel
      */
     public function getCount()
     {
-        $allProducts = $this->readProduct();
+        $all_cart = $this->readProduct();
 
-        if (count($allProducts) < 1) {
+        if (count($all_cart) < 1) {
             return 0;
         }
 
         $count = 0;
-        foreach ($allProducts as $product) {
-            $count = $count + $product;
+        foreach ($all_cart as $item) {
+            if (count(@ $item['product']) > 0) {
+                $count++;
+            }
         }
 
         return $count;
@@ -56,8 +50,8 @@ class Cart extends AppModel
      */
     public function saveProduct($data)
     {
-        return CakeSession::write('cart', $data);
-        //return $this->Session->write('cart', $data);
+        return $this->Session->write('cart', $data);
+        //return CakeSession::write('cart', $data);
     }
 
     /*
@@ -65,8 +59,8 @@ class Cart extends AppModel
      */
     public function readProduct()
     {
-        //return $this->Session->read('cart');
-        return CakeSession::read('cart');
+        return $this->Session->read('cart');
+        //return CakeSession::read('cart');
     }
 
 }

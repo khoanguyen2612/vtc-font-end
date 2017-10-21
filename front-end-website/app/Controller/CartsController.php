@@ -17,14 +17,22 @@ class CartsController extends AppController
     /**
      * @var array
      */
-    public $uses = array('Product', 'Cart', 'Order', 'OrderDetail');
     //var $layout = 'cart';
-    var  $components = array('Acl',  'Session');
+    public $uses = array('Product', 'Cart', 'Order', 'OrderDetail');
+
+    public $components = array('Acl',  'Session', 'RequestHandler');
+    public $helpers = array('Html', 'Form', 'Js' => array('Jquery'));
 
 
     function beforeFilter() {
         parent::beforeFilter();
         $this->layout = 'cart';
+
+        // Change layout for Ajax requests
+        if ($this->request->is('ajax')) {
+            $this->layout = 'ajax_cart';
+        }
+
     }
 
     public function add()
@@ -127,26 +135,44 @@ class CartsController extends AppController
     public function update()
     {
 
-        $this->autoRender = false;
         $cart = array();
 
         $request = $this->request->data;
 
-        Debugger::dump($request);
-        Debugger::dump($this->Order->findById($request['cart']['order']['id']));
+        $this->autoRender = false;
+        $this->request->onlyAllow('ajax'); // No direct access via browser URL
+
+        //$this->RequestHandler->isAjax();
+        //Debugger::dump($request);
+        //Debugger::dump($this->Order->findById($request['cart']['order']['id']));
 
         $cart = $request['cart'] ;
-        $this->Cart->saveProduct($cart);
+        //Debugger::dump($cart);
+
+        $this->Cart->addProduct($cart);
 
         if ($this->request->is('post')) {
             if (!empty($request) && count($request) > 0 && count($request['cart'] > 0)) {
-        //        $this->Cart->saveProduct($cart);
+                //        $this->Cart->saveProduct($cart);
             }
         }
 
         //Debugger::dump();
 
-        $this->redirect(array('action' => 'view'));
+        $content = 'Ajax success';
+
+        //set current date as content to show in view
+        $this->set(compact('content'));
+
+
+        Debugger::dump($this->Session->read('cart'));
+
+        //$this->Session->destroy();
+        //$this->Session->delete('cart');
+        //render spacial view for ajax
+        $this->render('ajax_update', 'ajax_cart');
+
+        //$this->redirect(array('action' => 'view'));
     }
 
 }
