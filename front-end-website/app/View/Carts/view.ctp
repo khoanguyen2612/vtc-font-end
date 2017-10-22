@@ -17,6 +17,7 @@
 
     </script>//-->
 
+
     <div class="cart">
         <div class="process">
             <div class="container">
@@ -254,6 +255,24 @@
                                                                     'value'=> $hosting['price_1'],
                                                                 ));
 
+                                                                echo $this->Form->hidden('cart.product.product_name', array(
+                                                                    'id' => "id{$id_form}_product_name",
+                                                                    //'name' => 'cart[product][price_1]',
+                                                                    'value'=> $hosting['product_name'],
+                                                                ));
+
+                                                                echo $this->Form->hidden('cart.product.product_type', array(
+                                                                    'id' => "id{$id_form}_product_product_type",
+                                                                    //'name' => 'cart[product][price_1]',
+                                                                    'value'=> $hosting['product_type'],
+                                                                ));
+
+                                                                echo $this->Form->hidden('cart.product.quantity', array(
+                                                                    'id' => "id{$id_form}_product_quantity",
+                                                                    //'name' => 'cart[product][price_1]',
+                                                                    'value'=> 1,
+                                                                ));
+
                                                                 echo $this->Form->button('Thêm vào giỏ', array(
                                                                     'type' => 'submit',
                                                                     'id' => "submit_{$id_form}",
@@ -280,7 +299,7 @@
 
                                             <?php
                                                 $id_form ++;
-                                                if ($id_form == 3) break;
+                                                if ($id_form == 6) break;
                                             endforeach; ?>
 
                                         </tbody>
@@ -319,7 +338,17 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="continue">
-                                            <button class="btn btn-continue" type="button"><a href="">Tiếp tục</a></button>
+                                            <button class="btn btn-continue hidden" type="button"><a href="">Tiếp tục</a></button>
+                                            <button class="btn btn-continue" type="button">
+                                                <?php
+                                                    echo $this->Html->link('Tiếp tục', array(
+                                                        'controller' => 'cart',
+                                                        'action' => 'checkout',
+                                                    ),
+                                                        array('class' => '', 'escape' => false)
+                                                    );
+                                                ?>
+                                            </button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -327,7 +356,19 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="buy">
-                                            <button class="btn btn-buy" type="button"> Mua thêm các dịch vụ</button>
+                                            <button class="btn btn-buy hidden" type="button"> Mua thêm các dịch vụ</button>
+                                            <button class="btn btn-buy" type="button">
+                                                <?php
+                                                    echo $this->Html->link('Mua thêm các dịch vụ', array(
+                                                        'controller' => 'cart',
+                                                        'action'     => 'continuebuy',
+                                                    ),
+                                                        array('class' => '','escape'    => false)
+                                                    );
+                                                ?>
+                                            </button>
+
+
                                         </td>
                                     </tr>
                                     </tbody>
@@ -363,6 +404,7 @@
         </div>
     </div>
 
+    <?php //echo $this->element('sql_dump'); ?>
 
 
 

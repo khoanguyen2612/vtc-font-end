@@ -25,7 +25,7 @@ class OrderDetail extends AppModel {
  *
  * @var array
  */
-	public $validate = array(
+	/*public $validate = array(
 		'id' => array(
 			'alphaNumeric' => array(
 				'rule' => array('alphaNumeric'),
@@ -36,5 +36,5 @@ class OrderDetail extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-	);
+	);*/
 }

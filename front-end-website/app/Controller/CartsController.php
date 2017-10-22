@@ -5,8 +5,7 @@
  ******************************************************************************/
 
 App::uses('AppController', 'Controller');
-App::uses('CakeSession', 'Model/Datasource');
-App::import('Model', 'CakeSession');
+App::uses('CakeTime', 'Utility');
 
 /**
  * Class CartsController
@@ -18,10 +17,10 @@ class CartsController extends AppController
      * @var array
      */
     //var $layout = 'cart';
-    public $uses = array('Product', 'Cart', 'Order', 'OrderDetail');
 
-    public $components = array('Acl',  'Session', 'RequestHandler');
-    public $helpers = array('Html', 'Form', 'Js' => array('Jquery'));
+    public $uses = array('Product', 'Cart', 'Order', 'OrderDetail');
+    public $components = array('Acl', 'RequestHandler');
+    public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
 
 
     function beforeFilter() {
@@ -64,7 +63,7 @@ class CartsController extends AppController
         Debugger::dump($this->Session->read('cart'));
         Debugger::dump("------------------------------");*/
 
-        $order_schema = $this->Order->findById('1430'); // 1430, 614 high total cost money
+        $order_schema = $this->Order->findById('1477'); // 1430, 614, 1477 high total cost money
 
         $order = $order_schema['Order'];
         $order_code = $order['order_code'];
@@ -73,7 +72,7 @@ class CartsController extends AppController
 
         $total_money = 0 ;
 
-
+        $item = 0;
         foreach ($p as $product) {
 
             $tmp_p = $this->Product->findById($product['product_id']);
@@ -84,17 +83,19 @@ class CartsController extends AppController
             switch ($type)
             {
                 case '1':
-                    $p_type = 'domain';
+                    $p_type = 'Domain';
                     break;
-
                 case '2':
-                    $p_type = 'window hosting';
+                    $p_type = 'Window hosting';
                     break;
                 case '3':
-                    $p_type = 'linux hosting';
+                    $p_type = 'Linux hosting';
                     break;
                 case '4':
-                    $p_type = 'other';
+                    $p_type = 'Other';
+                    break;
+                default :
+                    $p_type = 'Other';
                     break;
             }
 
@@ -102,6 +103,9 @@ class CartsController extends AppController
             $total_money += $product['quantity'] * $product['price'];
             $product['total_money'] = $total_money;
             $products[] = $product;
+            /** too much item to dev **/
+            $item ++ ;
+            //if ($item == 4) break;
 
         }
 
@@ -113,10 +117,10 @@ class CartsController extends AppController
         );
 
         $hosts = $this->Product->find('all', array(
-                    'fields' => array( 'id', 'product_key', 'product_type', 'product_name', 'price', 'price_1', 'price_2',),
+                    'fields' => array( 'id', 'product_type', 'product_key', 'product_type', 'product_name', 'price', 'price_1', 'price_2',),
                     'conditions' => $conditions,
                     'recursive' => 0,
-                    'limit' => 10,
+                    'limit' => 100,
              )
         );
 
@@ -136,43 +140,88 @@ class CartsController extends AppController
     {
 
         $cart = array();
-
         $request = $this->request->data;
 
         $this->autoRender = false;
         $this->request->onlyAllow('ajax'); // No direct access via browser URL
 
-        //$this->RequestHandler->isAjax();
-        //Debugger::dump($request);
         //Debugger::dump($this->Order->findById($request['cart']['order']['id']));
 
         $cart = $request['cart'] ;
-        //Debugger::dump($cart);
-
-        $this->Cart->addProduct($cart);
 
         if ($this->request->is('post')) {
             if (!empty($request) && count($request) > 0 && count($request['cart'] > 0)) {
-                //        $this->Cart->saveProduct($cart);
+                $this->Cart->addProduct($cart);
             }
         }
 
-        //Debugger::dump();
-
-        $content = 'Ajax success';
-
+        //Debugger::dump($cart);
+        //$content = 'Ajax success';
         //set current date as content to show in view
-        $this->set(compact('content'));
 
 
-        Debugger::dump($this->Session->read('cart'));
+        // for view layout
+        switch ($cart['product']['product_type'])
+        {
+            case '1':
+                $p_type = 'Domain';
+                break;
+            case '2':
+                $p_type = 'Window hosting';
+                break;
+            case '3':
+                $p_type = 'Linux hosting';
+                break;
+            case '4':
+                $p_type = 'Other';
+                break;
+            default :
+                $p_type = 'Other';
+                break;
+        }
 
+        $cart['product']['product_type'] = $p_type;
+
+        $this->set(compact('cart'));
+        //Debugger::dump( $this->Session->read('cart'));
+        //Debugger::dump( $this->Cart->getCount());
+
+        //$this->Cart->saveDbCart();
+        //$this->Cart->checkoutCart();
         //$this->Session->destroy();
         //$this->Session->delete('cart');
+
         //render spacial view for ajax
         $this->render('ajax_update', 'ajax_cart');
 
-        //$this->redirect(array('action' => 'view'));
+    }
+
+
+    public function continue_buy_product()
+    {
+        $this->autoRender = false;
+
+        $this->redirect(array("controller" => "home",
+                "action" => "index",
+                //"param" => "val",
+                //"param_1" => "val1")
+            )
+        );
+    }
+
+    public function checkout()
+    {
+
+        $this->autoRender = false;
+
+        $this->Cart->saveDbCart();
+
+        $this->redirect(array("controller" => "cart",
+                "action" => "register",
+                //"param1" => "val1",
+                //"param2" => "val2")
+            )
+        );
     }
 
 }
