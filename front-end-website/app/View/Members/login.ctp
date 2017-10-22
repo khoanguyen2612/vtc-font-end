@@ -5,7 +5,7 @@
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-xs-6 col-xs-offset-3 col-sm-offset-3 text-center">
-								<a href="#" class="active" id="login-form-link">Đăng nhập</a> 
+								<h3><b>Đăng nhập</b></h3> 
 
 							</div>
 						</div>

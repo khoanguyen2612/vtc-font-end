@@ -8,3 +8,4 @@
 /vendors/*
 
 # End of https://www.gitignore.io/api/cakephp
+.gitignore
