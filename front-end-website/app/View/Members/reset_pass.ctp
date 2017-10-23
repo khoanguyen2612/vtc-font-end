@@ -1,4 +1,5 @@
 
+  <?php echo $this->Html->css('style_mb');?>
 	<div class="forget-form fg-logincontainer">
 		<div class="fg-note">
 			<h3><b>Thay mới Mật Khẩu</b></h3>
@@ -49,33 +50,3 @@
 
 	</div>
 
-<style type="text/css">
-.forget-form > div > h3{
-	margin:100px 0px 30px 0px;
-	padding-bottom: 10px;
-	text-align: center;
-	color:#0060af;
-}
-.forget-form .fg-note{
-	margin: 20px 0;
-}
-.fg-logincontainer button{
-	text-align: center;
-	background: #f37636;
-	color:#ffffff;
-	width: 145px;
-	padding:10px 10px;
-}
-.fg-logincontainer input{
-	padding: 20px 10px;
-	margin:20px 0px;
-}
-.fg-logincontainer {
-    margin: 40px auto 100px auto;
-    padding: 0 20px;
-    max-width: 600px;
-    font-size: 16px;
-    font-family: Arial;
-}
-
-</style>

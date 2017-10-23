@@ -44,8 +44,8 @@ class EmailConfig {
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'timeout' => 30,
-        'username' => 'buithidieu10021996@gmail.com',
-        'password' => 'xxxxxx',
+        'username' => 'vtvtest1@gmail.com',
+        'password' => '12344321abc',
         'transport' => 'Smtp'
     );
 
@@ -55,8 +55,8 @@ class EmailConfig {
 		'host' => 'localhost',
 		'port' => 25,
 		'timeout' => 30,
-		'username' => 'buithidieu10021996@gmail.com',
-		'password' => 'xxxxxx',
+		'username' => 'vtvtest1@gmail.com',
+		'password' => '12344321abc',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',
