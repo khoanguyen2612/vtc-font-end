@@ -128,11 +128,16 @@ class CartsController extends AppController
             $list_hosting[] = $host['Product'];
         }
 
+
+        $n_item_cart = $this->Cart->getCount();
+        $this->set(compact('n_item_cart'));
+
         $this->set(compact('products'));
         $this->set(compact('order_id'));
         $this->set(compact('order'));
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
+
 
     }
 

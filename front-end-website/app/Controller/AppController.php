@@ -48,19 +48,22 @@ class AppController extends Controller
         $this->set('current_user', $this->Auth->user());
         // setup layout
         $this->__configLayout();
-        if($this->Auth->user()){
-                $login=$this->Auth->user('nickname');
-                // pr($login);die;
-                $this->set('login',$login);
-                if(!empty($this->Auth->user('proxy'))){
-                    $profile='profile_group';
-                }else{
-                    $profile='profile_user';
-                }
-                $this->set('profile',$profile);
+        if ($this->Auth->user()) {
+            $login = $this->Auth->user('nickname');
+            // pr($login);die;
+            $this->set('login', $login);
+            if (!empty($this->Auth->user('proxy'))) {
+                $profile = 'profile_group';
+            } else {
+                $profile = 'profile_user';
             }
-       
-        
+            $this->set('profile', $profile);
+        }
+
+
+        $n_item_cart = count($this->Session->read('cart'));
+        $this->set(compact('n_item_cart'));
+
     }
 
     private function __configAuth()
