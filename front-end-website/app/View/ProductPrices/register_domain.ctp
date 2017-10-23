@@ -11,11 +11,11 @@
 		</div>
 		<div class="container">
 			<div class="row">
-				<form action="" method="POST">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 search-add">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<p class="p-add"> Đăng kí tên miền để bảo vệ thương hiệu của bạn</p>
 						</div>
+				<form action="" method="POST">
 						<div>
 							<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 								<input type="text" name="add-domain" class="form-control input-add" placeholder="Nhập tên miền muốn đăng kí...">
@@ -24,6 +24,7 @@
 								<button type="submit" class="btn btn-add-domain">Kiểm tra</button>
 							</div>
 						</div>
+				</form>
 						<?php if(isset($request)) { ?>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<p class="p-add"> Kết quả kiểm tra</p>
@@ -59,13 +60,32 @@
 															echo "<img src='../app/webroot/img/icon-del.png'>";
 														}
 
-													$i++;
+													// $i++;
 
 											 ?></td>
 											<td><p class="p-name"><?php echo ($test = $request['add-domain'].$item['ProductPrice']['product_name']); ?></p></td>
 											<td><p class="p-money"><?php echo $item['ProductPrice']['price'] ?>VNĐ</p></td>
 											<td><p class="img-fee"><?php echo $item['ProductPrice']['bk_price'] ?>VNĐ</p></td>
-											<td></td>
+											<td>
+												<?php if ($output1[$i]['status'] != 'available'){?>
+														<form action="" method="POST">
+															<input type="hidden" class="domain_name" name="domain_name" value='<?php echo $test?>'>
+	
+															<div class='btn btn-danger button1' data-toggle="modal" data-target="#myModal" >Whois <img src='../app/webroot/img/icon-whois.png'></div>
+															<!-- Modal -->
+													        <div class="modal fade" id="myModal" role="dialog">
+													          <div class="modal-dialog modal-lg">
+													            <div class="modal-content md-cn" id = "demo">
+													                
+													            </div>
+													          </div>
+													        </div>
+														</form>
+
+												<?php }
+													$i++;
+												?><!-- <button type='submit' class='btn btn-danger'>Whois <img src='../app/webroot/img/icon-whois.png'></button> -->
+											</td>
 											<td>
 												<input type="checkbox" class="add-domain-checkbox" checked="true" name="">
 												<label for="demo" class="demoCheck demoCheckLabel"></label>
@@ -119,7 +139,78 @@
 							
 						</div>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	$('.button1').click(function(){
+		console.log($(this).parent().children(".domain_name").val())
+		// alert('1');
+		// $('#myModal').modal('show'); 
+
+			$.ajax({
+	                url : "<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'whois_domain'))?>",
+	                type : "post",
+	                dataType:"html",
+	                data : {
+	                    domain_name : $(this).parent().children(".domain_name").val(),
+	                },
+	                success : function (result){
+	                	
+	                	// alert('2')
+	                	// var datadomain = jQuery.parseJSON(result);
+	                	// obj = JSON.parse(obj);
+	                	// console.log(obj);
+						// alert( obj['code']);
+	                	// alert(result);
+	                	$('#demo').html(result);
+
+	                }
+	        	});
+	        });
+ }); 
+</script>
+<style type="text/css">
+	.md-cn {
+	    width: 100%;
+	    padding: 0%;
+	    height: auto;
+	}
+	.modal-lg{
+	  padding: unset;
+	}
+	.modal-header {
+	    padding: 20px;
+	    background: #e67237;
+	    color: #fff;
+	}
+	.whois-body{
+	    margin: 10px 50px;
+	    text-align: left;
+
+	}
+	.whois-section{
+	    margin-bottom: 15px;
+
+	}
+	.whois-item{
+	    background: #005faf;
+	    color: #fff;
+	    padding: 10px;
+	    font-size: 24px;
+	    }
+	.whois-content {
+	  line-height: 30px;
+	  padding-top: 10px;
+	}
+	.whois-content-1 {
+	  line-height: 15px;
+	  padding-top: 20px;
+	}
+	.dcol {
+	    float: left;
+	    width: 50%;
+	}
+</style>

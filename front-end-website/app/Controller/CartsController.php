@@ -70,7 +70,7 @@ class CartsController extends AppController
         $order_id = $order['id'];
         $p = $order_schema['OrderDetail'];
 
-        $total_money = 0;
+        $total_money = 0 ;
 
         $item = 0;
         foreach ($p as $product) {
@@ -80,7 +80,8 @@ class CartsController extends AppController
             //(1:domain, 2:window hosting, 3:linux hosting, 4:other)
 
             $type = $tmp_p['Product']['product_type'];
-            switch ($type) {
+            switch ($type)
+            {
                 case '1':
                     $p_type = 'Domain';
                     break;
@@ -103,7 +104,7 @@ class CartsController extends AppController
             $product['total_money'] = $total_money;
             $products[] = $product;
             /** too much item to dev **/
-            $item++;
+            $item ++ ;
             //if ($item == 4) break;
 
         }
@@ -116,28 +117,22 @@ class CartsController extends AppController
         );
 
         $hosts = $this->Product->find('all', array(
-                'fields' => array('id', 'product_type', 'product_key', 'product_type', 'product_name', 'price', 'price_1', 'price_2',),
-                'conditions' => $conditions,
-                'recursive' => 0,
-                'limit' => 100,
-            )
+                    'fields' => array( 'id', 'product_type', 'product_key', 'product_type', 'product_name', 'price', 'price_1', 'price_2',),
+                    'conditions' => $conditions,
+                    'recursive' => 0,
+                    'limit' => 100,
+             )
         );
 
         foreach ($hosts as $host) {
             $list_hosting[] = $host['Product'];
         }
 
-
-        $n_item_cart = $this->Cart->getCount();
-        $this->set(compact('n_item_cart'));
-
         $this->set(compact('products'));
         $this->set(compact('order_id'));
         $this->set(compact('order'));
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
-
-
 
     }
 
@@ -152,7 +147,7 @@ class CartsController extends AppController
 
         //Debugger::dump($this->Order->findById($request['cart']['order']['id']));
 
-        $cart = $request['cart'];
+        $cart = $request['cart'] ;
 
         if ($this->request->is('post')) {
             if (!empty($request) && count($request) > 0 && count($request['cart'] > 0)) {
@@ -166,7 +161,8 @@ class CartsController extends AppController
 
 
         // for view layout
-        switch ($cart['product']['product_type']) {
+        switch ($cart['product']['product_type'])
+        {
             case '1':
                 $p_type = 'Domain';
                 break;

@@ -97,7 +97,7 @@
               <!-- <input type="password" class="form-control" id="original_password" placeholder="Nhập mật khẩu" name="original_password" required> -->
               <?php
                 echo $this->Form->input('original_password',array(
-                    'type' => 'text',
+                    'type' => 'password',
                     'class' => 'form-control',
                     'label' => false,
                     'required' => true,
@@ -112,7 +112,7 @@
               <!-- <input type="password" class="form-control" id="confirm_password" placeholder="Xác nhận mật khẩu" name="confirm_password" required> -->
               <?php
                 echo $this->Form->input('confirm_password',array(
-                    'type' => 'text',
+                    'type' => 'password',
                     'class' => 'form-control',
                     'label' => false,
                     'required' => true,
@@ -354,7 +354,7 @@
                 <div class="col-sm-8">          
                   <?php
                     echo $this->Form->input('original_password',array(
-                        'type' => 'text',
+                        'type' => 'password',
                         'class' => 'form-control',
                         'label' => false,
                         'required' => true,
@@ -368,7 +368,7 @@
                 <div class="col-sm-8">          
                   <?php
                     echo $this->Form->input('confirm_password',array(
-                        'type' => 'text',
+                        'type' => 'password',
                         'class' => 'form-control',
                         'label' => false,
                         'required' => true,
@@ -434,10 +434,10 @@
                 <label class="control-label col-sm-3" for="pwd">Công ty bạn có muốn tạo domain mới không?:</label>
                 <div class="col-sm-8">   
                   <label class="radio-inline">
-                    <input type="radio" name="domain_new_flg" value= '1' required> Có
+                    <input type="radio" name="domain_news_flg" value= '1' required> Có
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="domain_new_flg" value= '0' required> Không
+                    <input type="radio" name="domain_news_flg" value= '0' required> Không
                   </label>
                 </div>
               </div>

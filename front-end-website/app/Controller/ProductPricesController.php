@@ -6,7 +6,7 @@
 			'ProductPrice',
 		);
 		
-		public function ResultSearch() 
+		public function result_search() 
 		  {
 		 //  	
 			$data=$this->ProductPrice->find('all');
@@ -58,8 +58,7 @@
 
 			}
 		}
-
-        public function RegisterDomain()
+        public function register_domain()
         {
         	$data=$this->ProductPrice->find('all');
 			$this->set('data',$data);
@@ -129,6 +128,27 @@
         	}
 
         }
+
+        public function whois_domain(){
+        	if($this->request->is('post')){
+        		$this->layout = 'ajax';
+        		// pr($this->request->data);die;
+        		$domain_name=$this->request->data['domain_name'];
+				$whois = array("domainName" => $domain_name);
+				$ch = curl_init("https://dms.inet.vn/api/public/whois/v1/whois/directly");
+
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_POST, true);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($whois));
+
+				$datadomain = curl_exec($ch);
+				$datadomain = json_decode($datadomain, true);
+				// pr($datadomain);die;
+				$this->set('datadomain',$datadomain);
+				curl_close($ch);
+			}
+		}
+
 	}
 
 ?>
