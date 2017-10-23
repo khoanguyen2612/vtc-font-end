@@ -51,10 +51,11 @@
                             $str_registras=explode(PHP_EOL,$datadomain['rawtext']);
                             // pr($str_registras);
                             $str='DNSSEC: unsigned';
-                            foreach ($str_registras as $key => $value) {
-                                echo $value.'<br>';
+                            if($str_registras[0]=='--------REGISTRY WHOIS INFORMATION------------'){
+                                foreach ($str_registras as $key => $value) {
+                                    echo $value.'<br>';
+                                }
                             }
-
 
                         }
                         

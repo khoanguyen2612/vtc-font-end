@@ -65,6 +65,7 @@
 					$Data_Form['Organization']['organ_name']=$Data_Form['Account']['organ_name'];
 					if(isset($Data_Form['tax_code'])){$Data_Form['Organization']['tax_code']=$Data_Form['Account']['tax_code'];}
 					if(isset($Data_Form['phonenumber2'])){$Data_Form['Organization']['phonenumber2']=$Data_Form['Account']['phonenumber2'];}
+					$Data_Form['Organization']['proxy']=1;
 					$this->Account->set($Data_Form['Account']);
 					$this->Organization->set($Data_Form['Organization']);
 				}else{
@@ -245,29 +246,16 @@
 				}
 
 				$this->request->data['Account']['id']=$user['Account']['id'];
+				$this->request->data['Account']['status']=1;
 
 				$this->request->data['Organization']['id']=$user['Organization']['id'];
 				$this->request->data['Organization']['organ_name']=$this->request->data['Account']['organ_name'];
-				$this->request->data['Organization']['tax_code']=$this->request->data['Account']['tax_code'];
-				$this->request->data['Organization']['phonenumber2']=$this->request->data['Account']['phonenumber2'];
+				if(isset($this->request->data['Account']['tax_code'])){$this->request->data['Organization']['tax_code']=$this->request->data['Account']['tax_code'];}
+				if(isset($this->request->data['Account']['phonenumber2'])){$this->request->data['Organization']['phonenumber2']=$this->request->data['Account']['phonenumber2'];}
 				if($this->request->data['Account']['email']==$user['Account']['email']){unset($this->request->data['Account']['email']);}
 				// pr($this->request->data);die;
 					$this->Account->set($this->request->data['Account']);
 					$this->Organization->set($this->request->data['Organization']);
-
-					// if ($this->Organization->validates()){
-					// 	$this->Organization->save($this->request->data);
-						
-					// 	$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
-					// }
-					// // else{
-					// 	foreach ($this->Organization->validationErrors as $key => $value) {
-			  //                   pr($value[0]);
-			  //                }
-			  //                die; 
-					// }
-
-
 
 				if ($this->Organization->validates()&&$this->Account->validates()){
 					$this->Account->save($this->request->data);
@@ -276,6 +264,19 @@
 						move_uploaded_file($tmp_name,$filename);
 					}
 					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
+		            $this->redirect(array('controller'=>'members','action'=>'profile_group'));
+				}else{
+					if(isset($this->Organization->validationErrors['tax_code'][0])){
+						$this->Session->setFlash($this->Organization->validationErrors['tax_code'][0],'default',array('class'=>'alert alert-danger'));
+					$this->redirect(array('controller'=>'members','action'=>'profile_group'));
+					}
+					if(isset($this->Organization->validationErrors['phonenumber2'][0])){
+						$this->Session->setFlash($this->Organization->validationErrors['phonenumber2'][0],'default',array('class'=>'alert alert-danger'));
+					$this->redirect(array('controller'=>'members','action'=>'profile_group'));
+					}
+
+					// pr($this->Organization->validationErrors);
+
 				}
 
 			}
@@ -299,6 +300,7 @@
 					unset($this->request->data['Account']['avatar']);
 				}
 				$this->request->data['Account']['id']=$user['Account']['id'];
+				$this->request->data['Account']['status']=1;
 
 				if($this->request->data['Account']['nickname']==$user['Account']['nickname']){unset($this->request->data['Account']['nickname']);}
 				if($this->request->data['Account']['email']==$user['Account']['email']){unset($this->request->data['Account']['email']);}
@@ -308,7 +310,7 @@
 	          			move_uploaded_file($tmp_name,$filename);
 	          		}
 					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
-		            // $this->redirect($this->referer());
+		            $this->redirect(array('controller'=>'members','action'=>'profile_user'));
 				}
 
 			}
