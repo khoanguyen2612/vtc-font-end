@@ -1,7 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
 
-class InfoCartsController extends AppController
+class InfocartsController extends AppController
 {
     public $uses = array('Account', 'Contact');
 
