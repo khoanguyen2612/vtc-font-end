@@ -48,10 +48,10 @@ Router::connect('/cart/register', array('controller' => 'InfoCarts', 'action' =>
     //Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
 
 	/* tue.phpmailer@gmail.com add route for ThangDH */
-Router::connect('/domain/register', array('controller' => 'ProductPrices', 'action' => 'RegisterDomain'));
-Router::connect('/domain/search', array('controller' => 'ProductPrices', 'action' => 'ResultSearch'));
-Router::connect('/Domains/search', array('controller' => 'ProductPrices', 'action' => 'ResultSearch'));
-Router::connect('/Domains/Domain_search.html', array('controller' => 'ProductPrices', 'action' => 'ResultSearch'));
+Router::connect('/domain/register', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
+Router::connect('/domain/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+Router::connect('/Domains/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+Router::connect('/Domains/Domain_search.html', array('controller' => 'ProductPrices', 'action' => 'result_search'));
 
 	//Router::connect('/domain/ResultSearch', array('controller' => 'ProductPrices', 'action' => 'resultsearch'));
 	//Router::connect('/domain/RegisterDomain', array('controller' => 'ProductPrices', 'action' => 'registerdomain'));
