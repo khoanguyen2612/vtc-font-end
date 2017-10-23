@@ -6,7 +6,7 @@
 			'ProductPrice',
 		);
 		
-		public function ResultSearch() 
+		public function result_search() 
 		  {
 		 //  	
 			$data=$this->ProductPrice->find('all');
@@ -58,7 +58,7 @@
 
 			}
 		}
-        public function RegisterDomain()
+        public function register_domain()
         {
         	$data=$this->ProductPrice->find('all');
 			$this->set('data',$data);
@@ -128,6 +128,7 @@
         	}
 
         }
+      
 	}
 
 ?>
