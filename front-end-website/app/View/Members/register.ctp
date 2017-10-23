@@ -63,7 +63,7 @@
 
             </div>
           </div>
-          <div class="form-group ">
+          <div class="form-group required">
             <label class="control-label col-sm-3" for="pwd">Số CMTND:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="CMTND" placeholder=" Nhập số CMTND" name="CMTND"> -->
@@ -73,6 +73,7 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập số CMTND',
+                    'required' => true,
                     ));
               ?>
             </div>
