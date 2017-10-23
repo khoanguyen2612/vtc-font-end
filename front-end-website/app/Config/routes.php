@@ -36,8 +36,23 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 	/* tue.phpmailer@gmail.com config route URL */
-	Router::connect('/cart/*', array('controller' => 'Carts', 'action' => 'view', 'index', 'home'));
-	Router::connect('/domain/*', array('controller' => 'Domains', 'action' => 'view', 'index', 'home'));
+	Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
+	Router::connect('/cart/', array('controller' => 'Carts', 'action' => 'view'));
+	Router::connect('/cart/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
+	Router::connect('/cart/checkout', array('controller' => 'Carts', 'action' => 'checkout'));
+	//Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
+	Router::connect('/cart/update', array('controller' => 'Carts', 'action' => 'update'));
+
+    /* tue.phpmailer@gmail.com add route for KhoaND */
+    Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
+    //Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
+
+	/* tue.phpmailer@gmail.com add route for ThangDH */
+	Router::connect('/domain/', array('controller' => 'Domains', 'action' => 'view', 'index', 'home'));
+	//Router::connect('/domain/ResultSearch', array('controller' => 'ProductPrices', 'action' => 'resultsearch'));
+	//Router::connect('/domain/RegisterDomain', array('controller' => 'ProductPrices', 'action' => 'registerdomain'));
+	Router::connect('/productprices/resultsearch', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+	Router::connect('/productprices/registerdomain', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

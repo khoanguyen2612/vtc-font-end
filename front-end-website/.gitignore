@@ -2,6 +2,7 @@
 #################################################
 /app/Config/database.php
 /app/tmp
+/app/Test
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
 /vendors
@@ -9,6 +10,10 @@
 /dist
 /tags
 *.mo
+*.backup
+*.__
+
+
 
 # IDE and editor specific files #
 #################################
@@ -17,7 +22,7 @@
 /.project
 /.buildpath
 /.settings/
-
+.gitignore
 # OS generated files #
 ######################
 .DS_Store
