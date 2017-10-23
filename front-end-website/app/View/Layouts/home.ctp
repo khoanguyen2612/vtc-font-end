@@ -110,8 +110,11 @@
 
                                 ?>
 
-                                <a href="">
-                                    <?php echo $this->Html->image("cart-icon.png", array("alt" => "icon")); ?>		0
+                                <a href="/cart/">
+                                    <?php
+                                    echo $this->Html->image("cart-icon.png", array("alt" => "icon"));
+                                    echo " " . $n_item_cart;
+                                    ?>
                                 </a>
 
                             </li>

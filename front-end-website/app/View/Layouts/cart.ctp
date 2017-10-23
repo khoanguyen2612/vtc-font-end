@@ -15,7 +15,7 @@
         <?php echo $this->Html->script('jquery.min.js') . "\n"; ?>
         <?php echo $this->Html->script('bootstrap.min.js') . "\n"; ?>
         <?php echo $this->Html->css('style') . "\n"; ?>
-        <link href='http://fonts.googleapis.com/css?family=Ruge+Boogie' rel='stylesheet' type='text/css'>
+        <?php echo $this->Html->css('http://fonts.googleapis.com/css?family=Ruge+Boogie') . "\n"; ?>
 
     </head>
 
@@ -109,8 +109,11 @@
 
                                     ?>
 
-                                    <a href="">
-                                        <?php echo $this->Html->image("cart-icon.png", array("alt" => "icon")); ?>		0
+                                    <a href="/cart/">
+                                        <?php
+                                        echo $this->Html->image("cart-icon.png", array("alt" => "icon"));
+                                        echo " " . $n_item_cart;
+                                        ?>
                                     </a>
 
                                 </li>

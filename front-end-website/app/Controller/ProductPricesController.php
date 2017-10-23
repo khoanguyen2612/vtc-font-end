@@ -58,6 +58,7 @@
 
 			}
 		}
+
         public function RegisterDomain()
         {
         	$data=$this->ProductPrice->find('all');
