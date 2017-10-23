@@ -1,7 +1,13 @@
 <?php
 App::uses('AppController', 'Controller');
-class InfocartsController extends AppController{
+class InfoCartsController extends AppController{
 	public $uses = array('Account','Contact');
+	public function beforeFilter() {
+		parent::beforeFilter();	
+		if(!$this->Auth->loggedIn()){
+		return $this->redirect($this->Auth->loginAction);
+		}
+	}
 	public function register(){
 		$id_acc = $this->Auth->User('id');
 		$record_personal = $this->Contact->find('all',array(
