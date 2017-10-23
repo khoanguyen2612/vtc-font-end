@@ -44,10 +44,10 @@
 	Router::connect('/cart/update', array('controller' => 'Carts', 'action' => 'update'));
 
     /* tue.phpmailer@gmail.com add route for KhoaND */
-Router::connect('/cart/register', array('controller' => 'InfoCarts', 'action' => 'register'));
-    //Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
+Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
+//Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
 
-	/* tue.phpmailer@gmail.com add route for ThangDH */
+/* tue.phpmailer@gmail.com add route for ThangDH */
 Router::connect('/domain/register', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
 Router::connect('/domain/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
 Router::connect('/Domains/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
