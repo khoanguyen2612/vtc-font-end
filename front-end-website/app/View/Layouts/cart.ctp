@@ -8,8 +8,8 @@
             'vtc-logo.png',
             array('type' => 'icon'));
         ?>
-
         <?php echo $this->Html->charset() . "\n"; ?>
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php echo $this->Html->css('bootstrap.min.css') . "\n"; ?>
         <?php echo $this->Html->script('jquery.min.js') . "\n"; ?>
@@ -17,8 +17,18 @@
         <?php echo $this->Html->css('style') . "\n"; ?>
         <?php echo $this->Html->css('http://fonts.googleapis.com/css?family=Ruge+Boogie') . "\n"; ?>
 
-    </head>
+        <?php
+        echo $this->Html->meta(array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge,chrome=1'));
+        echo $this->Html->meta(array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1.0'));
+        echo $this->Html->meta('description', 'Cloud, Domain shopping cart, test', array('type' => 'description'), false);
+        echo $this->Html->css('bootstrap.min.css') . "\n";
+        echo $this->Html->script('jquery.min.js') . "\n";
+        echo $this->Html->script('bootstrap.min.js') . "\n";
+        echo $this->Html->css('style') . "\n";
+        echo $this->Html->css('http://fonts.googleapis.com/css?family=Ruge+Boogie') . "\n";
+        ?>
 
+    </head>
 
     <body>
 
@@ -41,7 +51,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                         <div class="action">
@@ -132,7 +141,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="index.html"><?php echo $this->Html->image('vtc-logo.png'); ?></a>
+                    <a href="/"><?php echo $this->Html->image('vtc-logo.png'); ?></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
@@ -150,11 +159,11 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">DOMAINS</a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="Domain_search.html">Đăng ký tên miền</a>
+                                    <a href="/domain/search" class="hidden">Đăng ký tên miền</a>
                                     <?php echo $this->Html->link(
                                         'Đăng ký tên miền',
                                         array(
-                                            'controller' => 'Domains',
+                                            'controller' => 'domain',
                                             'action' => 'search',
                                             'full_base' => true
                                         )

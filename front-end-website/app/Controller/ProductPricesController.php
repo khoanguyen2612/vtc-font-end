@@ -6,10 +6,12 @@
 			'ProductPrice',
 		);
 		
-		public function result_search() 
+        public function result_search()
 		  {
 		 //  	
-			$data=$this->ProductPrice->find('all');
+			$data=$this->ProductPrice->find('all', array(
+				'conditions' => array( 'product_type LIKE' => "1" )
+			));
 			$this->set('data',$data);
 			if($this->request->is('post'))
 			{
@@ -58,6 +60,7 @@
 
 			}
 		}
+
         public function register_domain()
         {
         	$data=$this->ProductPrice->find('all');
@@ -149,8 +152,6 @@
 			}
 		}
 
-	}
+    }
 
 ?>
-
-

@@ -69,10 +69,11 @@ class CartsController extends AppController
         $order_code = $order['order_code'];
         $order_id = $order['id'];
         $p = $order_schema['OrderDetail'];
+        //Debugger::dump($p);
 
         $total_money = 0 ;
-
         $item = 0;
+
         foreach ($p as $product) {
 
             $tmp_p = $this->Product->findById($product['product_id']);
@@ -103,11 +104,21 @@ class CartsController extends AppController
             $total_money += $product['quantity'] * $product['price'];
             $product['total_money'] = $total_money;
             $products[] = $product;
+
             /** too much item to dev **/
             $item ++ ;
             //if ($item == 4) break;
 
         }
+
+        $order_arr = array();
+        $cart = array();
+        foreach ($products as $item) {
+            $tmp['order'] = array($order_id);
+            $tmp['product'] = $item;
+            $cart[] = $tmp;
+        }
+
 
         $conditions = array(
             'OR' => array(
@@ -124,15 +135,20 @@ class CartsController extends AppController
              )
         );
 
+
         foreach ($hosts as $host) {
             $list_hosting[] = $host['Product'];
         }
+
+        $n_item_cart = $this->Cart->getCount();
+        $this->set(compact('n_item_cart'));
 
         $this->set(compact('products'));
         $this->set(compact('order_id'));
         $this->set(compact('order'));
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
+
 
     }
 
@@ -205,6 +221,23 @@ class CartsController extends AppController
                 "action" => "index",
                 //"param" => "val",
                 //"param_1" => "val1")
+            )
+        );
+    }
+
+    public function delete_item()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+
+            $request = $this->request->data;
+
+        }
+
+
+        $this->redirect(array("controller" => "carts",
+                "action" => "view",
             )
         );
     }

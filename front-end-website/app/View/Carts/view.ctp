@@ -55,7 +55,7 @@
                 <div class="row">
                     <h3>CÁC BƯỚC THANH TOÁN</h3>
                 </div>
-                <form>
+
                     <div class="row">
                         <!--  -->
                         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
@@ -72,32 +72,33 @@
                                         </tr>
                                     </thead>
                                     <tbody id="add_tr">
-
-                                    <?php foreach ($products as $product): ?>
-                                        <tr>
+                                    <?php
+                                    $modal = 1;
+                                    foreach ($products as $odetail_product): ?>
+                                        <tr id="<?= $odetail_product['id'] ?>">
                                             <td>
-                                                <h4><?php echo $product['domain_name']; ?></h4>
-                                                <p class="vps"><?php echo $product['type']; ?></p>
+                                                <h4><?php echo $odetail_product['domain_name']; ?></h4>
+                                                <p class="vps"><?php echo $odetail_product['type']; ?></p>
                                             </td>
                                             <td>
                                                 <!--<select disabled class="hidden">
                                                     <option> năm</option>
                                                 </select>-->
-                                                <p class="active"><?php echo $product['quantity']; ?></p>
+                                                <p class="active"><?php echo $odetail_product['quantity']; ?></p>
                                             </td>
                                             <td>
-                                                <p><?php echo $product['price']; ?> VNĐ</p>
+                                                <p><?php echo $odetail_product['price']; ?> VNĐ</p>
                                                 <div class="product-removal">
                                                     <button type="button" class="remove-item" data-toggle="modal"
-                                                            data-target="#myModal">
+                                                            data-target="#myModal<?= $modal ?>">
                                                     </button>
                                                 </div>
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
-                                    <tr id="ajax_cart">
-
-                                    </tr>
+                                        <?php
+                                        $modal++;
+                                    endforeach; ?>
+                                    <tr id="ajax_cart"></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -322,7 +323,7 @@
                                     <tbody>
                                     <tr>
                                         <td>Tạm tính (Chưa VAT):</td>
-                                        <td><?php echo $product['total_money']; ?> VNĐ</td>
+                                        <td><?php echo $odetail_product['total_money']; ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td>Giảm giá:</td>
@@ -330,11 +331,13 @@
                                     </tr>
                                     <tr>
                                         <td>VAT (10%)</td>
-                                        <td><?php echo round($product['total_money']*10/100);?> VNĐ</td>
+                                        <td><?php echo round($odetail_product['total_money'] * 10 / 100); ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td><b>Thành tiền:</b></td>
-                                        <td><b><?php echo $product['total_money'] - round($product['total_money']*10/100); ?> VNĐ</b></td>
+                                        <td>
+                                            <b><?php echo $odetail_product['total_money'] - round($odetail_product['total_money'] * 10 / 100); ?>
+                                                VNĐ</b></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="continue">
@@ -356,7 +359,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="buy">
-                                            <button class="btn btn-buy hidden" type="button"> Mua thêm các dịch vụ</button>
+                                            <button class="btn btn-buy hidden" type="button"> Mua thêm các dịch vụ
+                                            </button>
                                             <button class="btn btn-buy" type="button">
                                                 <?php
                                                     echo $this->Html->link('Mua thêm các dịch vụ', array(
@@ -367,7 +371,6 @@
                                                     );
                                                 ?>
                                             </button>
-
 
                                         </td>
                                     </tr>
@@ -384,22 +387,51 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="myModal" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <!-- Modal content -->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4>Bạn muốn xóa dịch vụ này?</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <button type="submit" class="btn btn-success" id="remove-product">Đồng ý</button>
-                                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+                        <?php
+                        $modal = 1;
+                        foreach ($products as $odetail_product): ?>
+                            <div id="myModal<?= $modal ?>" class="modal fade" role="dialog">
+                                <?php
+                                echo $this->Form->create(null, array('type' => 'POST',
+                                        //echo $this->Form->create(null, array('type' => 'POST',
+                                        //'url' => '/cart/update',
+                                        'url' => array('controller' => 'carts', 'action' => 'delete_item'),
+                                        'id' => "modal_form_id_$modal",
+                                        'name' => "modal_form_id_$modal",
+                                        'class' => '',
+                                        'role' => 'form',
+                                    )
+                                );
+
+                                echo $this->Form->input('', array(
+                                    'id' => "id_odetail_product_$modal",
+                                    'type' => 'hidden',
+                                    'name' => 'id_odetail_product',
+                                    'value' => $odetail_product['id'],
+                                ));
+
+                                ?>
+                                <div class="modal-dialog">
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4>Bạn muốn xóa dịch vụ này? </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <button type="submit" class="btn btn-success" id="remove-product">Đồng ý
+                                            </button>
+                                            <button type="submit" class="btn btn-danger" data-dismiss="modal">Hủy
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <?php echo $this->Form->end(); ?>
                         </div>
+                            <?php
+                            $modal++;
+                        endforeach; ?>
+
                     </div>
-                </form>
             </div>
         </div>
     </div>
