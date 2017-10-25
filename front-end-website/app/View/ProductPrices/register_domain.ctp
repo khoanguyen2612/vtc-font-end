@@ -1,5 +1,3 @@
-
-<?php echo $this->Html->css('style_mb');?>
 <div class="search-domain">
 		<div class="container-fluid">
 			<h3 class="text-center">ĐĂNG KÍ THÊM TÊN MIỀN</h3>
@@ -174,3 +172,45 @@
 	        });
  }); 
 </script>
+<style type="text/css">
+	.md-cn {
+	    width: 100%;
+	    padding: 0%;
+	    height: auto;
+	}
+	.modal-lg{
+	  padding: unset;
+	}
+	.modal-header {
+	    padding: 20px;
+	    background: #e67237;
+	    color: #fff;
+	}
+	.whois-body{
+	    margin: 10px 50px;
+	    text-align: left;
+
+	}
+	.whois-section{
+	    margin-bottom: 15px;
+
+	}
+	.whois-item{
+	    background: #005faf;
+	    color: #fff;
+	    padding: 10px;
+	    font-size: 24px;
+	    }
+	.whois-content {
+	  line-height: 30px;
+	  padding-top: 10px;
+	}
+	.whois-content-1 {
+	  line-height: 15px;
+	  padding-top: 20px;
+	}
+	.dcol {
+	    float: left;
+	    width: 50%;
+	}
+</style>

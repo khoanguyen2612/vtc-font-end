@@ -28,9 +28,29 @@
 							<label for="search-dm">TÌM KIẾM TÊN MIỀN CỦA BẠN:</label>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-							<form action="Domain_search.html" method="get">
-								<input type="text" name="" id="search-dm" placeholder="Viết tên miền của bạn vào đây....">
-								<button type="submit" class="btn_search">TÌM KIỂM</button>
+							<!-- <form action="" method="post"> -->
+
+							<?php echo $this->Form->create('Data',array(
+								"url" => array('controller' => 'ProductPrices','action' => 'register_domain'),
+								'class' => 'form-horizontal',
+								)); 
+							?>
+								<!-- <input type="text" name="" id="search-dm" placeholder="Viết tên miền của bạn vào đây...."> -->
+							 <?php
+				                echo $this->Form->input('add-domain',array(
+				                    'type' => 'text',
+				                    'label' => false,
+				                    'placeholder' => 'Viết tên miền của bạn vào đây....',
+				                    'required' => true,
+				                    ));
+				            ?>
+								<!-- <button type="submit" class="btn_search">TÌM KIỂM</button> -->
+								<?php
+					                  echo $this->Form->button('Đăng ký',array(
+					                    'class' => 'btn_search',
+					                    'id' => 'submit',
+					                  ));
+					            ?>
 							</form>
 						</div>
 					</div>
