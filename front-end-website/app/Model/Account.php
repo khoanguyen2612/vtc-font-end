@@ -58,12 +58,6 @@ class Account extends AppModel {
                     'message' => 'Email không được để trống'
                 )
             ),
-            'name' => array(
-                'not empty' => array(
-                    'rule' => 'notBlank',
-                    'message' => 'Vui lòng nhập họ tên'
-                )
-            ),
             'phonenumber' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
@@ -77,11 +71,37 @@ class Account extends AppModel {
             'CMTND' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
+                    'allowEmpty' => true,
                     'message' => 'Vui lòng nhập số',
                 ),
                 'too long'=>array(
                     'rule' => array('between', 9, 10),
+                    'allowEmpty' => true,
                     'message' => 'Số CMT không hợp lệ',
+                ),
+            ),
+            'phonenumber2' => array(
+                'numeric' => array(
+                    'rule' => 'numeric',
+                    'allowEmpty' => true,
+                    'message' => 'Vui lòng nhập số',
+                ),
+                'too long'=>array(
+                    'rule' => array('between', 10, 12),
+                    'allowEmpty' => true,
+                    'message' => 'Số điện thoại không hợp lệ....',
+                ),
+            ),
+            'tax_code' => array(
+                'numeric' => array(
+                    'rule' => 'numeric',
+                    'allowEmpty' => true,
+                    'message' => 'Vui lòng nhập số',
+                ),
+                'too long'=>array(
+                    'rule' => array('between', 10, 13),
+                    'allowEmpty' => true,
+                    'message' => 'Mã thuế không hợp lệ',
                 ),
             ),
 
