@@ -5,8 +5,8 @@
 		(
 			'ProductPrice',
 		);
-		
-		public function result_search() 
+
+        public function result_search()
 		  {
 		 //  	
 			$data=$this->ProductPrice->find('all');
@@ -149,7 +149,7 @@
 			}
 		}
 
-	}
+    }
 
 ?>
 
