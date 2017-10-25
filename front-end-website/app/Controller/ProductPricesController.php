@@ -9,10 +9,12 @@
         public function result_search()
 		  {
 		 //  	
-			$data=$this->ProductPrice->find('all');
+			$data=$this->ProductPrice->find('all', array(
+				'conditions' => array( 'product_type LIKE' => "1" )
+			));
 			$this->set('data',$data);
 			if($this->request->is('post'))
-			{
+			{ 
 				$request = ($this->request->data);
 				$prod_name=$this->ProductPrice->find('first',array(
 					'conditions'=> array('ProductPrice.id'=>$request['product_id'])));
@@ -66,7 +68,17 @@
 			
         	if($this->request->is('post'))
         	{
-        		$request = ($this->request->data);
+        		// pr($this->request->data);die;
+        		if(isset($this->request->data['Data']))
+
+        		{
+        			$request = ($this->request->data['Data']);
+        		}
+        		else 
+        			{
+        				$request = ($this->request->data);
+        			}
+        		
 				//echo $request['add-domain'];
 				$this->set('request',$request);	
 
@@ -150,8 +162,7 @@
 			}
 		}
 
+
     }
 
 ?>
-
-

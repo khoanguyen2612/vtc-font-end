@@ -32,7 +32,7 @@
               ?>
             </div>
           </div>
-          <div class="form-group required">
+          <div class="form-group">
             <label class="control-label col-sm-3" for="pwd">Nhập họ tên:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="name" placeholder="Nhập họ tên" name="name" > -->
@@ -42,7 +42,6 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập họ tên',
-                    'required' => true,
                     ));
               ?>
             </div>
@@ -63,7 +62,7 @@
 
             </div>
           </div>
-          <div class="form-group required">
+          <div class="form-group">
             <label class="control-label col-sm-3" for="pwd">Số CMTND:</label>
             <div class="col-sm-8">          
               <!-- <input type="text" class="form-control" id="CMTND" placeholder=" Nhập số CMTND" name="CMTND"> -->
@@ -73,7 +72,6 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập số CMTND',
-                    'required' => true,
                     ));
               ?>
             </div>
@@ -301,7 +299,6 @@
                     'class' => 'form-control',
                     'label' => false,
                     'placeholder' => 'Nhập họ tên',
-                    'required' => true,
                     ));
                 ?>
               </div>
