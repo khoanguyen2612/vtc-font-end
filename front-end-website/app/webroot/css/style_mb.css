@@ -1,0 +1,111 @@
+/*register.ctp*/
+  .form-register{
+    margin: auto;
+    max-width: 900px;
+  }
+  .form-register h3{
+    color: #f37636;
+  }
+  .tab-content{
+    padding: 10px 10px;
+  }
+  .form-register .nav li.active a{
+    background: #f37636;
+    border:0px;
+    color:#ffffff;
+  }
+  .form-register .nav li a{
+    border:0px;
+    color:black;
+  }
+
+  .form-register li.active{
+    border: 0px solid #f37636;
+    background: #f37636;
+  }
+  .form-register .tab-content p{
+    color: #f37636;
+    margin:20px;
+  }
+  .tab-content{
+    border: 1px solid #f37636;
+  }
+  .tab-content button{
+    text-align: center;
+    background: #f37636;
+    color:#ffffff;
+    width: 145px;
+  }
+
+
+
+ /* RegisterDomain.ctp */
+ .md-cn {
+      width: 100%;
+      padding: 0%;
+      height: auto;
+  }
+  .modal-lg{
+    padding: unset;
+  }
+  .modal-header {
+      padding: 20px;
+      background: #e67237;
+      color: #fff;
+  }
+  .whois-body{
+      margin: 10px 50px;
+      text-align: left;
+
+  }
+  .whois-section{
+      margin-bottom: 15px;
+
+  }
+  .whois-item{
+      background: #005faf;
+      color: #fff;
+      padding: 10px;
+      font-size: 24px;
+      }
+  .whois-content {
+    line-height: 30px;
+    padding-top: 10px;
+  }
+  .whois-content-1 {
+    line-height: 15px;
+    padding-top: 20px;
+  }
+  .dcol {
+      float: left;
+      width: 50%;
+  }
+
+
+  /* reset_pass.ctp */
+  .forget-form > div > h3{
+  margin:100px 0px 30px 0px;
+  padding-bottom: 10px;
+  text-align: center;
+  color:#0060af;
+}
+.forget-form .fg-note{
+  margin: 20px 0;
+}
+.fg-logincontainer button{
+  text-align: center;
+  background: #f37636;
+  color:#ffffff;
+  width: 145px;
+  padding:10px 10px;
+}
+.fg-logincontainer input{
+  padding: 20px 10px;
+  margin:20px 0px;
+}
+.fg-logincontainer {
+    margin: 40px auto 100px auto;
+    padding: 0 20px;
+    max-width: 600px;
+    font-size: 16px;
+}

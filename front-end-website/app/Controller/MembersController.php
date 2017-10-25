@@ -6,22 +6,41 @@
 		public $uses = array('Account','Organization');
 		public $components = array('Email');
 
-		public function login(){
+		public function login($token=null){
 			$this->set('title_for_layout', 'Đăng nhập');
         	if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
+
         	if($this->request->is('post')){
-        		
-				if($this->Auth->login())
-				{
-					// pr($this->Auth->user());die;
-					return $this->redirect($this->Auth->redirectUrl($this->Auth->loginRedirect));
+        		$nickname=$this->request->data['Account']['nickname'];
+				$user=$this->Account->find('first',array('conditions'=>array('Account.nickname'=>$nickname)));
+				// pr($user);die;
+				if($user['Account']['status']==1){
+					if($this->Auth->login())
+					{
+						// pr($this->Auth->user());die;
+						return $this->redirect($this->Auth->redirectUrl($this->Auth->loginRedirect));
+					}
+					else
+					{
+						
+						$this->Session->setFlash('Thông tin đăng nhập không chính xác. Xin hãy thử lại.','default',array('class'=>'alert alert-danger'));
+					}
 				}
-				else
-				{
-					
-					$this->Session->setFlash('Thông tin đăng nhập không chính xác. Xin hãy thử lại.','default',array('class'=>'alert alert-danger'));
+				else{
+					$this->Session->setFlash('Tài khoản này chưa được kích hoạt','default',array('class'=>'alert alert-danger'));
 				}
 			}
+			if(!empty($token)){
+	            $u=$this->Account->findBytokenhash($token);
+	            if($u){
+	            	$this->Account->id=$u['Account']['id'];
+	            	$this->Account->saveField('status',1);
+	            	$this->Session->setFlash('Tài khoản của bạn đã được kích hoạt, vui lòng đăng nhập','default',array('class'=>'alert alert-success'));
+					return $this->redirect(array('controller'=>'members','action'=>'login'));
+
+	            }
+		    }
+
 
 		}
 
@@ -35,35 +54,88 @@
         	if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
 			if($this->request->is('post')||$this->request->is('put')){
 				$Data_Form=$this->request->data;
-				$Data_Form['Account']['domain_flg'] =$Data_Form['domain_flg'];
-				$Data_Form['Account']['domain_news_flg'] =$Data_Form['domain_news_flg'];
+
+				if(isset($Data_Form['domain_flg'])){$Data_Form['Account']['domain_flg'] =$Data_Form['domain_flg'];}
+				if(isset($Data_Form['domain_news_flg'])){$Data_Form['Account']['domain_news_flg'] =$Data_Form['domain_news_flg'];}
+
 				$Data_Form['Account']['login_password']=$Data_Form['Account']['original_password'];
 				$Data_Form['Account']['login_id']=$Data_Form['Account']['nickname'];
-				if(isset($Data_Form['sex'])){
-					$Data_Form['Account']['sex'] =$Data_Form['sex'];
-					$Data_Form['Account']['birthday']=$Data_Form['year'].'-'.$Data_Form['month'].'-'.$Data_Form['day'];
-					$this->Account->set($Data_Form['Account']);
-				}else{
+
+				if(isset($Data_Form['Account']['organ_name'])){
 					$Data_Form['Organization']['organ_name']=$Data_Form['Account']['organ_name'];
-					$Data_Form['Organization']['tax_code']=$Data_Form['Account']['tax_code'];
-					$Data_Form['Organization']['phonenumber2']=$Data_Form['Account']['phonenumber2'];
+					if(isset($Data_Form['tax_code'])){$Data_Form['Organization']['tax_code']=$Data_Form['Account']['tax_code'];}
+					if(isset($Data_Form['phonenumber2'])){$Data_Form['Organization']['phonenumber2']=$Data_Form['Account']['phonenumber2'];}
+					$Data_Form['Organization']['proxy']=1;
 					$this->Account->set($Data_Form['Account']);
 					$this->Organization->set($Data_Form['Organization']);
+				}else{
+					if(isset($Data_Form['sex'])){$Data_Form['Account']['sex'] =$Data_Form['sex'];}
+					$Data_Form['Account']['birthday']=$Data_Form['year'].'-'.$Data_Form['month'].'-'.$Data_Form['day'];
+					$this->Account->set($Data_Form['Account']);
 				}
+
+				// ---------------------------------
 				if(isset($Data_Form['Organization'])){
 	    			if ($this->Account->validates()&&$this->Organization->validates()) {
-						// $this->Account->save($Data_Form);
+
+						$key=sha1($Data_Form['Account']['email'].rand(0,100));
+	                    $url = Router::url( array('controller'=>'members','action'=>'login'), true ).'/'.$key;
+	                    $ms=$url;
+                    	$ms=wordwrap($ms,1000);
+                   		$Data_Form['Account']['tokenhash']=$key;
+
+						$this->Account->save($Data_Form);
 						$Data_Form['Organization']['account_id']=$this->Account->id;
-						// $this->Organization->save($Data_Form);
-						$this->Session->setFlash('Tài khoản đã của bạn đã được kích hoạt, vui lòng đăng nhập','default',array('class'=>'alert alert-success'));
-						$this->redirect(array('action'=>'login'));
+						$this->Organization->save($Data_Form);
+
+						//send mail--------------
+							$Messages="Chào bạn ".$Data_Form['Account']['nickname'].", - Vui lòng click vào địa chỉ bên dưới để kích hoạt tài khoản: 
+							".$ms;
+							$mess_success="Vui lòng truy cập email để kích hoạt tài khoản của bạn";
+							$mess_error="Đã có lỗi, vui lòng thử lại";
+							$Email = new CakeEmail('default');
+							$Email->from(array('vtvtest1@gmail.com' => 'VTC'));
+							$Email->to($Data_Form['Account']['email']);
+							$Email->subject('Thông báo kích hoạt tài khoản');
+							
+							if($Email->send($Messages)){
+							    $this->Session->setFlash($mess_success,'default',array('class'=>'alert alert-success'));
+							    return $this->redirect(array('controller'=>'members','action'=>'login'));
+							}
+							else  {
+							    $this->Session->setFlash($mess_error,'default',array('class'=>'alert alert-danger'));
+							}
 							
 					}
 				}
 				elseif ($this->Account->validates()) {
-					$this->Account->save($Data_Form);
-					$this->Session->setFlash('Tài khoản đã của bạn đã được kích hoạt, vui lòng đăng nhập','default',array('class'=>'alert alert-success'));
-					$this->redirect(array('action'=>'login'));
+
+						$key=sha1($Data_Form['Account']['email'].rand(0,100));
+	                    $url = Router::url( array('controller'=>'members','action'=>'login'), true ).'/'.$key;
+	                    $ms=$url;
+                  		$ms=wordwrap($ms,1000);
+                   		$Data_Form['Account']['tokenhash']=$key;
+
+						$this->Account->save($Data_Form);
+
+						//send mail--------------
+							$Messages="Chào bạn ".$Data_Form['Account']['nickname'].", - Vui lòng click vào địa chỉ bên dưới để kích hoạt tài khoản: 
+							".$ms;
+							$mess_success="Vui lòng truy cập email để kích hoạt tài khoản của bạn";
+							$mess_error="Đã có lỗi, vui lòng thử lại";
+							$Email = new CakeEmail('default');
+							$Email->from(array('vtvtest1@gmail.com' => 'VTC'));
+							$Email->to($Data_Form['Account']['email']);
+							$Email->subject('Thông báo kích hoạt tài khoản');
+							
+							if($Email->send($Messages)){
+							    $this->Session->setFlash($mess_success,'default',array('class'=>'alert alert-success'));
+							    return $this->redirect(array('controller'=>'members','action'=>'login'));
+							}
+							else  {
+							    $this->Session->setFlash($mess_error,'default',array('class'=>'alert alert-danger'));
+							}
+
 				}
 				
 
@@ -73,24 +145,6 @@
 		public function forgetpass(){
 			$this->set('title_for_layout', 'Khôi phục tài khoản');
 			if($this->request->is('post')){
-				// $useremail=$this->request->data['Send_mail'];
-				// $Email = new CakeEmail();
-				// $Email->transport('gmail');
-
-
-				// $Email->config('gmail')
-				// 		->from($useremail)        
-				// 		->to('buithidieu10021996@mail.com')
-				// 		->subject('Contact');
-				// if($Email->send('abc')){
-				//     $this->Session->setFlash('Mail sent','default',array('class'=>'alert alert-success'));
-				//     return $this->redirect(array('controller'=>'members','action'=>'login'));
-				// }
-				// else  {
-				//     $this->Session->setFlash('Problem during sending email','default',array('class'=>'alert alert-warning'));
-				// }
-
-				// pr($this->request->data);die;
 
 				$email=$this->request->data['Send_mail']['email'];
 				$user=$this->Account->find('first',array('conditions'=>array('Account.email'=>$email)));
@@ -113,13 +167,10 @@
 						$mess_success="Vui lòng truy cập vào email của bạn để xác nhận lại tài khoản";
 						$mess_error="Đã có lỗi, vui lòng thử lại";
 						$Email = new CakeEmail('default');
-						$Email->from(array('buithidieu10021996@gmail.com' => 'Bùi Thị Diệu'));
+						$Email->from(array('vtvtest1@gmail.com' => 'VTC'));
 						$Email->to($email);
 						$Email->subject('Xác nhận lại mật khẩu');
-						// $Email->template ('resetpw');
-						// $Email->emailFormat('html');
 
-						// pr($Email);die;
 						if($Email->send($Messages)){
 						    $this->Session->setFlash($mess_success,'default',array('class'=>'alert alert-success'));
 						    return $this->redirect(array('controller'=>'members','action'=>'login'));
@@ -195,29 +246,16 @@
 				}
 
 				$this->request->data['Account']['id']=$user['Account']['id'];
+				$this->request->data['Account']['status']=1;
 
 				$this->request->data['Organization']['id']=$user['Organization']['id'];
 				$this->request->data['Organization']['organ_name']=$this->request->data['Account']['organ_name'];
-				$this->request->data['Organization']['tax_code']=$this->request->data['Account']['tax_code'];
-				$this->request->data['Organization']['phonenumber2']=$this->request->data['Account']['phonenumber2'];
+				if(isset($this->request->data['Account']['tax_code'])){$this->request->data['Organization']['tax_code']=$this->request->data['Account']['tax_code'];}
+				if(isset($this->request->data['Account']['phonenumber2'])){$this->request->data['Organization']['phonenumber2']=$this->request->data['Account']['phonenumber2'];}
 				if($this->request->data['Account']['email']==$user['Account']['email']){unset($this->request->data['Account']['email']);}
 				// pr($this->request->data);die;
 					$this->Account->set($this->request->data['Account']);
 					$this->Organization->set($this->request->data['Organization']);
-
-					// if ($this->Organization->validates()){
-					// 	$this->Organization->save($this->request->data);
-						
-					// 	$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
-					// }
-					// // else{
-					// 	foreach ($this->Organization->validationErrors as $key => $value) {
-			  //                   pr($value[0]);
-			  //                }
-			  //                die; 
-					// }
-
-
 
 				if ($this->Organization->validates()&&$this->Account->validates()){
 					$this->Account->save($this->request->data);
@@ -226,6 +264,19 @@
 						move_uploaded_file($tmp_name,$filename);
 					}
 					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
+		            $this->redirect(array('controller'=>'members','action'=>'profile_group'));
+				}else{
+					if(isset($this->Organization->validationErrors['tax_code'][0])){
+						$this->Session->setFlash($this->Organization->validationErrors['tax_code'][0],'default',array('class'=>'alert alert-danger'));
+					$this->redirect(array('controller'=>'members','action'=>'profile_group'));
+					}
+					if(isset($this->Organization->validationErrors['phonenumber2'][0])){
+						$this->Session->setFlash($this->Organization->validationErrors['phonenumber2'][0],'default',array('class'=>'alert alert-danger'));
+					$this->redirect(array('controller'=>'members','action'=>'profile_group'));
+					}
+
+					// pr($this->Organization->validationErrors);
+
 				}
 
 			}
@@ -249,6 +300,7 @@
 					unset($this->request->data['Account']['avatar']);
 				}
 				$this->request->data['Account']['id']=$user['Account']['id'];
+				$this->request->data['Account']['status']=1;
 
 				if($this->request->data['Account']['nickname']==$user['Account']['nickname']){unset($this->request->data['Account']['nickname']);}
 				if($this->request->data['Account']['email']==$user['Account']['email']){unset($this->request->data['Account']['email']);}
@@ -258,7 +310,7 @@
 	          			move_uploaded_file($tmp_name,$filename);
 	          		}
 					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
-		            // $this->redirect($this->referer());
+		            $this->redirect(array('controller'=>'members','action'=>'profile_user'));
 				}
 
 			}

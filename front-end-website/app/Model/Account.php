@@ -52,6 +52,10 @@ class Account extends AppModel {
                 'duplicate email' => array(
                     'rule'=>'isUnique',
                     'message' => 'email đã có người sử dụng'
+                ),
+                'not empty' => array(
+                    'rule' => 'notBlank',
+                    'message' => 'Email không được để trống'
                 )
             ),
             'name' => array(
