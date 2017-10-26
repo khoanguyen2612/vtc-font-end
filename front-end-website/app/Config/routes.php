@@ -50,13 +50,13 @@ Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' =>
 /* tue.phpmailer@gmail.com add route for ThangDH */
 Router::connect('/domain/register', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
 Router::connect('/domain/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
-Router::connect('/Domains/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
-Router::connect('/Domains/Domain_search.html', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+//Router::connect('/Domains/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+//Router::connect('/Domains/Domain_search.html', array('controller' => 'ProductPrices', 'action' => 'result_search'));
 
 	//Router::connect('/domain/ResultSearch', array('controller' => 'ProductPrices', 'action' => 'resultsearch'));
 	//Router::connect('/domain/RegisterDomain', array('controller' => 'ProductPrices', 'action' => 'registerdomain'));
-	Router::connect('/productprices/resultsearch', array('controller' => 'ProductPrices', 'action' => 'result_search'));
-	Router::connect('/productprices/registerdomain', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
+	//Router::connect('/productprices/resultsearch', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+	//Router::connect('/productprices/registerdomain', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
