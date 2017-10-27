@@ -7,136 +7,410 @@
 		);
 		
         public function result_search()
-		  {
-		 //  	
-			$data=$this->ProductPrice->find('all', array(
-				'conditions' => array( 'product_type LIKE' => "1" )
-			));
+		{	
+			$data=$this->ProductPrice->find('all', array( 'conditions' => array( 'product_type LIKE' => "1" ) ));
 			$this->set('data',$data);
 			if($this->request->is('post'))
 			{ 
 				$request = ($this->request->data);
-				$prod_name=$this->ProductPrice->find('first',array(
-					'conditions'=> array('ProductPrice.id'=>$request['product_id'])));
-				$request['search']=$request['search'].$prod_name['ProductPrice']['product_name'];
-				$this->set('prod_name',$prod_name);
-				$this->set('request',$request);
+				// pr($request);die;	
+				$check = strstr( $request['search'], '.' );
 
-// -----------------------------------------------------------------------------------------------------------------------------------
-				$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
-				$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
+				if( ($data=$this->ProductPrice->find('all', array('conditions' => array( 'product_name LIKE' => "%$check%" )))) &&  ($check != "") )
+					
+					{
+						$request1 = $request['search'];
+						//pr($request1);die;
+						$this->set('request1',$request1);
+						//-----------------------------------------------------------------------
+						$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+						$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
 
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_POST, true);
-				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+						curl_setopt($ch, CURLOPT_POST, true);
+						curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
 
-				$output = curl_exec($ch);
-				$output = json_decode($output, true);
-				$token =  ($output['session']['token']);
-				curl_close($ch);
-// --------------------------------------------------------------------------------------------------------------------------------------
-				$checkDomain = array(  "name" => $request['search'], "registrar" => "inet");
-	
-				$data_string = json_encode($checkDomain);   
+						$output = curl_exec($ch);
+						$output = json_decode($output, true);
+						$token =  ($output['session']['token']);
+						curl_close($ch);
+						//-------------------------------------------------------------------------
+						$checkDomain = array(  "name" => $request1, "registrar" => "inet");
+						
+						$data_string = json_encode($checkDomain);   
 
 
-				$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+						$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
 
-				curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-				//curl_setopt($ch, CURLOPT_POST, true);
-				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-				curl_setopt($ch, CURLOPT_HTTPHEADER, array
-					(                                                                          
-						'Content-Type:application/json; charset=UTF-8',  
-						'token: '.$token                                                                             
-				    )                                                                       
-				);       
+						curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+						//curl_setopt($ch, CURLOPT_POST, true);
+						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+						curl_setopt($ch, CURLOPT_HTTPHEADER, array
+							(                                                                          
+								'Content-Type:application/json; charset=UTF-8',  
+								'token: '.$token                                                                             
+						    )                                                                       
+						);       
 
-				$output = curl_exec($ch);
-				$output = json_decode($output, true);
-				$this->set('output',$output);
-			 	curl_close($ch);
+						$output = curl_exec($ch);
+						$output = json_decode($output, true);
+						$this->set('output',$output);
+					 	curl_close($ch);
+					 	
+					}
+				else
+					{
+						if(isset($request['product_id'])){
+						$prod_name=$this->ProductPrice->find('first',array(
+							'conditions'=> array('ProductPrice.id'=>$request['product_id'])));
+						$request2=$request['search'].$prod_name['ProductPrice']['product_name'];}
 
-			}
+
+						//--------------------------------------------------------------------------------
+						if(isset($request2)){
+						$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+						$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
+
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+						curl_setopt($ch, CURLOPT_POST, true);
+						curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
+
+						$output = curl_exec($ch);
+						$output = json_decode($output, true);
+						$token =  ($output['session']['token']);
+						curl_close($ch);
+						//----------------------------------------------------------------------------------
+						$checkDomain = array(  "name" => $request2, "registrar" => "inet");
+			
+						$data_string = json_encode($checkDomain);   
+
+
+						$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+
+						curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+						//curl_setopt($ch, CURLOPT_POST, true);
+						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+						curl_setopt($ch, CURLOPT_HTTPHEADER, array
+							(                                                                          
+								'Content-Type:application/json; charset=UTF-8',  
+								'token: '.$token                                                                             
+						    )                                                                       
+						);       
+
+						$output = curl_exec($ch);
+						$output = json_decode($output, true);
+						$this->set('output',$output);
+					 	curl_close($ch);
+					}
+
+
+					 	if(!isset($request2)){
+								$this->Session->setFlash('Bạn chưa chọn đuôi tên miền. Làm ơn chọn đuôi tên miền cần kiểm tra!','default',array('class'=>'alert alert-danger'));
+							}else{
+
+								$this->set('prod_name',$prod_name);
+								$this->set('request2',$request2);
+							}
+					};
+					
+
+			};
 		}
-
         public function register_domain()
         {
-        	$data=$this->ProductPrice->find('all');
+        	$data=$this->ProductPrice->find('all', array(
+				'conditions' => array( 'product_type LIKE' => "1" )
+			));
 			$this->set('data',$data);
 			
         	if($this->request->is('post'))
         	{
-        		// pr($this->request->data);die;
+        		//pr($this->request->data);die;
         		if(isset($this->request->data['Data']))
 
-        		{
-        			$request = ($this->request->data['Data']);
-        		}
+	        		{
+	        			$request = ($this->request->data['Data']);
+	        			$check = strstr($request['add-domain'], '.');
+	        			$this->set('check',$check);
+	        			        			
+						if 
+							(
+								( $data=$this->ProductPrice->find('all', array('conditions' => array( 'product_name LIKE' => "$check%" ))) ) &&  ( $check != "") 
+							) 
+								{
+									$data1=$this->ProductPrice->find('all');
+									$this->set('data1',$data1);
+									$request1 = $request['add-domain'];
+									$this->set('request1',$request1);
+									//------------------------------------------------------------------------
+										$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+										$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
+
+										curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+										curl_setopt($ch, CURLOPT_POST, true);
+										curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
+
+										$output = curl_exec($ch);
+										$output = json_decode($output, true);
+										$token =  ($output['session']['token']);
+										curl_close($ch);
+									//--------------------------------------------------------------------------
+										$checkDomain = array(  "name" => $request1, "registrar" => "inet");
+								
+										$data_string = json_encode($checkDomain);   
+
+
+										$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+
+										curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+										//curl_setopt($ch, CURLOPT_POST, true);
+										curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+										curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+										curl_setopt($ch, CURLOPT_HTTPHEADER, array
+											(                                                                          
+												'Content-Type:application/json; charset=UTF-8',  
+												'token: '.$token                                                                             
+										    )                                                                       
+										);       
+
+										$output = curl_exec($ch);
+										$output = json_decode($output, true);
+										$this->set('output',$output);
+									 	curl_close($ch);
+						 		}
+						else
+								{
+									$request2 = ($this->request->data['Data']) ; 
+									$this->set('request2',$request2);
+									//------------------------------------------------------------
+										$data1=$this->ProductPrice->find('all');
+										$this->set('data1',$data1);
+										$i=0;
+										foreach($data1 as $item)
+										{
+											$test = $request['add-domain'].$item['ProductPrice']['product_name'];
+
+											
+											//LOGIN
+											$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+											$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
+
+											curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+											curl_setopt($ch, CURLOPT_POST, true);
+											curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
+
+											$output = curl_exec($ch);
+											$output = json_decode($output, true);
+											$token =  ($output['session']['token']);
+											curl_close($ch);
+											
+
+											//CHECK
+											$checkDomain = array(  "name" => $test, "registrar" => "inet");
+							
+											$data_string = json_encode($checkDomain);   
+
+
+											$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+
+											curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+											//curl_setopt($ch, CURLOPT_POST, true);
+											curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+											curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+											curl_setopt($ch, CURLOPT_HTTPHEADER, array
+												(                                                                          
+													'Content-Type:application/json; charset=UTF-8',  
+													'token: '.$token                                                                             
+											    )                                                                       
+											);       
+
+											$output = curl_exec($ch);
+											$output = json_decode($output, true);
+											$output1[$i]=$output;
+											$i++;
+											
+
+										 	
+										}
+
+										$this->set('output1',$output1);
+										curl_close($ch);
+									//
+								};
+
+	        		}
         		else 
         			{
         				$request = ($this->request->data);
+        				$check = strstr($request['add-domain'], '.');
+        				$this->set('check',$check);
+
+        				if 
+							(
+								( $data=$this->ProductPrice->find('all', array('conditions' => array( 'product_name LIKE' => "$check%" ))) ) &&  ( $check != "") 
+							)
+							{
+									$data1=$this->ProductPrice->find('all');
+									$this->set('data1',$data1);
+									$request1 = $request['add-domain'];
+									$this->set('request1',$request1);
+									//------------------------------------------------------------------------
+										$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+										$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
+
+										curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+										curl_setopt($ch, CURLOPT_POST, true);
+										curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
+
+										$output = curl_exec($ch);
+										$output = json_decode($output, true);
+										$token =  ($output['session']['token']);
+										curl_close($ch);
+									//--------------------------------------------------------------------------
+										$checkDomain = array(  "name" => $request1, "registrar" => "inet");
+								
+										$data_string = json_encode($checkDomain);   
+
+
+										$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+
+										curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+										//curl_setopt($ch, CURLOPT_POST, true);
+										curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+										curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+										curl_setopt($ch, CURLOPT_HTTPHEADER, array
+											(                                                                          
+												'Content-Type:application/json; charset=UTF-8',  
+												'token: '.$token                                                                             
+										    )                                                                       
+										);       
+
+										$output = curl_exec($ch);
+										$output = json_decode($output, true);
+										$this->set('output',$output);
+									 	curl_close($ch);
+							}
+						else
+							{
+									$request2 = ($this->request->data); 
+									//pr($request2); die;
+									$this->set('request2',$request2);
+									//------------------------------------------------------------
+										$data1=$this->ProductPrice->find('all');
+										$this->set('data1',$data1);
+										$i=0;
+										foreach($data1 as $item)
+										{
+											$test = $request['add-domain'].$item['ProductPrice']['product_name'];
+
+											
+											//LOGIN
+											$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+											$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
+
+											curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+											curl_setopt($ch, CURLOPT_POST, true);
+											curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
+
+											$output = curl_exec($ch);
+											$output = json_decode($output, true);
+											$token =  ($output['session']['token']);
+											curl_close($ch);
+											
+
+											//CHECK
+											$checkDomain = array(  "name" => $test, "registrar" => "inet");
+							
+											$data_string = json_encode($checkDomain);   
+
+
+											$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+
+											curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+											//curl_setopt($ch, CURLOPT_POST, true);
+											curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+											curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+											curl_setopt($ch, CURLOPT_HTTPHEADER, array
+												(                                                                          
+													'Content-Type:application/json; charset=UTF-8',  
+													'token: '.$token                                                                             
+											    )                                                                       
+											);       
+
+											$output = curl_exec($ch);
+											$output = json_decode($output, true);
+											$output1[$i]=$output;
+											$i++;
+											
+
+										 	
+										}
+
+										$this->set('output1',$output1);
+										curl_close($ch);
+									//
+								};
         			}
         		
 				//echo $request['add-domain'];
-				$this->set('request',$request);	
+				// $this->set('request',$request);	
 
-//-------------------------------------------------------------------------------------------------------------------------------------
-				
-				$data1=$this->ProductPrice->find('all');
-				$this->set('data1',$data1);
-				$i=0;
-				foreach($data1 as $item)
-				{
-					$test = $request['add-domain'].$item['ProductPrice']['product_name'];
+
+				// //---------------------------------------
+				// $data1=$this->ProductPrice->find('all');
+				// $this->set('data1',$data1);
+				// $i=0;
+				// foreach($data1 as $item)
+				// {
+				// 	$test = $request['add-domain'].$item['ProductPrice']['product_name'];
 
 					
-//--------------------------------------------------------------------------------------------------------------------------------------
-					$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
-					$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
+				// 	//LOGIN
+				// 	$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+				// 	$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
 
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-					curl_setopt($ch, CURLOPT_POST, true);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
+				// 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				// 	curl_setopt($ch, CURLOPT_POST, true);
+				// 	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
 
-					$output = curl_exec($ch);
-					$output = json_decode($output, true);
-					$token =  ($output['session']['token']);
-					curl_close($ch);
+				// 	$output = curl_exec($ch);
+				// 	$output = json_decode($output, true);
+				// 	$token =  ($output['session']['token']);
+				// 	curl_close($ch);
 					
-//------------------------------------------------------------------------------------------------------------------------------------------
 
-
-					$checkDomain = array(  "name" => $test, "registrar" => "inet");
+				// 	//CHECK
+				// 	$checkDomain = array(  "name" => $test, "registrar" => "inet");
 	
-					$data_string = json_encode($checkDomain);   
+				// 	$data_string = json_encode($checkDomain);   
 
 
-					$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+				// 	$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
 
-					curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-					//curl_setopt($ch, CURLOPT_POST, true);
-					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-					curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-					curl_setopt($ch, CURLOPT_HTTPHEADER, array
-						(                                                                          
-							'Content-Type:application/json; charset=UTF-8',  
-							'token: '.$token                                                                             
-					    )                                                                       
-					);       
+				// 	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+				// 	//curl_setopt($ch, CURLOPT_POST, true);
+				// 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+				// 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+				// 	curl_setopt($ch, CURLOPT_HTTPHEADER, array
+				// 		(                                                                          
+				// 			'Content-Type:application/json; charset=UTF-8',  
+				// 			'token: '.$token                                                                             
+				// 	    )                                                                       
+				// 	);       
 
-					$output = curl_exec($ch);
-					$output = json_decode($output, true);
-					$output1[$i]=$output;
-					$i++;
+				// 	$output = curl_exec($ch);
+				// 	$output = json_decode($output, true);
+				// 	$output1[$i]=$output;
+				// 	$i++;
 					
 
 				 	
-				}
+				// }
 
-				$this->set('output1',$output1);
-				curl_close($ch);
+				// $this->set('output1',$output1);
+				// curl_close($ch);
 
         	}
 
