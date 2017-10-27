@@ -113,7 +113,7 @@
                                     <a href="/cart/">
                                         <?php
                                         echo $this->Html->image("cart-icon.png", array("alt" => "icon"));
-                                        echo " " . $n_item_cart;
+                                        echo " <span id='id_count_carts'>" . $n_item_cart . " </span>";
                                         ?>
                                     </a>
 

@@ -21,8 +21,8 @@ class Cart extends AppModel
         $all_cart = $this->readProduct();
         $all_cart[] = $cart_item;
         $this->saveProduct($all_cart);
-
-        $this->saveDbItemCart($cart_item);
+        //Save item in DB table
+        //$this->saveDbItemCart($cart_item);
 
     }
 
@@ -67,12 +67,26 @@ class Cart extends AppModel
         return CakeSession::read('cart');
     }
 
+    public function saveCart($data)
+    {
+
+        return CakeSession::write('cart', $data);
+    }
+
+    /*
+     * read cart data from session
+     */
+    public function readCart()
+    {
+
+        return CakeSession::read('cart');
+    }
+
+
     public function checkoutCart()
     {
         $all_cart = $this->readProduct();
-        return count($all_cart);
-
-        //return CakeSession::destroy('cart');
+        return CakeSession::delete('cart');
     }
 
     public function saveDbCart()
@@ -137,7 +151,7 @@ class Cart extends AppModel
 
         }
 
-        return CakeSession::destroy('cart');
+        return CakeSession::delete('cart');
     }
 
     private function saveDbItemCart($item)

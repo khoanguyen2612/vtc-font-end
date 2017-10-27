@@ -64,9 +64,8 @@ class CartsController extends AppController
         Debugger::dump("------------------------------");*/
 
 
+
         $cart = $this->Cart->readCart();
-
-
 
         $order_schema = $this->Order->findById('1477'); // 1430, 614, 1477 high total cost money
 
@@ -75,13 +74,11 @@ class CartsController extends AppController
         $order_id = $order['id'];
         $p = $order_schema['OrderDetail'];
         //Debugger::dump($p);
-        //Debugger::dump($this->request->is('post'));
-        //Debugger::dump($param);
-
         $total_money = 0 ;
         $item = 0;
 
-        if (isNull($cart) || empty($cart)) {
+
+        if (is_null($cart) || empty($cart)) {
 
             foreach ($p as $product) {
 
@@ -149,6 +146,7 @@ class CartsController extends AppController
              )
         );
 
+
         foreach ($hosts as $host) {
             $list_hosting[] = $host['Product'];
         }
@@ -156,14 +154,18 @@ class CartsController extends AppController
 
         $n_item_cart = $this->Cart->getCount();
         $cart = $this->Cart->readCart();
+        $n_element = count($cart);
+        $products = $cart[$n_element - 1];
 
 
-        Debugger::dump(end($cart));
+        //Debugger::dump($n_element);
+        //Debugger::dump($cart);
+        //Debugger::dump(end($cart));
+
+        $this->Session->delete('cart');
 
         $this->set(compact('n_item_cart'));
-
         $this->set(compact('products'));
-
 
         $this->set(compact('order_id'));
         $this->set(compact('order'));

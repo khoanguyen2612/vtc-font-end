@@ -75,7 +75,7 @@
                                     <?php
                                     $modal = 1;
                                     foreach ($products as $odetail_product): ?>
-                                        <tr id="<?= $odetail_product['id'] ?>">
+                                        <tr id="<?php echo $odetail_product['id'] ?>">
                                             <td>
                                                 <h4><?php echo $odetail_product['domain_name']; ?></h4>
                                                 <p class="vps"><?php echo $odetail_product['type']; ?></p>
@@ -90,7 +90,7 @@
                                                 <p><?php echo $odetail_product['price']; ?> VNĐ</p>
                                                 <div class="product-removal">
                                                     <button type="button" class="remove-item" data-toggle="modal"
-                                                            data-target="#myModal<?= $modal ?>">
+                                                            data-target="#myModal<?php echo $modal ?>">
                                                     </button>
                                                 </div>
                                             </td>
@@ -174,7 +174,7 @@
                                                                 'dataExpression' =>true,
                                                                 'method' => 'POST',
                                                                 'before' => "$('#loading').fadeIn(2000);$('#ajax_cart').attr('disabled','disabled');",
-                                                                'complete' => "$('#loading').fadeOut(1000);$('#ajax_cart').removeAttr('disabled');change_id();" ,
+                                                                'complete' => "$('#loading').fadeOut(1000);$('#ajax_cart').removeAttr('disabled');change_id();update_cart_item();",
                                                                 'cache' => false,
                                                             )
                                                         )
@@ -189,7 +189,7 @@
                                                         });
                                                      ', array('inline' => true));
 
-                                                     echo $this->Html->scriptBlock('
+                                                echo $this->Html->scriptBlock('
       
                                                         function change_id() {
                                                               //alert("Success!");
@@ -198,9 +198,29 @@
                                                               $("#ajax_table_data > tbody").append("<tr id=\'ajax_cart\'></tr>");
                                                             
                                                         };
-                                                        
+                                                                                                            
                                                         ', array('inline' => true));
 
+
+                                                $url_del_cart = Router::url(array('controller' => 'carts', 'action' => 'del_i'));
+                                                $str = $this->Html->scriptBlock('
+      
+                                                        function update_cart_item() { 
+                                                               $.ajax({
+                                                                    dataType: "html",
+                                                                    type: "POST",
+                                                                    evalScripts: true,
+                                                                    url: \'' . $url_del_cart . '\',
+                                                                    data: ({type:\'del\'}),
+                                                                    success: function (data, textStatus){
+                                                                        $("#id_count_carts").html(data);
+                                                                    }
+                                                                });                                                       
+                                                        };
+                                                                                                            
+                                                        ', array('inline' => true));
+
+                                                echo $str;
 
                                                 ?>
 
@@ -323,7 +343,7 @@
                                     <tbody>
                                     <tr>
                                         <td>Tạm tính (Chưa VAT):</td>
-                                        <td><?php echo $odetail_product['total_money']; ?> VNĐ</td>
+                                        <td><?php echo @ $odetail_product['total_money']; ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td>Giảm giá:</td>
@@ -331,12 +351,12 @@
                                     </tr>
                                     <tr>
                                         <td>VAT (10%)</td>
-                                        <td><?php echo round($odetail_product['total_money'] * 10 / 100); ?> VNĐ</td>
+                                        <td><?php echo round(@ $odetail_product['total_money'] * 10 / 100); ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td><b>Thành tiền:</b></td>
                                         <td>
-                                            <b><?php echo $odetail_product['total_money'] - round($odetail_product['total_money'] * 10 / 100); ?>
+                                            <b><?php echo @ $odetail_product['total_money'] - round(@ $odetail_product['total_money'] * 10 / 100); ?>
                                                 VNĐ</b></td>
                                     </tr>
                                     <tr>
@@ -395,7 +415,7 @@
                                 echo $this->Form->create(null, array('type' => 'POST',
                                         //echo $this->Form->create(null, array('type' => 'POST',
                                         //'url' => '/cart/update',
-                                        'url' => array('controller' => 'carts', 'action' => 'delete_item'),
+                                        'url' => array('controller' => 'carts', 'action' => 'remove'),
                                         'id' => "modal_form_id_$modal",
                                         'name' => "modal_form_id_$modal",
                                         'class' => '',
