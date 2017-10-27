@@ -67,66 +67,74 @@ class CartsController extends AppController
 
         $cart = $this->Cart->readCart();
 
-        $order_schema = $this->Order->findById('1477'); // 1430, 614, 1477 high total cost money
+        $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
 
         $order = $order_schema['Order'];
         $order_code = $order['order_code'];
         $order_id = $order['id'];
-        $p = $order_schema['OrderDetail'];
-        //Debugger::dump($p);
+        $product_in_order = $order_schema['OrderDetail'];
+        //Debugger::dump($product_in_order);
         $total_money = 0 ;
         $item = 0;
 
 
         if (is_null($cart) || empty($cart)) {
 
-            foreach ($p as $product) {
+            foreach ($product_in_order as $p_item) {
+                //Debugger::dump($p_item);
+                $_p = $this->Product->findById($p_item['product_id']);
+                //Debugger::dump($_p);
+                //Debugger::dump('----------');
+                if (count($_p) > 0) {
+                    //(1:domain, 2:window hosting, 3:linux hosting, 4:other)
+                    $type = $_p['Product']['product_type'];
 
-                $tmp_p = $this->Product->findById($product['product_id']);
+                    switch ($type) {
+                        case '1':
+                            $p_type = 'Domain';
+                            break;
+                        case '2':
+                            $p_type = 'Window hosting';
+                            break;
+                        case '3':
+                            $p_type = 'Linux hosting';
+                            break;
+                        case '4':
+                            $p_type = 'Other';
+                            break;
+                        default :
+                            $p_type = 'Other';
+                            break;
+                    }
 
-                //(1:domain, 2:window hosting, 3:linux hosting, 4:other)
+                    $p_item['type'] = $p_type;
+                    $products[] = $p_item;
+                    $total_money += $p_item['quantity'] * $p_item['price'];
 
-                $type = $tmp_p['Product']['product_type'];
-                switch ($type) {
-                    case '1':
-                        $p_type = 'Domain';
-                        break;
-                    case '2':
-                        $p_type = 'Window hosting';
-                        break;
-                    case '3':
-                        $p_type = 'Linux hosting';
-                        break;
-                    case '4':
-                        $p_type = 'Other';
-                        break;
-                    default :
-                        $p_type = 'Other';
-                        break;
+                    /** too much item to dev **/
+                    //$item++;
+                    //if ($item == 4) break;
+                    //Debugger::dump($p_item);
                 }
-
-                $product['type'] = $p_type;
-                $total_money += $product['quantity'] * $product['price'];
-                $product['total_money'] = $total_money;
-                $products[] = $product;
-
-                /** too much item to dev **/
-                $item++;
-                //if ($item == 4) break;
             }
 
-            $order_arr = array();
+
             $cart = array();
 
             foreach ($products as $item) {
-                $tmp['order'] = array($order_id);
+                $cart['list'][] = $item;
+                $tmp['order'] = array('id' => $order_id);
                 $tmp['product'] = $item;
                 $cart[] = $tmp;
-                $cart['list'][] = $item;
             }
 
+
+            /*Debugger::dump('--->');
+            ksort($cart);
             // re soft list key of array
             sort($cart);
+            Debugger::dump($cart);*/
+
             $this->Cart->saveCart($cart);
         }
 
@@ -154,15 +162,16 @@ class CartsController extends AppController
 
         $n_item_cart = $this->Cart->getCount();
         $cart = $this->Cart->readCart();
-        $n_element = count($cart);
-        $products = $cart[$n_element - 1];
 
+        $all_item = array_shift($cart);  // shift an element off the beginning of array
+        //Debugger::dump($all_item);
+
+        $products = $all_item;
 
         //Debugger::dump($n_element);
         //Debugger::dump($cart);
         //Debugger::dump(end($cart));
 
-        $this->Session->delete('cart');
 
         $this->set(compact('n_item_cart'));
         $this->set(compact('products'));
@@ -171,6 +180,8 @@ class CartsController extends AppController
         $this->set(compact('order'));
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
+
+        $this->Session->delete('cart');
 
 
     }
@@ -187,44 +198,81 @@ class CartsController extends AppController
 
         //Debugger::dump($this->Order->findById($request['cart']['order']['id']));
 
-        $cart = $request['cart'] ;
+        $cart = $request['cart'];
 
         if ($this->request->is('post')) {
             if (!empty($request) && count($request) > 0 && count($request['cart'] > 0)) {
-                $this->Cart->addProduct($cart);
+
+                //Debugger::dump($cart);
+                // define 1 product in order detail item to add on to cart,
+                // for Database
+                $order_detail['order_id'] = $cart['order']['id'];
+                $order_detail['product_id'] = $cart['product']['id'];
+                $order_detail['domain_name'] = $cart['product']['product_name'];
+                $order_detail['action_id'] = 0;
+                $order_detail['order_type'] = 1;
+                $order_detail['order_dtl_status'] = 1;
+                $order_detail['price'] = $cart['product']['price']; // int
+                $order_detail['quantity'] = $cart['product']['quantity'];;  // int
+                $order_detail['amount'] = 0;
+                $order_detail['total'] = 0;
+                $order_detail['discount'] = 0;
+                $order_detail['code_affilates'] = 'CODE_AFF_0321A';
+                $order_detail['code_qc'] = 'CODE_QC_0321A';
+                $order_detail['notes'] = 'Thông tin note khách hàng mua sản phẩm'; // string
+                $order_detail['payment_method'] = 0;
+
+                $date_getmoney = CakeTime::format(date('Y-m-d H:i:s'), '%Y-%m-%d %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
+
+                $order_detail['date_getmoney'] = $date_getmoney; // string, varchar
+
+                $order_detail['money_kd'] = 0;
+                $order_detail['flg_renew'] = 0;
+                $order_detail['hosting_id'] = 0;
+                $order_detail['customer_id'] = 0;
+                $order_detail['campainh'] = 'ký tự, unknow value ?';  // varchar
+                $order_detail['totenten'] = 'ký tự, unknow value ?';  // varchar
+                $order_detail['csr_string'] = 'ký tự, unknow value ?';  // varchar
+                $order_detail['payment_activator'] = 'Người active Payment'; // string
+                $order_detail['auth_code_tranfer'] = 'ACT_0321A'; // string
+                $order_detail['detail_id_sub'] = 0;
+                $order_detail['flg_smartphone'] = 0;
+                $order_detail['user_confirm_active'] = 'UCA_0321A'; // string
+
+                $order_detail['ketoan_update'] = $date_getmoney;  // datetime
+                $order_detail['note_ketoan'] = 'Ghi nhớ cho kế toán'; // string
+
+                // Update field product of cart array
+                // for view layout
+                switch ($cart['product']['product_type']) {
+                    case 'Domain':
+                        $p_type = 1;
+                        break;
+                    case 'Window hosting':
+                        $p_type = 2;
+                        break;
+                    case 'Linux hosting':
+                        $p_type = 3;
+                        break;
+                    case 'Other':
+                        $p_type = 4;
+                        break;
+                    default :
+                        $p_type = 4;
+                        break;
+                }
+
+                $order_detail['type'] = $p_type;
+
+                $cart['product'] = $order_detail;
+
             }
+
+            $this->Cart->addProduct($cart);
         }
 
 
-        //Debugger::dump($cart);
-        //$content = 'Ajax success';
-        //set current date as content to show in view
-
-
-        // for view layout
-        switch ($cart['product']['product_type'])
-        {
-            case '1':
-                $p_type = 'Domain';
-                break;
-            case '2':
-                $p_type = 'Window hosting';
-                break;
-            case '3':
-                $p_type = 'Linux hosting';
-                break;
-            case '4':
-                $p_type = 'Other';
-                break;
-            default :
-                $p_type = 'Other';
-                break;
-        }
-
-        $cart['product']['product_type'] = $p_type;
-
-
-
+        Debugger::dump($cart);
 
         $this->set(compact('cart'));
         //Debugger::dump( $this->Session->read('cart'));
@@ -253,20 +301,37 @@ class CartsController extends AppController
         );
     }
 
-    public function delete_item()
+    public function remove()
     {
         $this->autoRender = false;
 
         if ($this->request->is('post')) {
-            $request = $this->request->data;
+            $res = $this->request->data;
+            $this->Cart->remove_it($res['id_odetail_product']);
         }
-
 
         $this->redirect(array("controller" => "carts",
                 "action" => "view",
                 "param1" => "item_del",
             )
         );
+    }
+
+
+    public function del_ajax_it()
+    {
+
+        $this->autoRender = false;
+        $this->request->onlyAllow('ajax'); // No direct access via browser URL
+
+        if ($this->RequestHandler->isAjax()) {
+            if ($this->request->is('post')) {
+                $num_i = $this->Cart->getCount();
+                $this->set(compact($num_i));
+                $this->render('ajax_up_i_cart', 'ajax_cart');
+            }
+        }
+
     }
 
     public function checkout()

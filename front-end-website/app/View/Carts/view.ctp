@@ -74,20 +74,20 @@
                                     <tbody id="add_tr">
                                     <?php
                                     $modal = 1;
-                                    foreach ($products as $odetail_product): ?>
-                                        <tr id="<?php echo $odetail_product['id'] ?>">
+                                    foreach ($products as $order_detail): ?>
+                                        <tr id="<?php echo $order_detail['id'] ?>">
                                             <td>
-                                                <h4><?php echo $odetail_product['domain_name']; ?></h4>
-                                                <p class="vps"><?php echo $odetail_product['type']; ?></p>
+                                                <h4><?php echo $order_detail['domain_name']; ?></h4>
+                                                <p class="vps"><?php echo $order_detail['type']; ?></p>
                                             </td>
                                             <td>
                                                 <!--<select disabled class="hidden">
                                                     <option> năm</option>
                                                 </select>-->
-                                                <p class="active"><?php echo $odetail_product['quantity']; ?></p>
+                                                <p class="active"><?php echo $order_detail['quantity']; ?></p>
                                             </td>
                                             <td>
-                                                <p><?php echo $odetail_product['price']; ?> VNĐ</p>
+                                                <p><?php echo $order_detail['price']; ?> VNĐ</p>
                                                 <div class="product-removal">
                                                     <button type="button" class="remove-item" data-toggle="modal"
                                                             data-target="#myModal<?php echo $modal ?>">
@@ -202,7 +202,7 @@
                                                         ', array('inline' => true));
 
 
-                                                $url_del_cart = Router::url(array('controller' => 'carts', 'action' => 'del_i'));
+                                                $url_del_cart = Router::url(array('controller' => 'carts', 'action' => 'del_ajax_it'));
                                                 $str = $this->Html->scriptBlock('
       
                                                         function update_cart_item() { 
@@ -343,7 +343,7 @@
                                     <tbody>
                                     <tr>
                                         <td>Tạm tính (Chưa VAT):</td>
-                                        <td><?php echo @ $odetail_product['total_money']; ?> VNĐ</td>
+                                        <td><?php echo @ $order_detail['total_money']; ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td>Giảm giá:</td>
@@ -351,12 +351,12 @@
                                     </tr>
                                     <tr>
                                         <td>VAT (10%)</td>
-                                        <td><?php echo round(@ $odetail_product['total_money'] * 10 / 100); ?> VNĐ</td>
+                                        <td><?php echo round(@ $order_detail['total_money'] * 10 / 100); ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td><b>Thành tiền:</b></td>
                                         <td>
-                                            <b><?php echo @ $odetail_product['total_money'] - round(@ $odetail_product['total_money'] * 10 / 100); ?>
+                                            <b><?php echo @ $order_detail['total_money'] - round(@ $order_detail['total_money'] * 10 / 100); ?>
                                                 VNĐ</b></td>
                                     </tr>
                                     <tr>
@@ -409,7 +409,7 @@
                         </div>
                         <?php
                         $modal = 1;
-                        foreach ($products as $odetail_product): ?>
+                        foreach ($products as $order_detail): ?>
                             <div id="myModal<?= $modal ?>" class="modal fade" role="dialog">
                                 <?php
                                 echo $this->Form->create(null, array('type' => 'POST',
@@ -427,7 +427,7 @@
                                     'id' => "id_odetail_product_$modal",
                                     'type' => 'hidden',
                                     'name' => 'id_odetail_product',
-                                    'value' => $odetail_product['id'],
+                                    'value' => $order_detail['id'],
                                 ));
 
                                 ?>

@@ -42,6 +42,12 @@
 	Router::connect('/cart/checkout', array('controller' => 'Carts', 'action' => 'checkout'));
 	//Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
 	Router::connect('/cart/update', array('controller' => 'Carts', 'action' => 'update'));
+Router::connect('/carts/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
+Router::connect('/cart/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
+
+
+
+
 
     /* tue.phpmailer@gmail.com add route for KhoaND */
 Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));

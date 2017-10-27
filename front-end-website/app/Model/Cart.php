@@ -15,11 +15,17 @@ class Cart extends AppModel
     /*
      * add a product to cart
      */
-    public function addProduct($cart_item)
+    public function addProduct($cart_item = array())
     {
 
-        $all_cart = $this->readProduct();
-        $all_cart[] = $cart_item;
+        $all_cart = CakeSession::read('cart');
+        //array_unshift($all_cart, $cart_item); // push value elements onto first array
+
+        if (count($cart_item) > 0) {
+            //array_push($all_cart, $cart_item); // push value elements onto the end of array
+            $all_cart[] = $cart_item;  // push value elements onto the end of array
+        }
+
         $this->saveProduct($all_cart);
         //Save item in DB table
         //$this->saveDbItemCart($cart_item);
@@ -34,19 +40,11 @@ class Cart extends AppModel
 
         $all_cart = $this->readProduct();
 
-
-        if (count($all_cart) < 1) {
-            return 0;
+        if (!is_null($all_cart) && is_array($all_cart)) {
+            $all_item = array_shift($all_cart);  // shift an element off the beginning of array
         }
 
-        $count = 0;
-        foreach ($all_cart as $item) {
-            if (count(@$item['product']) > 0) {
-                $count++;
-            }
-        }
-
-        return $count;
+        return count($all_item);
     }
 
     /*
@@ -80,6 +78,43 @@ class Cart extends AppModel
     {
 
         return CakeSession::read('cart');
+    }
+
+
+    public function remove_it($id_it = null)
+    {
+
+        $all_cart = $this->readProduct();
+        CakeSession::delete('cart');
+
+        Debugger::dump($all_cart);
+
+        $product_tmp = $all_cart[count($all_cart) - 1];
+        unset($all_cart[count($all_cart) - 1]);
+
+        if (!is_null($id_it) && $id_it > 0) {
+            foreach ($all_cart as $key => $it) {
+                if ($it['product']['id'] == $id_it) {
+                    $key_store = $key;
+                    break;
+                }
+            }
+        }
+
+        if (!is_null($key_store) && $key_store > 0) {
+            unset($all_cart[$key_store]);
+            unset($product_tmp[$key_store]);
+        };
+
+        $all_cart[] = $product_tmp;
+
+        $this->Cart->saveCart($all_cart);
+
+        Debugger::dump($all_cart);
+        Debugger::dump($all_cart[count($all_cart) - 1]);
+
+        die();
+
     }
 
 
@@ -156,7 +191,6 @@ class Cart extends AppModel
 
     private function saveDbItemCart($item)
     {
-
 
         $order_detail = array();
         if (!empty($item)) {
