@@ -269,11 +269,18 @@
 					</div>
 				</div>
 				<div class="slide-caption">
-					<div class="calendar pull-left">
-						<p>12</p><span>AUG</span>
-					</div>
-					<p>Trải nghiệm cấu hình cực khủng chỉ có tại VTC</p>
-					<span class="line"></span>
+					<?php foreach ($data as $item) { ?>
+						<div class="calendar pull-left">
+							<?php 
+								$date = $item['News']['created_date'];
+								$date1=strtotime(date($date));
+							?>
+							<p><?php echo date('d',$date1); ?></p><span><?php echo  date('m',$date1); ?></span>
+							
+						</div>
+						<p><?php echo $item['News']['title'] ?></p>
+						<span class="line"></span>
+					<?php } ?>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ques_block">
