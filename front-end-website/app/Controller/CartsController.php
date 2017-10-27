@@ -162,6 +162,7 @@ class CartsController extends AppController
 
         $n_item_cart = $this->Cart->getCount();
         $cart = $this->Cart->readCart();
+        //Debugger::dump($cart);
 
         $all_item = array_shift($cart);  // shift an element off the beginning of array
         //Debugger::dump($all_item);
@@ -181,7 +182,7 @@ class CartsController extends AppController
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
 
-        $this->Session->delete('cart');
+        //$this->Session->delete('cart');
 
 
     }
@@ -206,6 +207,7 @@ class CartsController extends AppController
                 //Debugger::dump($cart);
                 // define 1 product in order detail item to add on to cart,
                 // for Database
+                $order_detail['id'] = rand(95000, 99999);  // new id for item in OrderDetail
                 $order_detail['order_id'] = $cart['order']['id'];
                 $order_detail['product_id'] = $cart['product']['id'];
                 $order_detail['domain_name'] = $cart['product']['product_name'];
@@ -262,7 +264,10 @@ class CartsController extends AppController
                         break;
                 }
 
+                $order_detail['product_type'] = $cart['product']['product_type'];
                 $order_detail['type'] = $p_type;
+
+                $order_detail['product_name'] = $cart['product']['product_name'];
 
                 $cart['product'] = $order_detail;
 
@@ -272,7 +277,7 @@ class CartsController extends AppController
         }
 
 
-        Debugger::dump($cart);
+        //Debugger::dump($cart);
 
         $this->set(compact('cart'));
         //Debugger::dump( $this->Session->read('cart'));

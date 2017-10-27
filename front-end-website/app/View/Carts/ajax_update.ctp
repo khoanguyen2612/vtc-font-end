@@ -5,9 +5,7 @@
 
     <td>
         <h4><?php echo $cart['product']['product_name']; ?></h4>
-        <p class="vps"><?php
-
-            echo $cart['product']['product_type']; ?></p>
+        <p class="vps"><?php echo $cart['product']['product_type']; ?></p>
     </td>
     <td>
         <!--<select disabled class="hidden">
