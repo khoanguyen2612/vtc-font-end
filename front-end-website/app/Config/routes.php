@@ -36,12 +36,19 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 	/* tue.phpmailer@gmail.com config route URL */
-	Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
+Router::connect('/carts', array('controller' => 'Carts', 'action' => 'view'));
 	Router::connect('/cart/', array('controller' => 'Carts', 'action' => 'view'));
 	Router::connect('/cart/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
 	Router::connect('/cart/checkout', array('controller' => 'Carts', 'action' => 'checkout'));
 	//Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
 	Router::connect('/cart/update', array('controller' => 'Carts', 'action' => 'update'));
+Router::connect('/cart/del', array('controller' => 'Carts', 'action' => 'remove'));
+Router::connect('/carts/del', array('controller' => 'Carts', 'action' => 'remove'));
+Router::connect('/carts/del_i', array('controller' => 'Carts', 'action' => 'update_i_cart'));
+Router::connect('/carts/del_i', array('controller' => 'Cart', 'action' => 'update_i_cart'));
+
+
+
 
     /* tue.phpmailer@gmail.com add route for KhoaND */
 Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
