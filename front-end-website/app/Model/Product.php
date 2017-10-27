@@ -100,6 +100,12 @@ class Product extends AppModel {
 			'order' => ''
 		)
 	);*/
+	var $hasOne = array(
+        'Plan' => array(
+            'className' => 'Plan',
+            'foreignKey' => 'plan_id'
+        )
+    );
 
 /**
  * hasMany associations

@@ -12,5 +12,19 @@ class Plan extends AppModel {
  * @var string
  */
 	public $displayField = 'name';
+	public $useTable = 'plans';	
+
+	var $hasMany = array(
+        'Hosting' => array(
+            'className' => 'Hosting',
+            'foreignKey' => 'plan_id'
+        ),
+    );
+    var $hasOne=array(
+        'Product' => array(
+            'className' => 'Product',
+            'foreignKey' => 'plan_id'
+        ),
+    );
 
 }
