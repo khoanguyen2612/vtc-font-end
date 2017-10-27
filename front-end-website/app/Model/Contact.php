@@ -167,10 +167,6 @@ class Contact extends AppModel {
 					'rule' => 'email',
 					'message' => 'Vui lòng nhập đúng định dạng email'
 				),
-				'NotBlank' => array(
-					'rule' => 'notBlank',
-					'message' => 'Email không được để trống'
-				),
 			),
 
 			'mn_phone' => array(
@@ -200,7 +196,6 @@ class Contact extends AppModel {
 				)
 
 			),
-
 			'bill_email' => array(
 				'emailformat' => array(
 					'rule' => 'email',
@@ -211,7 +206,6 @@ class Contact extends AppModel {
 					'message' => 'Email không được để trống'
 				),
 			),
-
 			'bill_phone' => array(
 				'alphaNumeric' => array(
 					'rule' => 'Numeric',
