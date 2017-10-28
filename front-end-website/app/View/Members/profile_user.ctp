@@ -50,6 +50,7 @@
 				                    'type' => 'text',
 				                    'class' => 'form-control',
 				                    'label' => false,
+				                    'disabled'=>true,
 				                    'value'=>$user["nickname"]
 				                    ));
 				            ?>

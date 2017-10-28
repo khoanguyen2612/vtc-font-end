@@ -52,7 +52,7 @@
 		public function register(){
 			$this->set('title_for_layout', 'Đăng kí tài khoản');
         	if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
-			if($this->request->is('post')||$this->request->is('put')){
+			if($this->request->is('post')){
 				$Data_Form=$this->request->data;
 
 				if(isset($Data_Form['domain_flg'])){$Data_Form['Account']['domain_flg'] =$Data_Form['domain_flg'];}
@@ -63,9 +63,9 @@
 
 				if(isset($Data_Form['Account']['organ_name'])){
 					$Data_Form['Organization']['organ_name']=$Data_Form['Account']['organ_name'];
-					if(isset($Data_Form['tax_code'])){$Data_Form['Organization']['tax_code']=$Data_Form['Account']['tax_code'];}
-					if(isset($Data_Form['phonenumber2'])){$Data_Form['Organization']['phonenumber2']=$Data_Form['Account']['phonenumber2'];}
-					$Data_Form['Organization']['proxy']=1;
+					if(isset($Data_Form['Account']['tax_code'])){$Data_Form['Organization']['tax_code']=$Data_Form['Account']['tax_code'];}
+					if(isset($Data_Form['Account']['phonenumber2'])){$Data_Form['Organization']['phonenumber2']=$Data_Form['Account']['phonenumber2'];}
+					$Data_Form['Account']['proxy']=1;
 					$this->Account->set($Data_Form['Account']);
 					$this->Organization->set($Data_Form['Organization']);
 				}else{
@@ -73,10 +73,10 @@
 					$Data_Form['Account']['birthday']=$Data_Form['year'].'-'.$Data_Form['month'].'-'.$Data_Form['day'];
 					$this->Account->set($Data_Form['Account']);
 				}
-
+				// pr($Data_Form);die;
 				// ---------------------------------
 				if(isset($Data_Form['Organization'])){
-	    			if ($this->Account->validates()&&$this->Organization->validates()) {
+	    			if ($this->Account->validates()) {
 
 						$key=sha1($Data_Form['Account']['email'].rand(0,100));
 	                    $url = Router::url( array('controller'=>'members','action'=>'login'), true ).'/'.$key;
@@ -89,8 +89,7 @@
 						$this->Organization->save($Data_Form);
 
 						//send mail--------------
-							$Messages="Chào bạn ".$Data_Form['Account']['nickname'].", - Vui lòng click vào địa chỉ bên dưới để kích hoạt tài khoản: 
-							".$ms;
+							$Messages="Chào bạn ".$Data_Form['Account']['nickname'].", - Vui lòng click vào địa chỉ bên dưới để kích hoạt tài khoản:".$ms;
 							$mess_success="Vui lòng truy cập email để kích hoạt tài khoản của bạn";
 							$mess_error="Đã có lỗi, vui lòng thử lại";
 							$Email = new CakeEmail('default');
@@ -107,6 +106,7 @@
 							}
 							
 					}
+
 				}
 				elseif ($this->Account->validates()) {
 
@@ -137,8 +137,6 @@
 							}
 
 				}
-				
-
 			}
 		}
 
@@ -257,7 +255,7 @@
 					$this->Account->set($this->request->data['Account']);
 					$this->Organization->set($this->request->data['Organization']);
 
-				if ($this->Organization->validates()&&$this->Account->validates()){
+				if ($this->Account->validates()){
 					$this->Account->save($this->request->data);
 					$this->Organization->save($this->request->data);
 					if(isset($filename)){
@@ -265,18 +263,6 @@
 					}
 					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
 		            $this->redirect(array('controller'=>'members','action'=>'profile_group'));
-				}else{
-					if(isset($this->Organization->validationErrors['tax_code'][0])){
-						$this->Session->setFlash($this->Organization->validationErrors['tax_code'][0],'default',array('class'=>'alert alert-danger'));
-					$this->redirect(array('controller'=>'members','action'=>'profile_group'));
-					}
-					if(isset($this->Organization->validationErrors['phonenumber2'][0])){
-						$this->Session->setFlash($this->Organization->validationErrors['phonenumber2'][0],'default',array('class'=>'alert alert-danger'));
-					$this->redirect(array('controller'=>'members','action'=>'profile_group'));
-					}
-
-					// pr($this->Organization->validationErrors);
-
 				}
 
 			}
@@ -302,7 +288,7 @@
 				$this->request->data['Account']['id']=$user['Account']['id'];
 				$this->request->data['Account']['status']=1;
 
-				if($this->request->data['Account']['nickname']==$user['Account']['nickname']){unset($this->request->data['Account']['nickname']);}
+				unset($this->request->data['Account']['nickname']);
 				if($this->request->data['Account']['email']==$user['Account']['email']){unset($this->request->data['Account']['email']);}
 
 				if($this->Account->save($this->request->data)){
