@@ -64,9 +64,7 @@ class CartsController extends AppController
         Debugger::dump("------------------------------");*/
 
 
-
         $cart = $this->Cart->readCart();
-
         $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
 
         $order = $order_schema['Order'];
@@ -74,9 +72,8 @@ class CartsController extends AppController
         $order_id = $order['id'];
         $product_in_order = $order_schema['OrderDetail'];
         //Debugger::dump($product_in_order);
-        $total_money = 0 ;
+        $total_money = 0;
         $item = 0;
-
 
         if (is_null($cart) || empty($cart)) {
 
@@ -138,7 +135,6 @@ class CartsController extends AppController
             $this->Cart->saveCart($cart);
         }
 
-
         $conditions = array(
             'OR' => array(
                 array('product_type' => '2'),
@@ -154,24 +150,25 @@ class CartsController extends AppController
              )
         );
 
-
         foreach ($hosts as $host) {
             $list_hosting[] = $host['Product'];
         }
 
-
         $n_item_cart = $this->Cart->getCount();
-        $cart = $this->Cart->readCart();
-        Debugger::dump($cart);
-        $all_item = array_shift($cart);  // shift an element off the beginning of array
-        //Debugger::dump($all_item);
 
+        //Debugger::dump($cart);
+
+        if (isset($cart['list']))
+            $all_item = array_shift($cart);  // shift an element off the beginning of array
+        else
+            $all_item = $cart;
+
+        //Debugger::dump($all_item);
         $products = $all_item;
 
         //Debugger::dump($n_element);
         //Debugger::dump($cart);
         //Debugger::dump(end($cart));
-
 
         $this->set(compact('n_item_cart'));
         $this->set(compact('products'));
@@ -181,7 +178,7 @@ class CartsController extends AppController
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
 
-        //$this->Session->delete('cart');
+        $this->Cart->removeCart();
 
 
     }
@@ -245,21 +242,21 @@ class CartsController extends AppController
 
                 // Update field product of cart array
                 // for view layout
-                switch ($cart['product']['product_type']) {
-                    case 'Domain':
-                        $p_type = 1;
+                switch ((int)$cart['product']['product_type']) {
+                    case 1:
+                        $p_type = 'Domain';
                         break;
-                    case 'Window hosting':
-                        $p_type = 2;
+                    case 2:
+                        $p_type = 'Window hosting';
                         break;
-                    case 'Linux hosting':
-                        $p_type = 3;
+                    case 3:
+                        $p_type = 'Linux hosting';
                         break;
-                    case 'Other':
-                        $p_type = 4;
+                    case 4:
+                        $p_type = 'Other';
                         break;
                     default :
-                        $p_type = 4;
+                        $p_type = 'Other';
                         break;
                 }
 
@@ -275,8 +272,9 @@ class CartsController extends AppController
             $this->Cart->addProduct($cart);
         }
 
-
+        //$cart = $this->Cart->readCart();
         //Debugger::dump($cart);
+
 
         $this->set(compact('cart'));
         //Debugger::dump( $this->Session->read('cart'));
@@ -291,7 +289,6 @@ class CartsController extends AppController
         $this->render('ajax_update', 'ajax_cart');
 
     }
-
 
     public function continue_buy_product()
     {
@@ -321,7 +318,6 @@ class CartsController extends AppController
         );
     }
 
-
     public function del_ajax_it()
     {
 
@@ -330,13 +326,31 @@ class CartsController extends AppController
 
         if ($this->RequestHandler->isAjax()) {
             if ($this->request->is('post')) {
-                $num_i = $this->Cart->getCount();
-                $this->set(compact($num_i));
+                $n_item = $this->Cart->getCount();
+                $this->set(compact('n_item'));
                 $this->render('ajax_up_i_cart', 'ajax_cart');
             }
         }
 
     }
+
+    public function update_ajax_it()
+    {
+
+        $this->autoRender = false;
+        $this->request->onlyAllow('ajax'); // No direct access via browser URL
+
+        if ($this->RequestHandler->isAjax()) {
+            if ($this->request->is('post')) {
+                $n_item = $this->Cart->getCount();
+                $this->set(compact('n_item'));
+                $this->render('ajax_up_i_cart', 'ajax_cart');
+            }
+        }
+
+
+    }
+
 
     public function checkout()
     {

@@ -23,6 +23,7 @@ class Cart extends AppModel
 
         if (count($cart_item) > 0) {
             //array_push($all_cart, $cart_item); // push value elements onto the end of array
+            $all_cart['list'] = $cart_item;
             $all_cart[] = $cart_item;  // push value elements onto the end of array
         }
 
@@ -82,6 +83,11 @@ class Cart extends AppModel
         return CakeSession::read('cart');
     }
 
+    public function removeCart()
+    {
+
+        return CakeSession::delete('cart');
+    }
 
     public function remove_it($id_it = null)
     {

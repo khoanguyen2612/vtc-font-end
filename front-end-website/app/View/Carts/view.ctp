@@ -205,12 +205,32 @@
                                                 $url_del_cart = Router::url(array('controller' => 'carts', 'action' => 'del_ajax_it'));
                                                 $str = $this->Html->scriptBlock('
       
-                                                        function update_cart_item() { 
+                                                        function del_ajax_it() { 
                                                                $.ajax({
                                                                     dataType: "html",
                                                                     type: "POST",
                                                                     evalScripts: true,
                                                                     url: \'' . $url_del_cart . '\',
+                                                                    data: ({type:\'del\'}),
+                                                                    success: function (data, textStatus){
+                                                                        $("#id_count_carts").html(data);
+                                                                    }
+                                                                });                                                       
+                                                        };
+                                                                                                            
+                                                        ', array('inline' => true));
+
+                                                echo $str;
+
+                                                $update_ajax_it = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_it'));
+                                                $str = $this->Html->scriptBlock('
+      
+                                                        function update_cart_item() { 
+                                                               $.ajax({
+                                                                    dataType: "html",
+                                                                    type: "POST",
+                                                                    evalScripts: true,
+                                                                    url: \'' . $update_ajax_it . '\',
                                                                     data: ({type:\'del\'}),
                                                                     success: function (data, textStatus){
                                                                         $("#id_count_carts").html(data);

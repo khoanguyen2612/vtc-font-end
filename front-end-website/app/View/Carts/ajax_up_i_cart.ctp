@@ -4,4 +4,4 @@
 -->
 
 
-<?php echo $num_i; ?>
+<?php echo $n_item; ?>
