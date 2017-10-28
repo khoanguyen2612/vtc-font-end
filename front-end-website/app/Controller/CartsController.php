@@ -162,8 +162,7 @@ class CartsController extends AppController
 
         $n_item_cart = $this->Cart->getCount();
         $cart = $this->Cart->readCart();
-        //Debugger::dump($cart);
-
+        Debugger::dump($cart);
         $all_item = array_shift($cart);  // shift an element off the beginning of array
         //Debugger::dump($all_item);
 

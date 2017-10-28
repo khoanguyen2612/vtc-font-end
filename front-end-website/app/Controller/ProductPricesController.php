@@ -6,15 +6,13 @@
 			'ProductPrice',
 		);
 		
-        public function result_search()
+		public function ResultSearch() 
 		  {
 		 //  	
-			$data=$this->ProductPrice->find('all', array(
-				'conditions' => array( 'product_type LIKE' => "1" )
-			));
+			$data=$this->ProductPrice->find('all');
 			$this->set('data',$data);
 			if($this->request->is('post'))
-			{ 
+			{
 				$request = ($this->request->data);
 				$prod_name=$this->ProductPrice->find('first',array(
 					'conditions'=> array('ProductPrice.id'=>$request['product_id'])));
@@ -60,25 +58,14 @@
 
 			}
 		}
-
-        public function register_domain()
+        public function RegisterDomain()
         {
         	$data=$this->ProductPrice->find('all');
 			$this->set('data',$data);
 			
         	if($this->request->is('post'))
         	{
-        		// pr($this->request->data);die;
-        		if(isset($this->request->data['Data']))
-
-        		{
-        			$request = ($this->request->data['Data']);
-        		}
-        		else 
-        			{
-        				$request = ($this->request->data);
-        			}
-        		
+        		$request = ($this->request->data);
 				//echo $request['add-domain'];
 				$this->set('request',$request);	
 
@@ -141,7 +128,6 @@
         	}
 
         }
-
         public function whois_domain(){
         	if($this->request->is('post')){
         		$this->layout = 'ajax';
@@ -161,7 +147,8 @@
 				curl_close($ch);
 			}
 		}
-
-    }
+	}
 
 ?>
+
+

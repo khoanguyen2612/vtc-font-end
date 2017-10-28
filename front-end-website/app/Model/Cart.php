@@ -41,11 +41,11 @@ class Cart extends AppModel
         $all_cart = $this->readProduct();
         //Debugger::dump($all_cart);
 
-        /* if (!is_null($all_cart) && is_array($all_cart)) {
-             $all_item = array_shift($all_cart);  // shift an element off the beginning of array
-         }
+       /* if (!is_null($all_cart) && is_array($all_cart)) {
+            $all_item = array_shift($all_cart);  // shift an element off the beginning of array
+        }
 
-         return count($all_item);*/
+        return count($all_item);*/
         return count($all_cart) - 1;
     }
 

@@ -36,28 +36,27 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 	/* tue.phpmailer@gmail.com config route URL */
-	Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
+	Router::connect('/carts', array('controller' => 'Carts', 'action' => 'view'));
 	Router::connect('/cart/', array('controller' => 'Carts', 'action' => 'view'));
 	Router::connect('/cart/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
 	Router::connect('/cart/checkout', array('controller' => 'Carts', 'action' => 'checkout'));
 	//Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
 	Router::connect('/cart/update', array('controller' => 'Carts', 'action' => 'update'));
-Router::connect('/carts/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
-Router::connect('/cart/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
-
+	Router::connect('/cart/del', array('controller' => 'Carts', 'action' => 'remove'));
+	Router::connect('/carts/del', array('controller' => 'Carts', 'action' => 'remove'));
 
 
 
 
     /* tue.phpmailer@gmail.com add route for KhoaND */
-Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
-//Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
+    Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
+    //Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
 
-/* tue.phpmailer@gmail.com add route for ThangDH */
-Router::connect('/domain/register', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
-Router::connect('/domain/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
-Router::connect('/Domains/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
-Router::connect('/Domains/Domain_search.html', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+    /* tue.phpmailer@gmail.com add route for ThangDH */
+    Router::connect('/domain/register', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
+    Router::connect('/domain/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+    Router::connect('/Domains/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+    Router::connect('/Domains/Domain_search.html', array('controller' => 'ProductPrices', 'action' => 'result_search'));
 
 	//Router::connect('/domain/ResultSearch', array('controller' => 'ProductPrices', 'action' => 'resultsearch'));
 	//Router::connect('/domain/RegisterDomain', array('controller' => 'ProductPrices', 'action' => 'registerdomain'));

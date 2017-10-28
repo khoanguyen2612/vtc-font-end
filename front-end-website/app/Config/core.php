@@ -40,7 +40,7 @@
  */
 	/*Configure::write('debug', 2);*/
     /* tue.phpmailer@gmail.com */
-    Configure::write('debug', 2);
+    Configure::write('debug', 0);
     Configure::write('Cache.disable', true);
     $duration = '+1 day';
     if (Configure::read('debug') > 0) {
