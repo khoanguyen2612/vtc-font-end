@@ -47,7 +47,7 @@ class CartsController extends AppController
         echo $this->Cart->getCount();
     }
 
-    public function view()
+    public function view($param = null)
     {
 
         ini_set('memory_limit', '-1');
@@ -63,6 +63,11 @@ class CartsController extends AppController
         Debugger::dump($this->Session->read('cart'));
         Debugger::dump("------------------------------");*/
 
+
+        $cart = $this->Cart->readCart();
+
+
+
         $order_schema = $this->Order->findById('1477'); // 1430, 614, 1477 high total cost money
 
         $order = $order_schema['Order'];
@@ -70,53 +75,60 @@ class CartsController extends AppController
         $order_id = $order['id'];
         $p = $order_schema['OrderDetail'];
         //Debugger::dump($p);
-
         $total_money = 0 ;
         $item = 0;
 
-        foreach ($p as $product) {
 
-            $tmp_p = $this->Product->findById($product['product_id']);
+        if (isNull($cart) || empty($cart)) {
 
-            //(1:domain, 2:window hosting, 3:linux hosting, 4:other)
+            foreach ($p as $product) {
 
-            $type = $tmp_p['Product']['product_type'];
-            switch ($type)
-            {
-                case '1':
-                    $p_type = 'Domain';
-                    break;
-                case '2':
-                    $p_type = 'Window hosting';
-                    break;
-                case '3':
-                    $p_type = 'Linux hosting';
-                    break;
-                case '4':
-                    $p_type = 'Other';
-                    break;
-                default :
-                    $p_type = 'Other';
-                    break;
+                $tmp_p = $this->Product->findById($product['product_id']);
+
+                //(1:domain, 2:window hosting, 3:linux hosting, 4:other)
+
+                $type = $tmp_p['Product']['product_type'];
+                switch ($type) {
+                    case '1':
+                        $p_type = 'Domain';
+                        break;
+                    case '2':
+                        $p_type = 'Window hosting';
+                        break;
+                    case '3':
+                        $p_type = 'Linux hosting';
+                        break;
+                    case '4':
+                        $p_type = 'Other';
+                        break;
+                    default :
+                        $p_type = 'Other';
+                        break;
+                }
+
+                $product['type'] = $p_type;
+                $total_money += $product['quantity'] * $product['price'];
+                $product['total_money'] = $total_money;
+                $products[] = $product;
+
+                /** too much item to dev **/
+                $item++;
+                //if ($item == 4) break;
             }
 
-            $product['type'] = $p_type;
-            $total_money += $product['quantity'] * $product['price'];
-            $product['total_money'] = $total_money;
-            $products[] = $product;
+            $order_arr = array();
+            $cart = array();
 
-            /** too much item to dev **/
-            $item ++ ;
-            //if ($item == 4) break;
+            foreach ($products as $item) {
+                $tmp['order'] = array($order_id);
+                $tmp['product'] = $item;
+                $cart[] = $tmp;
+                $cart['list'][] = $item;
+            }
 
-        }
-
-        $order_arr = array();
-        $cart = array();
-        foreach ($products as $item) {
-            $tmp['order'] = array($order_id);
-            $tmp['product'] = $item;
-            $cart[] = $tmp;
+            // re soft list key of array
+            sort($cart);
+            $this->Cart->saveCart($cart);
         }
 
 
@@ -140,10 +152,19 @@ class CartsController extends AppController
             $list_hosting[] = $host['Product'];
         }
 
+
+
         $n_item_cart = $this->Cart->getCount();
+        $cart = $this->Cart->readCart();
+
+
+        Debugger::dump(end($cart));
+
         $this->set(compact('n_item_cart'));
 
         $this->set(compact('products'));
+
+
         $this->set(compact('order_id'));
         $this->set(compact('order'));
         $this->set(compact('order_code'));
@@ -158,6 +179,7 @@ class CartsController extends AppController
         $cart = array();
         $request = $this->request->data;
 
+
         $this->autoRender = false;
         $this->request->onlyAllow('ajax'); // No direct access via browser URL
 
@@ -170,6 +192,7 @@ class CartsController extends AppController
                 $this->Cart->addProduct($cart);
             }
         }
+
 
         //Debugger::dump($cart);
         //$content = 'Ajax success';
@@ -197,6 +220,9 @@ class CartsController extends AppController
         }
 
         $cart['product']['product_type'] = $p_type;
+
+
+
 
         $this->set(compact('cart'));
         //Debugger::dump( $this->Session->read('cart'));
@@ -230,14 +256,13 @@ class CartsController extends AppController
         $this->autoRender = false;
 
         if ($this->request->is('post')) {
-
             $request = $this->request->data;
-
         }
 
 
         $this->redirect(array("controller" => "carts",
                 "action" => "view",
+                "param1" => "item_del",
             )
         );
     }

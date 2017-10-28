@@ -62,8 +62,8 @@ Router::connect('/Domains/Domain_search.html', array('controller' => 'ProductPri
 
 	//Router::connect('/domain/ResultSearch', array('controller' => 'ProductPrices', 'action' => 'resultsearch'));
 	//Router::connect('/domain/RegisterDomain', array('controller' => 'ProductPrices', 'action' => 'registerdomain'));
-	//Router::connect('/productprices/resultsearch', array('controller' => 'ProductPrices', 'action' => 'ResultSearch'));
-	//Router::connect('/productprices/registerdomain', array('controller' => 'ProductPrices', 'action' => 'RegisterDomain'));
+	Router::connect('/productprices/resultsearch', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+	Router::connect('/productprices/registerdomain', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

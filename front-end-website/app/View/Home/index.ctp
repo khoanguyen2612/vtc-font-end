@@ -28,9 +28,29 @@
 							<label for="search-dm">TÌM KIẾM TÊN MIỀN CỦA BẠN:</label>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-							<form action="Domain_search.html" method="get">
-								<input type="text" name="" id="search-dm" placeholder="Viết tên miền của bạn vào đây....">
-								<button type="submit" class="btn_search">TÌM KIỂM</button>
+							<!-- <form action="" method="post"> -->
+
+							<?php echo $this->Form->create('Data',array(
+								"url" => array('controller' => 'ProductPrices','action' => 'register_domain'),
+								'class' => 'form-horizontal',
+								)); 
+							?>
+								<!-- <input type="text" name="" id="search-dm" placeholder="Viết tên miền của bạn vào đây...."> -->
+							 <?php
+				                echo $this->Form->input('add-domain',array(
+				                    'type' => 'text',
+				                    'label' => false,
+				                    'placeholder' => 'Viết tên miền của bạn vào đây....',
+				                    'required' => true,
+				                    ));
+				            ?>
+								<!-- <button type="submit" class="btn_search">TÌM KIỂM</button> -->
+								<?php
+					                  echo $this->Form->button('Đăng ký',array(
+					                    'class' => 'btn_search',
+					                    'id' => 'submit',
+					                  ));
+					            ?>
 							</form>
 						</div>
 					</div>
@@ -66,24 +86,34 @@
 				</div>
 			</div>
 			<div class="row">
+			<?php foreach ($cloud as $item) { ?>
 				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
-					<span class="top-sell-icon">Best Seller</span>
-					<div class="cloud-item best_seller">
-						<h4>CLOUD SERVER 2</h4>
+					<?php 
+						if(isset($item['best_seller'])){
+							echo '
+								<span class="top-sell-icon">Best Seller</span>
+								<div class="cloud-item best_seller">';
+						}else{
+							echo '<div class="cloud-item">';
+						}
+					?>
+						<h4><?php echo $item['Product']['product_name'];?></h4>
 						<div class="cloud-register">
-							<h3>510.000<small>VND/THÁNG</small></h3>
-							<p>Regularly $16.99</p>
-							<a href="" class="btn btn-default">ĐĂNG KÝ</a>
+							<h3><?php echo $item['Product']['price'];?><small> VND/THÁNG</small></h3>
+							<h3><?php echo $item['Plan']['capacity'];?><small> MB</small></h3>
+							<a href="#" class="btn btn-default">ĐĂNG KÝ</a>
 						</div>
 						<div class="cloud-config">
-							<p>1 CPU</p>
-							<p>1 RAM</p>
-							<p>20 Dung lượng ổ cứng</p>
-							<p class="cpu">1 Địa chỉ Internet</p>
+							<p>Băng thông : <strong><?php echo $item['Plan']['bandwidth'];?></strong> GB</p>
+							<p>Subdomain : <strong> <?php echo $item['Plan']['limit_subdomain'];?></strong></p>
+							<p>MySQL : <strong><?php echo $item['Plan']['limit_mysql'];?></strong></p>
+							<p class="cpu">Database : <strong><?php echo $item['Plan']['limit_db'];?></strong></p>
+
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
+			<?php }?>
+				<!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
 					
 					<div class="cloud-item">
 						<h4>CLOUD SERVER 2</h4>
@@ -133,7 +163,8 @@
 							<p class="cpu">1 Địa chỉ Internet</p>
 						</div>
 					</div>
-				</div>
+				</div> -->
+				
 			</div>
 		</div>
 	</div>
