@@ -21,7 +21,7 @@ class CartsController extends AppController
     public $uses = array('Product', 'Cart', 'Order', 'OrderDetail');
     public $components = array('Acl', 'RequestHandler');
     public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
-
+    var $session_cart = array();
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -31,6 +31,8 @@ class CartsController extends AppController
         if ($this->request->is('ajax')) {
             $this->layout = 'ajax_cart';
         }
+
+        $this->session_cart = $this->Cart->readCart();
 
     }
 
@@ -63,19 +65,21 @@ class CartsController extends AppController
         Debugger::dump($this->Session->read('cart'));
         Debugger::dump("------------------------------");*/
 
+        //Debugger::dump(CakeSession::read('cart'));
 
         $cart = $this->Cart->readCart();
-        $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
 
+        $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
         $order = $order_schema['Order'];
         $order_code = $order['order_code'];
         $order_id = $order['id'];
         $product_in_order = $order_schema['OrderDetail'];
         //Debugger::dump($product_in_order);
+
         $total_money = 0;
         $item = 0;
 
-        if (is_null($cart) || empty($cart)) {
+        if (is_null($cart) || empty($cart) || !count($cart) ) {
 
             foreach ($product_in_order as $p_item) {
                 //Debugger::dump($p_item);
@@ -106,9 +110,8 @@ class CartsController extends AppController
 
                     $p_item['type'] = $p_type;
                     $products[] = $p_item;
-                    $total_money += $p_item['quantity'] * $p_item['price'];
 
-                    /** too much item to dev **/
+                    // too much item to dev
                     //$item++;
                     //if ($item == 4) break;
                     //Debugger::dump($p_item);
@@ -126,14 +129,15 @@ class CartsController extends AppController
             }
 
 
-            /*Debugger::dump('--->');
-            ksort($cart);
+            // Debugger::dump('--->');
+            // ksort($cart);
             // re soft list key of array
-            sort($cart);
-            Debugger::dump($cart);*/
+            // sort($cart);
+            // Debugger::dump($cart);
 
             $this->Cart->saveCart($cart);
-        }
+        };
+
 
         $conditions = array(
             'OR' => array(
@@ -150,6 +154,7 @@ class CartsController extends AppController
              )
         );
 
+
         foreach ($hosts as $host) {
             $list_hosting[] = $host['Product'];
         }
@@ -163,6 +168,7 @@ class CartsController extends AppController
         else
             $all_item = $cart;
 
+        //Debugger::dump(CakeSession::read('cart'), 4);
         //Debugger::dump($all_item);
         $products = $all_item;
 
@@ -178,18 +184,14 @@ class CartsController extends AppController
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
 
-        $this->Cart->removeCart();
-
+        //$this->Cart->removeCart();
 
     }
 
     public function update()
     {
 
-        $cart = array();
         $request = $this->request->data;
-
-
         $this->autoRender = false;
         $this->request->onlyAllow('ajax'); // No direct access via browser URL
 
@@ -197,13 +199,19 @@ class CartsController extends AppController
 
         $cart = $request['cart'];
 
+        //Debugger::dump($cart['product']['product_type']);
+        //Debugger::dump($cart['product']['product_type']);
+        //Debugger::dump($cart['order']['id']);
+        //die();
+
         if ($this->request->is('post')) {
             if (!empty($request) && count($request) > 0 && count($request['cart'] > 0)) {
 
                 //Debugger::dump($cart);
                 // define 1 product in order detail item to add on to cart,
                 // for Database
-                $order_detail['id'] = rand(95000, 99999);  // new id for item in OrderDetail
+                $order_detail['id'] = rand(95000, 99999);  // new id for item in OrderDetail on to session Cart
+
                 $order_detail['order_id'] = $cart['order']['id'];
                 $order_detail['product_id'] = $cart['product']['id'];
                 $order_detail['domain_name'] = $cart['product']['product_name'];
@@ -242,17 +250,17 @@ class CartsController extends AppController
 
                 // Update field product of cart array
                 // for view layout
-                switch ((int)$cart['product']['product_type']) {
-                    case 1:
+                switch ( (string) $cart['product']['product_type']) {
+                    case '1':
                         $p_type = 'Domain';
                         break;
-                    case 2:
+                    case '2':
                         $p_type = 'Window hosting';
                         break;
-                    case 3:
+                    case '3':
                         $p_type = 'Linux hosting';
                         break;
-                    case 4:
+                    case '4':
                         $p_type = 'Other';
                         break;
                     default :
@@ -261,11 +269,13 @@ class CartsController extends AppController
                 }
 
                 $order_detail['product_type'] = $cart['product']['product_type'];
+                $order_detail['product_name'] = $cart['product']['product_name'];
+                // for view layout
                 $order_detail['type'] = $p_type;
 
-                $order_detail['product_name'] = $cart['product']['product_name'];
-
                 $cart['product'] = $order_detail;
+
+                //Debugger::dump($order_detail);
 
             }
 
@@ -302,18 +312,44 @@ class CartsController extends AppController
         );
     }
 
+    public function payment()
+    {
+        if ($this->request->is('post')) {
+            $res = $this->request->data;
+            if (count($res) > 0) {
+
+            }
+
+        }
+
+    }
+
+    public function finish()
+    {
+        // Payment port return GET/POST
+        if ($this->request->is('get')) {
+            $res = $this->request->data;
+            if (count($res) > 0) {
+
+            }
+
+        }
+
+    }
+
     public function remove()
     {
         $this->autoRender = false;
 
         if ($this->request->is('post')) {
             $res = $this->request->data;
-            $this->Cart->remove_it($res['id_odetail_product']);
+            if (count($res) > 0)
+                $this->Cart->remove_it($res['id_odetail_product']);
         }
 
         $this->redirect(array("controller" => "carts",
                 "action" => "view",
-                "param1" => "item_del",
+                //"param1" => "item_del",
             )
         );
     }

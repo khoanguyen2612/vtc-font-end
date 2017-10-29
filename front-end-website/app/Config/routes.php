@@ -39,28 +39,34 @@
 	Router::connect('/carts', array('controller' => 'Carts', 'action' => 'view'));
 	Router::connect('/cart/', array('controller' => 'Carts', 'action' => 'view'));
 
-Router::connect('/carts/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
+    Router::connect('/carts/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
 	Router::connect('/cart/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
-Router::connect('/carts/checkout', array('controller' => 'Carts', 'action' => 'checkout'));
+    Router::connect('/carts/checkout', array('controller' => 'Carts', 'action' => 'checkout'));
 	Router::connect('/cart/checkout', array('controller' => 'Carts', 'action' => 'checkout'));
+
+    Router::connect('/carts/payment', array('controller' => 'Carts', 'action' => 'payment'));
+    Router::connect('/cart/payment', array('controller' => 'Carts', 'action' => 'payment'));
+
+    Router::connect('/carts/finish', array('controller' => 'Carts', 'action' => 'finish'));
+    Router::connect('/cart/finish', array('controller' => 'Carts', 'action' => 'finish'));
 
 	//Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
 	Router::connect('/cart/update', array('controller' => 'Carts', 'action' => 'update'));
-Router::connect('/carts/update', array('controller' => 'Carts', 'action' => 'update'));
+    Router::connect('/carts/update', array('controller' => 'Carts', 'action' => 'update'));
 
 	Router::connect('/cart/del', array('controller' => 'Carts', 'action' => 'remove'));
 	Router::connect('/carts/del', array('controller' => 'Carts', 'action' => 'remove'));
 
-Router::connect('/cart/update_ajax_it', array('controller' => 'Carts', 'action' => 'update_ajax_it'));
-Router::connect('/carts/update_ajax_it', array('controller' => 'Carts', 'action' => 'update_ajax_it'));
+    Router::connect('/cart/update_ajax_it', array('controller' => 'Carts', 'action' => 'update_ajax_it'));
+    Router::connect('/carts/update_ajax_it', array('controller' => 'Carts', 'action' => 'update_ajax_it'));
 
-Router::connect('/cart/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
-Router::connect('/carts/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
+    Router::connect('/cart/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
+    Router::connect('/carts/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
 
 
     /* tue.phpmailer@gmail.com add route for KhoaND */
     Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
-Router::connect('/carts/register', array('controller' => 'Infocarts', 'action' => 'register'));
+    Router::connect('/carts/register', array('controller' => 'Infocarts', 'action' => 'register'));
     //Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
 
     /* tue.phpmailer@gmail.com add route for ThangDH */

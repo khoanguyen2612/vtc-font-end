@@ -40,8 +40,10 @@
  */
 	/*Configure::write('debug', 2);*/
     /* tue.phpmailer@gmail.com */
-Configure::write('debug', 3);
+    Configure::write('debug', 2);
+
     Configure::write('Cache.disable', true);
+
     $duration = '+1 day';
     if (Configure::read('debug') > 0) {
         $duration = '+1 seconds';
@@ -237,7 +239,8 @@ Configure::write('debug', 3);
  * the cake shell command: cake schema create Sessions
  */
 	Configure::write('Session', array(
-		'defaults' => 'php'
+		//'defaults' => 'php'
+		'defaults' => 'cake'
 	));
 
 /**

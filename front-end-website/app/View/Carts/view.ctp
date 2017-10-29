@@ -74,6 +74,7 @@
                                     <tbody id="add_tr">
                                     <?php
                                     $modal = 1;
+                                    if (count($products) > 0)
                                     foreach ($products as $order_detail): ?>
                                         <tr id="<?php echo $order_detail['id'] ?>">
                                             <td>
