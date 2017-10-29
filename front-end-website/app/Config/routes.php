@@ -63,6 +63,9 @@
     Router::connect('/cart/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
     Router::connect('/carts/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
 
+    Router::connect('/cart/update_ajax_sum_money', array('controller' => 'Carts', 'action' => 'update_ajax_sum_money'));
+    Router::connect('/carts/update_ajax_sum_money', array('controller' => 'Carts', 'action' => 'update_ajax_sum_money'));
+
 
     /* tue.phpmailer@gmail.com add route for KhoaND */
     Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
@@ -79,6 +82,8 @@
 	//Router::connect('/domain/RegisterDomain', array('controller' => 'ProductPrices', 'action' => 'registerdomain'));
 	Router::connect('/productprices/resultsearch', array('controller' => 'ProductPrices', 'action' => 'result_search'));
 	Router::connect('/productprices/registerdomain', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
+
+    Router::parseExtensions('json', 'xml');
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

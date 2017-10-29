@@ -76,17 +76,16 @@ class CartsController extends AppController
         $product_in_order = $order_schema['OrderDetail'];
         //Debugger::dump($product_in_order);
 
-        $total_money = 0;
-        $item = 0;
+
 
         if (is_null($cart) || empty($cart) || !count($cart) ) {
 
             foreach ($product_in_order as $p_item) {
-                //Debugger::dump($p_item);
+
                 $_p = $this->Product->findById($p_item['product_id']);
-                //Debugger::dump($_p);
-                //Debugger::dump('----------');
+
                 if (count($_p) > 0) {
+
                     //(1:domain, 2:window hosting, 3:linux hosting, 4:other)
                     $type = $_p['Product']['product_type'];
 
@@ -111,16 +110,11 @@ class CartsController extends AppController
                     $p_item['type'] = $p_type;
                     $products[] = $p_item;
 
-                    // too much item to dev
-                    //$item++;
-                    //if ($item == 4) break;
-                    //Debugger::dump($p_item);
+
                 }
             }
 
-
             $cart = array();
-
             foreach ($products as $item) {
                 $cart['list'][] = $item;
                 $tmp['order'] = array('id' => $order_id);
@@ -128,12 +122,9 @@ class CartsController extends AppController
                 $cart[] = $tmp;
             }
 
-
-            // Debugger::dump('--->');
             // ksort($cart);
             // re soft list key of array
             // sort($cart);
-            // Debugger::dump($cart);
 
             $this->Cart->saveCart($cart);
         };
@@ -154,11 +145,11 @@ class CartsController extends AppController
              )
         );
 
-
         foreach ($hosts as $host) {
             $list_hosting[] = $host['Product'];
         }
 
+        $total_money = 0;
         $n_item_cart = $this->Cart->getCount();
 
         //Debugger::dump($cart);
@@ -172,11 +163,19 @@ class CartsController extends AppController
         //Debugger::dump($all_item);
         $products = $all_item;
 
+        if (count($products)  > 0) {
+            foreach ($products as $it ) {
+                $total_money += $it['price'] * $it['quantity'];
+
+            }
+        }
+
         //Debugger::dump($n_element);
         //Debugger::dump($cart);
         //Debugger::dump(end($cart));
 
         $this->set(compact('n_item_cart'));
+        $this->set(compact('total_money'));
         $this->set(compact('products'));
 
         $this->set(compact('order_id'));
@@ -386,6 +385,55 @@ class CartsController extends AppController
 
 
     }
+
+    public function update_ajax_sum_money()
+    {
+
+        $this->autoRender = false;
+        $this->request->onlyAllow('ajax'); // No direct access via browser URL
+
+        if ($this->RequestHandler->isAjax()) {
+            Configure::write('debug', 0);
+        }
+
+        if ($this->RequestHandler->isAjax()) {
+            if ($this->request->is('post')) {
+
+                $cart = $this->Cart->readCart();
+
+                if (isset($cart['list']))
+                    $all_item = array_shift($cart);  // shift an element off the beginning of array
+                else
+                    $all_item = $cart;
+
+                $total_money = 0;
+                $products = $all_item;
+
+                if (count($products)  > 0) {
+                    foreach ($products as $it ) {
+                        $total_money += $it['price'] * $it['quantity'];
+                    }
+                }
+
+                $total_money_vat =  round($total_money * 10 / 100);
+                $total_money_finish = $total_money - $total_money_vat;
+
+                $this->response->body(json_encode(array(
+                    'total_money' => $total_money,
+                    'total_money_vat' => $total_money_vat,
+                    'total_money_finish' => $total_money_finish,
+
+                )));
+
+                $this->response->send();
+                $this->_stop();
+
+            }
+        }
+
+
+    }
+
 
 
     public function checkout()

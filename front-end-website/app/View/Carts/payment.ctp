@@ -65,17 +65,17 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="list-inline banklist text-center">
-                            <li class="list-group-item"><a href="#"><img src="img/paypal.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/vietcom.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/techcom.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/viettin.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/vib.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/hdbank.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/agri.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/bidv.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/donga.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/baokim.png" class="img-responsive"></a></li>
-                            <li class="list-group-item"><a href="#"><img src="img/soha.png" class="img-responsive"></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('paypal.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('vietcom.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('techcom.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('viettin.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('vib.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('hdbank.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('agri.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('bidv.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('donga.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('baokim.png', array('class' => 'img-responsive'));?></a></li>
+                            <li class="list-group-item"><a href="#"><?php echo $this->Html->image('soha.png', array('class' => 'img-responsive'));?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <td><img src="img/icon-vietcom.png"></td>
+                                    <td><?php echo $this->Html->image('icon-vietcom.png', array('class' => ''));?></td>
                                     <td>
                                         <div class="form-group banks">
                                             <label>
@@ -127,7 +127,7 @@
                                         Số tài khoản: 0011001894899</td>
                                 </tr>
                                 <tr>
-                                    <td><img src="img/icon-mb.png"></td>
+                                    <td><?php echo $this->Html->image('icon-mb.png', array('class' => ''));?></td>
                                     <td>
                                         <div class="form-group banks">
                                             <label>
@@ -140,7 +140,7 @@
                                         Số tài khoản: 0551100239007</td>
                                 </tr>
                                 <tr>
-                                    <td><img src="img/icon-exi.png"></td>
+                                    <td><?php echo $this->Html->image('icon-exi.png', array('class' => ''));?></td>
                                     <td>
                                         <div class="form-group banks">
                                             <label>
@@ -153,7 +153,7 @@
                                         Số tài khoản: 170214851010357</td>
                                 </tr>
                                 <tr>
-                                    <td><img src="img/icon-vietin.png"></td>
+                                    <td><?php echo $this->Html->image('icon-vietin.png', array('class' => ''));?></td>
                                     <td>
                                         <div class="form-group banks">
                                             <label>

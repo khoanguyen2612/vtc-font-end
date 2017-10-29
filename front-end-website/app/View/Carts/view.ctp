@@ -150,7 +150,94 @@
 
                                         <?php
 
-                                            $id_form = 1;
+                                        echo $this->Html->scriptBlock(' 
+                                                        $(document).ready( function () {
+                                                            console.log( "Ajax ready!" );
+                                                        
+                                                        });
+                                                     ', array('inline' => true));
+
+                                        echo $this->Html->scriptBlock('
+      
+                                                        function change_id() {
+                                                              //alert("Success!");
+                                                              $("tr#ajax_cart").removeAttr("id");
+                                                              
+                                                              $("#ajax_table_data > tbody").append("<tr id=\'ajax_cart\'></tr>");
+                                                            
+                                                        };
+                                                                                                            
+                                                        ', array('inline' => true));
+
+
+                                        $url_del_cart = Router::url(array('controller' => 'carts', 'action' => 'del_ajax_it'));
+                                        $str = $this->Html->scriptBlock('
+          
+                                                            function del_ajax_it() { 
+                                                                   $.ajax({
+                                                                        dataType: "html",
+                                                                        type: "POST",
+                                                                        evalScripts: true,
+                                                                        url: \'' . $url_del_cart . '\',
+                                                                        data: ({type:\'del\'}),
+                                                                        success: function (data, textStatus){
+                                                                            $("#id_count_carts").html(data);
+                                                                        }
+                                                                    });                                                       
+                                                            };
+                                                                                                                
+                                                            ', array('inline' => true));
+
+                                        echo $str;
+
+                                        $update_ajax_it = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_it'));
+                                        $str = $this->Html->scriptBlock('
+          
+                                                            function update_ajax_it() { 
+                                                                   $.ajax({
+                                                                        dataType: "html",
+                                                                        type: "POST",
+                                                                        evalScripts: true,
+                                                                        url: \'' . $update_ajax_it . '\',
+                                                                        data: ({type:\'del\'}),
+                                                                        success: function (data, textStatus){
+                                                                            $("#id_count_carts").html(data);
+                                                                        }
+                                                                    });                                                       
+                                                            };
+                                                                                                                
+                                                            ', array('inline' => true));
+
+                                        echo $str;
+
+                                        $update_ajax_sum_money = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_sum_money'));
+                                        $str = $this->Html->scriptBlock('
+          
+                                                            function update_ajax_sum_money() {
+                                                                   $.ajax({
+                                                                        accepts: {json: \'application/json\'},
+                                                                        dataType:\'json\',
+                                                                        type: \'POST\',
+                                                                        evalScripts: true,
+                                                                        url: \'' . $update_ajax_sum_money . '\',
+                                                                        data: ({type:\'add\'}),
+                                                                        success: function (resp){
+                                                                            console.log(resp);
+                                                                            $("#total-money").html(resp.total_money + " VNĐ");
+                                                                            $("#total-money-vat").html(resp.total_money_vat + " VNĐ");
+                                                                            $("#total-money-finish").html("<b>" + resp.total_money_finish + " VNĐ</b>");
+                                                                        }
+                                                                    });                                                       
+                                                            };
+                                                                                                                
+                                                            ', array('inline' => true));
+
+                                        echo $str;
+
+
+
+                                        $id_form = 1;
+                                        if (count($list_hosting) > 0)
                                             foreach ($list_hosting as $hosting): ?>
 
                                                 <?php
@@ -175,7 +262,7 @@
                                                                 'dataExpression' =>true,
                                                                 'method' => 'POST',
                                                                 'before' => "$('#loading').fadeIn(2000);$('#ajax_cart').attr('disabled','disabled');",
-                                                                'complete' => "$('#loading').fadeOut(1000);$('#ajax_cart').removeAttr('disabled');change_id();update_cart_item();",
+                                                                'complete' => "$('#loading').fadeOut(1000);$('#ajax_cart').removeAttr('disabled');change_id();update_ajax_it();update_ajax_sum_money();",
                                                                 'cache' => false,
                                                             )
                                                         )
@@ -183,65 +270,6 @@
 
                                                     echo $this->Js->writeBuffer();
 
-                                                    echo $this->Html->scriptBlock(' 
-                                                        $(document).ready( function () {
-                                                            console.log( "Ajax ready!" );
-                                                        
-                                                        });
-                                                     ', array('inline' => true));
-
-                                                echo $this->Html->scriptBlock('
-      
-                                                        function change_id() {
-                                                              //alert("Success!");
-                                                              $("tr#ajax_cart").removeAttr("id");
-                                                              
-                                                              $("#ajax_table_data > tbody").append("<tr id=\'ajax_cart\'></tr>");
-                                                            
-                                                        };
-                                                                                                            
-                                                        ', array('inline' => true));
-
-
-                                                $url_del_cart = Router::url(array('controller' => 'carts', 'action' => 'del_ajax_it'));
-                                                $str = $this->Html->scriptBlock('
-      
-                                                        function del_ajax_it() { 
-                                                               $.ajax({
-                                                                    dataType: "html",
-                                                                    type: "POST",
-                                                                    evalScripts: true,
-                                                                    url: \'' . $url_del_cart . '\',
-                                                                    data: ({type:\'del\'}),
-                                                                    success: function (data, textStatus){
-                                                                        $("#id_count_carts").html(data);
-                                                                    }
-                                                                });                                                       
-                                                        };
-                                                                                                            
-                                                        ', array('inline' => true));
-
-                                                echo $str;
-
-                                                $update_ajax_it = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_it'));
-                                                $str = $this->Html->scriptBlock('
-      
-                                                        function update_cart_item() { 
-                                                               $.ajax({
-                                                                    dataType: "html",
-                                                                    type: "POST",
-                                                                    evalScripts: true,
-                                                                    url: \'' . $update_ajax_it . '\',
-                                                                    data: ({type:\'del\'}),
-                                                                    success: function (data, textStatus){
-                                                                        $("#id_count_carts").html(data);
-                                                                    }
-                                                                });                                                       
-                                                        };
-                                                                                                            
-                                                        ', array('inline' => true));
-
-                                                echo $str;
 
                                                 ?>
 
@@ -364,7 +392,7 @@
                                     <tbody>
                                     <tr>
                                         <td>Tạm tính (Chưa VAT):</td>
-                                        <td><?php echo @ $order_detail['total_money']; ?> VNĐ</td>
+                                        <td id="total-money"><?php echo $total_money; ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td>Giảm giá:</td>
@@ -372,25 +400,27 @@
                                     </tr>
                                     <tr>
                                         <td>VAT (10%)</td>
-                                        <td><?php echo round(@ $order_detail['total_money'] * 10 / 100); ?> VNĐ</td>
+                                        <td id="total-money-vat"><?php echo round($total_money * 10 / 100); ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td><b>Thành tiền:</b></td>
-                                        <td>
-                                            <b><?php echo @ $order_detail['total_money'] - round(@ $order_detail['total_money'] * 10 / 100); ?>
+                                        <td id="total-money-finish">
+                                            <b><?php echo $total_money - round($total_money * 10 / 100); ?>
                                                 VNĐ</b></td>
                                     </tr>
+
                                     <tr>
                                         <td colspan="2" class="continue">
-                                            <button class="btn btn-continue hidden" type="button"><a href="">Tiếp tục</a></button>
+                                            <button class="btn btn-continue hidden" type="button"><a href="">Tiếp
+                                                    tục</a></button>
                                             <button class="btn btn-continue" type="button">
                                                 <?php
-                                                    echo $this->Html->link('Tiếp tục', array(
-                                                        'controller' => 'cart',
-                                                        'action' => 'checkout',
-                                                    ),
-                                                        array('class' => '', 'escape' => false)
-                                                    );
+                                                echo $this->Html->link('Tiếp tục', array(
+                                                    'controller' => 'cart',
+                                                    'action' => 'checkout',
+                                                ),
+                                                    array('class' => '', 'escape' => false)
+                                                );
                                                 ?>
                                             </button>
                                         </td>
@@ -404,12 +434,12 @@
                                             </button>
                                             <button class="btn btn-buy" type="button">
                                                 <?php
-                                                    echo $this->Html->link('Mua thêm các dịch vụ', array(
-                                                        'controller' => 'cart',
-                                                        'action'     => 'continuebuy',
-                                                    ),
-                                                        array('class' => '','escape'    => false)
-                                                    );
+                                                echo $this->Html->link('Mua thêm các dịch vụ', array(
+                                                    'controller' => 'cart',
+                                                    'action' => 'continuebuy',
+                                                ),
+                                                    array('class' => '', 'escape' => false)
+                                                );
                                                 ?>
                                             </button>
 
@@ -418,6 +448,8 @@
                                     </tbody>
                                 </table>
                             </div>
+
+
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 support">
                                 <div>
                                     <h4>Nhập nhân viên tư vấn : <?php echo $this->Html->image('icon-chat.png',array('class' => 'img'));?> </h4>
@@ -430,6 +462,7 @@
                         </div>
                         <?php
                         $modal = 1;
+                        if (count($products) > 0)
                         foreach ($products as $order_detail): ?>
                             <div id="myModal<?= $modal ?>" class="modal fade" role="dialog">
                                 <?php
