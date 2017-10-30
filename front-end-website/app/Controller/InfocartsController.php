@@ -56,7 +56,7 @@ class InfocartsController extends AppController
                 $this->Contact->set($this->data);
                 if ($this->Contact->validate_cn()) {
                     $this->Contact->save($data);
-                    return $this->redirect(array('controller' => 'Payment', 'action' => 'paychoice'));
+                    return $this->redirect(array('controller' => 'carts', 'action' => 'payment'));
                 }else{
                   $this->set('Errors',$this->Contact->validationErrors);
               }
@@ -108,7 +108,7 @@ class InfocartsController extends AppController
             $this->Contact->set($this->data);
             if ($this->Contact->validate_tc()) {
               if(  $this->Contact->saveMany($data))
-                $this->redirect(array('controller' => 'payment', 'method' => 'paychoice'));
+                $this->redirect(array('controller' => 'carts', 'method' => 'payment'));
         }else{
          $this->set('Errors',$this->Contact->validationErrors);
      }
