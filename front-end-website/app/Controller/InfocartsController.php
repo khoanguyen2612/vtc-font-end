@@ -39,19 +39,19 @@ class InfocartsController extends AppController
         ));
 
         if ($this->request->is('post')) {
-
             if (!empty($this->data['Contact']['name'])) {
-
                 $data = array(
                     'lname' => $this->data['Contact']['name'],
                     'ownerid' => $this->data['Contact']['ownerid'],
                     'street1' => $this->data['Contact']['street'],
                     'phone' => $this->data['Contact']['phone'],
                     'email' => $this->data['Contact']['email'],
-                    'account_id' => $id_acc,
+                    'sex' => $this->data['Contact']['sex_cn'],
+                    'city' => $this->data['Contact']['city'],
+                    'birthday' => $this->data['Contact']['birthday'],
                     'contact_type' => '1',
                     'role_flg' => 'I',
-                    'sex' => $this->data['Contact']['sex_cn']
+                    'account_id' => $id_acc,
                 );
                 $this->Contact->set($this->data);
                 if ($this->Contact->validate_cn()) {
@@ -62,6 +62,7 @@ class InfocartsController extends AppController
               }
           } else
           if (!empty($this->data['Contact']['name_tc'])) {
+            pr($this->data);
             $data = array(
                 array(
                     'lname' => $this->data['Contact']['name_tc'],
@@ -69,6 +70,7 @@ class InfocartsController extends AppController
                     'street1' => $this->data['Contact']['street_tc'],
                     'phone' => $this->data['Contact']['phone_tc'],
                     'email' => $this->data['Contact']['email_tc'],
+                    'city' => $this->data['Contact']['city_tc'],
                     'account' => $id_acc,
                     'role_flg' => 'R',
                     'contact_type' => '1',
@@ -77,42 +79,42 @@ class InfocartsController extends AppController
                 array(
                     'lname' => $this->data['Contact']['mn_name'],
                     'ownerid' => $this->data['Contact']['mn_ownerid'],
+                    'sex' => $this->data['Contact']['mn_gender'],
+                    'birthday' => $this->data['Contact']['mn_birthday'],
                     'street1' => $this->data['Contact']['mn_street'],
                     'phone' => $this->data['Contact']['mn_phone'],
                     'email' => $this->data['Contact']['mn_email'],
+                    'city' => $this->data['Contact']['mn_city'],
                     'role_flg' => 'R',
                     'contact_type' => '2',
-                     'account_id' => $id_acc,
-                     'organization' => $this->data['Contact']['name_tc']
+                    'account_id' => $id_acc,
+                    'organization' => $this->data['Contact']['name_tc'],
                 ),
                 array(
                     'lname' => $this->data['Contact']['bill_name'],
                     'ownerid' => $this->data['Contact']['bill_ownerid'],
                     'street1' => $this->data['Contact']['bill_street'],
+                    'birthday' => $this->data['Contact']['bill_birthday'],
+                    'city' => $this->data['Contact']['bill_city'],
+                    'sex' => $this->data['Contact']['bill_gender'],
                     'phone' => $this->data['Contact']['bill_phone'],
                     'email' => $this->data['Contact']['bill_email'],
+                    'organization' => $this->data['Contact']['name_tc'],
                     'role_flg' => 'R',
                     'contact_type' => '4',
-                     'account_id' => $id_acc,
-                     'organization' => $this->data['Contact']['name_tc']
+                    'account_id' => $id_acc,
                 )
             );
-
             $this->Contact->set($this->data);
-
             if ($this->Contact->validate_tc()) {
               if(  $this->Contact->saveMany($data))
                 $this->redirect(array('controller' => 'payment', 'method' => 'paychoice'));
-
         }else{
          $this->set('Errors',$this->Contact->validationErrors);
      }
  }
-
 }
-
 }
-
 public function getSaveRecord()
 {
     $data = $this->Contact->findById($_POST['record_id']);
@@ -130,7 +132,6 @@ public function getInfoAccount()
 {
     $id_acc = $this->Auth->User('id');
     $data = $this->Account->findById($id_acc);
-    pr($data);
     header('Content-Type: application/json');
     echo json_encode($data);
     $this->autoRender = false;

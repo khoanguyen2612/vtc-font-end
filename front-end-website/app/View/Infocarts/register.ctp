@@ -197,7 +197,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="mn_birthday" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Ngày sinh</label>
-                                            <input type="date" name="" class="col-md-8" name="data[Contact][mn_birthday]" id="mn_birthday">
+                                            <input type="date" class="col-md-8" name="data[Contact][mn_birthday]" id="mn_birthday">
                                         </div>
                                         <div class="form-group">
                                             <label for="mn_phone" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Số điện thoại</label>
@@ -216,11 +216,11 @@
                                         <div class="form-group gender">
                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Giới tính</label>
                                             <label>
-                                                <input type="radio" name="data[Contact][mn_gender]" value="1">
+                                                <input type="radio" name="data[Contact][mn_gender]" value="1" required>
                                                 <span>Nam</span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="data[Contact][mn_gender]" value="0">
+                                                <input type="radio" name="data[Contact][mn_gender]" value="0" required>
                                                 <span>Nữ</span>
                                             </label>
                                         </div>
@@ -253,7 +253,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="birthday" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Ngày sinh</label>
-                                            <input type="date" name="" class="col-md-8" name="data[Contact][bill_birthday]" id="bill_birthday">
+                                            <input type="date" class="col-md-8" name="data[Contact][bill_birthday]" id="bill_birthday">
                                         </div>
                                         <div class="form-group">
                                             <label for="phone" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Số điện thoại</label>
@@ -272,11 +272,11 @@
                                         <div class="form-group gender">
                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Giới tính</label>
                                             <label>
-                                                <input type="radio" name="data[Contact][bill_gender]" value="1">
+                                                <input type="radio" name="data[Contact][bill_gender]" value="1" required>
                                                 <span>Nam</span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="data[Contact][bill_gender]" value="0">
+                                                <input type="radio" name="data[Contact][bill_gender]" value="0" required>
                                                 <span>Nữ</span>
                                             </label>
                                         </div>
@@ -405,7 +405,6 @@
                 }
 
             }else if(data.Contact.role_flg == 'R'){
-                // console.log(data);
                 $('#name_tc').val(data.Contact.organization);
                 $('#street_tc').val(data.Contact.street1);
                 $('#phone_tc').val(data.Contact.phone);
@@ -417,7 +416,6 @@
     }
 });
     }
-
     function getAccInfo(data){
       $.ajax({
           url: 'getInfoAccount',
@@ -426,21 +424,23 @@
           data: {type: data},
       })
       .done(function(result) {
+        console.log(result);
         if(data == 'I'){
-            // console.log(result);
             $('#birthday_cn').val(result.Account.birthday);
-            $('#ownerid_cn').val(result.Account.ownerid);
-            $('#phone_cn').val(result.Account.phone);
+            $('#ownerid_cn').val(result.Account.CMTND);
+            $('#phone_cn').val(result.Account.phonenumber);
             $('#email_cn').val(result.Account.email);
             $('#name_cn').val(result.Account.login_id);
-            
+            $('#street_cn').val(result.Account.add_contact);
+            $('#city_cn').val(result.Account.address); 
         }
         if(data = 'R'){
-            $('#name_tc').val(result.Account.organization);
-            $('#street_tc').val(result.Account.street1);
-            $('#phone_tc').val(result.Account.phone);
-            $('#ownerid_tc').val(result.Account.ownerid);
-            $('#city_tc').val(result.Account.city);
+
+            $('#name_tc').val(result.Organization.organ_name);
+            $('#street_tc').val(result.Account.add_contact);
+            $('#phone_tc').val(result.Organization.phonenumber2);
+            $('#ownerid_tc').val(result.Organization.tax_code);
+            $('#city_tc').val(result.Account.address);
             $('#email_tc').val(result.Account.email); 
         }
     });
@@ -462,20 +462,21 @@
 
     });
  });
+
   $('button[type=submit]').click(function(){
      if ($('#cn').hasClass('active')) {
         $('#group').find('input[required]').removeAttr('required');
+        $('#group input').val('');
     }else{
      $('#personal').find('input[required]').removeAttr('required');
+     $('#personal input').val('');
  }
 });
 
   // lay thong tin chu the ten mien
   $('#get_mana').click(function(){
-    $('#mn_name').val($('#name_tc').val());
     $('#mn_street').val($('#street_tc').val());
     $('#mn_phone').val($('#phone_tc').val());
-    $('#mn_ownerid').val($('#ownerid_tc').val());
     $('#mn_city').val($('#city_tc').val());
     $('#mn_email').val($('#email_tc').val());
 });
