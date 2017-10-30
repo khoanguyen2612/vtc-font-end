@@ -2,6 +2,7 @@
   .form-register{
     margin: auto;
     max-width: 900px;
+    margin-bottom: 30px;
   }
   .form-register h3{
     color: #f37636;
@@ -27,8 +28,9 @@
     color: #f37636;
     margin:20px;
   }
-  .tab-content{
+  .form-register .tab-content{
     border: 1px solid #f37636;
+    /*margin-bottom: 20px;*/
   }
   .tab-content button{
     text-align: center;

@@ -14,20 +14,25 @@
         		$nickname=$this->request->data['Account']['nickname'];
 				$user=$this->Account->find('first',array('conditions'=>array('Account.nickname'=>$nickname)));
 				// pr($user);die;
-				if($user['Account']['status']==1){
-					if($this->Auth->login())
-					{
-						// pr($this->Auth->user());die;
-						return $this->redirect($this->Auth->redirectUrl($this->Auth->loginRedirect));
+				if(!empty($user)){
+					if($user['Account']['status']==1){
+						if($this->Auth->login())
+						{
+							// pr($this->Auth->user());die;
+							return $this->redirect($this->Auth->redirectUrl($this->Auth->loginRedirect));
+						}
+						else
+						{
+							
+							$this->Session->setFlash('Mật khẩu không đúng, vui lòng thử lại!','default',array('class'=>'alert alert-danger'));
+						}
 					}
-					else
-					{
-						
-						$this->Session->setFlash('Thông tin đăng nhập không chính xác. Xin hãy thử lại.','default',array('class'=>'alert alert-danger'));
+					else{
+						$this->Session->setFlash('Tài khoản này chưa được kích hoạt','default',array('class'=>'alert alert-danger'));
 					}
 				}
 				else{
-					$this->Session->setFlash('Tài khoản này chưa được kích hoạt','default',array('class'=>'alert alert-danger'));
+					$this->Session->setFlash('Tài khoản không đúng, vui lòng thử lại!','default',array('class'=>'alert alert-danger'));
 				}
 			}
 			if(!empty($token)){
@@ -55,22 +60,16 @@
 			if($this->request->is('post')){
 				$Data_Form=$this->request->data;
 
-				if(isset($Data_Form['domain_flg'])){$Data_Form['Account']['domain_flg'] =$Data_Form['domain_flg'];}
-				if(isset($Data_Form['domain_news_flg'])){$Data_Form['Account']['domain_news_flg'] =$Data_Form['domain_news_flg'];}
 
 				$Data_Form['Account']['login_password']=$Data_Form['Account']['original_password'];
 				$Data_Form['Account']['login_id']=$Data_Form['Account']['nickname'];
 
 				if(isset($Data_Form['Account']['organ_name'])){
 					$Data_Form['Organization']['organ_name']=$Data_Form['Account']['organ_name'];
-					if(isset($Data_Form['Account']['tax_code'])){$Data_Form['Organization']['tax_code']=$Data_Form['Account']['tax_code'];}
-					if(isset($Data_Form['Account']['phonenumber2'])){$Data_Form['Organization']['phonenumber2']=$Data_Form['Account']['phonenumber2'];}
 					$Data_Form['Account']['proxy']=1;
 					$this->Account->set($Data_Form['Account']);
 					$this->Organization->set($Data_Form['Organization']);
 				}else{
-					if(isset($Data_Form['sex'])){$Data_Form['Account']['sex'] =$Data_Form['sex'];}
-					$Data_Form['Account']['birthday']=$Data_Form['year'].'-'.$Data_Form['month'].'-'.$Data_Form['day'];
 					$this->Account->set($Data_Form['Account']);
 				}
 				// pr($Data_Form);die;

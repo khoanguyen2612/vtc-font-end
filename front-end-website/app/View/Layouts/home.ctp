@@ -10,13 +10,14 @@
     ?>
 
     <?php echo $this->Html->charset() . "\n"; ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
     <?php echo $this->Html->css('bootstrap.min.css'). "\n"; ?>
     <?php //echo $this->Html->script('jquery.min.js'). "\n"; ?>
     <?php echo $this->Html->script('jquery-1.11.3.min'); ?>
     <?php echo $this->Html->script('bootstrap.min.js'). "\n"; ?>
     <?php echo $this->Html->css('style'). "\n"; ?>
     <link href='http://fonts.googleapis.com/css?family=Ruge+Boogie' rel='stylesheet' type='text/css'>
+    <?php echo $this->Html->script('jssor.slider-26.3.0.min.js'). "\n"; ?>
 
 </head>
 
