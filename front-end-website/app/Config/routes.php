@@ -41,6 +41,7 @@
 
     Router::connect('/carts/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
 	Router::connect('/cart/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
+
     Router::connect('/carts/checkout', array('controller' => 'Carts', 'action' => 'checkout'));
 	Router::connect('/cart/checkout', array('controller' => 'Carts', 'action' => 'checkout'));
 
@@ -65,6 +66,15 @@
 
     Router::connect('/cart/update_ajax_sum_money', array('controller' => 'Carts', 'action' => 'update_ajax_sum_money'));
     Router::connect('/carts/update_ajax_sum_money', array('controller' => 'Carts', 'action' => 'update_ajax_sum_money'));
+
+    Router::connect('/cart/vtc_payment', array('controller' => 'Carts', 'action' => 'vtc_payment'));
+    Router::connect('/carts/vtc_payment', array('controller' => 'Carts', 'action' => 'vtc_payment'));
+
+    Router::connect('/cart/payment', array('controller' => 'Carts', 'action' => 'payment'));
+    Router::connect('/carts/payment', array('controller' => 'Carts', 'action' => 'payment'));
+
+    Router::connect('/cart/finish', array('controller' => 'Carts', 'action' => 'finish'));
+    Router::connect('/carts/finish', array('controller' => 'Carts', 'action' => 'finish'));
 
 
     /* tue.phpmailer@gmail.com add route for KhoaND */

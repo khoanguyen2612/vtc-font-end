@@ -1,23 +1,4 @@
 
-    <?php /*echo $this->element('home'); */?>
-    <?php /*echo Debugger::dump($products); */?>
-
-    <?php //echo Debugger::dump($hostings); ?>
-
-    <!--// <script type="text/javascript">
-
-        $(document).ready( function () {
-            console.log( "ready!" );
-            //alert("ready!");
-        });
-
-        function change_id() {
-
-        };
-
-    </script>//-->
-
-
     <div class="cart">
         <div class="process">
             <div class="container">
@@ -57,7 +38,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="row">
-                            <p class="congra"><?php echo $this->Html->image('icon-wonder.png', array('class' => ''));?> Tuyệt vời! Bạn đã đăng ký đặt hàng thành công.</p>
+                            <p class="congra "><?php echo $this->Html->image('icon-wonder.png', array('class' => ''));?> Tuyệt vời! Bạn đã đăng ký đặt hàng thành công.</p>
                         </div>
                     </div>
                     <div class="domain-completed">
@@ -72,15 +53,19 @@
                                     <tbody>
                                     <tr>
                                         <td>Tên khách hàng</td>
-                                        <td class="name-customer">ABC</td>
+                                        <td class="name-customer"><?php echo $u_name; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Số điện thoại:</td>
-                                        <td>0123456789</td>
+                                        <td><?php echo $phone; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Email: </td>
-                                        <td>abc@gmail.com</td>
+                                        <td><?php echo $email; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>CMND: </td>
+                                        <td><?php echo $cmtnd; ?></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -95,15 +80,15 @@
                                     <tbody>
                                     <tr>
                                         <td>Mã đơn hàng: </td>
-                                        <td class="code-cart"> ABCDEF</td>
+                                        <td class="code-cart"> <?php echo $order_code; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Ngày đặt hàng : </td>
-                                        <td>17/10/2017</td>
+                                        <td><?php echo $date_day; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Giờ đặt hàng: </td>
-                                        <td> 10:35 SA</td>
+                                        <td> <?php echo $time_h; ?></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -116,80 +101,63 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 service-info">
                         <table class="table table-bordered domain-service-info text-center">
                             <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Dịch vụ</th>
-                                <th>Thời hạn</th>
-                                <th>Số tiền</th>
-                            </tr>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Dịch vụ</th>
+                                    <th>Số lượng</th>
+                                    <th>Số tiền</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <h4>abc.info</h4>
-                                    <p class="ten-mien">Tên miền</p>
-                                </td>
-                                <td>1 năm</td>
-                                <td>
-                                    <p class="line-through">319.000 VNĐ</p>
-                                    <h4>79.000 VNĐ</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <h4>abc.info</h4>
-                                    <p class="ten-mien">Tên miền</p>
-                                </td>
-                                <td>1 năm</td>
-                                <td>
-                                    <p class="line-through">319.000 VNĐ</p>
-                                    <h4>79.000 VNĐ</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <h4>abc.info</h4>
-                                    <p class="ten-mien">Tên miền</p>
-                                </td>
-                                <td>1 năm</td>
-                                <td>
-                                    <p class="line-through">319.000 VNĐ</p>
-                                    <h4>79.000 VNĐ</h4>
-                                </td>
-                            </tr>
-
+                            <?php
+                            $stt = 1;
+                            if (count($products) > 0)
+                            foreach ($products as $order_detail): ?>
+                                <tr>
+                                    <td><?=$stt ?></td>
+                                    <td>
+                                        <h4><?php echo $order_detail['domain_name']; ?></h4>
+                                        <p class="ten-mien"><?php echo $order_detail['type']; ?></p>
+                                    </td>
+                                    <td><?php echo $order_detail['quantity']; ?></td>
+                                    <td>
+                                        <p class="line-through"><?php echo $order_detail['discount']; ?> VNĐ</p>
+                                        <h4><?php echo $order_detail['price']; ?> VNĐ</h4>
+                                    </td>
+                                </tr>
+                                <?php
+                                $stt++;
+                            endforeach; ?>
                             </tbody>
                         </table>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"></div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 service-money">
                             <table class="table service-total-money">
                                 <tbody>
-                                <tr>
-                                    <td>Tổng cộng(Chưa VAT): </td>
-                                    <td> 1.349.000 VNĐ</td>
-                                </tr>
-                                <tr>
-                                    <td>Số tiền giảm giá: </td>
-                                    <td> - 240.000 VNĐ</td>
-                                </tr>
-                                <tr>
-                                    <td> VAT: </td>
-                                    <td>55.900 VNĐ</td>
-                                </tr>
-                                <tr>
-                                    <td> Mã giảm giá: </td>
-                                    <td></td>
-                                </tr>
-                                <tr class="into-money">
-                                    <td>Thành tiền:</td>
-                                    <td class="into-total"> 1.164.900 VNĐ</td>
-                                </tr>
+                                    <tr>
+                                        <td>Tổng cộng(Chưa VAT): </td>
+                                        <td> <?php echo $total_money; ?> VNĐ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Số tiền giảm giá: </td>
+                                        <td> - <?php echo $total_money - $total_payment; ?> VNĐ</td>
+                                    </tr>
+                                    <tr>
+                                        <td> VAT: </td>
+                                        <td><?php echo $total_vat; ?> VNĐ</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Mã giảm giá: </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="into-money">
+                                        <td>Thành tiền:</td>
+                                        <td class="into-total"> <?php echo $total_payment; ?> VNĐ</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
+
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 domain-cart-payments">
                             <h3><?php echo $this->Html->image('icon-info.png', array('class' => 'icon-info'));?>  HÌNH THỨC THANH TOÁN </h3>
                             <div class="something">
@@ -215,10 +183,10 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 print-cart">
-                            <button type="submit" class="btn btn-print-cart">In đơn hàng</button>
+                            <button type="submit" class="btn btn-print-cart" onclick="return false">In đơn hàng</button>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 save-cart">
-                            <button type="submit" class="btn btn-save-cart"> Lưu</button>
+                            <button type="submit" class="btn btn-save-cart" onclick="return false"> Lưu</button>
                         </div>
                     </div>
                 </form>

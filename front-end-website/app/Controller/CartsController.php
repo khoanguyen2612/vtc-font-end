@@ -23,6 +23,9 @@ class CartsController extends AppController
     public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
     var $session_cart = array();
 
+    //static $total_money = 0;
+    //static $order_code = 'CL_VTC_AZ_';
+
     function beforeFilter() {
         parent::beforeFilter();
         $this->layout = 'cart';
@@ -32,7 +35,38 @@ class CartsController extends AppController
             $this->layout = 'ajax_cart';
         }
 
-        $this->session_cart = $this->Cart->readCart();
+        $this->Session->write('order_code', 'CL_VTC_AZ_');
+        $this->Session->write('total_money', 0);
+
+        $cart = $this->Cart->readCart();
+
+        if (isset($cart) && !is_null($cart)) {
+
+            if (isset($cart['list']))
+                $all_item = array_shift($cart);  // shift an element off the beginning of array
+            else
+                $all_item = $cart;
+
+            $total_money = 0;
+            $products = $all_item;
+
+            if (count($products)  > 0) {
+                foreach ($products as $it ) {
+                    $total_money += $it['price'] * $it['quantity'];
+                }
+            }
+
+            $this->Session->delete('total_money');
+            $this->Session->write('total_money', $total_money);
+        }
+
+
+        $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
+        $order = $order_schema['Order'];
+
+        $this->Session->delete('order_code');
+        $this->Session->write('order_code', $order['order_code']);
+
 
     }
 
@@ -60,22 +94,17 @@ class CartsController extends AppController
             array( 'order' => array('Order.id' => 'asc') )
         );*/
 
-        /*Debugger::dump($this->Cart->readProduct());
-        Debugger::dump(CakeSession::read('cart'));
-        Debugger::dump($this->Session->read('cart'));
-        Debugger::dump("------------------------------");*/
-
-        //Debugger::dump(CakeSession::read('cart'));
 
         $cart = $this->Cart->readCart();
 
         $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
         $order = $order_schema['Order'];
+
         $order_code = $order['order_code'];
+
         $order_id = $order['id'];
         $product_in_order = $order_schema['OrderDetail'];
         //Debugger::dump($product_in_order);
-
 
 
         if (is_null($cart) || empty($cart) || !count($cart) ) {
@@ -129,7 +158,6 @@ class CartsController extends AppController
             $this->Cart->saveCart($cart);
         };
 
-
         $conditions = array(
             'OR' => array(
                 array('product_type' => '2'),
@@ -152,27 +180,21 @@ class CartsController extends AppController
         $total_money = 0;
         $n_item_cart = $this->Cart->getCount();
 
-        //Debugger::dump($cart);
-
         if (isset($cart['list']))
             $all_item = array_shift($cart);  // shift an element off the beginning of array
         else
             $all_item = $cart;
 
-        //Debugger::dump(CakeSession::read('cart'), 4);
-        //Debugger::dump($all_item);
         $products = $all_item;
 
         if (count($products)  > 0) {
             foreach ($products as $it ) {
                 $total_money += $it['price'] * $it['quantity'];
-
             }
         }
 
-        //Debugger::dump($n_element);
-        //Debugger::dump($cart);
-        //Debugger::dump(end($cart));
+        $this->Session->delete('total_money');
+        $this->Session->write('total_money', $total_money);
 
         $this->set(compact('n_item_cart'));
         $this->set(compact('total_money'));
@@ -182,8 +204,6 @@ class CartsController extends AppController
         $this->set(compact('order'));
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
-
-        //$this->Cart->removeCart();
 
     }
 
@@ -197,11 +217,6 @@ class CartsController extends AppController
         //Debugger::dump($this->Order->findById($request['cart']['order']['id']));
 
         $cart = $request['cart'];
-
-        //Debugger::dump($cart['product']['product_type']);
-        //Debugger::dump($cart['product']['product_type']);
-        //Debugger::dump($cart['order']['id']);
-        //die();
 
         if ($this->request->is('post')) {
             if (!empty($request) && count($request) > 0 && count($request['cart'] > 0)) {
@@ -271,30 +286,14 @@ class CartsController extends AppController
                 $order_detail['product_name'] = $cart['product']['product_name'];
                 // for view layout
                 $order_detail['type'] = $p_type;
-
                 $cart['product'] = $order_detail;
-
-                //Debugger::dump($order_detail);
 
             }
 
             $this->Cart->addProduct($cart);
         }
 
-        //$cart = $this->Cart->readCart();
-        //Debugger::dump($cart);
-
-
         $this->set(compact('cart'));
-        //Debugger::dump( $this->Session->read('cart'));
-        //Debugger::dump( $this->Cart->getCount());
-
-        //$this->Cart->saveDbCart();
-        //$this->Cart->checkoutCart();
-        //$this->Session->destroy();
-        //$this->Session->delete('cart');
-
-        //render spacial view for ajax
         $this->render('ajax_update', 'ajax_cart');
 
     }
@@ -309,15 +308,71 @@ class CartsController extends AppController
                 //"param_1" => "val1")
             )
         );
+
     }
 
     public function payment()
     {
-        if ($this->request->is('post')) {
-            $res = $this->request->data;
-            if (count($res) > 0) {
+        $res = $this->request->data;
 
-            }
+        if ($this->request->is('post') || $this->request->is('get')) {
+
+            $order_code = $this->Session->read('order_code');
+            $total_money = $this->Session->read('total_money');
+
+            $total_payment = $total_money - round($total_money * 10 / 100);
+
+            $this->set(compact('order_code'));
+            $this->set(compact('total_payment'));
+        }
+
+    }
+
+    public function vtc_payment()
+    {
+
+        $this->autoRender = false;
+        $res = $this->request->data;
+
+        $destinationUrl = "http://alpha1.vtcpay.vn/portalgateway/checkout.html";
+
+        if ($this->request->is('post')) {
+
+            $plaintext = $res["txtTotalAmount"] . "|" .
+                         $res["txtCurency"] . "|" .
+                         $res["txtParamExt"] . "|" .
+                         $res["txtReceiveAccount"] . "|" .
+                         $res["txtOrderID"] . "|" .
+                         $res["txtUrlReturn"] . "|" .
+                         $res["txtWebsiteID"] . "|" .
+                         $res["txtSecret"];
+
+            echo $plaintext;
+
+            $sign = strtoupper(hash('sha256', $plaintext));
+
+            $data = "?website_id=" .
+                    $res["txtWebsiteID"] . "&currency=" .
+                    $res["txtCurency"] . "&reference_number=" .
+                    $res["txtOrderID"] . "&amount=" .
+                    $res["txtTotalAmount"] . "&receiver_account=" .
+                    $res["txtReceiveAccount"]. "&url_return=". urlencode($res["txtUrlReturn"]). "&signature=". $sign. "&payment_type=". $res["txtParamExt"];
+
+            $bill_to_surname = htmlentities($res["txtCustomerFirstName"]);
+            $bill_to_forename = htmlentities($res["txtCustomerLastName"]);
+            $bill_to_address = htmlentities($res["txtBillAddress"]);
+            $bill_to_address_city = htmlentities($res["txtCity"]);
+            $bill_to_email = htmlentities($res["txtCustomerEmail"]);
+            $bill_to_phone = htmlentities($res["txtCustomerMobile"]);
+            $language = htmlentities($res["txtParamLanguage"]);
+
+            $destinationUrl = $destinationUrl . $data;
+
+            echo "||||" . $destinationUrl;
+
+            $this->redirect($destinationUrl );
+
+            //header('Location: ' . $destinationUrl);
 
         }
 
@@ -326,11 +381,49 @@ class CartsController extends AppController
     public function finish()
     {
         // Payment port return GET/POST
-        if ($this->request->is('get')) {
-            $res = $this->request->data;
-            if (count($res) > 0) {
+        $res = $this->request->data;
 
-            }
+        $id_acc = $this->Auth->User('id');
+        $user_info = $this->Account->findById($id_acc);
+
+        $u_name = $email = $cmtnd = $phone = '';
+
+        if (count($user_info) > 0) {
+
+            $u_name = $user_info['Account']['name'];
+            $email = $user_info['Account']['email'];
+            $cmtnd = $user_info['Account']['CMTND'];
+            $phone = $user_info['Account']['phonenumber'];
+
+        }
+
+        $cart = $this->Cart->readCart();
+
+        $products = $cart['list'];
+
+        if ($this->request->is('post') || $this->request->is('get')) {
+
+            $order_code = $this->Session->read('order_code');
+            $total_money = $this->Session->read('total_money');
+            $total_vat = round($total_money * 10 / 100);
+            $total_payment = $total_money - round($total_money * 10 / 100);
+
+            $date_day = CakeTime::format(date('Y/m/d'), '%Y/%m/%d', 'N/A', 'Asia/Ho_Chi_Minh');
+            $time_h = CakeTime::format(date('H:i:s'), '%H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
+
+            $this->set(compact('u_name'));
+            $this->set(compact('email'));
+            $this->set(compact('cmtnd'));
+            $this->set(compact('phone'));
+
+            $this->set(compact('products'));
+            $this->set(compact('order_code'));
+            $this->set(compact('total_money'));
+            $this->set(compact('total_payment'));
+            $this->set(compact('total_vat'));
+
+            $this->set(compact('date_day'));
+            $this->set(compact('time_h'));
 
         }
 
@@ -415,6 +508,9 @@ class CartsController extends AppController
                     }
                 }
 
+                $this->Session->delete('total_money');
+                $this->Session->write('total_money', $total_money);
+
                 $total_money_vat =  round($total_money * 10 / 100);
                 $total_money_finish = $total_money - $total_money_vat;
 
@@ -431,7 +527,6 @@ class CartsController extends AppController
             }
         }
 
-
     }
 
 
@@ -439,10 +534,9 @@ class CartsController extends AppController
     {
 
         $this->autoRender = false;
-
         $this->Cart->saveDbCart();
 
-        $this->redirect(array("controller" => "cart",
+        $this->redirect(array("controller" => "carts",
                 "action" => "register",
                 //"param1" => "val1",
                 //"param2" => "val2")
