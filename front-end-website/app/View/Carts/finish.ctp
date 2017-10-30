@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="row">
-                            <p class="congra"><img src="img/icon-wonder.png"> Tuyệt vời! Bạn đã đăng ký đặt hàng thành công.</p>
+                            <p class="congra"><?php echo $this->Html->image('icon-wonder.png', array('class' => ''));?> Tuyệt vời! Bạn đã đăng ký đặt hàng thành công.</p>
                         </div>
                     </div>
                     <div class="domain-completed">
@@ -66,7 +66,7 @@
                                 <table class="table table-bordered domain-custom-info">
                                     <thead>
                                     <tr>
-                                        <th colspan="2"><img src="img/icon-info.png" class="icon-info"> THÔNG TIN KHÁCH HÀNG</th>
+                                        <th colspan="2"><?php echo $this->Html->image('icon-info.png', array('class' => 'icon-info'));?> THÔNG TIN KHÁCH HÀNG </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -89,7 +89,7 @@
                                 <table class="table table-bordered domain-cart-info">
                                     <thead>
                                     <tr>
-                                        <th colspan="2"><img src="img/icon-info.png" class="icon-info"> THÔNG TIN ĐƠN HÀNG</th>
+                                        <th colspan="2"><?php echo $this->Html->image('icon-info.png', array('class' => 'icon-info'));?>  THÔNG TIN ĐƠN HÀNG </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <p class="info-domain"><img src="img/icon-info.png" class="icon-info"> THÔNG TIN DỊCH VỤ</p>
+                        <p class="info-domain"><?php echo $this->Html->image('icon-info.png', array('class' => 'icon-info'));?>  THÔNG TIN DỊCH VỤ </p>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 service-info">
                         <table class="table table-bordered domain-service-info text-center">
@@ -191,7 +191,7 @@
                             </table>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 domain-cart-payments">
-                            <h3><img src="img/icon-info.png" class="icon-info"> HÌNH THỨC THANH TOÁN </h3>
+                            <h3><?php echo $this->Html->image('icon-info.png', array('class' => 'icon-info'));?>  HÌNH THỨC THANH TOÁN </h3>
                             <div class="something">
                                 <h4>Chuyển khoản</h4>
                                 <table class="table">

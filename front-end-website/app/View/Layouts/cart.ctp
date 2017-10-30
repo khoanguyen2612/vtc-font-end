@@ -16,6 +16,7 @@
         echo $this->Html->css('bootstrap.min.css') . "\n";
         echo $this->Html->script('jquery.min.js') . "\n";
         echo $this->Html->script('bootstrap.min.js') . "\n";
+        echo $this->Html->css('cart-finish') . "\n";
         echo $this->Html->css('style') . "\n";
         echo $this->Html->css('http://fonts.googleapis.com/css?family=Ruge+Boogie') . "\n";
         ?>

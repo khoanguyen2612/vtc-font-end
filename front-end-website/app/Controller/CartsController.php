@@ -435,7 +435,6 @@ class CartsController extends AppController
     }
 
 
-
     public function checkout()
     {
 

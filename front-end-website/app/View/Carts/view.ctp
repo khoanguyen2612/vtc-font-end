@@ -234,8 +234,6 @@
 
                                         echo $str;
 
-
-
                                         $id_form = 1;
                                         if (count($list_hosting) > 0)
                                             foreach ($list_hosting as $hosting): ?>
@@ -405,14 +403,12 @@
                                     <tr>
                                         <td><b>Thành tiền:</b></td>
                                         <td id="total-money-finish">
-                                            <b><?php echo $total_money - round($total_money * 10 / 100); ?>
-                                                VNĐ</b></td>
+                                            <b><?php echo $total_money - round($total_money * 10 / 100); ?> VNĐ</b></td>
                                     </tr>
 
                                     <tr>
                                         <td colspan="2" class="continue">
-                                            <button class="btn btn-continue hidden" type="button"><a href="">Tiếp
-                                                    tục</a></button>
+                                            <button class="btn btn-continue hidden" type="button"><a href="">Tiếp tục</a></button>
                                             <button class="btn btn-continue" type="button">
                                                 <?php
                                                 echo $this->Html->link('Tiếp tục', array(
@@ -430,8 +426,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="buy">
-                                            <button class="btn btn-buy hidden" type="button"> Mua thêm các dịch vụ
-                                            </button>
+                                            <button class="btn btn-buy hidden" type="button"> Mua thêm các dịch vụ </button>
                                             <button class="btn btn-buy" type="button">
                                                 <?php
                                                 echo $this->Html->link('Mua thêm các dịch vụ', array(
@@ -455,7 +450,7 @@
                                     <h4>Nhập nhân viên tư vấn : <?php echo $this->Html->image('icon-chat.png',array('class' => 'img'));?> </h4>
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Số điện thoại">
-                                        <button class="btn btn-nhap">Cập nhật</button>
+                                        <button class="btn btn-nhap"> Cập nhật </button>
                                     </div>
                                 </div>
                             </div>
@@ -492,10 +487,8 @@
                                             <h4>Bạn muốn xóa dịch vụ này? </h4>
                                         </div>
                                         <div class="modal-body">
-                                            <button type="submit" class="btn btn-success" id="remove-product">Đồng ý
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" data-dismiss="modal">Hủy
-                                            </button>
+                                            <button type="submit" class="btn btn-success" id="remove-product">Đồng ý </button>
+                                            <button type="submit" class="btn btn-danger" data-dismiss="modal">Hủy </button>
                                         </div>
                                     </div>
                                 </div>
