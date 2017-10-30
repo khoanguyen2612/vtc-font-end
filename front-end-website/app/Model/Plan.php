@@ -15,14 +15,22 @@ class Plan extends AppModel {
 	public $useTable = 'plans';	
 
 	var $hasMany = array(
-        'Hosting' => array(
-            'className' => 'Hosting',
-            'foreignKey' => 'plan_id'
-        ),
+        // 'Hosting' => array(
+        //     'className' => 'Hosting',
+        //     'foreignKey' => 'plan_id'
+        // ),
+        'Cloudserver' => array(
+        	'className' => 'Cloudserver',
+        	'foreignKey' => 'plan_id'
+        )
     );
     var $hasOne=array(
-        'Product' => array(
-            'className' => 'Product',
+        // 'Product' => array(
+        //     'className' => 'Product',
+        //     'foreignKey' => 'plan_id'
+        // ),
+        'Productprice' => array(
+            'className' => 'Productprice',
             'foreignKey' => 'plan_id'
         ),
     );
