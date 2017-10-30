@@ -115,14 +115,13 @@ class Contact extends AppModel {
 	function  validate_tc(){
 
 		$this->validate = array(
-			'name_tc' => array(
-				'sizeName' => array(
-					'rule' =>array('minLength', 5),
-					'message' => 'Tên chủ thể không được ít hơn 5 ký tự'
-				)
+			// 'name_tc' => array(
+			// 	'sizeName' => array(
+			// 		'rule' =>array('minLength', 5),
+			// 		'message' => 'Tên chủ thể không được ít hơn 5 ký tự'
+			// 	)
 
-			),
-
+			// ),
 			'email_tc' => array(
 				'emailformat' => array(
 					'rule' => 'email',
@@ -182,11 +181,11 @@ class Contact extends AppModel {
 			'mn_ownerid' => array(
 				'alphaNumeric' => array(
 					'rule' => 'Numeric',
-					'message' => 'CMT định dạng chữ số'
+					'message' => 'số CMT có định dạng chữ số'
 				),
 				'between' => array(
-					'rule' => array('lengthBetween', 10, 11),
-					'message' => 'Vui lòng nhập CMT hợp lệ'
+					'rule' => array('lengthBetween', 9, 10),
+					'message' => 'Vui lòng nhập số CMT hợp lệ'
 				)
 			),
 			'bill_name' => array(
@@ -219,11 +218,11 @@ class Contact extends AppModel {
 			'bill_ownerid' => array(
 				'alphaNumeric' => array(
 					'rule' => 'Numeric',
-					'message' => 'CMT định dạng chữ số'
+					'message' => 'số CMT có định dạng chữ số'
 				),
 				'between' => array(
-					'rule' => array('lengthBetween', 10, 11),
-					'message' => 'Vui lòng nhập CMT hợp lệ'
+					'rule' => array('lengthBetween', 9, 10),
+					'message' => 'Vui lòng nhập số CMT hợp lệ'
 				)
 			),
 
