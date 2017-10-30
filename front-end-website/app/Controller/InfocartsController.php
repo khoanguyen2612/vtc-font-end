@@ -108,7 +108,7 @@ class InfocartsController extends AppController
             $this->Contact->set($this->data);
             if ($this->Contact->validate_tc()) {
               if(  $this->Contact->saveMany($data))
-                $this->redirect(array('controller' => 'carts', 'method' => 'payment'));
+                $this->redirect(array('controller' => 'carts', 'action' => 'payment'));
         }else{
          $this->set('Errors',$this->Contact->validationErrors);
      }
