@@ -13,70 +13,24 @@
 			$maxw=0;$maxl=0;
 			$planw= $this->Plan->find('all',array(
 				'conditions'=>array('Plan.linux_flg'=>0),
-	            'contain' => array(
-	                'Hosting',
-	                'Product'),
+                        'limit'=>4,
 	            
 	            ));
-			$planl= $this->Plan->find('all',array(
-				'conditions'=>array('Plan.linux_flg'=>1),
-	            'contain' => array(
-	                'Hosting',
-	                'Product'),
-	            
-	            ));
-			$i=0;
-            foreach ($planw as $item) {
-            		if($maxw<=count($item['Hosting'])){
-            			$maxw=count($item['Hosting']);
-            			unset($item['Hosting']);
-            			// $best_sellerw=$item;
-            			$best_sellerw=$i;
-            		}
-            		$i++;
-            }
+                  $best_seller=1;
+                  // pr($planw);die;
+                  $this->set('best_seller',$best_seller);
+                  $this->set('planw',$planw);
 
-            if($best_sellerw==0){
-            	$cloud[0]=$planw[0];
-            	$cloud[0]['best_seller']=1;
-            	$cloud[1]=$planw[1];
-            }else{
-            	$cloud[0]=$planw[0];
-            	$cloud[1]=$planw['best_sellerl'];
-            	$cloud[1]['best_seller']=1;
-            }
-            // pr($cloud);die;
-            $i=0;
-            foreach ($planl as $item) {
-            		if($maxl<=count($item['Hosting'])){
-            			$maxl=count($item['Hosting']);
-            			unset($item['Hosting']);
-            			$best_sellerl=$i;
-            		}
-            		$i++;
-            }
-            if($best_sellerl==0){
-            	$cloud[2]=$planl[0];
-            	$cloud[2]['best_seller']=1;
-            	$cloud[3]=$planl[1];
-            }else{
-            	$cloud[2]=$planl[0];
-            	$cloud[3]=$planl['best_sellerl'];
-            	$cloud[3]['best_seller']=1;
-            }
-            // pr($cloud);die;
-            $this->set('cloud',$cloud);
+                  // Hiển thị tin tức trang trên Home 
 
-            // Hiển thị tin tức trang trên Home 
-
-            $data=$this->News->find("all", array(
-				
-				'order' => array( 'id DESC'),
-				'limit' => 1,
-			));
-			
-			$this->set('data',$data);
-        }
+                  $data=$this->News->find("all", array(
+      				
+      				'order' => array( 'id DESC'),
+      				'limit' => 1,
+      			));
+      			
+      			$this->set('data',$data);
+              }
 
 	}
 ?>

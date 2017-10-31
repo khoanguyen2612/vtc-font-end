@@ -86,10 +86,10 @@
 				</div>
 			</div>
 			<div class="row">
-			<?php foreach ($cloud as $item) { ?>
+			<?php foreach ($planw as $item) { ?>
 				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
 					<?php 
-						if(isset($item['best_seller'])){
+						if($best_seller==$item['Plan']['id']){
 							echo '
 								<span class="top-sell-icon">Best Seller</span>
 								<div class="cloud-item best_seller">';
@@ -97,18 +97,17 @@
 							echo '<div class="cloud-item">';
 						}
 					?>
-						<h4><?php echo $item['Product']['product_name'];?></h4>
+						<h4><?php echo $item['Productprice']['product_name']?></h4>
 						<div class="cloud-register">
-							<h3><?php echo $item['Product']['price'];?><small> VND/THÁNG</small></h3>
-							<h3><?php echo $item['Plan']['capacity'];?><small> MB</small></h3>
-							<a href="#" class="btn btn-default">ĐĂNG KÝ</a>
+							<h3><?php echo number_format($item['Productprice']['price'])?><small> VND/THÁNG</small></h3>
+							
 						</div>
 						<div class="cloud-config">
-							<p>Băng thông : <strong><?php echo $item['Plan']['bandwidth'];?></strong> GB</p>
-							<p>Subdomain : <strong> <?php echo $item['Plan']['limit_subdomain'];?></strong></p>
-							<p>MySQL : <strong><?php echo $item['Plan']['limit_mysql'];?></strong></p>
-							<p class="cpu">Database : <strong><?php echo $item['Plan']['limit_db'];?></strong></p>
-
+							<p><?php echo $item['Plan']['cpu']?> CPU</p>
+							<p><?php echo $item['Plan']['ram']?> RAM</p>
+							<p><?php echo $item['Plan']['hdd']?>G Dung lượng ổ cứng</p>
+							<p class="cpu"><?php echo $item['Plan']['ip']?> Địa chỉ Internet</p>
+							<a href="" class="btn btn-info">ĐĂNG KÝ</a>
 						</div>
 					</div>
 				</div>
