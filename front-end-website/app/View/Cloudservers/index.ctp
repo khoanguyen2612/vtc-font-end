@@ -31,134 +31,89 @@
 							<img src="img/setting_os.png">
 						</div>
 						<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" id="select_os">
-							<a href="Cloud_server_Linux.html" class="choiced">LINUX</a>
-							<a href="Cloud_server_Window.html">WINDOWS</a>
+							<!-- <a href="#CSLinux" class="choiced">LINUX</a>
+							<a href="#CSWindown">WINDOWS</a> -->
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#CSLinux">LINUX</a></li>
+								<li><a data-toggle="tab" href="#CSWindown">WINDOWS</a></li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="cloud_content">
-				<div class="row" id = "plan-data">
-					<?php foreach ($data as $item) {
-					 ?>
-					<div class="col-md-6 col-lg-4 item-<?php echo $item['Plan']['id']?>" >
-						<?php 
-							if($best_seller==$item['Plan']['id']){ 
-								echo '<div class="cloud_item cloud_topsell">
-								<span id="cloud_top">Best Seller</span>';}
-							else{ 
-								echo '<div class="cloud_item">';} 
-						?>
-							<h4><?php echo $item['Productprice']['product_name']?></h4>
-							<div class="price" >
-								<h3 id="item-<?php echo $item['Plan']['id']?>" val = <?php echo $item['Productprice']['price']?>><?php echo $item['Productprice']['price']?><small>VND/THÁNG</small></h3>
-								
-							</div>
+			<div class="cloud_content tab-content"  id = "plan-data">
+				<div id="CSLinux" class="tab-pane fade in active">
+					<div class="row">
+						<?php foreach ($datal as $item) {
+						 ?>
+						<div class="col-md-6 col-lg-4 item-<?php echo $item['Plan']['id']?>" >
 							<?php 
 								if($best_seller==$item['Plan']['id']){ 
-									echo '<img src="img/narrow_bestcloud.png" class="img-responsive">';}
+									echo '<div class="cloud_item cloud_topsell">
+									<span id="cloud_top">Best Seller</span>';}
 								else{ 
-									echo '<img src="img/narrow_cloud.png" class="img-responsive">';} 
+									echo '<div class="cloud_item">';} 
 							?>
-							<div class="cloud-config">
-								<p><?php echo $item['Plan']['cpu']?> CPU</p>
-								<p><?php echo $item['Plan']['ram']?> RAM</p>
-								<p class='hdd-hdd' plan_id = <?php echo $item['Plan']['id']?> val = <?php echo $item['Plan']['hdd']?>><?php echo $item['Plan']['hdd']?>G Dung lượng ổ cứng</p>
-								<p class="cpu"><?php echo $item['Plan']['ip']?> Địa chỉ Internet</p>
-								<a href="" class="btn btn-info">ĐĂNG KÝ</a>
+								<h4><?php echo $item['Productprice']['product_name']?></h4>
+								<div class="price" >
+									<h3 id="item-<?php echo $item['Plan']['id']?>" val = <?php echo number_format($item['Productprice']['price']);?>><?php echo number_format($item['Productprice']['price'])?><small>VND/THÁNG</small></h3>
+									
+								</div>
+								<?php 
+									if($best_seller==$item['Plan']['id']){ 
+										echo '<img src="img/narrow_bestcloud.png" class="img-responsive">';}
+									else{ 
+										echo '<img src="img/narrow_cloud.png" class="img-responsive">';} 
+								?>
+								<div class="cloud-config">
+									<p><?php echo $item['Plan']['cpu']?> CPU</p>
+									<p><?php echo $item['Plan']['ram']?> RAM</p>
+									<p class='hdd-hdd' plan_id = <?php echo $item['Plan']['id']?> val = <?php echo $item['Plan']['hdd']?>><?php echo $item['Plan']['hdd']?>G Dung lượng ổ cứng</p>
+									<p class="cpu"><?php echo $item['Plan']['ip']?> Địa chỉ Internet</p>
+									<a href="" class="btn btn-info">ĐĂNG KÝ</a>
+								</div>
 							</div>
 						</div>
+						<?php }?>
 					</div>
-					<?php }?>
-					<!-- <div class="col-md-6 col-lg-4">
-						<div class="cloud_item">
-							<h4>CLOUD SERVER 1</h4>
-							<div class="price">
-								<h3>510.000<small>VND/THÁNG</small></h3>
-								<p>Regularly $16.99</p>
-							</div>
-							<img src="img/narrow_cloud.png" class="img-responsive">
-							<div class="cloud-config">
-								<p>1 CPU</p>
-								<p>1 RAM</p>
-								<p>20 Dung lượng ổ cứng</p>
-								<p class="cpu">1 Địa chỉ Internet</p>
-								<a href="" class="btn btn-info">ĐĂNG KÝ</a>
+				</div>
+				<div id="CSWindown" class="tab-pane fade">
+					<div class="row">
+						<?php foreach ($dataw as $item) {
+						 ?>
+						<div class="col-md-6 col-lg-4 item-<?php echo $item['Plan']['id']?>" >
+							<?php 
+								if($best_seller==$item['Plan']['id']){ 
+									echo '<div class="cloud_item cloud_topsell">
+									<span id="cloud_top">Best Seller</span>';}
+								else{ 
+									echo '<div class="cloud_item">';} 
+							?>
+								<h4><?php echo $item['Productprice']['product_name']?></h4>
+								<div class="price" >
+									<h3 id="item-<?php echo $item['Plan']['id']?>" val = <?php echo $item['Productprice']['price']?>><?php echo number_format($item['Productprice']['price'])?><small>VND/THÁNG</small></h3>
+									
+								</div>
+								<?php 
+									if($best_seller==$item['Plan']['id']){ 
+										echo '<img src="img/narrow_bestcloud.png" class="img-responsive">';}
+									else{ 
+										echo '<img src="img/narrow_cloud.png" class="img-responsive">';} 
+								?>
+								<div class="cloud-config">
+									<p><?php echo $item['Plan']['cpu']?> CPU</p>
+									<p><?php echo $item['Plan']['ram']?> RAM</p>
+									<p class='hdd-hdd' plan_id = <?php echo $item['Plan']['id']?> val = <?php echo $item['Plan']['hdd']?>><?php echo $item['Plan']['hdd']?>G Dung lượng ổ cứng</p>
+									<p class="cpu"><?php echo $item['Plan']['ip']?> Địa chỉ Internet</p>
+									<a href="" class="btn btn-info">ĐĂNG KÝ</a>
+								</div>
 							</div>
 						</div>
+						<?php }?>
 					</div>
-					<div class="col-md-6 col-lg-4">
-						<div class="cloud_item">
-							<h4>CLOUD SERVER 1</h4>
-							<div class="price">
-								<h3>510.000<small>VND/THÁNG</small></h3>
-								<p>Regularly $16.99</p>
-							</div>
-							<img src="img/narrow_cloud.png" class="img-responsive">
-							<div class="cloud-config">
-								<p>1 CPU</p>
-								<p>1 RAM</p>
-								<p>20 Dung lượng ổ cứng</p>
-								<p class="cpu">1 Địa chỉ Internet</p>
-								<a href="" class="btn btn-info">ĐĂNG KÝ</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-4">
-						<div class="cloud_item">
-							<h4>CLOUD SERVER 1</h4>
-							<div class="price">
-								<h3>510.000<small>VND/THÁNG</small></h3>
-								<p>Regularly $16.99</p>
-							</div>
-							<img src="img/narrow_cloud.png" class="img-responsive">
-							<div class="cloud-config">
-								<p>1 CPU</p>
-								<p>1 RAM</p>
-								<p>20 Dung lượng ổ cứng</p>
-								<p class="cpu">1 Địa chỉ Internet</p>
-								<a href="" class="btn btn-info">ĐĂNG KÝ</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-4">
-						<div class="cloud_item">
-							<h4>CLOUD SERVER 1</h4>
-							<div class="price">
-								<h3>510.000<small>VND/THÁNG</small></h3>
-								<p>Regularly $16.99</p>
-							</div>
-							<img src="img/narrow_cloud.png" class="img-responsive">
-							<div class="cloud-config">
-								<p>1 CPU</p>
-								<p>1 RAM</p>
-								<p>20 Dung lượng ổ cứng</p>
-								<p class="cpu">1 Địa chỉ Internet</p>
-								<a href="" class="btn btn-info">ĐĂNG KÝ</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-4">
-						
-						<div class="cloud_item cloud_topsell">
-							<span id="cloud_top">Best Seller</span>
-							<h4>CLOUD SERVER 1</h4>
-							<div class="price ">
-								<h3>510.000<small>VND/THÁNG</small></h3>
-								<p>Regularly $16.99</p>
-							</div>
-							<img src="img/narrow_bestcloud.png" class="img-responsive">
-							<div class="cloud-config">
-								<p>1 CPU</p>
-								<p>1 RAM</p>
-								<p>20 Dung lượng ổ cứng</p>
-								<p class="cpu">1 Địa chỉ Internet</p>
-								<a href="" class="btn btn-info">ĐĂNG KÝ</a>
-							</div>
-						</div>
-					</div> -->
 				</div>
 			</div>
+
 			<div class="addon_service">
 				<h3>DỊCH VỤ BỔ SUNG</h3>
 				<div class="row option">
@@ -214,6 +169,29 @@
 	.slider.slider-horizontal {
 	    width: 90%;
 	}
+	.nav-tabs>li {
+	    float: left;
+	    margin-bottom: -1px;
+	    width: 50%;
+	}
+	#select_os a {
+	    text-decoration: none !important;
+	    color: #29353f;
+	    display: inline-block;
+	    width: 100%;
+	    float: left;
+	    text-align: center;
+	    padding: 20px 0px;
+	    cursor: pointer;
+	}
+	.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+	    color: #555;
+	    cursor: default;
+	    
+    	border: 1px solid #29353f;
+	    background-color: #29353f !important;
+	    color: #fff !important;
+	}
 </style>
 <script type="text/javascript">
 	// With JQuery
@@ -232,6 +210,7 @@ $(document).ready(function(){
                     //arr: arr
                 },
                 success : function (result){
+                	console.log(result);
                 	$('#plan-data').html(result)
                 }
         	});
