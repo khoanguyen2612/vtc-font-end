@@ -5,7 +5,7 @@
 	class HomeController extends AppController{
 
 
-        public $uses = array('Account', 'Cart','Hosting','Plan');
+        public $uses = array('Account', 'Cart','Hosting','Plan','News');
         public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
 
 
@@ -67,7 +67,15 @@
             // pr($cloud);die;
             $this->set('cloud',$cloud);
 
+            // Hiển thị tin tức trang trên Home 
 
+            $data=$this->News->find("all", array(
+				
+				'order' => array( 'id DESC'),
+				'limit' => 1,
+			));
+			
+			$this->set('data',$data);
         }
 
 	}
