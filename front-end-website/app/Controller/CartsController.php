@@ -534,7 +534,7 @@ class CartsController extends AppController
     {
 
         $this->autoRender = false;
-        $this->Cart->saveDbCart();
+        //$this->Cart->saveDbCart();
 
         $this->redirect(array("controller" => "carts",
                 "action" => "register",
