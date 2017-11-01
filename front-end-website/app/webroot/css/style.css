@@ -1,8 +1,8 @@
-<<<<<<< HEAD
-/*@import url(cart-finish.css);*/
-=======
+@import url(home.css);
+@import url(fix_repon.css);
+@import url(sub_page.css);
+@import url(page_news.css);
 
->>>>>>> dieubt
 body{
 	font-family: Roboto;
 	color: #2a363f;
@@ -3003,4 +3003,4 @@ span#cloud_top{
 .cloud_op .text-center {
      margin-top: 0px; 
 }
->>>>>>> dieubt
+
