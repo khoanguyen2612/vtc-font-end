@@ -1,5 +1,7 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.9.0/css/bootstrap-slider.min.css' rel='stylesheet' type='text/css'>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.9.0/bootstrap-slider.min.js" type="text/javascript"></script>
+
+    <?php echo $this->Html->css('style_cloud.css'). "\n"; ?>
 	<div class="cloud_server">
 		<div class="container">
 			<div class="cloud_head text-center">
