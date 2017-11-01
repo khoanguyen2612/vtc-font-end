@@ -36,7 +36,7 @@
 							<!-- <a href="#CSLinux" class="choiced">LINUX</a>
 							<a href="#CSWindown">WINDOWS</a> -->
 							<ul class="nav nav-tabs">
-								<li class="active"><a data-toggle="tab" href="#CSLinux">LINUX</a></li>
+								<li id='linux' class="active"><a data-toggle="tab" href="#CSLinux">LINUX</a></li>
 								<li><a data-toggle="tab" href="#CSWindown">WINDOWS</a></li>
 							</ul>
 						</div>
@@ -45,7 +45,7 @@
 			</div>
 			<div class="cloud_content tab-content"  id = "plan-data">
 				<div id="CSLinux" class="tab-pane fade in active">
-					<div class="row">
+					<div class="row" id='cll'>
 						<?php foreach ($datal as $item) {
 						 ?>
 						<div class="col-md-6 col-lg-4 item-<?php echo $item['Plan']['id']?>" >
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 				<div id="CSWindown" class="tab-pane fade">
-					<div class="row">
+					<div class="row" id='clw'>
 						<?php foreach ($dataw as $item) {
 						 ?>
 						<div class="col-md-6 col-lg-4 item-<?php echo $item['Plan']['id']?>" >
@@ -203,12 +203,14 @@
 
 $(document).ready(function(){
 	$('#hdd').change(function(){
+		if($('#linux').hasClass('active')){ var linux=1;}
 		$.ajax({
                 url : "<?php echo $this->Html->url(array('controller'=>'Cloudservers','action'=>'price_hdd'))?>",
                 type : "post",
                 dataType:"html",
                 data : {
                     hdd : $('#hdd').val(),
+                    linux : linux,
                     //arr: arr
                 },
                 success : function (result){

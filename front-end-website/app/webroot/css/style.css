@@ -8,9 +8,9 @@ body{
 }
 /*== prfile-user, profile-group ===*/
 .profile-user{
-	background-color: #eee;
+	/*background-color: #eee;
 	width: 155px;
-	height: 160px;
+	height: 160px;*/
 	padding-top:20%;
 }
 div.choose-img{
@@ -115,6 +115,15 @@ div.action ul.menu-user{
 div.action ul li a:hover{
 	text-decoration: none;
 }
+
+.hover_bg ul{
+    list-style: none;     
+    padding: 0px;
+}
+.hover_bg{
+    margin-bottom: -13px;
+}
+
 /*-------------*/
 .navbar{
 	background-color: #fff;

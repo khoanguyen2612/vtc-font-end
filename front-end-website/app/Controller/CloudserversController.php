@@ -2,7 +2,7 @@
 	/**
 	* 
 	*/
-
+	use Cake\View\View;
 	App::uses('AppController', 'Controller');
 	class CloudserversController extends AppController{
 
@@ -68,9 +68,6 @@
 			}
 
 			$best_seller=1;
-			$this->set('datal',$planls);
-			$this->set('best_seller',$best_seller);
-			$this->set('hdd_hdd',$this->request->data['hdd']);
 
 			foreach ($planws as $key => $planw) {
 				$hdd=$this->request->data['hdd']+$planws[$key]['Plan']['hdd'];
@@ -102,11 +99,11 @@
 
 			
 			}
-
+			if(isset($this->request->data['linux'])){$this->set('linux',$this->request->data['linux']);}
+			$this->set('datal',$planls);
+			$this->set('best_seller',$best_seller);
+			$this->set('hdd_hdd',$this->request->data['hdd']);
 			$this->set('dataw',$planws);
-			// pr($planls);
-			// pr($planws);die;
-
 
 		}
 	}

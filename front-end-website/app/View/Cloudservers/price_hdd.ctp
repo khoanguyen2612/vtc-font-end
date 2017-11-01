@@ -1,4 +1,10 @@
-		<div id="CSLinux" class="tab-pane fade in active">
+		<!-- <div id="CSLinux" class="tab-pane fade in active" > -->
+		<?php if(isset($linux)){
+			echo '<div id="CSLinux" class="tab-pane fade in active" >';
+		}else{
+			echo '<div id="CSLinux" class="tab-pane fade" >';
+		}
+		?>
 			<div class="row" >	
 				<?php foreach ($datal as $item) {?>
 				<div class="col-md-6 col-lg-4 item-<?php echo $item['Plan']['id']?>" >
@@ -23,7 +29,7 @@
 						<div class="cloud-config">
 							<p><?php echo $item['Plan']['cpu']?> CPU</p>
 							<p><?php echo $item['Plan']['ram']?> RAM</p>
-							<p class='hdd-hdd' plan_id = <?php echo $item['Plan']['id']?> val = <?php echo $item['Plan']['hdd']?>><?php echo $item['Plan']['hdd']?>G + <?=$hdd_hdd?>G Dung lượng ổ cứng</p>
+							<p class='hdd-hdd' val = <?php echo $item['Plan']['hdd']?>><?php echo $item['Plan']['hdd']?>G + <?=$hdd_hdd?>G Dung lượng ổ cứng</p>
 							<p class="cpu"><?php echo $item['Plan']['ip']?> Địa chỉ Internet</p>
 							<a href="" class="btn btn-info">ĐĂNG KÝ</a>
 						</div>
@@ -32,8 +38,13 @@
 				<?php }?>
 			
 		</div></div>
-
-		<div id="CSWindown" class="tab-pane fade">
+		<?php if(isset($linux)){
+			echo '<div id="CSWindown" class="tab-pane fade">';
+		}else{
+			echo '<div id="CSLinux" class="tab-pane fade in active" >';
+		}
+		?>
+		<!-- <div id="CSWindown" class="tab-pane fade"> -->
 			<div class="row">
 				<?php foreach ($dataw as $item) {
 				 ?>
@@ -59,7 +70,7 @@
 						<div class="cloud-config">
 							<p><?php echo $item['Plan']['cpu']?> CPU</p>
 							<p><?php echo $item['Plan']['ram']?> RAM</p>
-							<p class='hdd-hdd' val = <?php echo $item['Plan']['hdd']?>><?php echo $item['Plan']['hdd']?>G Dung lượng ổ cứng</p>
+							<p class='hdd-hdd' val = <?php echo $item['Plan']['hdd']?>><?php echo $item['Plan']['hdd']?>G + <?=$hdd_hdd?>G Dung lượng ổ cứng</p>
 							<p class="cpu"><?php echo $item['Plan']['ip']?> Địa chỉ Internet</p>
 							<a href="" class="btn btn-info">ĐĂNG KÝ</a>
 						</div>
