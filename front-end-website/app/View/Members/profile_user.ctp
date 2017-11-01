@@ -16,7 +16,7 @@
 			                    	'label'=>false,
 			                    	'type'=>'file',
 			                    	));
-			                    ?>	                
+			                    ?>            
 			               	</div>
 			            </div>
 			            <div class="kv-avatar-hint"><small>Select file < 1500 KB</small></div>
@@ -30,7 +30,7 @@
 					<div class="form-group">
 						<label class="col-lg-3 control-label">Họ và tên:</label>
 						<div class="col-lg-8">          
-			             	<!-- <input type="text" class="form-control" id="name" name="name" value="<?php echo $user['name']?>"> -->
+			             	<!-- <input type="text" class="form-control" id="name" name="name" value="<?php //echo $user['name']?>"> -->
 			             	<?php
 				                echo $this->Form->input('name',array(
 				                    'type' => 'text',
@@ -44,7 +44,7 @@
 					<div class="form-group">
 						<label class="col-lg-3 control-label"> Tên đăng nhập: </label>
 						<div class="col-lg-8">
-							<!-- <input type="text" class="form-control" name="nickname" value="<?php echo $user['nickname']?>"> -->
+							<!-- <input type="text" class="form-control" name="nickname" value="<?php //echo $user['nickname']?>"> -->
 							<?php
 				                echo $this->Form->input('nickname',array(
 				                    'type' => 'text',
@@ -59,7 +59,7 @@
 					<div class="form-group">
 						<label class="col-lg-3 control-label"> Email: </label>
 						<div class="col-lg-8">
-							<!-- <input type="email" class="form-control" name="email" value="<?php echo $user['email']?>"> -->
+							<!-- <input type="email" class="form-control" name="email" value="<?php //echo $user['email']?>"> -->
 							<?php
 				                echo $this->Form->input('email',array(
 				                    'type' => 'email',
@@ -73,7 +73,7 @@
 					<div class="form-group">
 						<label class="col-lg-3 control-label"> Số CMTND: </label>
 						<div class="col-lg-8">
-							<!-- <input type="text" class="form-control" name="CMTND" value="<?php echo $user['CMTND']?>"> -->
+							<!-- <input type="text" class="form-control" name="CMTND" value="<?php //echo $user['CMTND']?>"> -->
 							<?php
 				                echo $this->Form->input('CMTND',array(
 				                    'type' => 'text',
@@ -87,7 +87,7 @@
 					<div class="form-group">
 						<label class="col-lg-3 control-label"> Tỉnh/Thành phố: </label>
 						<div class="col-lg-8">
-							<!-- <input type="text" class="form-control" name="address" value="<?php echo $user['address']?>"> -->
+							<!-- <input type="text" class="form-control" name="address" value="<?php //echo $user['address']?>"> -->
 							<?php
 				                echo $this->Form->input('address',array(
 				                    'type' => 'text',
@@ -101,7 +101,7 @@
 					<div class="form-group">
 						<label class="col-lg-3 control-label"> Địa chỉ liên hệ: </label>
 						<div class="col-lg-8">
-							<!-- <input type="text" class="form-control" name="add_contact" value="<?php echo $user['add_contact']?>"> -->
+							<!-- <input type="text" class="form-control" name="add_contact" value="<?php //echo $user['add_contact']?>"> -->
 							<?php
 				                echo $this->Form->input('add_contact',array(
 				                    'type' => 'text',
@@ -115,7 +115,7 @@
 					<div class="form-group">
 						<label class="col-lg-3 control-label"> Số điện thoại: </label>
 						<div class="col-lg-8">
-							<!-- <input type="text" class="form-control" name="phonenumber" value="<?php echo $user['phonenumber']?>"> -->
+							<!-- <input type="text" class="form-control" name="phonenumber" value="<?php //echo $user['phonenumber']?>"> -->
 							<?php
 				                echo $this->Form->input('phonenumber',array(
 				                    'type' => 'text',
