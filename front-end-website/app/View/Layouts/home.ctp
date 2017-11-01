@@ -12,10 +12,9 @@
     <?php echo $this->Html->charset() . "\n"; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
     <?php echo $this->Html->css('bootstrap.min.css'). "\n"; ?>
-    <?php //echo $this->Html->script('jquery.min.js'). "\n"; ?>
-    <?php echo $this->Html->script('jquery-1.11.3.min'); ?>
+    <?php echo $this->Html->script('jquery.min.js'). "\n"; ?>
     <?php echo $this->Html->script('bootstrap.min.js'). "\n"; ?>
-    <?php echo $this->Html->css('style'). "\n"; ?>
+    <?php echo $this->Html->css('style.css'). "\n"; ?>
     <link href='http://fonts.googleapis.com/css?family=Ruge+Boogie' rel='stylesheet' type='text/css'>
     <?php echo $this->Html->script('jssor.slider-26.3.0.min.js'). "\n"; ?>
 
@@ -26,99 +25,32 @@
     <div class="top-nav">
         <div class="container">
             <div class="row">
-
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                    <div class="btn-group" role="group">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                LANGUAGE
-                                <?php echo $this->Html->image('lang-icon.png'); ?>
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">ENGLISH</a></li>
-                                <li><a href="#">Tiếng Việt</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <div class="col-xs-12 col-sm-12 col-md-12col-lg-12">
                     <div class="action">
-                        <ul class="list-inline">
-
+                        <ul class="list-inline list-group col-lg-8">
                             <li>
-                                <a href="" class="phone">
-                                    <?php echo $this->Html->image('phone-icon.png'); ?>
-                                    (04) 4450 5566
-                                </a>
+                                <?php echo $this->Html->image('phone-icon.png'); ?>
+                                (04) 4450 5566
                             </li>
                             <li>
-                                <a href="">
-                                    <?php echo $this->Html->image('email-icon.png'); ?>
-                                    cloud.info@vtc.vn
+                                <?php echo $this->Html->image('email-icon.png'); ?>
+                                cloud.info@vtc.vn 
+                            </li>
+                            <li class="hover_bg">
+                                <?php echo $this->Html->image('user-icon.png'); ?>
+                                <a href="<?php echo $this->Html->url(array('controller'=>'members','action'=>'login'),true);?>">
+                                    Đăng nhập
+                                </a>
+                                |
+                                <a href="<?php echo $this->Html->url(array('controller'=>'members','action'=>'register'),true);?>">
+                                    Đăng ký
                                 </a>
                             </li>
-                            <li>
-                                <a href="">
-                                    <?php echo $this->Html->image('suppot-icon.png'); ?>
-                                    Hỗ trợ
+                            <li class="hover_bg">
+                                <a href="domain_cart.html">
+                                    <?php echo $this->Html->image('cart-icon.png'); ?>
+                                    0
                                 </a>
-                            </li>
-                            <?php if (isset($login)) { ?>
-                               
-                                <li>
-									<ul class="nav pull-right">
-										<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-											<?php echo $login; echo $this->Html->image('user-icon.png');?><b class="caret"></b></a>
-											<ul class="dropdown-menu menu-user">
-												
-													<li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => $profile ), true); ?>"> <span class="glyphicon glyphicon-wrench"></span> Cài đặt</a></li>
-													<li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ hỗ trợ</a></li>
-													<li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => 'logout' ), true); ?>"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-                            <?php } else { ?>
-                                <li>
-                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'login'), true); ?>">
-                                        <?php echo $this->Html->image('user-icon.png'); ?>
-                                        Đăng nhập
-                                    </a>
-                                </li>
-                            <?php } ?>
-
-                            <li>
-                                <?php
-                                /*$text = "0". $this->Html->image('cart-icon.png');
-                                echo $this->Html->link(
-                                    $text
-                                    , array(
-                                        'controller' => 'Carts',
-                                        'action' => 'view',
-                                        'full_base' => false
-                                    )
-                                );*/
-
-                                /*echo $this->Html->link(
-                                    $this->Html->image("cart-icon.png", array("alt" => "icon")),
-                                    array(
-                                        'controller' => 'Carts',
-                                        'action' => 'view',
-                                    )
-                                );*/
-
-                                ?>
-
-                                <a href="/cart/">
-                                    <?php
-                                    echo $this->Html->image("cart-icon.png", array("alt" => "icon"));
-                                    echo " " . $n_item_cart;
-                                    ?>
-                                </a>
-
                             </li>
                         </ul>
                     </div>
@@ -133,46 +65,33 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
                 </button>
-                <a href="index.html"><?php echo $this->Html->image('vtc-logo.png'); ?></a>
+                <a href="<?php echo $this->Html->url(array('controller'=>'home','action'=>'index'),true);?>"><?php echo $this->Html->image('vtc-logo.png'); ?></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <?php echo $this->Html->link(
-                            'HOME',
-                            array(
-                                'controller' => 'home',
-                                'action' => 'index',
-                                'full_base' => true
-                            )
-                        ); ?>
-                    </li>
+                    <li><a href="<?php echo $this->Html->url(array('controller'=>'home','action'=>'index'),true);?>">Trang chủ</a></li>
                     <li  class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">DOMAINS</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">máy chủ ảo</a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a href="Domain_search.html">Đăng ký tên miền</a>
-                                <?php echo $this->Html->link(
-                                    'Đăng ký tên miền',
-                                    array(
-                                        'controller' => 'Domains',
-                                        'action' => 'search',
-                                        'full_base' => true
-                                    )
-                                ); ?>
-                            </li>
-                            <li><a href="#">Bảng giá tên miền</a></li>
-                            <li><a href="#">Chuyển đổi nhà cung cấp</a></li>
+                            <li><a href="Cloud_server_Window.html">Máy chủ Windows</a></li>
+                            <li><a href="Cloud_server_Linux.html">Máy chủ linux</a></li>
+                        </ul>
+                    </li> 
+                    <li  class="dropdown"><a href="">máy chủ lưu trữ</a></li>
+                    <li  class="dropdown"><a href="#">DATa center</a></li>
+                    <li  class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">tên miền</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="Domain_search.html">Đăng ký tên miền</a></li>
+                            <li><a href="domain_price.html">Bảng giá tên miền</a></li>
+                            <li><a href="domain_transfer.html">Chuyển đổi nhà cung cấp</a></li>
+                            <li><a href="Domain_search.html">Kiểm tra tên miền</a></li>
                         </ul>
                     </li>
-                    <li  class="dropdown"><a href="#">HOSTING</a></li>
-                    <li  class="dropdown"><a href="#">FEATURES</a></li>
-                    <li  class="dropdown"><a href="#">SERVICES</a></li>
-                    <li  class="dropdown"><a href="#">BLOG</a></li>
-                    <li  class="dropdown"><a href="#">SUPPORT</a></li>
-                    <li  class="dropdown"><a href="#">CONTACT</a></li>
+                    <li  class="dropdown"><a href="#">tin tức</a></li>
+                    <li  class="dropdown"><a href="#">liên hệ</a></li>
                 </ul>
             </div>
         </div>
@@ -182,84 +101,23 @@
     <?php
         echo $this->fetch('content');
     ?>
-
-    <div class="contac_info">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contact_vtc">
-                    <h3>VTC CLOUD Nhà cung cấp tên miền và Cloud server số 1 Việt Nam</h3>
-                    <p>
-                        Nhà cung cấp tên miền và Cloud server số 1 Việt Nam <br>
-                        Trụ sở chính: Toà nhà VTC, 23 Phố Lạc Trung, Vĩnh Tuy, Hai Bà Trưng, Hà Nội  <br>
-                        VP miền Nam: Tầng 4, 88A-B Trần Huy Liệu, P.15, Q. Phú Nhuận, Tp. Hồ Chí Minh  <br>
-                        Hotline: Miền Nam: (08) 4450 3077 - Miền Bắc: (04) 4450 5566  <br>
-                        Email: cloud.info@vtc.vn  <br>
-                        Hotline: Miền Nam: (08) 4450 3077 - Miền Bắc: (04) 4450 5566
-                    </p>
-                    <ul class="list-inline banklist text-center">
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('paypal.png', array('class' => 'img-responsive')); ?>
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('vietcom.png', array('class' => 'img-responsive')); ?>
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('techcom.png', array('class' => 'img-responsive')); ?>
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('viettin.png', array('class' => 'img-responsive')); ?>
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('vib.png', array('class' => 'img-responsive')); ?>
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('hdbank.png', array('class' => 'img-responsive')); ?>
-
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('agri.png', array('class' => 'img-responsive')); ?>
-
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('bidv.png', array('class' => 'img-responsive')); ?>
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('donga.png', array('class' => 'img-responsive')); ?>
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('baokim.png', array('class' => 'img-responsive')); ?>
-                        </li>
-                        <li class="list-group-item">
-                            <?php echo $this->Html->image('soha.png', array('class' => 'img-responsive')); ?>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
+    <footer>
         <div class="tfoot">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-                        <h3>HOTLINE </h3>
-                        <strong>(04) 4450 5566</strong>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <form action="" method="POST" role="form">
-                            <label for="send_mail">Đăng ký nhận  email</label for="email">
-                            <div class="form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <form action="" method="POST">
+                            <label for="send_mail">Đăng ký nhận  email</label>
+                            <div>
                                 <input type="text" class="form-control" id="send_mail" placeholder="Vui lòng ghi địa chỉ email tại đây!.....">
+                                <button type="submit" class="btn btn-primary">SUBMIT</button>
                             </div>
-                            <button type="submit" class="btn btn-primary">SUBMIT</button>
                         </form>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="clearfix"></div>
         <div class="bfoot">
             <div class="container">
                 <div class="row">
@@ -331,7 +189,7 @@
                         </section>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-right" id="address">
-                        <?php echo $this->Html->image('logo_footer.png'); ?>
+                        <img src="img/logo_footer.png">
                         <ul class="list-unstyled">
                             <li class="list-group-item">Toà nhà VTC,</li>
                             <li class="list-group-item"> 23 Phố Lạc Trung, </li>
@@ -339,7 +197,7 @@
                             <li class="list-group-item">Phone: (04) 4450 5566</li>
                             <li class="list-group-item">Mail: cloud.info@vtc.vn</li>
                             <li class="list-group-item">View Directions</li>
-                            <?php echo $this->Html->image('logo_icon.png', array('class' => 'hidden-xs')); ?>
+                            <img src="img/logo_icon.png" class="hidden-xs">
                         </ul>
                     </div>
                 </div>
@@ -349,7 +207,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <span>Copyright © 2017 Codelovers. All rights reserved.</span>
+                        <span>Copyright © 2015 ARKAHOST. All rights reserved.</span>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <ul class="list-inline text-right">
@@ -362,13 +220,27 @@
             </div>
         </div>
     </footer>
-
+    <div class="online_sp">
+        <div id="hotline">
+            <?php echo $this->Html->image('online_icon1.png'); ?>
+            <span>Hotline:</span>
+            <strong class="phone">04) 4450 5566</strong>
+        </div>
+        <div id="tech_ol">
+            <?php echo $this->Html->image('online_icon2.png'); ?>
+            <span>Hỗ trợ kỹ thuật:</span>
+            <strong class="phone">0123.456.789</strong>
+        </div>
+        <div id="tv_ol">
+            <a href="">
+            <?php echo $this->Html->image('online_icon3.png'); ?>
+                <strong>Tư vấn trực tuyến</strong>
+            </a>
+        </div>
+    </div>
+    <?php echo $this->Html->script('home_page.js'). "\n"; ?>
+    <script type="text/javascript">jssor_1_slider_init();</script>
     
-  <!--   <?php echo $this->Html->script('jssor.slider-26.3.0.min'); ?>
-    <?php echo $this->Html->script('custom'); ?> -->
-
     <?php echo $this->fetch('script'); ?>
-
 </body>
-
 </html>

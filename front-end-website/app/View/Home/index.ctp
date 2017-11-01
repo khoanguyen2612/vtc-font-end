@@ -1,84 +1,69 @@
-<?php $this->start('css')?>
-<?php echo $this->Html->css('style'); ?>
-<?php $this->end()?>
 	<div class="banner">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-					<h2>CLOUD SERVER GIÁ SIÊU RẺ CLOUD SERVER GIÁ SIÊU RẺ CLOUD SERVER GIÁ SIÊU RẺ</h2>
-					<h1><span>KHÔNG GIỚI HẠN</span> CLOUD SERVER</h1>
-					<p><i class="stick"></i>Cloud Server số 1 Việt Nam</p>
-					<p><i class="stick"></i>Domain cực rẻ</p>
-					<p><i class="stick"></i>Cloud Server cấu hình cực khủng</p>
-					<p><i class="stick"></i>Storage cực lớn</p>
-					<button class="btn btn-primary"><a href="">DÙNG THỬ NGAY</a></button>
+		<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1920px;height:600px;overflow:hidden;visibility:hidden;background-color:#24262e;">
+			<div data-u="slides" style="cursor:default;position:relative;top:0px;left:400px;width:1520px;height:600px;overflow:hidden;">
+				<div>
+					<img data-u="image" src="img/slide_img1.jpg" />
+					<img data-u="thumb" src="img/slide_thumb_img1.jpg" />
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-					<img src="img/banner.jpeg" class="img-responsive">
+				<div>
+					<img data-u="image" src="img/slide_img2.jpg" />
+					<img data-u="thumb" src="img/slide_thumb_img2.jpg" />
 				</div>
+				<div>
+					<img data-u="image" src="img/slide_img3.jpg" />
+					<img data-u="thumb" src="img/slide_thumb_img3.jpg" />
+				</div>
+			</div>
+			<!-- Thumbnail Navigator -->
+			<div data-u="thumbnavigator" class="jssort101" style="position:absolute;left:0px;top:0px;width:400px;height:600px;" data-autocenter="2" data-scale-left="0.75">
+				<div data-u="slides">
+					<div data-u="prototype" class="p" style="width:355px;height:130px;">
+						<div data-u="thumbnailtemplate" class="t"></div>
+						<svg viewbox="0 0 16000 16000" class="cv">
+						</svg>
+					</div>
+				</div>
+			</div>
+			<!-- Arrow Navigator -->
+			<div data-u="arrowleft" class="jssora093" style="width:50px;height:50px;top:0px;left:430px;" data-autocenter="2">
+				<svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+					<img src="img/button_prev.png" height="100%">
+				</svg>
+			</div>
+			<div data-u="arrowright" class="jssora093" style="width:50px;height:50px;top:0px;right:30px;" data-autocenter="2">
+				<svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+					<img src="img/button_next.png" height="100%">
+				</svg>
 			</div>
 		</div>
 	</div>
-	<div class="select-domain">
-		<div class="container-fluid search-block">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 search-box">
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-							<label for="search-dm">TÌM KIẾM TÊN MIỀN CỦA BẠN:</label>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-							<!-- <form action="" method="post"> -->
-
-							<?php echo $this->Form->create('Data',array(
-								"url" => array('controller' => 'ProductPrices','action' => 'register_domain'),
-								'class' => 'form-horizontal',
-								)); 
-							?>
-								<!-- <input type="text" name="" id="search-dm" placeholder="Viết tên miền của bạn vào đây...."> -->
-							 <?php
-				                echo $this->Form->input('add-domain',array(
-				                    'type' => 'text',
-				                    'label' => false,
-				                    'placeholder' => 'Viết tên miền của bạn vào đây....',
-				                    'required' => true,
-				                    ));
-				            ?>
-								<!-- <button type="submit" class="btn_search">TÌM KIỂM</button> -->
-								<?php
-					                  echo $this->Form->button('Đăng ký',array(
-					                    'class' => 'btn_search',
-					                    'id' => 'submit',
-					                  ));
-					            ?>
-							</form>
-						</div>
-					</div>
+	<div class="slect_search_domain">
+		<div class="container">
+			<form action="Domain_search.html" method="GET">
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					<label>Tìm kiếm tên miền của bạn:</label>
 				</div>
-			</div>
-		</div>
-		<div class=" container-fluid list_domain">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-						<ul class="list-inline">
-							<li>.com</li>
-							<li>.net</li>
-							<li>.org </li>
-							<li>.vn</li>
-							<li class="biz">.biz</li>
-						</ul>
-					</div>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="search">
+					<input type="text" name="" id="input" class="form-control" placeholder="Viết tên miền của bạn vào đây....">
+					<i class="btn" id="choice_list_domain"><span class="caret"></span></i>
+					<ul class="list-group list-unstyled" id="menu_list">
+						<li><input type="checkbox" name=""> <span>.com</span></li>
+						<li><input type="checkbox" name=""> <span>.net</span></li>
+						<li><input type="checkbox" name=""> <span>.org</span></li>
+						<li><input type="checkbox" name=""> <span>.vn</span></li>
+						<li><input type="checkbox" name=""> <span>.biz</span></li>
+					</ul>
 				</div>
-			</div>
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					<button type="submit">Tìm kiểm</button>
+				</div>
+			</form>
 		</div>
 	</div>
 	<div class="clouds-plan">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" id="cloud_head">
 					<h3>CÁC GÓI DỊCH VỤ ĐANG BÁN CHẠY</h3>
 					<p>Đăng ký ngay bây giờ để dùng miễn phí mọi tính năng của Cloud Server trong 7 ngày
 					</p>
@@ -86,8 +71,8 @@
 				</div>
 			</div>
 			<div class="row">
-			<?php foreach ($planw as $item) { ?>
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
+				<?php foreach ($planw as $item) { ?>	
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
 					<?php 
 						if($best_seller==$item['Plan']['id']){
 							echo '
@@ -111,250 +96,164 @@
 						</div>
 					</div>
 				</div>
-			<?php }?>
-				<!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
 					
-					<div class="cloud-item">
-						<h4>CLOUD SERVER 2</h4>
-						<div class="cloud-register">
-							<h3>510.000<small>VND/THÁNG</small></h3>
-							<p>Regularly $16.99</p>
-							<a href="" class="btn btn-default">ĐĂNG KÝ</a>
-						</div>
-						<div class="cloud-config">
-							<p>1 CPU</p>
-							<p>1 RAM</p>
-							<p>20 Dung lượng ổ cứng</p>
-							<p class="cpu">1 Địa chỉ Internet</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
-					
-					<div class="cloud-item">
-						<h4>CLOUD SERVER 2</h4>
-						<div class="cloud-register">
-							<h3>510.000<small>VND/THÁNG</small></h3>
-							<p>Regularly $16.99</p>
-							<a href="" class="btn btn-default">ĐĂNG KÝ</a>
-						</div>
-						<div class="cloud-config">
-							<p>1 CPU</p>
-							<p>1 RAM</p>
-							<p>20 Dung lượng ổ cứng</p>
-							<p class="cpu">1 Địa chỉ Internet</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
-					
-					<div class="cloud-item">
-						<h4>CLOUD SERVER 2</h4>
-						<div class="cloud-register">
-							<h3>510.000<small>VND/THÁNG</small></h3>
-							<p>Regularly $16.99</p>
-							<a href="" class="btn btn-default">ĐĂNG KÝ</a>
-						</div>
-						<div class="cloud-config">
-							<p>1 CPU</p>
-							<p>1 RAM</p>
-							<p>20 Dung lượng ổ cứng</p>
-							<p class="cpu">1 Địa chỉ Internet</p>
-						</div>
-					</div>
-				</div> -->
-				
+				<?php }?>
 			</div>
 		</div>
 	</div>
 	<div class="our_service">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="row">
 				<h3 class="text-center">DỊCH VỤ CỦA CHÚNG TÔI</h3>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 cloud-server">
 					<img src="img/our_service_icon1.png" class="img-responsive">
 					<h4 class="text-left">VTC Cloud Server</h4>
 					<p class="text-left">
-						Cloud server cung cấp một server riêng ảo giống như VPS
-						nhưng được triển khai và phát triển trên nền tảng của 
-						công nghệ điện toán đám mây, do đó Cloud server kế thừa
-						các ưu điểm vượt trội của công nghệ điện toán đám mây mà
-						sẽ không thể có được khi sử dụng các VPS thông thường.
+						<a href="">http://cloud.vtc.vn/content.php?id=6</a>
 					</p>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 cloud-strorage">
 					<img src="img/our_service_icon2.png" class="img-responsive">
 					<h4 class="text-left">VTC Cloud Storage</h4>
 					<p class="text-left">
-						Dịch vụ VTC Cloud Storage cung cấp cho người dùng không gian
-						lưu trữ với khả năng mở rộng gần như vô hạn. Người dùng có thể
-						sử dụng không gian lưu trữ này như một ổ cứng cắm ngoài cho 
-						VTC Cloud Server hoặc như ổ đĩa mạng có chức năng chia sẻ theo
-						phân quyền của người dùng. Ngoài ra, VTC Cloud Storage cũng c
-						ung cấp giao diện Web-service đơn giản để người dùng có thể lưu, 
-						truy xuất dữ liệu với dung lượng bất kỳ, mọi lúc, mọi nơi.
+						<a href="">http://cloud.vtc.vn/content.php?id=6</a>
 					</p>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 cloud-small">
 					<img src="img/our_service_icon3.png" class="img-responsive">
 					<h4 class="text-left">VTC Cloud Storage</h4>
 					<p class="text-left">
-						Các doanh nghiệp vừa và nhỏ (SME - Small and Medium Enterperises)
-						luôn được coi là thành phần năng động và hiệu quả nhất trong nền 
-						kinh tế Việt Nam. Trong môi trường cạnh tranh khắc nghiệt như hiện nay,
-						để tồn tại và phát triển được trên thị trường, Doanh nghiệp SME luôn phải 
-						tìm kiếm những giải pháp công nghệ CNTT nhằm giảm thiểu rủi ro đầu tư, 
-						tiết kiệm chi phí vận hành, dễ điều chỉnh cho phù hợp với quy mô doanh
-						nghiệp, có hiệu quả kinh tế cao.
+						<a href="">http://cloud.vtc.vn/content.php?id=6</a>
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="contac_us">
+	<div class="mid_slide">
 		<div class="container-fluid">
-			<h3 class="text-center">LIÊN HỆ VỚI CHÚNG TÔI</h3>
-			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 sale_info">
-					<i class="service1-icon hidden-xs"></i>
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-						<img src="img/sale.png" class="img-responsive hidden-xs thumb">
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 contact_area">
-						<img src="img/sale-header-icon.png" class="pull-left hidden-xs icon">
-						<p class="hidden-xs">LIÊN HỆ</p>
-						<h4>NHÂN VIÊN KINH DOANH</h4>
-						<p class="south_area"><img src="img/vector-icon.png"> <span>Miền Nam: </span><strong>(08) 4450 3077</strong></p>
-						<p class="nouth_area"><img src="img/vector-icon.png"> <span>Miền Bắc: </span><strong>(04) 4450 5566</strong> </p>
-						<p>Tư vấn vào tất cả các ngày trong tuần</p>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 tech_info">
-					<i class="service2-icon hidden-xs"></i>
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-						<img src="img/technical.png" class="img-responsive hidden-xs thumb">
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 contact_area">
-						<img src="img/tech-header-icon.png" class="pull-left hidden-xs icon">
-						<p class="hidden-xs">LIÊN HỆ</p>
-						<h4>NHÂN VIÊN KỸ THUẬT</h4>
-						<p class="south_area"><img src="img/vector-icon.png"> <span>Miền Nam: </span><strong>(08) 4450 3077</strong></p>
-						<p class="nouth_area"><img src="img/vector-icon.png"> <span>Miền Bắc: </span><strong>(04) 4450 5566</strong> </p>
-						<p>Tư vấn vào tất cả các ngày trong tuần</p>
-					</div>
-				</div>
+			<div id="link_navi">
+				<ul>
+					<li class="item_1"><img src="img/slide_icon1.png"><a href="javascript:void(0)">Mua .VN tặng Email Server</a></li>
+					<li class="item_2"><img src="img/slide_icon2.png"><a href="javascript:void(0)">Tên miền Tiếng Việt .VN</a></li>
+					<li class="item_3"><img src="img/slide_icon3.png"><a href="javascript:void(0)">Chuyển nhượng quyền sử dụng .VN</a></li>
+					<li class="item_4"><img src="img/slide_icon4.png"><a href="javascript:void(0)">Mua Hosting tặng website</a></li>
+					<li class="item_5"><img src="img/slide_icon5.png"><a href="javascript:void(0)">Tên miền 1K + Hosting</a></li>
+				</ul>
 			</div>
+			<div id="image">
+				<img src="img/slide_pic5.png" class="img-responsive">
+			</div>
+			<div class="clear"></div>
 		</div>
 	</div>
-	<div class="embeded_video">
-		<img src="img/embed_video.jpeg" class="img-responsive">
-	</div>
-	<div class="news">
+	<div class="contact_us">
 		<div class="container">
-			<div class="row"><div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 slider">
-				<ol class="breadcrumb">
-					<li><a href="#">TIN TỨC</a></li>
-					<li><a href="#">BLOGS</a></li>
-				</ol>
-				<div id="myCarousel" class="carousel slide" data-ride="carousel">
-					<!-- Indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-						<li data-target="#myCarousel" data-slide-to="2"></li>
-					</ol>
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner">
-						<div class="item active">
-							<img src="img/slide2.jpg" alt="">
-						</div>
-
-						<div class="item">
-							<img src="img/slide3.jpg" alt="" >
-						</div>
-
-						<div class="item">
-							<img src="img/slide1.jpg" alt="" >
-						</div>
+			<h3 class="text-center">LIÊN HỆ VỚI CHÚNG TÔI</h3>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+				<div class="sale">
+					<div class="img_radius">
+						<img src="img/sale.jpeg">
 					</div>
-				</div>
-				<div class="slide-caption">
-					<?php foreach ($data as $item) { ?>
-						<div class="calendar pull-left">
-							<?php 
-								$date = $item['News']['created_date'];
-								$date1=strtotime(date($date));
-							?>
-							<p><?php echo date('d',$date1); ?></p><span><?php echo  date('m',$date1); ?></span>
-							
-						</div>
-						<p><?php echo $item['News']['title'] ?></p>
-						<span class="line"></span>
-					<?php } ?>
+					<h5>Nhân viên kinh doanh 1</h5>
+					<p>Ms Thiên Thanh: </p>
+					<span>(08) 4450 3077</span>
+					<h5>Nhân viên kinh doanh 2</h5>
+					<p>Ms Thiên Thanh:</p>
+					<span> (08) 4450 3077</span>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ques_block">
-				<h3>CÂU  HỎI DÀNH CHO CHÚNG TÔI ?</h3>
-				<div class="question">
-					<h5><i class="item-list"></i> 14 Diffrent Creative Header Styles</h5>
-					<p class="para">
-						Why do we use it?
-						It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-					</p>
-					<h5><i class="item-list"></i> 14 Diffrent Creative Header Styles</h5>
-					<p class="para">
-						Why do we use it?
-						It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-					</p class="paragraph">
-					<h5><i class="item-list"></i> 14 Diffrent Creative Header Styles</h5>
-					<p class="para">
-						Why do we use it?
-						It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-					</p>
-					<h5><i class="item-list"></i> 14 Diffrent Creative Header Styles</h5>
-					<p class="para">
-						Why do we use it?
-						It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-					</p>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+				<div class="messa_sp">
+					<div class="img_radius">
+						<img src="img/messa_sp.jpeg">
+					</div>
+					<h5>Chăm sóc khách hàng</h5>
+					<span>19006868</span>
 				</div>
-			</div></div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+				<div class="tech_sp">
+					<div class="img_radius">
+						<img src="img/tech_sp.jpeg">
+					</div>
+					<h5>Hỗ trợ kỹ thuật</h5>
+					<p>Mr Thiên Thanh:</p>
+					<span>(08) 4450 3077</span>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="join_us">
-		<div class="container-fluid text-center">
-			<h5>MỌI NGƯỜI ĐÃ TỰ TẠO CHO MÌNH MỘT TRANG WEB CÁ TÍNH, CÒN BẠN THÌ SAO ?</h5>
-			<h3>HÃY THAM GIA CÙNG CHÚNG TÔI!</h3>
-
+	<div class="pay_step">
+		<img src="img/regis_now.jpeg" class="img-responsive">
+	</div>
+	<div class="news_area">
+		<div class="container">
+			<h4 class="text-center title_area">TIN TỨC</h4>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<div id="post_news">
+						<h4 class="text-center"><a href="">Tin tức</a></h4>
+						<ul class="list-group">
+							<li class="list-group-item">
+								<a href="">
+									<span>01.09.2017</span>
+									<span>Ra mắt sản phẩm mới</span>
+								</a>
+							</li>
+							<li class="list-group-item">
+								<a href="">
+									<span>01.09.2017</span>
+									<span>Phương thức thanh toán mới</span>
+								</a>
+							</li>
+							<li class="list-group-item">
+								<a href="">
+									<span>01.09.2017</span>
+									<span>Áp dụng nghiệp vụ chuyển nhương tên miền</span>
+								</a>
+							</li>
+							<li class="list-group-item">
+								<a href="">
+									<span>01.09.2017</span>
+									<span>Ra mắt sản phẩm mới</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<div id="post_noti">
+						<h4 class="text-center"><a href="">Thông báo</a></h4>
+						<ul class="list-group">
+							<li class="list-group-item">
+								<a href="">
+									<span>01.09.2017</span>
+									<span>Ra mắt sản phẩm mới</span>
+								</a>
+							</li>
+							<li class="list-group-item">
+								<a href="">
+									<span>01.09.2017</span>
+									<span>Phương thức thanh toán mới</span>
+								</a>
+							</li>
+							<li class="list-group-item">
+								<a href="">
+									<span>01.09.2017</span>
+									<span>Áp dụng nghiệp vụ chuyển nhương tên miền </span>
+								</a>
+							</li>
+							<li class="list-group-item">
+								<a href="">
+									<span>01.09.2017</span>
+									<span>Ra mắt sản phẩm mới</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!-- slide div -->
-		<div class="slide_box" id="jssor_1">
-			<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1920px;height:500px;overflow:hidden;">
-				<div class="item-slide active">
-					<img data-u="image" src="img/pic3.jpg" />
-				</div>
-				<div class="item-slide">
-					<img data-u="image" src="img/pic2.jpg" />
-				</div>
-				<div class="item-slide">
-					<img data-u="image" src="img/pic3.jpg"/>
-				</div>
-				<div class="item-slide">
-					<img data-u="image" src="img/pic2.jpg" />
-				</div>
-			</div>
-			<!-- Arrow Navigator -->
-			<div data-u="arrowleft" class="jssora051 prev" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-				<svg viewbox="0 0 16000 16000">
-					<polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-				</svg>
-			</div>
-			<div data-u="arrowright" class="jssora051 next" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-				<svg viewbox="0 0 16000 16000">
-					<polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-				</svg>
-			</div>
-		</div>
-		<!-- end slide div -->
 	</div>
 	<div class="contac_info">
 		<div class="container">
@@ -369,21 +268,7 @@
 						Email: cloud.info@vtc.vn  <br>
 						Hotline: Miền Nam: (08) 4450 3077 - Miền Bắc: (04) 4450 5566
 					</p>
-					<ul class="list-inline banklist text-center">
-						<li class="list-group-item"><img src="img/paypal.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/vietcom.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/techcom.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/viettin.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/vib.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/hdbank.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/agri.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/bidv.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/donga.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/baokim.png" class="img-responsive"></li>
-						<li class="list-group-item"><img src="img/soha.png" class="img-responsive"></li>
-					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-
