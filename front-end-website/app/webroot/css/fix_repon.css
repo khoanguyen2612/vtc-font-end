@@ -206,8 +206,18 @@
 		padding: 2px !important;
 	}
 }
-/*@media (min-width: 768px){
-	input.value{
-		margin-top: 15px;
+@media screen and (max-width: 768px) {
+	.l_banner .l_title{
+		bottom: 80px !important;
 	}
-}*/
+	.l_banner .l_title h1{
+		font-size: 36px !important;
+		margin-bottom: 5px !important;
+	}
+}
+@media screen and (max-width: 480px) {
+	.l_banner .l_title h1{
+		font-size: 30px !important;
+		margin-bottom: 5px;
+	}
+}
