@@ -18,7 +18,7 @@
                   <?php echo $this->Html->image($top['News']['img'])?>
                 </div>
                 <div class=" col-sm-4 col-md-4 col-lg-4">
-                  <a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'Notificion_maintain',$top['News']['id']));?>"><h3><?php echo $top['News']['title'] ?></h3></a>
+                  <a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'notificion_maintain',$top['News']['id']));?>"><h3><?php echo $top['News']['title'] ?></h3></a>
                   <p><?php echo $top['News']['description'] ?></p>
                 </div>
               </div>
@@ -31,7 +31,7 @@
                   <?php echo $this->Html->image($item['News']['img'],array('class'=>'img-responsive'))?>
                 </div>
                 <div class="col-xs-8 col-sm-7 col-md-7 col-lg-7">
-                  <a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'Notificion_maintain',$item['News']['id']));?>"><h5><?php echo $item['News']['title']; ?></h5></a>
+                  <a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'notificion_maintain',$item['News']['id']));?>"><h5><?php echo $item['News']['title']; ?></h5></a>
                   <p><?php echo $item['News']['description']; ?></p>
                 </div>
               </div>
