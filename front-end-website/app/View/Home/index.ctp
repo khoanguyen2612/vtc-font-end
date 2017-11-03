@@ -82,9 +82,9 @@
 							echo '<div class="cloud-item">';
 						}
 					?>
-						<h4><?php echo $item['Productprice']['product_name']?></h4>
+						<h4><?php echo $item['ProductPrice']['product_name']?></h4>
 						<div class="cloud-register">
-							<h3><?php echo number_format($item['Productprice']['price'])?><small> VND/THÁNG</small></h3>
+							<h3><?php echo number_format($item['ProductPrice']['price'])?><small> VND/THÁNG</small></h3>
 							
 						</div>
 						<div class="cloud-config">
