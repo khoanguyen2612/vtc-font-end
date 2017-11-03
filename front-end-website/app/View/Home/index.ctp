@@ -1,4 +1,4 @@
-	<div class="banner">
+<div class="banner">
 		<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1920px;height:600px;overflow:hidden;visibility:hidden;background-color:#24262e;">
 			<div data-u="slides" style="cursor:default;position:relative;top:0px;left:400px;width:1520px;height:600px;overflow:hidden;">
 				<div>
@@ -39,25 +39,33 @@
 	</div>
 	<div class="slect_search_domain">
 		<div class="container">
-			<form action="Domain_search.html" method="GET">
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 					<label>Tìm kiếm tên miền của bạn:</label>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="search">
-					<input type="text" name="" id="input" class="form-control" placeholder="Viết tên miền của bạn vào đây....">
-					<i class="btn" id="choice_list_domain"><span class="caret"></span></i>
-					<ul class="list-group list-unstyled" id="menu_list">
-						<li><input type="checkbox" name=""> <span>.com</span></li>
-						<li><input type="checkbox" name=""> <span>.net</span></li>
-						<li><input type="checkbox" name=""> <span>.org</span></li>
-						<li><input type="checkbox" name=""> <span>.vn</span></li>
-						<li><input type="checkbox" name=""> <span>.biz</span></li>
-					</ul>
+					<?php echo $this->Form->create('Data',array(
+							"url" => array('controller' => 'ProductPrices','action' => 'register_domain'),
+							'class' => 'form-horizontal',)); 
+					?>
+					<?php
+				        echo $this->Form->input('add-domain',array(
+				            'type' => 'text',
+				            'label' => false,
+				            'placeholder' => 'Viết tên miền của bạn vào đây....',
+				            'required' => true,
+				            'id' => 'input',
+				            'class' => 'form-control'
+				        ));
+				    ?>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					<button type="submit">Tìm kiểm</button>
+					<?php
+					    echo $this->Form->button('Đăng ký',array(
+					        'class' => 'btn_search',
+					        'id' => 'submit',
+					    ));
+					?>
 				</div>
-			</form>
 		</div>
 	</div>
 	<div class="clouds-plan">
@@ -194,30 +202,18 @@
 					<div id="post_news">
 						<h4 class="text-center"><a href="">Tin tức</a></h4>
 						<ul class="list-group">
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Ra mắt sản phẩm mới</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Phương thức thanh toán mới</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Áp dụng nghiệp vụ chuyển nhương tên miền</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Ra mắt sản phẩm mới</span>
-								</a>
-							</li>
+							<?php foreach ($news as $item) { ?>
+								<li class="list-group-item">
+									<?php 
+										$date = $item['News']['created_date'];
+										$date1=strtotime(date($date));
+									?>
+									<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'Notificion_maintain',$item['News']['id']));?>">
+										<span><?php echo date('d/m/y',$date1); ?></span>
+										<span><?php echo $item['News']['title'] ?></span>
+									</a>
+								</li>
+							<?php } ?>
 						</ul>
 					</div>
 				</div>
@@ -225,30 +221,18 @@
 					<div id="post_noti">
 						<h4 class="text-center"><a href="">Thông báo</a></h4>
 						<ul class="list-group">
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Ra mắt sản phẩm mới</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Phương thức thanh toán mới</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Áp dụng nghiệp vụ chuyển nhương tên miền </span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Ra mắt sản phẩm mới</span>
-								</a>
-							</li>
+							<?php foreach ($notif as $item) { ?>
+								<li class="list-group-item">
+									<?php 
+										$date = $item['News']['created_date'];
+										$date1=strtotime(date($date));
+									?>
+									<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'Notificion_maintain',$item['News']['id']));?>">
+										<span><?php echo date('d/m/y',$date1); ?></span>
+										<span><?php echo $item['News']['title'] ?></span>
+									</a>
+								</li>
+							<?php } ?>
 						</ul>
 					</div>
 				</div>

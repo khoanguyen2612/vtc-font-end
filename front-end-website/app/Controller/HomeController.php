@@ -5,11 +5,12 @@
 	class HomeController extends AppController{
 
 
-        public $uses = array('Account', 'Cart','Hosting','Plan','News');
+        public $uses = array('Account', 'Cart','Hosting','Plan','News','ProductPrice');
         public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
 
 
-		public function index(){
+		public function index()
+    {
 			$maxw=0;$maxl=0;
 			$planw= $this->Plan->find('all',array(
 				'conditions'=>array('Plan.linux_flg'=>0),
@@ -23,14 +24,19 @@
 
                   // Hiển thị tin tức trang trên Home 
 
-                  $data=$this->News->find("all", array(
-      				
-      				'order' => array( 'id DESC'),
-      				'limit' => 1,
-      			));
-      			
-      			$this->set('data',$data);
-              }
+                  $notif=$this->News->find("all", array(
+                        'conditions' => array( 'new_news_flg LIKE' => "1" ),
+      				   				'order' => array( 'id DESC'),
+                				'limit' => 4,
+                			));
+      			       $news=$this->News->find("all", array(
+                        'conditions' => array( 'new_news_flg LIKE' => "0" ),
+                        'order' => array( 'id DESC'),
+                        'limit' => 4,
+                      ));
+      			     $this->set('notif',$notif);
+                 $this->set('news',$news);
+    }
 
 	}
 ?>
