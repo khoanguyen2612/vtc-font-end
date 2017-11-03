@@ -7,7 +7,7 @@
 	class CloudserversController extends AppController{
 
 
-        public $uses = array('Plan','Productprice');
+        public $uses = array('Plan','ProductPrice');
         // public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
 
 
@@ -15,7 +15,7 @@
 			$planl= $this->Plan->find('all',array(
 				'conditions'=>array('Plan.linux_flg'=>0),
 	            ));
-			// pr($plan);die;
+			// pr($planl);die;
 			$best_seller=1;
 			$this->set('datal',$planl);
 			$this->set('best_seller',$best_seller);
@@ -34,24 +34,24 @@
 				'conditions'=>array('Plan.linux_flg'=>1),
             ));
 
-			$data=$this->Productprice->find('all',array(
-				'conditions' =>array('Productprice.product_type'=>5)
+			$data=$this->ProductPrice->find('all',array(
+				'conditions' =>array('ProductPrice.product_type'=>5)
 			));
 			foreach ($planls as $key => $planl) {
 				$hdd=$this->request->data['hdd']+$planls[$key]['Plan']['hdd'];
 				$price=0;
 				foreach ($data as $item) {
-					if($hdd>$item['Productprice']['start_hdd']){
-						if(!empty($item['Productprice']['end_hdd'])){
-							if($hdd<=$item['Productprice']['end_hdd']){
-								$item['price_hdd']=($hdd-$item['Productprice']['start_hdd'])*$item['Productprice']['price']/10;
+					if($hdd>$item['ProductPrice']['start_hdd']){
+						if(!empty($item['ProductPrice']['end_hdd'])){
+							if($hdd<=$item['ProductPrice']['end_hdd']){
+								$item['price_hdd']=($hdd-$item['ProductPrice']['start_hdd'])*$item['ProductPrice']['price']/10;
 							}
 							else{
-								$item['price_hdd']=($item['Productprice']['end_hdd']-$item['Productprice']['start_hdd'])*$item['Productprice']['price']/10;
+								$item['price_hdd']=($item['ProductPrice']['end_hdd']-$item['ProductPrice']['start_hdd'])*$item['ProductPrice']['price']/10;
 							}
 						}
 						else{
-							$item['price_hdd']=($hdd-$item['Productprice']['start_hdd'])*$item['Productprice']['price']/10;
+							$item['price_hdd']=($hdd-$item['ProductPrice']['start_hdd'])*$item['ProductPrice']['price']/10;
 						}
 					}
 					else{
@@ -62,7 +62,7 @@
 
 				}
 
-				$planls[$key]['Productprice']['price'] =  $price+$planl['Productprice']['except_hdd'];
+				$planls[$key]['ProductPrice']['price'] =  $price+$planl['ProductPrice']['except_hdd'];
 
 			
 			}
@@ -73,17 +73,17 @@
 				$hdd=$this->request->data['hdd']+$planws[$key]['Plan']['hdd'];
 				$price=0;
 				foreach ($data as $item) {
-					if($hdd>$item['Productprice']['start_hdd']){
-						if(!empty($item['Productprice']['end_hdd'])){
-							if($hdd<=$item['Productprice']['end_hdd']){
-								$item['price_hdd']=($hdd-$item['Productprice']['start_hdd'])*$item['Productprice']['price']/10;
+					if($hdd>$item['ProductPrice']['start_hdd']){
+						if(!empty($item['ProductPrice']['end_hdd'])){
+							if($hdd<=$item['ProductPrice']['end_hdd']){
+								$item['price_hdd']=($hdd-$item['ProductPrice']['start_hdd'])*$item['ProductPrice']['price']/10;
 							}
 							else{
-								$item['price_hdd']=($item['Productprice']['end_hdd']-$item['Productprice']['start_hdd'])*$item['Productprice']['price']/10;
+								$item['price_hdd']=($item['ProductPrice']['end_hdd']-$item['ProductPrice']['start_hdd'])*$item['ProductPrice']['price']/10;
 							}
 						}
 						else{
-							$item['price_hdd']=($hdd-$item['Productprice']['start_hdd'])*$item['Productprice']['price']/10;
+							$item['price_hdd']=($hdd-$item['ProductPrice']['start_hdd'])*$item['ProductPrice']['price']/10;
 						}
 					}
 					else{
@@ -94,8 +94,8 @@
 
 				}
 
-				$planws[$key]['Productprice']['price'] =  $price+$planw['Productprice']['except_hdd'];
-				// pr($planws[$key]['Productprice']['price']);
+				$planws[$key]['ProductPrice']['price'] =  $price+$planw['ProductPrice']['except_hdd'];
+				// pr($planws[$key]['ProductPrice']['price']);
 
 			
 			}

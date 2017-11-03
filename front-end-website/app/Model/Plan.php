@@ -29,8 +29,8 @@ class Plan extends AppModel {
         //     'className' => 'Product',
         //     'foreignKey' => 'plan_id'
         // ),
-        'Productprice' => array(
-            'className' => 'Productprice',
+        'ProductPrice' => array(
+            'className' => 'ProductPrice',
             'foreignKey' => 'plan_id'
         ),
     );
