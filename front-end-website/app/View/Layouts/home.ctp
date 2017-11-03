@@ -103,13 +103,13 @@
                     <li  class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">tên miền</a>
                         <ul class="dropdown-menu">
-                            <li><a href="Domain_search.html">Đăng ký tên miền</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'register_domain'),true);?>">Đăng ký tên miền</a></li>
                             <li><a href="domain_price.html">Bảng giá tên miền</a></li>
                             <li><a href="domain_transfer.html">Chuyển đổi nhà cung cấp</a></li>
-                            <li><a href="Domain_search.html">Kiểm tra tên miền</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'result_search'),true);?>">Kiểm tra tên miền</a></li>
                         </ul>
                     </li>
-                    <li  class="dropdown"><a href="#">tin tức</a></li>
+                    <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>">tin tức</a></li>
                     <li  class="dropdown"><a href="#">liên hệ</a></li>
                 </ul>
             </div>

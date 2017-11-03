@@ -25,7 +25,7 @@
 			$data = $this->Paginator->paginate('News');
 			$this->set(compact('data'));
 		}
-		public function notificion_maintain(int $id = null)
+		public function notificion_maintain($id = null)
 		{
 			$data=$this->News->find('all', array(
 				'conditions' => array( 'id LIKE' => "$id" )
