@@ -18,6 +18,7 @@
 			//pr($top_new); die;
 			$this->set('top_new',$top_new);
 			$this->Paginator->settings = array(
+				'conditions' => array( 'new_news_flg LIKE' => "0" ),
 				'order' => array( 'id' => 'DESC' ),
 				'limit' => 4,
 			);

@@ -18,7 +18,7 @@
 				<form action="" method="POST">
 						<div>
 							<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-								<input type="text" name="add-domain" class="form-control input-add" placeholder="Nhập tên miền muốn đăng kí...">
+								<input type="text" id="input" name="add-domain" class="form-control input-add" placeholder="Nhập tên miền muốn đăng kí...">
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
 								<button type="submit" class="btn btn-add-domain">Kiểm tra</button>
@@ -85,6 +85,7 @@
 												<?php } ?>
 
 												</td>
+												
 												<td>
 													<input type="checkbox" class="add-domain-checkbox" checked="true" name="">
 													<label for="demo" class="demoCheck demoCheckLabel"></label>
@@ -92,6 +93,81 @@
 											</tr>
 										</tbody>
 									</table>
+
+									<!-- --------------------------------- -->
+					
+										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+											<p class="p-add"> Kết quả gợi ý thêm </p>
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-domain-domain">
+											<div class="table-responsive add-on">
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Tên miền</th>
+														<th>Phí duy trì</th>
+														<th> Phí đăng kí</th>
+														<th> Thông tin Whois</th>
+														<th>Thêm vào giỏ</th>
+													</tr>
+												</thead>
+												<tbody>
+
+													<?php
+													$i=0;
+													foreach($data as $item) { ?>
+													<tr>
+															
+															<td><?php 
+
+																		if ($output2[$i]['status'] == "available")
+																		{
+																			echo "<img src='../app/webroot/img/icon-check.png'>";
+																		}
+																		else
+																		{
+																			echo "<img src='../app/webroot/img/icon-del.png'>";
+																		}
+
+																	
+
+															 ?></td>
+															<td><p class="p-name"><?php echo ($test = $request3.$item['ProductPrice']['product_name']); ?></p></td>
+															<td><p class="p-money"><?php echo $item['ProductPrice']['price'] ?>VNĐ</p></td>
+															<td><p class="img-fee"><?php echo $item['ProductPrice']['bk_price'] ?>VNĐ</p></td>
+															<td>
+																<?php if ($output2[$i]['status'] != 'available'){?>
+																		<form action="" method="POST">
+																			<input type="hidden" class="domain_name" name="domain_name" value='<?php echo $test?>'>
+					
+																			<div class='btn btn-danger button1' data-toggle="modal" data-target="#myModal" >Whois <img src='../app/webroot/img/icon-whois.png'></div>
+																			<!-- Modal -->
+																	        <div class="modal fade" id="myModal" role="dialog">
+																	          <div class="modal-dialog modal-lg">
+																	            <div class="modal-content md-cn" id = "demo">
+																	                
+																	            </div>
+																	          </div>
+																	        </div>
+																		</form>
+
+																<?php }
+																	$i++;
+																?>
+															</td>
+															<td>
+																<input type="checkbox" class="add-domain-checkbox" checked="true" name="">
+																<label for="demo" class="demoCheck demoCheckLabel"></label>
+															</td>
+														
+													</tr>
+													<?php } ?>
+												</tbody>
+											</table>
+											</div>
+										</div>
+
 
 						<?php } ?>
 
