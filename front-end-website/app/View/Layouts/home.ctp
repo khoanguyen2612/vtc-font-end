@@ -92,11 +92,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="<?php echo $this->Html->url(array('controller'=>'home','action'=>'index'),true);?>">Trang chủ</a></li>
                     <li  class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">máy chủ ảo</a>
+                        <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">máy chủ ảo</a>
                         <ul class="dropdown-menu">
                             <li><a href="Cloud_server_Window.html">Máy chủ Windows</a></li>
                             <li><a href="Cloud_server_Linux.html">Máy chủ linux</a></li>
-                        </ul>
+                        </ul> -->
+                        <a href="<?php echo $this->Html->url(array('controller'=>'cloudservers','action'=>'index'),true);?>">máy chủ lưu trữ</a>
                     </li> 
                     <li  class="dropdown"><a href="">máy chủ lưu trữ</a></li>
                     <li  class="dropdown"><a href="#">DATa center</a></li>
