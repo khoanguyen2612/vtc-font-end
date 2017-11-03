@@ -8,7 +8,7 @@
 					'News',
 				);
 		
-		public function News_menulist()
+		public function news_menulist()
 		{
 
 			$top_new=$this->News->find('all', array(
@@ -25,7 +25,7 @@
 			$data = $this->Paginator->paginate('News');
 			$this->set(compact('data'));
 		}
-		public function Notificion_maintain(int $id = null)
+		public function notificion_maintain(int $id = null)
 		{
 			$data=$this->News->find('all', array(
 				'conditions' => array( 'id LIKE' => "$id" )

@@ -208,7 +208,7 @@
 										$date = $item['News']['created_date'];
 										$date1=strtotime(date($date));
 									?>
-									<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'Notificion_maintain',$item['News']['id']));?>">
+									<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'notificion_maintain',$item['News']['id']));?>">
 										<span><?php echo date('d/m/y',$date1); ?></span>
 										<span><?php echo $item['News']['title'] ?></span>
 									</a>
@@ -227,7 +227,7 @@
 										$date = $item['News']['created_date'];
 										$date1=strtotime(date($date));
 									?>
-									<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'Notificion_maintain',$item['News']['id']));?>">
+									<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'notificion_maintain',$item['News']['id']));?>">
 										<span><?php echo date('d/m/y',$date1); ?></span>
 										<span><?php echo $item['News']['title'] ?></span>
 									</a>
