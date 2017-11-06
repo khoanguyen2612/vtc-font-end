@@ -10,8 +10,9 @@
         public function result_search()
 		{	
 			$data=$this->ProductPrice->find('all', array( 'conditions' => array( 'product_type LIKE' => "1" ) ));
-
+			
 			$this->set('data',$data);
+
 			if($this->request->is('post'))
 			{
 				$request = ($this->request->data);

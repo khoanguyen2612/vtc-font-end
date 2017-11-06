@@ -29,107 +29,33 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
-					<div class=" ssl-item">
-						<div class="ssl-name">
-							<h4><b>ALPHA SSL</b></h4>
-							<p><b>Fast & Economical</b></p>
-						</div>	
-						<div class="ssl-1">
-								<p>Free .com/ .net/<br>.org/ .info/ .biz</p>
-						</div>
-						<div class="ssl-price">
-							<h2><b> 915,000 đ/năm</b></h2>
-						</div>
-						<div class="ssl-2">
-							<p><i class="material-icons" style="font-size:15px">lock</i>html:// Tên miền</p>
-						</div>
-						<div class="ssl-3">
-							<ul>
-								<li>Cấp phát nhanh chóng.</li>
-								<li>Lực chọn lý tưởng cho các website non trẻ</li>
-							</ul>
-								<a href="#" class="btn btn-ssl">ĐĂNG KÝ NGAY</a><br>
-								<a href="#"> Xem chi tiết</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
-					<div class=" ssl-item">
-						<div class="ssl-name">
-							<h4><b>DOMAIN SSL</b></h4>
-							<p><b>Fast & Economical</b></p>
-						</div>	
-						<div class="ssl-1">
-								<p>Free .com/ .net/<br>.org/ .info/ .biz</p>
-						</div>
-						<div class="ssl-price">
-							<h2><b> 915,000 đ/năm</b></h2>
-						</div>
-						<div class="ssl-2">
-							<p><i class="material-icons" style="font-size:15px">lock</i>html:// Tên miền</p>
-						</div>
-						<div class="ssl-3">
-							<ul>
-								<li>Cấp phát nhanh chóng.</li>
-								<li>Lực chọn lý tưởng cho các website non trẻ</li>
-							</ul>
-								<a href="#" class="btn btn-ssl">ĐĂNG KÝ NGAY</a><br>
-								<a href="#"> Xem chi tiết</a>
+				<?php foreach ($data as $item) { ?>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
+						<div class=" ssl-item">
+							<div class="ssl-name">
+								<h4><b><?php echo $item['ProductPrice']['product_name'] ?></b></h4>
+								<p><b>Fast & Economical</b></p>
+							</div>	
+							<div class="ssl-1">
+									<p>Free .com/ .net/<br>.org/ .info/ .biz</p>
+							</div>
+							<div class="ssl-price">
+								<h2><b><?php echo $item['ProductPrice']['price'] ?>đ/năm</b></h2>
+							</div>
+							<div class="ssl-2">
+								<p><i class="material-icons" style="font-size:15px">lock</i>html:// Tên miền</p>
+							</div>
+							<div class="ssl-3">
+								<ul>
+									<li>Cấp phát nhanh chóng.</li>
+									<li>Lực chọn lý tưởng cho các website non trẻ</li>
+								</ul>
+									<a href="#" class="btn btn-ssl">ĐĂNG KÝ NGAY</a><br>
+									<a href="#"> Xem chi tiết</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
-					<div class=" ssl-item">
-						<div class="ssl-name">
-							<h4><b>ORGANIZATION SSL</b></h4>
-							<p><b>Fast & Economical</b></p>
-						</div>	
-						<div class="ssl-1">
-								<p>Free .com/ .net/<br>.org/ .info/ .biz</p>
-						</div>
-						<div class="ssl-price">
-							<h2><b> 915,000 đ/năm</b></h2>
-						</div>
-						<div class="ssl-2">
-							<p><i class="material-icons" style="font-size:15px">lock</i>html:// Tên miền</p>
-						</div>
-						<div class="ssl-3">
-							<ul>
-								<li>Cấp phát nhanh chóng.</li>
-								<li>Lực chọn lý tưởng cho các website non trẻ</li>
-							</ul>
-								<a href="#" class="btn btn-ssl">ĐĂNG KÝ NGAY</a><br>
-								<a href="#"> Xem chi tiết</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
-					<div class=" ssl-item">
-						<div class="ssl-name">
-							<h4><b>EXTENDED SSL</b></h4>
-							<p><b>Fast & Economical</b></p>
-						</div>	
-						<div class="ssl-1">
-								<p>Free .com/ .net/<br>.org/ .info/ .biz</p>
-						</div>
-						<div class="ssl-price">
-							<h2><b> 915,000 đ/năm</b></h2>
-						</div>
-						<div class="ssl-2">
-							<p><i class="material-icons" style="font-size:15px">lock</i>html:// Tên miền</p>
-						</div>
-						<div class="ssl-3">
-							<ul>
-								<li>Cấp phát nhanh chóng.</li>
-								<li>Lực chọn lý tưởng cho các website non trẻ</li>
-							</ul>
-								<a href="#" class="btn btn-ssl">ĐĂNG KÝ NGAY</a><br>
-								<a href="#"> Xem chi tiết</a>
-						</div>
-					</div>
-				</div>
-
+				<?php } ?>
 			</div>
 		</div>
 	</div>
