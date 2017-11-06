@@ -79,7 +79,7 @@
 }
 /********/
 .menu_news {
-position: relative;
+	position: relative;
 }
 .menu_news .container{
 
@@ -156,4 +156,73 @@ position: relative;
 	font-weight: 600;
 	margin:5px 0px 40px 0px;
 	color: #2a363f;
+}
+
+/**css for mana_service_page **/
+.mana_service {
+	background-color: #2a363f;
+}
+.mana_service h3{
+	margin-top: 60px;
+	margin-bottom: 20px;
+	color: #fff;
+	font-size: 35px;
+	font-weight: 400;
+	text-align: center;
+}
+.mana_head > p{
+	margin-bottom: 80px;
+	font-size: 18px;
+	color: #fff;
+	text-align: center;
+}
+.mana_item {
+	position: relative;
+	padding-top: 12px;
+	background-color: #fff;
+	margin-bottom: 34px;
+	height: 330px;
+}
+.mana_item h4{
+	font-size: 24px;
+	color: #fff;
+	padding: 5px;
+	background-color: #0060af;
+	text-align: center;
+	width: 70%;
+	margin:auto;
+	border-radius: 5px;
+	margin-bottom: 50px;
+	text-transform: uppercase;
+}
+.mana_item p{
+	padding: 0px 30px;
+}
+
+.mana_item a{
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;	
+	display: inline-block;
+	text-align: center;
+	background-color: #f37636;
+	color: #fff;
+	text-decoration: none;
+	padding: 13px;
+}
+.mana_banner{
+	position: relative;
+}
+.mana_banner img{
+	height: 100%;
+
+}
+.mana_banner h1{
+	font-size: 58px;
+	text-transform: uppercase;
+	bottom: 30px;
+	right: 5%;
+	color: #fff;
+	position: absolute;
 }
