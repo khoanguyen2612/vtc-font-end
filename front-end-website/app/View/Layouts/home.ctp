@@ -66,7 +66,7 @@
                             <?php } ?>
                            
                             <li class="hover_bg">
-                                <a href="domain_cart.html">
+                                <a href="<?php echo $this->Html->url('/carts',true);?>">
                                     <?php echo $this->Html->image('cart-icon.png'); ?>
                                     0
                                 </a>
