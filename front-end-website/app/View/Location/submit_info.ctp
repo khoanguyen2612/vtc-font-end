@@ -48,26 +48,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3">
-					<h4>Thông tin gói đăng ký</h4>
-					<p class="package_name">Tên gói: 
-						<select id="packlist" name="id">
-							<?php foreach($id as $row): ?>
-								<option value="<?php echo $row['CoLocation']['id'] ?>" <?php if($order_package['CoLocation']['id'] == $row['CoLocation']['id']){ echo 'selected'; } ?>>
-									<?php echo $row['CoLocation']['name'] ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
-					</p>
-					<div class="package_info">
-						<p id="space">Không gian máy chủ: <span><?php echo $order_package['CoLocation']['space'] ?></span></p>
-						<p id="power">Công suất điện: <span><?php echo $order_package['CoLocation']['power'] ?></span></p>
-						<p id="info_band">Lưu lượng thông tin: <span><?php echo $order_package['CoLocation']['info_band'] ?></span></p>
-						<p id="bandwith">Băng thông internet: <span><?php echo $order_package['CoLocation']['bandwith'] ?></span></p>
-						<p id="ip">Số địa chỉ IP: <span><?php echo $order_package['CoLocation']['ip'] ?></span></p>
-						<p id="price">Giá:<span><?php echo $order_package['CoLocation']['price'] ?></span> VNĐ/THÁNG</p>
-					</div>
-				</div>
 			</form>
 		</div>
 	</div>
@@ -100,25 +80,3 @@
 		margin: auto;
 	}
 </style>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#packlist').change(function(){
-			$.ajax({
-				url : "<?php echo $this->Html->url(array('controller' => 'location','action' =>'ajax'))?>",
-				type : "post",
-				dataType:"json",
-				data : {
-					id : $(this).val()
-				},
-				success : function (result){
-					$('#space span').text(result.CoLocation.space);
-					$('#power span').text(result.CoLocation.power);
-					$('#info_band span').text(result.CoLocation.info_band);
-					$('#bandwith span').text(result.CoLocation.bandwith);
-					$('#ip span').text(result.CoLocation.ip);
-					$('#price span').text(result.CoLocation.price);
-				}
-			});
-		});
-	});
-</script>
