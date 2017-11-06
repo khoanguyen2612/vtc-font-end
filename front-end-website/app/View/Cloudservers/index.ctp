@@ -211,10 +211,8 @@ $(document).ready(function(){
                 data : {
                     hdd : $('#hdd').val(),
                     linux : linux,
-                    //arr: arr
                 },
                 success : function (result){
-                	console.log(result);
                 	$('#plan-data').html(result)
                 }
         	});
