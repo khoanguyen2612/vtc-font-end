@@ -25,7 +25,7 @@
 						//pr($request1);die;
 						$this->set('request1',$request1);
 						//-----------------------------------------------------------------------
-						$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+						$Login = array("email" => "tonvantruongbk@gmail.com", "password" => "vtc12345");
 						$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
 
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -71,7 +71,7 @@
 
 						//--------------------------------------------------------------------------------
 						if(isset($request2)){
-						$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+						$Login = array("email" => "tonvantruongbk@gmail.com", "password" => "vtc12345");
 						$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
 
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -128,7 +128,7 @@
 			));
 			$this->set('data',$data);
 			//LOGIN
-				$Login = array("email" => "phuongnt6@vtc.vn", "password" => "Phuongnt6");
+				$Login = array("email" => "tonvantruongbk@gmail.com", "password" => "vtc12345");
 				$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
 
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

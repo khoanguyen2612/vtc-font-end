@@ -2,9 +2,9 @@
 		<div class="container-fluid">
 			<h3 class="text-center">ĐĂNG KÍ THÊM TÊN MIỀN</h3>
 			<ul class="nav nav-tabs container">
-				<li class="active"><a data-toggle="tab" href="#regis">Đăng ký tên miền</a></li>
+				<li class="active"><a data-toggle="tab" href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'register_domain'),true);?>">Đăng ký tên miền</a></li>
 				<li><a data-toggle="tab" href="#transfer">Chuyển đổi nhà cung cấp</a></li>
-				<li><a data-toggle="tab" href="#check">Kiểm tra tên miền</a></li>
+				<li><a data-toggle="tab" href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'result_search'),true);?>">Kiểm tra tên miền</a></li>
 				<li><a data-toggle="tab" href="#price_menu">Bảng giá tên miền</a></li>
 			</ul>
 			<hr>
@@ -87,14 +87,14 @@
 												</td>
 												
 												<td>
-													<input type="checkbox" class="add-domain-checkbox" checked="true" name="">
+													<input type="checkbox" class="add-domain-checkbox" name="">
 													<label for="demo" class="demoCheck demoCheckLabel"></label>
 												</td>
 											</tr>
 										</tbody>
 									</table>
 
-									<!-- --------------------------------- -->
+									
 					
 										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 											<p class="p-add"> Kết quả gợi ý thêm </p>
@@ -157,7 +157,7 @@
 																?>
 															</td>
 															<td>
-																<input type="checkbox" class="add-domain-checkbox" checked="true" name="">
+																<input type="checkbox" class="add-domain-checkbox" name="">
 																<label for="demo" class="demoCheck demoCheckLabel"></label>
 															</td>
 														
@@ -166,6 +166,14 @@
 												</tbody>
 											</table>
 											</div>
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+											<button type="submit" class="btn btn-all"> Chọn tất cả</button>
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 add-continue">
+											<button type="submit" class="btn btn-add-continue"> Tiếp tục</button>
 										</div>
 
 
@@ -233,7 +241,7 @@
 												?><!-- <button type='submit' class='btn btn-danger'>Whois <img src='../app/webroot/img/icon-whois.png'></button> -->
 											</td>
 											<td>
-												<input type="checkbox" class="add-domain-checkbox" checked="true" name="">
+												<input type="checkbox" class="add-domain-checkbox" name="">
 												<label for="demo" class="demoCheck demoCheckLabel"></label>
 											</td>
 										
