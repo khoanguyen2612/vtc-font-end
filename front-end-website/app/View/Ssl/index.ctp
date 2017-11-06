@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <?php echo $this->Html->css('ssl.css'). "\n"; ?>
@@ -12,7 +12,7 @@
 					<label>Tìm kiếm gói SSL</label>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="search">
-					<input type="text" name="" id="input" class="form-control" placeholder="http://Tên miền">
+					<input type="text" name="domain" id="input" class="form-control" placeholder="http://Tên miền">
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 					<button type="submit">Tìm kiểm</button>

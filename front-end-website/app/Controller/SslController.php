@@ -15,6 +15,14 @@
 			$this->set('data',$data);
 		}
 
+		public function register(){
+
+		}
+
+		public function complete(){
+
+		}
+
 	}
 
 ?>
