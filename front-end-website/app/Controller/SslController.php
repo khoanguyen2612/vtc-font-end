@@ -7,6 +7,14 @@
 
 		}
 
+		public function register(){
+
+		}
+
+		public function complete(){
+
+		}
+
 	}
 
 ?>
