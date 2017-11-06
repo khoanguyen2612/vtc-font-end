@@ -3,7 +3,23 @@
 
 	class SslController extends AppController{
 
-		public function index(){
+		public $uses = array
+				(
+					'ProductPrice',
+				);
+				
+		public function index()
+		{
+			$data=$this->ProductPrice->find('all', array( 'conditions' => array('product_type LIKE' => "6" ) ));
+			
+			$this->set('data',$data);
+		}
+
+		public function register(){
+
+		}
+
+		public function complete(){
 
 		}
 

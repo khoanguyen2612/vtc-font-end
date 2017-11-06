@@ -1,4 +1,4 @@
-.pay_step img{
+	.pay_step img{
 		width: 100%;
 	}
 	.domain-ssl{
@@ -73,7 +73,12 @@
 		/*margin: 0px 150px;*/
 	}
 	.ssl-procedure .row{
-		margin: 0px 110px 20px 110px;
+		max-width: 900px;
+		margin: auto;
+	}
+	.ssl-register .row{
+		margin-top: 20px;
+		margin-bottom: 30px;
 	}
 	.ssl-procedure .ssl-step1{
 		width: 20%;
@@ -126,6 +131,16 @@
 	.ssl-procedure .btn-ssl{
 		width: 250px;
 		padding: 15px;
+	}
+	.ssl-register{
+		padding-top: 50px 0px;
+		/*margin:20px;*/
+	}
+	.ssl-register h3{
+		padding : 20px;
+	}
+	.ssl_choise{
+		background: #005faf;
 	}
 	.ff5c93{
 		color: #ff5c93;
@@ -190,3 +205,14 @@
 	.c8acf5a .triangle{
 		border-left: solid 13px #8acf5a;
 	}
+	@media (max-width: 768px) {
+		.ssl-complete img{
+			display: none;
+		}
+	}
+	@media (max-width: 600px) {
+		.ssl-step1{
+			display: none;
+		}
+	}
+	ssl-step1
