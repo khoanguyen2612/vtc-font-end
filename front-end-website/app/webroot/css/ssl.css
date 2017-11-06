@@ -210,3 +210,9 @@
 			display: none;
 		}
 	}
+	@media (max-width: 600px) {
+		.ssl-step1{
+			display: none;
+		}
+	}
+	ssl-step1
