@@ -1,6 +1,6 @@
 # User specific & automatically generated files #
 #################################################
-/app/Config/database.php
+#/app/Config/database.php
 /app/tmp
 /app/Test
 /lib/Cake/Console/Templates/skel/tmp/
@@ -34,3 +34,4 @@ Icon?
 ehthumbs.db
 Thumbs.db
 /app/Config/core.php
+/.gitignore
