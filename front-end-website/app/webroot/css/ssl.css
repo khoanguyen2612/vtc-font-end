@@ -1,0 +1,192 @@
+.pay_step img{
+		width: 100%;
+	}
+	.domain-ssl{
+		background: #005faf;
+	}
+	.ssl-plan{
+		background: #29363f;
+		padding-bottom: 70px;
+	}
+	.ssl-plan h3{
+		color : #fff;
+		padding : 50px;
+	}
+	.ssl-plan .ssl-item{
+		background : #fff;
+		padding: 0px;
+	}
+	.ssl-plan .ssl-name{
+		background : #005faf;
+		color: #fff;
+		padding: 10px;
+		line-height: 5px;
+	}
+	.ssl-price h2{
+		color: #f37636;
+		padding: 20px;
+	}
+	.ssl-1{
+	    color: #005faf;
+	    padding: 15px;
+	}
+	body{
+		/*font-family: arial;*/
+	}
+	.ssl-2{
+	    color: #0863b2;
+	    padding: 5px 20px;
+	    margin: 10px 20px;
+		text-align: left;
+		border: 1px solid #0863b2;
+	}
+	.ssl-2 p{
+		margin: 0px;
+	}
+	.ssl-3 li{
+		text-align: left;
+		padding: 5px 0px;
+		font-size: 13px;
+	}
+	.btn-ssl{
+		background: #f37636;
+		color: #fff;
+		margin: 20px;
+	}
+	.ssl-3{
+		margin: 20px 0px;
+		padding-bottom: 13px;
+
+	}
+	.ssl-procedure{
+		background-color: #f1f1f1;
+	}
+	.ssl-procedure h3{
+		padding : 50px;
+	}
+	.ssl-procedure>.container > h2{
+		text-align: center;
+		margin: 40px;
+	}
+	.ssl-step{
+		background: #fff;
+		/*margin: 0px 150px;*/
+	}
+	.ssl-procedure .row{
+		margin: 0px 110px 20px 110px;
+	}
+	.ssl-procedure .ssl-step1{
+		width: 20%;
+		padding: 20px;
+		margin: 10px;
+		float: left;
+		text-align: right;
+	}
+	.ssl-step1 span{
+		padding: 13px;
+		border: 8px solid;
+		border-radius: 50%;
+		font-size: 30px;
+	}
+	.ssl-step1{
+		position: relative;
+	}
+	.rectangle {
+		position: absolute;
+		left: 91%;
+		top: 10px;
+		border-radius: 5px;
+		width: 7px;
+		height: 60px;
+		/*background: black;*/
+		text-align: left;
+	}
+	.triangle {
+		position: absolute;
+		left: 94%;
+		top: 30px;
+		width: 26px;
+		height: 14px;
+		border-bottom: solid 7px transparent;
+		border-right: solid 13px transparent;
+		/*border-left: solid 13px black;*/
+		border-top: solid 7px transparent;	
+	}
+	.ssl-step2 p{
+		margin: 35px;
+	}
+	.ssl-note{
+		background: #005faf;
+		color: #fff;
+		text-transform: uppercase;
+		padding: 15px 0px 7px 0px;
+		text-align: center;
+		margin-top: 15px;
+	}
+	.ssl-procedure .btn-ssl{
+		width: 250px;
+		padding: 15px;
+	}
+	.ff5c93{
+		color: #ff5c93;
+	}
+	.ff5c93 .rectangle{
+		background: #ff5c93;
+	}
+	.ff5c93 .triangle{
+		border-left: solid 13px #ff5c93;
+	}
+	.c65c5c1{
+		color: #65c5c1;
+	}
+	.c65c5c1 .rectangle{
+		background: #65c5c1;
+	}
+	.c65c5c1 .triangle{
+		border-left: solid 13px #65c5c1;
+	}
+	.fecc2b{
+		color: #fecc2b;
+	}
+	.fecc2b .rectangle{
+		background: #fecc2b;
+	}
+	.fecc2b .triangle{
+		border-left: solid 13px #fecc2b;
+	}
+	.cc8ce3{
+		color: #cc8ce3;
+	}
+	.cc8ce3 .rectangle{
+		background: #cc8ce3;
+	}
+	.cc8ce3 .triangle{
+		border-left: solid 13px #cc8ce3;
+	}
+	.fa987f{
+		color: #fa987f;
+	}
+	.fa987f .rectangle{
+		background: #fa987f;
+	}
+	.fa987f .triangle{
+		border-left: solid 13px #fa987f;
+	}
+	.c83c2f8{
+		color: #83c2f8;
+	}
+	.c83c2f8 .rectangle{
+		background: #83c2f8;
+	}
+	.c83c2f8 .triangle{
+		border-left: solid 13px #83c2f8;
+	}
+	.c8acf5a{
+		color: #8acf5a;
+	}
+	.c8acf5a .rectangle{
+		background: #8acf5a;
+	}
+	.c8acf5a .triangle{
+		border-left: solid 13px #8acf5a;
+	}
