@@ -3,10 +3,7 @@
 
 	class SslController extends AppController{
 
-		public $uses = array
-				(
-					'ProductPrice',
-				);
+		public $uses = array('ProductPrice','SslContact');
 				
 		public function index()
 		{
@@ -16,11 +13,18 @@
 		}
 
 		public function register(){
+			$ssl=$this->ProductPrice->find('all', array('conditions' => array('ProductPrice.product_type' => "6" ) ));
+			$this->set('ssl',$ssl);
 
-		}
-
-		public function complete(){
-
+			if($this->request->is('post')){
+				// pr($this->request->data);die;
+				if($this->SslContact->save($this->request->data)){
+					$this->render('complete');
+				}
+				else{
+					$this->Session->setFlash('Đăng kí chưa thành công, vui lòng nhập lại thông tin','default',array('class'=>'alert alert-danger'));
+				}
+			}
 		}
 
 	}
