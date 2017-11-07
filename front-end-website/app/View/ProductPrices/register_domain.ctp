@@ -65,8 +65,8 @@
                                 <td><?php echo $request1 ?></td>
                                 <?php foreach ($data1 as $item) { ?>
                                     <?php if ($item['ProductPrice']['product_name'] == $check) { ?>
-                                        <td><p class="p-money"><?php echo $item['ProductPrice']['price'] ?>VNĐ</p></td>
-                                        <td><p class="img-fee"><?php echo $item['ProductPrice']['bk_price'] ?>VNĐ</p>
+                                        <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?>VNĐ</p></td>
+                                        <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?>VNĐ</p>
                                         </td>
 
                                     <?php }
@@ -95,8 +95,10 @@
                                 </td>
 
                                 <td>
-                                    <input type="checkbox" class="add-domain-checkbox" name="">
-                                    <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                    <?php if ($output['status'] == 'available') { ?>
+                                        <input type="checkbox" class="add-domain-checkbox" name="">
+                                        <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             </tbody>
@@ -139,10 +141,8 @@
                                             <td>
                                                 <p class="p-name"><?php echo($test = $request3 . $item['ProductPrice']['product_name']); ?></p>
                                             </td>
-                                            <td><p class="p-money"><?php echo $item['ProductPrice']['price'] ?>VNĐ</p>
-                                            </td>
-                                            <td><p class="img-fee"><?php echo $item['ProductPrice']['bk_price'] ?>
-                                                    VNĐ</p></td>
+                                            <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?>VNĐ</p></td>
+                                            <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?>VNĐ</p></td>
                                             <td>
                                                 <?php if ($output2[$i]['status'] != 'available') { ?>
                                                     <form action="" method="POST">
@@ -163,12 +163,14 @@
                                                     </form>
 
                                                 <?php }
-                                                $i++;
+                                                
                                                 ?>
                                             </td>
                                             <td>
-                                                <input type="checkbox" class="add-domain-checkbox" name="">
-                                                <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                                <?php if ($output2[$i]['status'] == 'available') { ?>
+                                                    <input type="checkbox" class="add-domain-checkbox" name="">
+                                                    <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                                <?php }  $i++; ?>
                                             </td>
 
                                         </tr>
@@ -226,10 +228,8 @@
                                                 <td>
                                                     <p class="p-name"><?php echo($test = $request2['add-domain'] . $item['ProductPrice']['product_name']); ?></p>
                                                 </td>
-                                                <td><p class="p-money"><?php echo $item['ProductPrice']['price'] ?>
-                                                        VNĐ</p></td>
-                                                <td><p class="img-fee"><?php echo $item['ProductPrice']['bk_price'] ?>
-                                                        VNĐ</p></td>
+                                                <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?>VNĐ</p></td>
+                                                <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?>VNĐ</p></td>
                                                 <td>
                                                     <?php if ($output1[$i]['status'] != 'available'){ ?>
                                                     <form action="" method="POST">
@@ -250,12 +250,14 @@
                                                     </form>
 
                                                     <?php }
-                                                    $i++;
+                                                   
                                                     ?><!-- <button type='submit' class='btn btn-danger'>Whois <img src='../app/webroot/img/icon-whois.png'></button> -->
                                                 </td>
                                                 <td>
-                                                    <input type="checkbox" class="add-domain-checkbox" name="">
-                                                    <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                                    <?php if ($output1[$i]['status'] == 'available'){ ?>
+                                                        <input type="checkbox" class="add-domain-checkbox" name="">
+                                                        <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                                    <?php }  $i++; ?>
                                                 </td>
 
                                             </tr>
