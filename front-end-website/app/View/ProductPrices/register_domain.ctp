@@ -1,3 +1,4 @@
+
 <div class="search-domain">
 		<div class="container-fluid">
 			<h3 class="text-center">ĐĂNG KÍ THÊM TÊN MIỀN</h3>
@@ -22,6 +23,7 @@
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
 								<button type="submit" class="btn btn-add-domain">Kiểm tra</button>
+								
 							</div>
 						</div>
 				</form>
@@ -87,8 +89,10 @@
 												</td>
 												
 												<td>
-													<input type="checkbox" class="add-domain-checkbox" name="">
-													<label for="demo" class="demoCheck demoCheckLabel"></label>
+													<?php if ($output['status'] == "available") { ?>
+														<input type="checkbox" class="add-domain-checkbox" name="">
+														<label for="demo" class="demoCheck demoCheckLabel"></label>
+													<?php } ?>
 												</td>
 											</tr>
 										</tbody>
@@ -114,13 +118,10 @@
 												</thead>
 												<tbody>
 
-													<?php
-													$i=0;
-													foreach($data as $item) { ?>
+												<?php $i=0;foreach($data as $item) { ?>
 													<tr>
 															
-															<td><?php 
-
+															<td> <?php 
 																		if ($output2[$i]['status'] == "available")
 																		{
 																			echo "<img src='../app/webroot/img/icon-check.png'>";
@@ -129,10 +130,8 @@
 																		{
 																			echo "<img src='../app/webroot/img/icon-del.png'>";
 																		}
-
-																	
-
-															 ?></td>
+															?>
+															</td>
 															<td><p class="p-name"><?php echo ($test = $request3.$item['ProductPrice']['product_name']); ?></p></td>
 															<td><p class="p-money"><?php echo $item['ProductPrice']['price'] ?>VNĐ</p></td>
 															<td><p class="img-fee"><?php echo $item['ProductPrice']['bk_price'] ?>VNĐ</p></td>
@@ -152,13 +151,16 @@
 																	        </div>
 																		</form>
 
+																<?php }?>
+															</td>
+															<td>
+																<?php if ($output2[$i]['status'] == 'available'){?>
+																	<input type="checkbox" class="add-domain-checkbox" name="">
+																	<label for="demo" class="demoCheck demoCheckLabel"></label>
+
 																<?php }
 																	$i++;
 																?>
-															</td>
-															<td>
-																<input type="checkbox" class="add-domain-checkbox" name="">
-																<label for="demo" class="demoCheck demoCheckLabel"></label>
 															</td>
 														
 													</tr>
@@ -237,12 +239,14 @@
 														</form>
 
 												<?php }
-													$i++;
-												?><!-- <button type='submit' class='btn btn-danger'>Whois <img src='../app/webroot/img/icon-whois.png'></button> -->
+													
+												?>
 											</td>
 											<td>
-												<input type="checkbox" class="add-domain-checkbox" name="">
-												<label for="demo" class="demoCheck demoCheckLabel"></label>
+												<?php if ($output1[$i]['status'] == 'available'){ ?>
+													<input type="checkbox" class="add-domain-checkbox" name="">
+													<label for="demo" class="demoCheck demoCheckLabel"></label>
+												<?php  } $i++; ?>
 											</td>
 										
 									</tr>
