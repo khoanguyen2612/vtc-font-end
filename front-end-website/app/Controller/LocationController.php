@@ -1,9 +1,12 @@
 <?php 
 class LocationController extends AppController{
-
-	public $uses = array('Orderforeignservice');
+	public $uses = array('Orderforeignservice','Staticpages');
 	public $components = array('Session');
+	
 	public function index(){
+		$content = $this->Staticpages->find('all',array(
+			'conditions'=>array('pagename'=>'location')));
+		$this->set('content',$content);
 		$this->set('title_for_layout', 'Dịch vụ thuê chỗ đặt máy chủ');
 	}
 
