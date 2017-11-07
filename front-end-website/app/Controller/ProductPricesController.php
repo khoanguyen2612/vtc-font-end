@@ -189,9 +189,7 @@
 									 	$request3 = $str ;
 										$this->set('request3',$request3);
 									//------------------------------------------------------------
-										$data1=$this->ProductPrice->find('all',array(
-											'conditions' => array( 'product_type LIKE' => "1" )
-										));
+										$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
 										$this->set('data1',$data1);
 										$i=0;
 										foreach($data1 as $item)
@@ -235,13 +233,14 @@
 									$request2 = ($this->request->data['Data']) ;
 									$this->set('request2',$request2);
 									//------------------------------------------------------------
-										$data1=$this->ProductPrice->find('all');
+										$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
 										$this->set('data1',$data1);
 										$i=0;
 										
 										foreach($data1 as $item)
 										{
 											$test = $request['add-domain'].$item['ProductPrice']['product_name'];
+											//pr($test); die;
 											//CHECK
 											$checkDomain = array(  "name" => $test, "registrar" => "inet");
 							
@@ -288,7 +287,7 @@
 								( $data=$this->ProductPrice->find('all', array('conditions' => array( 'product_name LIKE' => "$check%" ))) ) &&  ( $check != "") 
 							)
 							{
-									$data1=$this->ProductPrice->find('all');
+									$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
 									$this->set('data1',$data1);
 									$request1 = $request['add-domain'];
 									$this->set('request1',$request1);
@@ -370,7 +369,7 @@
 									//pr($request2); die;
 									$this->set('request2',$request2);
 									//------------------------------------------------------------
-										$data1=$this->ProductPrice->find('all');
+										$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
 										$this->set('data1',$data1);
 										$i=0;
 										foreach($data1 as $item)
