@@ -1,28 +1,29 @@
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
 
-<head>
-	<title><?php echo $title_for_layout?></title>
+    <head>
+        <title><?php echo $title_for_layout ?></title>
 
-    <?php echo $this->html->meta('icon',
-        'vtc-logo.png',
-        array('type' =>'icon'));
-    ?>
+        <?php echo $this->html->meta('icon',
+            'vtc-logo.png',
+            array('type' => 'icon'));
+        ?>
 
-    <?php echo $this->Html->charset() . "\n"; ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
-    <?php echo $this->Html->css('bootstrap.min.css'). "\n"; ?>
-    <?php echo $this->Html->script('jquery.min.js'). "\n"; ?>
-    <?php echo $this->Html->script('bootstrap.min.js'). "\n"; ?>
-    <?php //echo $this->Html->script('jquery-1.11.3.min'); ?>
-    <?php echo $this->Html->css('style.css'). "\n"; ?>
-    <link href='http://fonts.googleapis.com/css?family=Ruge+Boogie' rel='stylesheet' type='text/css'>
-    <?php echo $this->Html->script('jssor.slider-26.3.0.min.js'). "\n"; ?>
+        <?php echo $this->Html->charset() . "\n"; ?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+        <?php echo $this->Html->css('bootstrap.min.css') . "\n"; ?>
+        <?php echo $this->Html->script('jquery.min.js') . "\n"; ?>
+        <?php echo $this->Html->script('bootstrap.min.js') . "\n"; ?>
+        <?php //echo $this->Html->script('jquery-1.11.3.min'); ?>
+        <?php echo $this->Html->css('style.css') . "\n"; ?>
+        <link href='http://fonts.googleapis.com/css?family=Ruge+Boogie' rel='stylesheet' type='text/css'>
+        <?php echo $this->Html->script('jssor.slider-26.3.0.min.js') . "\n"; ?>
 
-</head>
+    </head>
 
 
-<body>
+    <body>
+
     <div class="top-nav">
         <div class="container">
             <div class="row">
@@ -35,19 +36,25 @@
                             </li>
                             <li>
                                 <?php echo $this->Html->image('email-icon.png'); ?>
-                                cloud.info@vtc.vn 
+                                cloud.info@vtc.vn
                             </li>
                             <?php if (isset($login)) { ?>
-                               
+
                                 <li class="hover_bg">
                                     <ul class="">
                                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <?php echo $login; echo $this->Html->image('user-icon.png');?><b class="caret"></b></a>
+                                                <?php echo $login;
+                                                echo $this->Html->image('user-icon.png'); ?><b class="caret"></b></a>
                                             <ul class="dropdown-menu menu-user">
-                                                
-                                                    <li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => $profile ), true); ?>"> <span class="glyphicon glyphicon-wrench"></span> Cài đặt</a></li>
-                                                    <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ hỗ trợ</a></li>
-                                                    <li><a href="<?php echo $this->Html->url(array( 'controller' => 'members', 'action' => 'logout' ), true); ?>"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+
+                                                <li>
+                                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => $profile), true); ?>">
+                                                        <span class="glyphicon glyphicon-wrench"></span> Cài đặt</a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ
+                                                        hỗ trợ</a></li>
+                                                <li>
+                                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'logout'), true); ?>"><span
+                                                                class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -55,20 +62,24 @@
                             <?php } else { ?>
                                 <li class="hover_bg">
                                     <?php echo $this->Html->image('user-icon.png'); ?>
-                                    <a href="<?php echo $this->Html->url(array('controller'=>'members','action'=>'login'),true);?>">
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'login'), true); ?>">
                                         Đăng nhập
                                     </a>
                                     |
-                                    <a href="<?php echo $this->Html->url(array('controller'=>'members','action'=>'register'),true);?>">
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'register'), true); ?>">
                                         Đăng ký
                                     </a>
                                 </li>
                             <?php } ?>
-                           
+
+                            <!--// tue.phpmailer@gmail.com //
+                            // Get number item cart for home page //-->
                             <li class="hover_bg">
-                                <a href="<?php echo $this->Html->url('/carts',true);?>">
-                                    <?php echo $this->Html->image('cart-icon.png'); ?>
-                                    0
+                                <a href="<?php echo $this->Html->url('/cart/', true); ?>">
+                                    <?php
+                                    echo $this->Html->image("cart-icon.png", array("alt" => "icon"));
+                                    echo " <span id='id_count_carts'>" . $n_item_cart . " </span>";
+                                    ?>
                                 </a>
                             </li>
                         </ul>
@@ -77,41 +88,51 @@
             </div>
         </div>
     </div>
-
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span>
                 </button>
-                <a href="<?php echo $this->Html->url(array('controller'=>'home','action'=>'index'),true);?>"><?php echo $this->Html->image('vtc-logo.png'); ?></a>
+                <a href="<?php echo $this->Html->url(array('controller' => 'home', 'action' => 'index'), true); ?>"><?php echo $this->Html->image('vtc-logo.png'); ?></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="<?php echo $this->Html->url(array('controller'=>'home','action'=>'index'),true);?>">Trang chủ</a></li>
-                    <li  class="dropdown">
+                    <li><a href="<?php echo $this->Html->url(array('controller' => 'home', 'action' => 'index'), true); ?>">Trang
+                            chủ</a></li>
+                    <li class="dropdown">
                         <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">máy chủ ảo</a>
                         <ul class="dropdown-menu">
                             <li><a href="Cloud_server_Window.html">Máy chủ Windows</a></li>
                             <li><a href="Cloud_server_Linux.html">Máy chủ linux</a></li>
                         </ul> -->
-                        <a href="<?php echo $this->Html->url(array('controller'=>'cloudservers','action'=>'index'),true);?>">máy chủ lưu trữ</a>
-                    </li> 
-                    <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller'=>'ssl','action'=>'index'),true);?>">bảo mật</a></li>
-                    <li  class="dropdown"><a href="#">DATa center</a></li>
-                    <li  class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">tên miền</a>
+                        <a href="<?php echo $this->Html->url(array('controller' => 'cloudservers', 'action' => 'index'), true); ?>">máy
+                            chủ lưu trữ</a>
+                    </li>
+                    <li class="dropdown"><a
+                                href="<?php echo $this->Html->url(array('controller' => 'ssl', 'action' => 'index'), true); ?>">bảo
+                            mật</a></li>
+                    <li class="dropdown"><a href="#">DATa center</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">tên miền</a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'register_domain'),true);?>">Đăng ký tên miền</a></li>
+                            <li>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">Đăng
+                                    ký tên miền</a></li>
                             <li><a href="domain_price.html">Bảng giá tên miền</a></li>
                             <li><a href="domain_transfer.html">Chuyển đổi nhà cung cấp</a></li>
-                            <li><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'result_search'),true);?>">Kiểm tra tên miền</a></li>
+                            <li>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">Kiểm
+                                    tra tên miền</a></li>
                         </ul>
                     </li>
-                    <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>">tin tức</a></li>
-                    <li  class="dropdown"><a href="#">liên hệ</a></li>
+                    <li class="dropdown"><a
+                                href="<?php echo $this->Html->url(array('controller' => 'News', 'action' => 'news_menulist'), true); ?>">tin
+                            tức</a></li>
+                    <li class="dropdown"><a href="#">liên hệ</a></li>
                 </ul>
             </div>
         </div>
@@ -119,7 +140,7 @@
 
 
     <?php
-        echo $this->fetch('content');
+    echo $this->fetch('content');
     ?>
     <footer>
         <div class="tfoot">
@@ -127,9 +148,10 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <form action="" method="POST">
-                            <label for="send_mail">Đăng ký nhận  email</label>
+                            <label for="send_mail">Đăng ký nhận email</label>
                             <div>
-                                <input type="text" class="form-control" id="send_mail" placeholder="Vui lòng ghi địa chỉ email tại đây!.....">
+                                <input type="text" class="form-control" id="send_mail"
+                                       placeholder="Vui lòng ghi địa chỉ email tại đây!.....">
                                 <button type="submit" class="btn btn-primary">SUBMIT</button>
                             </div>
                         </form>
@@ -212,7 +234,7 @@
                         <img src="img/logo_footer.png">
                         <ul class="list-unstyled">
                             <li class="list-group-item">Toà nhà VTC,</li>
-                            <li class="list-group-item"> 23 Phố Lạc Trung, </li>
+                            <li class="list-group-item"> 23 Phố Lạc Trung,</li>
                             <li class="list-group-item">Vĩnh Tuy, Hai Bà Trưng, Hà Nội</li>
                             <li class="list-group-item">Phone: (04) 4450 5566</li>
                             <li class="list-group-item">Mail: cloud.info@vtc.vn</li>
@@ -253,15 +275,15 @@
         </div>
         <div id="tv_ol">
             <a href="">
-            <?php echo $this->Html->image('online_icon3.png'); ?>
+                <?php echo $this->Html->image('online_icon3.png'); ?>
                 <strong>Tư vấn trực tuyến</strong>
             </a>
         </div>
     </div>
-    <?php echo $this->Html->script('home_page.js'). "\n"; ?>
+    <?php echo $this->Html->script('home_page.js') . "\n"; ?>
     <script type="text/javascript">jssor_1_slider_init();</script>
 
     <?php echo $this->fetch('script'); ?>
-    
-</body>
-</html>
+
+    </body>
+    </html>
