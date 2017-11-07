@@ -35,7 +35,7 @@ class AppController extends Controller
 {
     var $components = array('Session', 'Cookie', 'Paginator', 'Auth', 'Email');
     public $helpers = array('Session', 'Html', 'Form');
-    var $uses = array('Account');
+    var $uses = array('Account', 'Cart');
 
 
     public function beforeFilter()
