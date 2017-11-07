@@ -61,7 +61,9 @@ class AppController extends Controller
         }
 
 
-        $n_item_cart = count($this->Session->read('cart'));
+        // tue.phpmailer@gmail.com //
+        // Get number item cart for home page //
+        $n_item_cart = $this->Cart->getCount();
         $this->set(compact('n_item_cart'));
 
     }
