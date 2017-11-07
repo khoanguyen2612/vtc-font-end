@@ -65,8 +65,8 @@
                                 <td><?php echo $request1 ?></td>
                                 <?php foreach ($data1 as $item) { ?>
                                     <?php if ($item['ProductPrice']['product_name'] == $check) { ?>
-                                        <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?>VNĐ</p></td>
-                                        <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?>VNĐ</p>
+                                        <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
+                                        <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p>
                                         </td>
 
                                     <?php }
@@ -141,8 +141,8 @@
                                             <td>
                                                 <p class="p-name"><?php echo($test = $request3 . $item['ProductPrice']['product_name']); ?></p>
                                             </td>
-                                            <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?>VNĐ</p></td>
-                                            <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?>VNĐ</p></td>
+                                            <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
+                                            <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p></td>
                                             <td>
                                                 <?php if ($output2[$i]['status'] != 'available') { ?>
                                                     <form action="" method="POST">
@@ -228,8 +228,8 @@
                                                 <td>
                                                     <p class="p-name"><?php echo($test = $request2['add-domain'] . $item['ProductPrice']['product_name']); ?></p>
                                                 </td>
-                                                <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?>VNĐ</p></td>
-                                                <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?>VNĐ</p></td>
+                                                <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
+                                                <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p></td>
                                                 <td>
                                                     <?php if ($output1[$i]['status'] != 'available'){ ?>
                                                     <form action="" method="POST">
