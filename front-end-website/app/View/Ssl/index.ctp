@@ -40,7 +40,7 @@
 									<p>Free .com/ .net/<br>.org/ .info/ .biz</p>
 							</div>
 							<div class="ssl-price">
-								<h2><b><?php echo $item['ProductPrice']['price'] ?>đ/năm</b></h2>
+								<h2><b><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> đ/năm</b></h2>
 							</div>
 							<div class="ssl-2">
 								<p><i class="material-icons" style="font-size:15px">lock</i>html:// Tên miền</p>
