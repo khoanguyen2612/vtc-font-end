@@ -2,18 +2,18 @@
 App::uses('AppModel', 'Model');
 
 
-class LocationOrder extends AppModel {
+class Orderforeignservice extends AppModel {
 
 
-    public $useTable = 'location_order';
+    public $useTable = 'order_foreign_service';
 
     public $validate = array(
     	'phone' => array(
-    		'checknum' => array(
+    		'check num' => array(
     			'rule' => 'numeric',
     			'message' => 'Số điện thoại nhập định dạng chữ số'
     		),
-    		'checksize' => array(
+    		'check num count' => array(
     			'rule' => array('lengthBetween',10,11),
     			'message' => 'Vui lòng nhập số điện thoại hợp lệ'
     		)
