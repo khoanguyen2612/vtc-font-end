@@ -3,7 +3,7 @@
 
 	class SslController extends AppController{
 
-		public $uses = array('ProductPrice','SslContact');
+		public $uses = array('ProductPrice','ServiceRequest');
 				
 		public function index()
 		{
@@ -15,10 +15,12 @@
 		public function register(){
 			$ssl=$this->ProductPrice->find('all', array('conditions' => array('ProductPrice.product_type' => "6" ) ));
 			$this->set('ssl',$ssl);
-
+			$a=$this->ServiceRequest->find('all');
+			// pr($a);die;
 			if($this->request->is('post')){
-				// pr($this->request->data);die;
-				if($this->SslContact->save($this->request->data)){
+				$this->request->data['ServiceRequest']['order_type']=3;
+				pr($this->request->data);
+				if($this->ServiceRequest->save($this->request->data)){
 					$this->render('complete');
 				}
 				else{
