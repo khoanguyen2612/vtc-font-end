@@ -132,7 +132,7 @@ class CartsController extends AppController
                 $this->Product->recursive = 2;
                 $_p = $this->Product->findById($p_item['product_id']);
 
-                Debugger::dump($_p);
+                //Debugger::dump($_p);
 
                 if (count($_p) > 0) {
 
