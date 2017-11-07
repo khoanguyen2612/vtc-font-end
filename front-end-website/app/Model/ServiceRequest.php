@@ -1,11 +1,9 @@
 <?php
 App::uses('AppModel', 'Model');
 
+class ServiceRequest extends AppModel {
 
-class Orderforeignservice extends AppModel {
-
-
-    public $useTable = 'order_foreign_service';
+    public $useTable = 'service_request';
 
     public $validate = array(
     	'phone' => array(

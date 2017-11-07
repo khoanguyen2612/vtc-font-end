@@ -7,21 +7,21 @@
 	class CloudserversController extends AppController{
 
 
-        public $uses = array('Plan','ProductPrice');
+		public $uses = array('Plan','ProductPrice');
         // public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
 
 
 		public function index(){
 			$planl= $this->Plan->find('all',array(
 				'conditions'=>array('Plan.linux_flg'=>0),
-	            ));
+			));
 			// pr($planl);die;
 			$best_seller=1;
 			$this->set('datal',$planl);
 			$this->set('best_seller',$best_seller);
 			$planw= $this->Plan->find('all',array(
 				'conditions'=>array('Plan.linux_flg'=>1),
-	            ));
+			));
 			$this->set('dataw',$planw);
 		}
 
@@ -29,10 +29,10 @@
 			$this->layout = 'ajax';
 			$planls = $this->Plan->find('all',array(
 				'conditions'=>array('Plan.linux_flg'=>0),
-            ));
-            $planws = $this->Plan->find('all',array(
+			));
+			$planws = $this->Plan->find('all',array(
 				'conditions'=>array('Plan.linux_flg'=>1),
-            ));
+			));
 
 			$data=$this->ProductPrice->find('all',array(
 				'conditions' =>array('ProductPrice.product_type'=>5)
@@ -64,7 +64,7 @@
 
 				$planls[$key]['ProductPrice']['price'] =  $price+$planl['ProductPrice']['except_hdd'];
 
-			
+				
 			}
 
 			$best_seller=1;
@@ -97,7 +97,7 @@
 				$planws[$key]['ProductPrice']['price'] =  $price+$planw['ProductPrice']['except_hdd'];
 				// pr($planws[$key]['ProductPrice']['price']);
 
-			
+				
 			}
 			if(isset($this->request->data['linux'])){$this->set('linux',$this->request->data['linux']);}
 			$this->set('datal',$planls);

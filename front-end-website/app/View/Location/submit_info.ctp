@@ -6,40 +6,40 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="name">Họ tên:</label>
 						<div class="col-sm-10">
-							<input type="name" class="form-control" id="name" name="data[Orderforeignservice][name]" required>
+							<input type="name" class="form-control" id="name" name="data[ServiceRequest][name]" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="birth">Ngày sinh</label>
 						<div class="col-sm-10">          
-							<input type="date" class="form-control" id="birth"  name="data[Orderforeignservice][birth]" required="">
+							<input type="date" class="form-control" id="birth"  name="data[ServiceRequest][birth]" required="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="cmnd">Số CMND</label>
 						<div class="col-sm-10">          
-							<input type="text" class="form-control" id="cmnd" name="data[Orderforeignservice][cmnd]">
+							<input type="text" class="form-control" id="cmnd" name="data[ServiceRequest][cmnd]">
 							<p class="error"><?php echo isset($validationErrors['cmnd'])? $validationErrors['cmnd'][0]:''; ?></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="phone">Số điện thoại:</label>
 						<div class="col-sm-10">          
-							<input type="text" class="form-control" id="phone"  name="data[Orderforeignservice][phone]">
+							<input type="text" class="form-control" id="phone"  name="data[ServiceRequest][phone]">
 							<p class="error"><?php echo isset($validationErrors['phone'])? $validationErrors['phone'][0]:''; ?></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="email">Email</label>
 						<div class="col-sm-10">          
-							<input type="text" class="form-control" id="email"  name="data[Orderforeignservice][email]">
+							<input type="text" class="form-control" id="email"  name="data[ServiceRequest][email]">
 							<p class="error"><?php echo isset($validationErrors['email'])? $validationErrors['email'][0]:''; ?></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="addr">Địa chỉ liên lạc:</label>
 						<div class="col-sm-10">          
-							<input type="text" class="form-control" id="addr"  name="data[Orderforeignservice][addr]" required>
+							<input type="text" class="form-control" id="addr"  name="data[ServiceRequest][addr]" required>
 						</div>
 					</div>
 					<div class="form-group">        
