@@ -1,4 +1,4 @@
-	<div class="container submit_info">
+<div class="container submit_info">
 		<div class="row">
 			<form class="form-horizontal" action="" method="post">
 				<div class="col-lg-9">

@@ -1,14 +1,16 @@
 <?php 
-class LocationController extends AppController{
+App::uses('AppController', 'Controller');
+class ManagerServersController extends AppController{
 
 	public $uses = array('Orderforeignservice');
 	public $components = array('Session');
+
 	public function index(){
-		$this->set('title_for_layout', 'Dịch vụ thuê chỗ đặt máy chủ');
+		$this->set('title_for_layout','Dịch vụ quản trị cloud server');
 	}
 
 	public function submit_info($pack_id = null){
-		$this->set('title_for_layout', 'Nhập thông tin');
+		$this->set('title_for_layout','Điền thông tin liên hệ');
 		if($this->request->is('post')){
 			$this->Orderforeignservice->set($this->request->data);
 			if($this->Orderforeignservice->validates()){
@@ -20,7 +22,7 @@ class LocationController extends AppController{
 					'email' => $this->request->data['Orderforeignservice']['email'],
 					'address' => $this->request->data['Orderforeignservice']['addr'],
 					'package_order' =>$pack_id,
-					'order_type' => 1
+					'order_type' => 2
 				);
 				if($this->Orderforeignservice->save($this->data)){
 					$this->Session->setFlash(__('Yêu cầu của bạn đã được gửi,chúng tôi sẽ liên hệ lại theo số điện thoại bạn đã đăng ký'));
@@ -31,4 +33,6 @@ class LocationController extends AppController{
 			}
 		}	
 	}
+
 }
+?>
