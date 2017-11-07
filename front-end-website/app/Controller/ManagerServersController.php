@@ -2,10 +2,13 @@
 App::uses('AppController', 'Controller');
 class ManagerServersController extends AppController{
 
-	public $uses = array('Orderforeignservice');
+	public $uses = array('Orderforeignservice','Staticpages');
 	public $components = array('Session');
 
 	public function index(){
+		$content = $this->Staticpages->find('all',array(
+			'conditions'=>array('pagename'=>'managerservers')));
+		$this->set('content',$content);
 		$this->set('title_for_layout','Dịch vụ quản trị cloud server');
 	}
 
