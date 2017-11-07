@@ -35,6 +35,7 @@ class CartsController extends AppController
             $this->layout = 'ajax_cart';
         }
 
+
         $this->Session->write('order_code', 'CL_VTC_AZ_');
         $this->Session->write('total_money', 0);
 
@@ -61,12 +62,22 @@ class CartsController extends AppController
         }
 
 
+        $this->Order->setDataSource('db_vtc_cloud');
+        $this->Product->setDataSource('db_vtc_cloud');
+        $this->OrderDetail->setDataSource('db_vtc_cloud');
+        //$this->Plan->setDataSource('db_vtc_cloud');
+        //$results = $this->Order->query('SELECT * FROM orders WHERE id= "614"');
+        //Debugger::dump($results);
+
+
+
+        //$this->Order->recursive = -1;
         $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
         $order = $order_schema['Order'];
+        //Debugger::dump($order_schema);
 
         $this->Session->delete('order_code');
         $this->Session->write('order_code', $order['order_code']);
-
 
     }
 
@@ -94,24 +105,37 @@ class CartsController extends AppController
             array( 'order' => array('Order.id' => 'asc') )
         );*/
 
+        $this->Order->setDataSource('db_vtc_cloud');
+        $this->Product->setDataSource('db_vtc_cloud');
+
 
         $cart = $this->Cart->readCart();
 
+        //$this->Order->recursive = 2;
+
+        //$this->Order->OrderDetail->attach('Containable');
+
         $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
         $order = $order_schema['Order'];
-
         $order_code = $order['order_code'];
 
         $order_id = $order['id'];
         $product_in_order = $order_schema['OrderDetail'];
+
         //Debugger::dump($product_in_order);
+        //Debugger::dump($order_schema);
+        /*$od = $this->OrderDetail->findByOrderId('614');
+        Debugger::dump($od);*/
 
 
         if (is_null($cart) || empty($cart) || !count($cart) ) {
 
             foreach ($product_in_order as $p_item) {
 
+                $this->Product->recursive = 2;
                 $_p = $this->Product->findById($p_item['product_id']);
+
+                Debugger::dump($_p);
 
                 if (count($_p) > 0) {
 

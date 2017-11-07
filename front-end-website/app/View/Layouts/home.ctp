@@ -99,7 +99,7 @@
                         </ul> -->
                         <a href="<?php echo $this->Html->url(array('controller'=>'cloudservers','action'=>'index'),true);?>">máy chủ lưu trữ</a>
                     </li> 
-                    <li  class="dropdown"><a href="">máy chủ lưu trữ</a></li>
+                    <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller'=>'ssl','action'=>'index'),true);?>">bảo mật</a></li>
                     <li  class="dropdown"><a href="#">DATa center</a></li>
                     <li  class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">tên miền</a>

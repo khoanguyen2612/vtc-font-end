@@ -20,6 +20,9 @@ class OrderDetail extends AppModel {
  */
 	public $displayField = 'domain_name';
 
+
+    var $actsAs = array( 'Containable' );
+
 /**
  * Validation rules
  *
@@ -37,4 +40,16 @@ class OrderDetail extends AppModel {
 			),
 		),
 	);*/
+
+
+   /* public $belongsTo = array(
+        'Order' => array(
+            'className' => 'Order',
+            'foreignKey' => 'order_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+    );*/
+
 }

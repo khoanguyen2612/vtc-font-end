@@ -25,6 +25,10 @@ class Order extends AppModel {
  */
 	public $displayField = 'name';
 
+
+    var $actsAs = array( 'Containable' );
+
+
 /**
  * Validation rules
  *
