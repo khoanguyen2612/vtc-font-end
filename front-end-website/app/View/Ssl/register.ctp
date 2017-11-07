@@ -10,7 +10,7 @@
 		<div class="container">
 			
 			<div class="row ssl-step ">
-			<?php echo $this->Form->create('SslContact',array("url" => array('controller' => 'ssl','action' => 'register'))); 
+			<?php echo $this->Form->create('ServiceRequest',array("url" => array('controller' => 'ssl','action' => 'register'))); 
 			?>
 				<div class="col-xs-12 text-center">
 					<h3><b>GÓI SSL LỰA CHỌN</b></h3>
@@ -19,7 +19,7 @@
 					<div class="ssl-reg">
 						<div class="ssl-01">
 							<strong>
-							<select id="" name="data[SslContact][ssl_id]" class='ssl_choise'>
+							<select id="" name="data[ServiceRequest][ssl_id]" class='ssl_choise'>
 								<!-- <option value="0">ALPHA SSL</option>
 								<option value="1" selected='selected'>DOMAIN SSL</option>
 								<option value="2">ORGANIZATION SSL</option>
@@ -71,7 +71,7 @@
 									<!-- <input type="text" name="phonenumber" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
 									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 										<?php
-											echo $this->Form->input('phonenumber',array(
+											echo $this->Form->input('phone',array(
 												'type' => 'text',
 												'class' => 'form-control',
 												'label' => false,
@@ -86,7 +86,7 @@
 									<!-- <input type="text" name="organization" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
 									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 										<?php
-											echo $this->Form->input('organ_name',array(
+											echo $this->Form->input('company',array(
 												'type' => 'text',
 												'class' => 'form-control',
 												'label' => false,
