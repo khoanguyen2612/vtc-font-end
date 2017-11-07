@@ -23,9 +23,6 @@ class CartsController extends AppController
     public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
     var $session_cart = array();
 
-    //static $total_money = 0;
-    //static $order_code = 'CL_VTC_AZ_';
-
     function beforeFilter() {
         parent::beforeFilter();
         $this->layout = 'cart';
