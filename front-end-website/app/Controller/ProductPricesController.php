@@ -5,7 +5,11 @@
 		(
 			'ProductPrice',
 		);
-		
+
+		//use helper for Javascript && Session cart //
+		//tue.phpmailer@gmail.com //
+		/*****************************/
+        public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
 
         public function result_search()
 		{	
