@@ -74,10 +74,10 @@
 												<?php } else { ?>
 													<td><?php echo $request1 ?></td>
 													<td><?php echo "Tên miền đã tồn tại"; ?></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
+													<td>X</td>
+													<td>X</td>
+													<td>X</td>
+													<td>X</td>
 
 												<?php } ?>
 												
@@ -122,10 +122,10 @@
 												<?php } else { ?>
 													<td><?php echo $request2 ?></td>
 													<td><?php echo "Tên miền đã tồn tại"; ?></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
+													<td>X</td>
+													<td>X</td>
+													<td>X</td>
+													<td>X</td>
 
 												<?php } ?>
 												
