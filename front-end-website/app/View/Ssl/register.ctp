@@ -5,7 +5,6 @@
 	<div class="pay_step">
 		<?php echo $this->Html->image('SSL.png',array('class'=>'img-responsive')); ?>
 	</div>
-
 	<div class="ssl-procedure ssl-register">
 		<div class="container">
 			
@@ -25,7 +24,11 @@
 								<option value="2">ORGANIZATION SSL</option>
 								<option value="3">EXTENDED SSL</option> -->
 								<?php foreach ($ssl as $item) {
-									echo '<option value="'.$item['ProductPrice']['id'].'"">'.$item['ProductPrice']['product_name'].'</option>';
+									if(isset($ssl_id)&&$ssl_id==$item['ProductPrice']['id']){
+										echo '<option selected value="'.$item['ProductPrice']['id'].'">'.$item['ProductPrice']['product_name'].'</option>';
+									}else{
+										echo '<option value="'.$item['ProductPrice']['id'].'">'.$item['ProductPrice']['product_name'].'</option>';
+									}
 								} ?>
 							</select>
 							</strong>

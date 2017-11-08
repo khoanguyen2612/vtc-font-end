@@ -28,6 +28,8 @@
 					
 				</div>
 			</div>
+			<form id="domainSSLform" action="" method="post">
+				<input name="ssl_id" type="hidden" value="" id="value_code">
 			<div class="row">
 				<?php foreach ($data as $item) { ?>
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
@@ -50,13 +52,15 @@
 									<li>Cấp phát nhanh chóng.</li>
 									<li>Lực chọn lý tưởng cho các website non trẻ</li>
 								</ul>
-									<a href="#" class="btn btn-ssl">ĐĂNG KÝ NGAY</a><br>
+									<!-- <a href="#" class="btn btn-ssl">ĐĂNG KÝ NGAY</a><br> -->
+									<input onclick="submitdomainSSLform('<?php echo $item['ProductPrice']['id'] ?>')" type="button" class="btn btn-ssl" value="ĐĂNG KÝ NGAY"><br>
 									<a href="#"> Xem chi tiết</a>
 							</div>
 						</div>
 					</div>
 				<?php } ?>
 			</div>
+			</form>
 		</div>
 	</div>
 	<div class="ssl-procedure">
@@ -142,10 +146,17 @@
 				<p>Nếu quý khách hàng có bất cứ thắc mắc nào về SSL, vui lòng gửi email đến hòm thư: ssl@VTC.vn để đc giải đáp</p>
 			</div>
 
-			<h2><a href="#" class="btn btn-ssl"><b>ĐĂNG KÝ NGAY</b></a><br></h2>
+			<h2><a href="<?php echo $this->Html->url(array('controller' => 'ssl','action' => 'register'));?>" class="btn btn-ssl"><b>ĐĂNG KÝ NGAY</b></a><br></h2>
 		</div>	
 	</div>
 
 <style type="text/css">
 	
 </style>
+<script type="text/javascript">
+	function submitdomainSSLform(code) {
+
+                jQuery("#value_code").val(code);
+                jQuery("#domainSSLform").submit();
+            }
+</script>

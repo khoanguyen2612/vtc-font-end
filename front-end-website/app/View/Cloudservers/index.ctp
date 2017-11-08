@@ -120,15 +120,15 @@
 				<h3>DỊCH VỤ BỔ SUNG</h3>
 				<div class="row option">
 					<div class="col-md-6 col-lg-6">
-						<p>SSD Option <span>50Gb - 100,000</span> <strong> đ/tháng</strong> </p>
-						<p>SSD Option <span>300Gb - 600,000</span> <strong>đ/tháng</strong> </p>
-						<p>IP Option (1-2-4-8-16 IP) <span>100,000</span> <strong>đ/tháng</strong></p>
-						<p>Load Balance <span>200,000</span> <strong>đ/tháng</strong></p>
-						<p>Auto backup (snaptshot) <span>75,000</span> <strong>đ/tháng</strong> </p>
+						<p>HDD Option <span>10GB - 100GB</span> <strong>50,000đ/10GB/tháng</strong> </p>
+						<p>HDD Option <span>100GB - 200GB</span> <strong>28,000đ/10GB/tháng</strong> </p>
+						<p>HDD Option <span>200GB - 500GB</span> <strong>22,000đ/10GB/tháng</strong></p>
+						<p>HDD Option <span>500GB - 1000GB</span> <strong>20,000đ/10GB/tháng</strong></p>
+						<p>HDD Option <span>trên 1000GB</span> <strong>18,000đ/10GB/tháng</strong> </p>
 					</div>
 					<div class="col-md-6 col-lg-6">
-						<p>SSD Option <span>150Gb - 300,000</span> <strong>đ/tháng</strong></p>
-						<p>SSD Option <span>700Gb - 1,400,000</span> <strong>đ/tháng</strong></p>
+						<p>IP Option (1-2-4-8-16 IP) <span>100,000</span> <strong>đ/tháng</strong></p>
+						<p>Load Balance <span>200,000</span> <strong>đ/tháng</strong></p>
 						<p>Plesk (WebHost) <span>300,000</span> <strong>đ/tháng</strong></p>
 						<p>Image Storage Space 50Gb - Free /<span>100Gb - 375,000</span><strong>đ/tháng</strong></p>
 						<p>Cpanel <span>300,000</span> <strong>đ/tháng</strong></p>
