@@ -18,6 +18,8 @@
                 <div class="clearfix"></div>
                 <div class="dcol">Status</div><div class="drcol"><?php if(isset($datadomain['status'][0])){echo $datadomain['status'][0];}?></div>
                 <div class="clearfix"></div>
+                <div class="dcol">Registrant Name</div><div class="drcol"><?php if(isset($datadomain['registrantName'])){echo $datadomain['registrantName'];}?></div>
+                <div class="clearfix"></div>
             </div>
 
         </div>

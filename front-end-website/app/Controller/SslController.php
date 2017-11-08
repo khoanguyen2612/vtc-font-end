@@ -19,7 +19,7 @@
 			// pr($a);die;
 			if($this->request->is('post')){
 				$this->request->data['ServiceRequest']['order_type']=3;
-				pr($this->request->data);
+				// pr($this->request->data);
 				if($this->ServiceRequest->save($this->request->data)){
 					$this->render('complete');
 				}
