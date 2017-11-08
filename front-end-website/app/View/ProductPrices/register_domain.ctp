@@ -33,15 +33,15 @@
                 </form>
 
 
-
                 <?php if (isset($request1)) { ?>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p class="p-add"> Kết quả kiểm tra</p>
                 </div>
 
-                <div id="loading" style="display: none;">
+                <div id="loading" style="display: none; position: static; top: 100px; left: auto">
                     <div class="alert alert-info" role="alert">
-                        <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...</div>
+                        <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...
+                    </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-domain-domain">
@@ -183,42 +183,45 @@
                                                     <label for="demo" class="demoCheck demoCheckLabel"></label>
                                                 <?php } $i++; ?>
                                                 <?php
-                                                    $cart = array();
-                                                    $cart['product']['product_name'] = $request3 . $item['ProductPrice']['product_name'];
-                                                    $cart['product']['price'] = $item['ProductPrice']['price'] + $item['ProductPrice']['bk_price'];
-                                                    $cart['product']['product_type'] = 7;
+                                                $cart = array();
+                                                $cart['product']['product_name'] = $request3 . $item['ProductPrice']['product_name'];
+                                                $cart['product']['price'] = $item['ProductPrice']['price'] + $item['ProductPrice']['bk_price'];
+                                                $cart['product']['product_type'] = 7;
 
-                                                    //checkbox id is checked
-                                                    $cart['checkbox']['id'] = "domain_item_id<?=$do_id?>";
+                                                //checkbox id is checked
+                                                $cart['checkbox']['id'] = "domain_item_id{$do_id}";
 
-                                                    $data = json_encode($cart);
-                                                    $this->Js->get('#domain_item_id'.$do_id)->event('change',
+                                                $data = json_encode($cart);
 
-                                                        $this->Js->request(
-                                                            array('controller' => 'carts', 'action' => 'add_domain'),
-                                                            array(
-                                                                //'update' => '#id_count_carts',
-                                                                //'update' => $data = json_encode($cart);,
-                                                                'data' => $data,
-                                                                'async' => true,
-                                                                'dataExpression' => true,
-                                                                'method' => 'POST',
-                                                                'before' => "$('#loading').fadeIn(1000);",
-                                                                'complete' => "$('#loading').fadeOut(1000);update_ajax_it();",
-                                                                'cache' => false,
-                                                            )
-                                                        )
-                                                    );
+                                                $str = $this->Html->scriptBlock('
+                                                                    $(document).ready(function () {
+                                                                      $("#domain_item_id' . $do_id . '").bind("change", function (event) {
+                                                                             if (this.checked) { 
+                                                                                 $.ajax({
+                                                                                      async: true, beforeSend: function (XMLHttpRequest) {
+                                                                                        $(\'#loading\').fadeIn(1000);
+                                                                                      }, cache: false, complete: function (XMLHttpRequest, textStatus) {
+                                                                                        $(\'#loading\').fadeOut(1000);
+                                                                                        update_ajax_it();
+                                                                                      }, data: ' . $data . ', type: "POST", url: "\/carts\/add_domain"
+                                                                                 });
+                                                                             }
+                                                                                                                                                   
+                                                                            return false;
+                                                                      });
+                                                                    });       
+                                                                    ', array('inline' => true));
 
+                                                echo $str;
+                                                echo $this->Js->writeBuffer();
 
-                                                    echo $this->Js->writeBuffer();
                                                 ?>
 
                                             </td>
 
                                         </tr>
-                                    <?php
-                                        $do_id ++;
+                                        <?php
+                                        $do_id++;
                                     } ?>
                                     </tbody>
                                 </table>
@@ -233,6 +236,12 @@
                             <button type="submit" class="btn btn-add-continue"> Tiếp tục</button>
                         </div>
 
+                        <div id="loading" style="display: none;">
+                            <div class="alert alert-info" role="alert">
+                                <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...
+                            </div>
+                        </div>
+
 
                         <?php } ?>
 
@@ -241,10 +250,6 @@
                                 <p class="p-add"> Kết quả kiểm tra</p>
                             </div>
 
-                            <div id="loading" style="display: none;">
-                                <div class="alert alert-info" role="alert">
-                                    <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...</div>
-                            </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-domain-domain">
                                 <div class="table-responsive add-on">
@@ -313,40 +318,44 @@
 
                                                     <?php
 
-                                                        $cart = array();
-                                                        $cart['product']['product_name'] = $request2['add-domain'] . $item['ProductPrice']['product_name'];
-                                                        $cart['product']['price'] = $item['ProductPrice']['price'] + $item['ProductPrice']['bk_price'];
-                                                        $cart['product']['product_type'] = 7;
+                                                    $cart = array();
+                                                    $cart['product']['product_name'] = $request2['add-domain'] . $item['ProductPrice']['product_name'];
+                                                    $cart['product']['price'] = $item['ProductPrice']['price'] + $item['ProductPrice']['bk_price'];
+                                                    $cart['product']['product_type'] = 7;
 
-                                                        //checkbox id is checked
-                                                        $cart['checkbox']['id'] = "domain_item_id<?=$do_id?>";
+                                                    //checkbox id is checked
+                                                    $cart['checkbox']['id'] = "domain_item_id{$do_id}";
 
-                                                        $data = json_encode($cart);
-                                                        $this->Js->get('#domain_item_id'. $do_id)->event('change',
-                                                            $this->Js->request(
-                                                                array('controller' => 'carts', 'action' => 'add_domain'),
-                                                                array(
-                                                                    //'update' => '#id_count_carts',
-                                                                    //'update' => ,
-                                                                    'data' => $data,
-                                                                    'async' => true,
-                                                                    'dataExpression' => true,
-                                                                    'method' => 'POST',
-                                                                    'before' => "$('#loading').fadeIn(1000);",
-                                                                    'complete' => "$('#loading').fadeOut(1000);update_ajax_it();",
-                                                                    'cache' => false,
-                                                                )
-                                                            )
-                                                        );
+                                                    $data = json_encode($cart);
 
-                                                        echo $this->Js->writeBuffer();
+                                                    $str = $this->Html->scriptBlock('
+                                                                $(document).ready(function () {
+                                                                  $("#domain_item_id' . $do_id . '").bind("change", function (event) {
+                                                                         if (this.checked) { 
+                                                                             $.ajax({
+                                                                                  async: true, beforeSend: function (XMLHttpRequest) {
+                                                                                    $(\'#loading\').fadeIn(1000);
+                                                                                  }, cache: false, complete: function (XMLHttpRequest, textStatus) {
+                                                                                    $(\'#loading\').fadeOut(1000);
+                                                                                    update_ajax_it();
+                                                                                  }, data: ' . $data . ', type: "POST", url: "\/carts\/add_domain"
+                                                                             });
+                                                                         }
+                                                                                                                                               
+                                                                        return false;
+                                                                  });
+                                                                });       
+                                                                ', array('inline' => true));
+
+                                                    echo $str;
+                                                    echo $this->Js->writeBuffer();
                                                     ?>
 
                                                 </td>
 
                                             </tr>
-                                        <?php
-                                            $do_id ++;
+                                            <?php
+                                            $do_id++;
                                         } ?>
                                         </tbody>
                                     </table>
@@ -359,6 +368,12 @@
                                 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 add-continue">
                                     <button type="submit" class="btn btn-add-continue"> Tiếp tục</button>
                                 </div>
+                                <div id="loading" style="display: none; position: static; top: 100px; left: auto">
+                                    <div class="alert alert-info" role="alert">
+                                        <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...
+                                    </div>
+                                </div>
+
                             </div>
                         <?php } ?>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 explain">
@@ -400,8 +415,8 @@
         </div>
 
         <?php
-            $update_ajax_it = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_it'));
-            $str = $this->Html->scriptBlock('
+        $update_ajax_it = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_it'));
+        $str = $this->Html->scriptBlock('
                                     function update_ajax_it() {
                                         $.ajax({
                                             dataType: "html",
@@ -415,9 +430,9 @@
                                         });
                                     };
   
-                                    ', array('inline' => true) );
-            echo $str;
-            echo $this->Js->writeBuffer();
+                                    ', array('inline' => true));
+        echo $str;
+        echo $this->Js->writeBuffer();
         ?>
 
 
