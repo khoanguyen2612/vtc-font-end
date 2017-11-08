@@ -1,13 +1,13 @@
 <?php 
 App::uses('AppController', 'Controller');
-class ManagerServersController extends AppController{
+class ManaserverprivateController extends AppController{
 
 	public $uses = array('ServiceRequest','Staticpages');
 	public $components = array('Session');
 
 	public function index(){
 		$content = $this->Staticpages->find('all',array(
-			'conditions'=>array('pagename'=>'managerservers')));
+			'conditions'=>array('pagename'=>'manaserverprivate')));
 		$this->set('content',$content);
 		$this->set('title_for_layout','Dịch vụ quản trị cloud server');
 	}
@@ -25,7 +25,7 @@ class ManagerServersController extends AppController{
 					'email' => $this->request->data['ServiceRequest']['email'],
 					'address' => $this->request->data['ServiceRequest']['addr'],
 					'package_order' =>$pack_id,
-					'order_type' => 2
+					'order_type' => 4
 				);
 				if($this->ServiceRequest->save($this->data)){
 					$this->Session->setFlash(__('Yêu cầu của bạn đã được gửi,chúng tôi sẽ liên hệ lại theo số điện thoại bạn đã đăng ký'));

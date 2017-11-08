@@ -63,6 +63,8 @@
 
     Router::connect('/cart/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
     Router::connect('/carts/del_ajax_it', array('controller' => 'Carts', 'action' => 'del_ajax_it'));
+    Router::connect('/cart/add_domain', array('controller' => 'Carts', 'action' => 'add_domain'));
+    Router::connect('/carts/add_domain', array('controller' => 'Carts', 'action' => 'add_domain'));
 
     Router::connect('/cart/update_ajax_sum_money', array('controller' => 'Carts', 'action' => 'update_ajax_sum_money'));
     Router::connect('/carts/update_ajax_sum_money', array('controller' => 'Carts', 'action' => 'update_ajax_sum_money'));
