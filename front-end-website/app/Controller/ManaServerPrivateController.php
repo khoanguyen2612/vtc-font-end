@@ -1,6 +1,6 @@
 <?php 
 App::uses('AppController', 'Controller');
-class ManaServerPrivateController extends AppController{
+class ManaserverprivateController extends AppController{
 
 	public $uses = array('ServiceRequest','Staticpages');
 	public $components = array('Session');
