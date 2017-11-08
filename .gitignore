@@ -6,6 +6,7 @@
 /app/Config/core.php
 /app/Config/database.php
 /vendors/*
+/front-end-website/app/Config/database.php
 
 # End of https://www.gitignore.io/api/cakephp
 .gitignore
