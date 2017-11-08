@@ -178,10 +178,10 @@
                                                 ?>
                                             </td>
                                             <td>
-
-                                                <input type="checkbox" class="add-domain-checkbox" id="domain_item_id<?=$do_id?>" name="">
-                                                <label for="demo" class="demoCheck demoCheckLabel"></label>
-
+                                                <?php if ($output2[$i]['status'] == 'available') { ?>
+                                                    <input type="checkbox" class="add-domain-checkbox" id="domain_item_id<?=$do_id?>" name="">
+                                                    <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                                <?php } $i++; ?>
                                                 <?php
                                                     $cart = array();
                                                     $cart['product']['product_name'] = $request3 . $item['ProductPrice']['product_name'];
@@ -306,8 +306,10 @@
                                                     ?><!-- <button type='submit' class='btn btn-danger'>Whois <img src='../app/webroot/img/icon-whois.png'></button> -->
                                                 </td>
                                                 <td>
-                                                    <input type="checkbox" class="add-domain-checkbox" id="domain_item_id<?=$do_id?>" name="">
-                                                    <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                                    <?php if ($output1[$i]['status'] == 'available'){ ?>
+                                                        <input type="checkbox" class="add-domain-checkbox" id="domain_item_id<?=$do_id?>" name="">
+                                                        <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                                    <?php } $i++; ?>
 
                                                     <?php
 
