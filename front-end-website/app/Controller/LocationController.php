@@ -34,4 +34,15 @@ class LocationController extends AppController{
 			}
 		}	
 	}
+
+	public function edit(){
+		$content = $this->Staticpages->find('all',array(
+			'conditions'=>array('pagename'=>'location')));
+
+		$this->set('content',$content);
+		if(isset($_POST['content'])){
+			$data = $_POST['content'];
+		}
+		var_dump($data);
+	}
 }
