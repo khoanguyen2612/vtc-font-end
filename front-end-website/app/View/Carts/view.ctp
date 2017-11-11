@@ -1,20 +1,11 @@
 
-    <?php /*echo $this->element('home'); */?>
-    <?php /*echo Debugger::dump($products); */?>
-
-    <?php //echo Debugger::dump($hostings); ?>
-
     <!--// <script type="text/javascript">
-
         $(document).ready( function () {
             console.log( "ready!" );
             //alert("ready!");
         });
-
         function change_id() {
-
         };
-
     </script>//-->
 
 
@@ -376,14 +367,89 @@
 
                         </div>
 
+                        <?php
+
+
+                            //$data = json_encode($lis);
+
+                            $route_support = Router::url(array('controller' => 'carts', 'action' => 'gifcode_daily_ajax_sum_money'));
+                            $str = $this->Html->scriptBlock('    $(document).ready(function () {
+                                                                                  $("#btn_gifcode_id").bind("click", function (event) {
+                                                                                       
+                                                                                             $.ajax({
+                                                                                                  async: true, 
+                                                                                                  beforeSend: function (XMLHttpRequest) {
+                                                                                                    $(\'#loading\').fadeIn(1000);
+                                                                                                  },
+                                                                                                  accepts: {json: \'application/json\'},
+                                                                                                  dataType:\'json\',
+                                                                                                  cache: false,
+                                                                                                  data: ' . $data . ',
+                                                                                                  type: "POST",
+                                                                                                  url: "'. $route_support. '",
+                                                                                                  //complete: function (XMLHttpRequest, textStatus) {
+                                                                                                  success: function (data, textStatus){
+                                                                                                    $(\'#loading\').fadeOut(1000);
+                                                                                                    $("#gifcode_daily_ajax_sum_money_id").html(data);
+                                                                                                  }, 
+                                                                                             });
+                                                                                                                                                                                                                                                 
+                                                                                        return false;
+                                                                                  });
+                                                                            });
+                                                                            ', array('inline' => true));
+
+                            echo $str;
+
+
+                            $route_support = Router::url(array('controller' => 'carts', 'action' => 'supporters_ajax'));
+                            $str = $this->Html->scriptBlock('    $(document).ready(function () {
+                            
+                                                                                  $("#btn_supporters_ajax_id").bind("click", function (event) {
+                                                                                       
+                                                                                             $.ajax({
+                                                                                                  async: true, 
+                                                                                                  beforeSend: function (XMLHttpRequest) {
+                                                                                                    $(\'#loading\').fadeIn(1000);
+                                                                                                  },
+                                                                                                  accepts: {json: \'application/json\'},
+                                                                                                  dataType:\'json\',
+                                                                                                  cache: false,
+                                                                                                  data: ' . $data . ',
+                                                                                                  type: "POST",
+                                                                                                  url: "'. $route_support. '",
+                                                                                                  //complete: function (XMLHttpRequest, textStatus) {
+                                                                                                  success: function (data, textStatus){
+                                                                                                    $(\'#loading\').fadeOut(1000);
+                                                                                                    $("#supporters_ajax_id").html(data);
+                                                                                                  }, 
+                                                                                             });
+                                                                                                                                                                                                                                                 
+                                                                                        return false;
+                                                                                  });
+                                                                            });
+                                                                            ', array('inline' => true));
+                            echo $str;
+                            echo $this->Js->writeBuffer();
+
+
+
+                        ?>
+
 
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 domain-domain">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code">
+
                                 <h3>Mã giảm giá:</h3>
+                                <div class="row" id="gifcode_daily_ajax_sum_money_id">
+
+                                </div>
+
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Số điện thoại">
-                                    <button class="btn btn-ok">Áp dụng</button>
+                                    <button class="btn btn-ok" id="btn_gifcode_id">Áp dụng</button>
                                 </div>
+
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 domain-domain payment">
                                 <table class="table total-money">
@@ -447,13 +513,19 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 support">
                                 <div>
-                                    <h4>Nhập nhân viên tư vấn : <?php echo $this->Html->image('icon-chat.png',array('class' => 'img'));?> </h4>
+                                    <h4>Nhập nhân viên tư vấn : <?php echo $this->Html->image('icon-chat.png', array('class' => 'img'));?> </h4>
+
+                                    <div class="row" id="supporters_ajax_id">
+
+                                    </div>
+
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Số điện thoại">
-                                        <button class="btn btn-nhap"> Cập nhật </button>
+                                        <button class="btn btn-nhap" id="btn_supporters_ajax_id"> Cập nhật </button>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <?php
                         $modal = 1;

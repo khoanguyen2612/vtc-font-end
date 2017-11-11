@@ -23,7 +23,8 @@ class CartsController extends AppController
     public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
     var $session_cart = array();
 
-    function beforeFilter() {
+    function beforeFilter()
+    {
         parent::beforeFilter();
         $this->layout = 'cart';
 
@@ -48,8 +49,8 @@ class CartsController extends AppController
             $total_money = 0;
             $products = $all_item;
 
-            if (count($products)  > 0) {
-                foreach ($products as $it ) {
+            if (count($products) > 0) {
+                foreach ($products as $it) {
                     $total_money += $it['price'] * $it['quantity'];
                 }
             }
@@ -65,7 +66,6 @@ class CartsController extends AppController
         //$this->Plan->setDataSource('db_vtc_cloud');
         //$results = $this->Order->query('SELECT * FROM orders WHERE id= "614"');
         //Debugger::dump($results);
-
 
 
         //$this->Order->recursive = -1;
@@ -160,7 +160,7 @@ class CartsController extends AppController
 
                 // Update field product of cart array
                 // for view layout
-                switch ( (string) $cart['product']['product_type']) {
+                switch ((string)$cart['product']['product_type']) {
                     case '7':
                         $p_type = 'Domain SSL - Standard';
                         break;
@@ -177,7 +177,7 @@ class CartsController extends AppController
 
             }
 
-            if ( is_null($checkbox) || empty($checkbox) || is_null($checkbox[$cart['checkbox']['id']]) ) {
+            if (is_null($checkbox) || empty($checkbox) || is_null($checkbox[$cart['checkbox']['id']])) {
                 $checkbox[$cart['checkbox']['id']] = $cart['checkbox']['id'];
                 $this->Session->write('checkbox', $checkbox);
                 $this->Cart->addProduct($cart);
@@ -193,7 +193,6 @@ class CartsController extends AppController
         //return;
 
     }
-
 
     public function view($param = null)
     {
@@ -229,7 +228,7 @@ class CartsController extends AppController
         Debugger::dump($od);*/
 
 
-        if (is_null($cart) || empty($cart) || !count($cart) ) {
+        if (is_null($cart) || empty($cart) || !count($cart)) {
 
             foreach ($product_in_order as $p_item) {
 
@@ -291,11 +290,11 @@ class CartsController extends AppController
         );
 
         $hosts = $this->Product->find('all', array(
-                    'fields' => array( 'id', 'product_type', 'product_key', 'product_type', 'product_name', 'price', 'price_1', 'price_2',),
-                    'conditions' => $conditions,
-                    'recursive' => 0,
-                    'limit' => 100,
-             )
+                'fields' => array('id', 'product_type', 'product_key', 'product_type', 'product_name', 'price', 'price_1', 'price_2',),
+                'conditions' => $conditions,
+                'recursive' => 0,
+                'limit' => 100,
+            )
         );
 
         foreach ($hosts as $host) {
@@ -312,8 +311,8 @@ class CartsController extends AppController
 
         $products = $all_item;
 
-        if (count($products)  > 0) {
-            foreach ($products as $it ) {
+        if (count($products) > 0) {
+            foreach ($products as $it) {
                 $total_money += $it['price'] * $it['quantity'];
             }
         }
@@ -389,7 +388,7 @@ class CartsController extends AppController
 
                 // Update field product of cart array
                 // for view layout
-                switch ( (string) $cart['product']['product_type']) {
+                switch ((string)$cart['product']['product_type']) {
                     case '1':
                         $p_type = 'Domain';
                         break;
@@ -464,24 +463,24 @@ class CartsController extends AppController
         if ($this->request->is('post')) {
 
             $plaintext = $res["txtTotalAmount"] . "|" .
-                         $res["txtCurency"] . "|" .
-                         $res["txtParamExt"] . "|" .
-                         $res["txtReceiveAccount"] . "|" .
-                         $res["txtOrderID"] . "|" .
-                         $res["txtUrlReturn"] . "|" .
-                         $res["txtWebsiteID"] . "|" .
-                         $res["txtSecret"];
+                $res["txtCurency"] . "|" .
+                $res["txtParamExt"] . "|" .
+                $res["txtReceiveAccount"] . "|" .
+                $res["txtOrderID"] . "|" .
+                $res["txtUrlReturn"] . "|" .
+                $res["txtWebsiteID"] . "|" .
+                $res["txtSecret"];
 
             echo $plaintext;
 
             $sign = strtoupper(hash('sha256', $plaintext));
 
             $data = "?website_id=" .
-                    $res["txtWebsiteID"] . "&currency=" .
-                    $res["txtCurency"] . "&reference_number=" .
-                    $res["txtOrderID"] . "&amount=" .
-                    $res["txtTotalAmount"] . "&receiver_account=" .
-                    $res["txtReceiveAccount"]. "&url_return=". urlencode($res["txtUrlReturn"]). "&signature=". $sign. "&payment_type=". $res["txtParamExt"];
+                $res["txtWebsiteID"] . "&currency=" .
+                $res["txtCurency"] . "&reference_number=" .
+                $res["txtOrderID"] . "&amount=" .
+                $res["txtTotalAmount"] . "&receiver_account=" .
+                $res["txtReceiveAccount"] . "&url_return=" . urlencode($res["txtUrlReturn"]) . "&signature=" . $sign . "&payment_type=" . $res["txtParamExt"];
 
             $bill_to_surname = htmlentities($res["txtCustomerFirstName"]);
             $bill_to_forename = htmlentities($res["txtCustomerLastName"]);
@@ -495,7 +494,7 @@ class CartsController extends AppController
 
             echo "||||" . $destinationUrl;
 
-            $this->redirect($destinationUrl );
+            $this->redirect($destinationUrl);
 
             //header('Location: ' . $destinationUrl);
 
@@ -627,8 +626,8 @@ class CartsController extends AppController
                 $total_money = 0;
                 $products = $all_item;
 
-                if (count($products)  > 0) {
-                    foreach ($products as $it ) {
+                if (count($products) > 0) {
+                    foreach ($products as $it) {
                         $total_money += $it['price'] * $it['quantity'];
                     }
                 }
@@ -636,7 +635,7 @@ class CartsController extends AppController
                 $this->Session->delete('total_money');
                 $this->Session->write('total_money', $total_money);
 
-                $total_money_vat =  round($total_money * 10 / 100);
+                $total_money_vat = round($total_money * 10 / 100);
                 $total_money_finish = $total_money - $total_money_vat;
 
                 $this->response->body(json_encode(array(
@@ -653,6 +652,85 @@ class CartsController extends AppController
         }
 
     }
+
+    public function gifcode_daily_ajax_sum_money()
+    {
+
+        $this->autoRender = false;
+        $this->request->onlyAllow('ajax'); // No direct access via browser URL
+
+        if ($this->RequestHandler->isAjax()) {
+            Configure::write('debug', 0);
+        }
+
+        if ($this->RequestHandler->isAjax()) {
+            if ($this->request->is('post')) {
+
+                $cart = $this->Cart->readCart();
+
+                if (isset($cart['list']))
+                    $all_item = array_shift($cart);  // shift an element off the beginning of array
+                else
+                    $all_item = $cart;
+
+                $total_money = 0;
+                $products = $all_item;
+
+                if (count($products) > 0) {
+                    foreach ($products as $it) {
+                        $total_money += $it['price'] * $it['quantity'];
+                    }
+                }
+
+                $this->Session->delete('total_money');
+                $this->Session->write('total_money', $total_money);
+
+                $total_money_vat = round($total_money * 10 / 100);
+                $total_money_finish = $total_money - $total_money_vat;
+
+                $this->response->body(json_encode(array(
+                    'total_money' => $total_money,
+                    'total_money_vat' => $total_money_vat,
+                    'total_money_finish' => $total_money_finish,
+
+                )));
+
+                $this->response->send();
+                $this->_stop();
+
+            }
+        }
+
+    }
+
+    public function supporters_ajax()
+    {
+
+        $this->autoRender = false;
+        $this->request->onlyAllow('ajax'); // No direct access via browser URL
+
+        if ($this->RequestHandler->isAjax()) {
+            Configure::write('debug', 0);
+        }
+
+        if ($this->RequestHandler->isAjax()) {
+
+            if ($this->request->is('post')) {
+
+                $_l_support = $this->session_cart;
+
+                $this->response->body(json_encode(array(
+                    '_l_support' => $_l_support,
+                )));
+
+                $this->response->send();
+                $this->_stop();
+
+            }
+        }
+
+    }
+
 
     public function checkout()
     {
