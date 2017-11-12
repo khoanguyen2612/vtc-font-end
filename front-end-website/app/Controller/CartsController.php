@@ -653,47 +653,33 @@ class CartsController extends AppController
 
     }
 
-    public function gifcode_daily_ajax_sum_money()
+    public function gif_code_daily_ajax_sum_money()
     {
 
         $this->autoRender = false;
         $this->request->onlyAllow('ajax'); // No direct access via browser URL
+        $res = $this->request->data;
 
         if ($this->RequestHandler->isAjax()) {
-            Configure::write('debug', 0);
+            Configure::write('debug', 2);
         }
 
         if ($this->RequestHandler->isAjax()) {
+
             if ($this->request->is('post')) {
 
-                $cart = $this->Cart->readCart();
-
-                if (isset($cart['list']))
-                    $all_item = array_shift($cart);  // shift an element off the beginning of array
+                if (isset($res['phone']))
+                    $phone = $res['phone'];
                 else
-                    $all_item = $cart;
+                    $phone = 'Lỗi số phone gif code';
 
-                $total_money = 0;
-                $products = $all_item;
-
-                if (count($products) > 0) {
-                    foreach ($products as $it) {
-                        $total_money += $it['price'] * $it['quantity'];
-                    }
-                }
-
-                $this->Session->delete('total_money');
-                $this->Session->write('total_money', $total_money);
-
-                $total_money_vat = round($total_money * 10 / 100);
-                $total_money_finish = $total_money - $total_money_vat;
+                $l_phone[] = $phone;
+                $this->Session->write('phone_gif', $l_phone);
 
                 $this->response->body(json_encode(array(
-                    'total_money' => $total_money,
-                    'total_money_vat' => $total_money_vat,
-                    'total_money_finish' => $total_money_finish,
-
-                )));
+                    'phone_gif' => $phone,
+                    'status' => '0',
+                ), JSON_UNESCAPED_UNICODE));
 
                 $this->response->send();
                 $this->_stop();
@@ -708,20 +694,32 @@ class CartsController extends AppController
 
         $this->autoRender = false;
         $this->request->onlyAllow('ajax'); // No direct access via browser URL
+        $res = $this->request->data;
 
         if ($this->RequestHandler->isAjax()) {
-            Configure::write('debug', 0);
+            Configure::write('debug', 2);
         }
+
+        //Debugger::dump($this->request->is('post'));
+        //Debugger::dump($this->RequestHandler->isAjax());
+        //Debugger::dump($res);
 
         if ($this->RequestHandler->isAjax()) {
 
             if ($this->request->is('post')) {
 
-                $_l_support = $this->session_cart;
+                if (isset($res['phone']))
+                    $phone = $res['phone'];
+                else
+                    $phone = 'Lỗi số phone support';
+
+                $l_phone[] = $phone;
+                $this->Session->write('phone_support', $l_phone);
 
                 $this->response->body(json_encode(array(
-                    '_l_support' => $_l_support,
-                )));
+                    'phone_support' => $phone,
+                    'status' => '0',
+                ), JSON_UNESCAPED_UNICODE));
 
                 $this->response->send();
                 $this->_stop();
