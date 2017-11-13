@@ -5,7 +5,7 @@
 @import url(static_page.css);
 @import url('font_import.css');
 body{
-	font-family: 'Myriad Pro';
+	font-family: "Myriad Pro",sans-serif, Serif;
 	color: #2a363f;
 }
 /*== prfile-user, profile-group ===*/
