@@ -200,51 +200,7 @@
 	<?php echo $this->Html->image('regis_now.jpeg',array('class'=>'img-responsive')); ?>
 </div>
 <!--  -->
-<div class="news_area">
-	<div class="container">
-		<h4 class="text-center title_area">TIN TỨC</h4>
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-				<div id="post_news">
-					<h4 class="text-center"><a href="">Tin tức</a></h4>
-					<ul class="list-group">
-						<?php foreach ($news as $item) { ?>
-							<li class="list-group-item">
-								<?php 
-									$date = $item['News']['created_date'];
-									$date1=strtotime(date($date));
-								?>
-								<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'notificion_maintain',$item['News']['id']));?>">
-									<span><?php echo date('d/m/y',$date1); ?></span>
-									<span><?php echo $item['News']['title'] ?></span>
-								</a>
-							</li>
-						<?php } ?>
-					</ul>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-				<div id="post_noti">
-					<h4 class="text-center"><a href="">Thông báo</a></h4>
-					<ul class="list-group">
-						<?php foreach ($notif as $item) { ?>
-							<li class="list-group-item">
-								<?php 
-									$date = $item['News']['created_date'];
-									$date1=strtotime(date($date));
-								?>
-								<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'notificion_maintain',$item['News']['id']));?>">
-									<span><?php echo date('d/m/y',$date1); ?></span>
-									<span><?php echo $item['News']['title'] ?></span>
-								</a>
-							</li>
-						<?php } ?>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
 <!--  -->
 	<div class="news_area">
 		<div class="container">
@@ -254,31 +210,19 @@
 					<div id="post_news">
 						<h4 class="text-center"><a href="">Tin tức</a></h4>
 						<ul class="list-group">
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Ra mắt sản phẩm mới</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Phương thức thanh toán mới</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Áp dụng nghiệp vụ chuyển nhương tên miền</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Ra mắt sản phẩm mới</span>
-								</a>
-							</li>
-							<a href="" class="see_more">Xem thêm</a>
+							<?php foreach ($news as $item) { ?>
+								<li class="list-group-item">
+								<?php 
+									$date = $item['News']['created_date'];
+									$date1=strtotime(date($date));
+								?>
+									<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'notificion_maintain',$item['News']['id']));?>">
+										<span><?php echo date('d/m/y',$date1); ?></span>
+										<span><?php echo $item['News']['title'] ?></span>
+									</a>
+								</li>
+							<?php } ?>
+							<a href="" class="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>">Xem thêm</a>
 						</ul>
 					</div>
 				</div>
@@ -287,31 +231,19 @@
 					<div id="post_noti">
 						<h4 class="text-center"><a href="">Thông báo</a></h4>
 						<ul class="list-group">
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Ra mắt sản phẩm mới</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Phương thức thanh toán mới</span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Áp dụng nghiệp vụ chuyển nhương tên miền </span>
-								</a>
-							</li>
-							<li class="list-group-item">
-								<a href="">
-									<span>01.09.2017</span>
-									<span>Ra mắt sản phẩm mới</span>
-								</a>
-							</li>
-							<a href="" class="see_more">Xem thêm</a>
+							<?php foreach ($notif as $item) { ?>
+								<li class="list-group-item">
+								<?php 
+									$date = $item['News']['created_date'];
+									$date1=strtotime(date($date));
+								?>
+									<a href="">
+										<span><?php echo date('d/m/y',$date1); ?></span>
+										<span><?php echo $item['News']['title'] ?></span>
+									</a>
+								</li>
+							<?php } ?>
+							<a href="" class="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>">Xem thêm</a>
 						</ul>
 					</div>
 				</div>
