@@ -579,7 +579,7 @@
 
                     .done(function (resp) {
                          var data = JSON.parse(resp);
-                         $("#gifcode_daily_ajax_sum_money_id").append('<h6><span class="alert-info">' + data.phone_gif + '</span></h6>');
+                         $("#gifcode_daily_ajax_sum_money_id").append('<h5><span class="alert-info">' + data.phone_gif + '</span></h5>');
                          console.log("done response", data);
                          console.log("data.phone_support",  data['phone_support']);
                     })
@@ -606,7 +606,7 @@
                     })
                         .done(function (resp) {
                             var data = JSON.parse(resp);
-                            $("#supporters_ajax_id").append('<h6><span class="alert-success">' + data.phone_support + '</span></h6>');
+                            $("#supporters_ajax_id").append('<h5><span class="alert-success">' + data.phone_support + '</span></h5>');
                             console.log("done response", data);
                             console.log("data.phone_support",  data['phone_support']);
                         })
