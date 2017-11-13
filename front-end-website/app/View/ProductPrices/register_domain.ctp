@@ -439,7 +439,7 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('.button1').click(function () {
-                    console.log($(this).parent().children(".domain_name").val())
+                    console.log($(this).parent().children(".domain_name").val());
                     // alert('1');
                     // $('#myModal').modal('show');
 

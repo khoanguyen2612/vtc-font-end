@@ -482,21 +482,21 @@
 });
   // lay thong tin nguoi quan ly
   $('#get_bill').click(function(){
-    $('#bill_name').val($('#mn_name').val())
-    $('#bill_birthday').val($('#mn_birthday').val())
-    $('#bill_ownerid').val($('#mn_ownerid').val())
-    $('#bill_phone').val($('#mn_phone').val())
-    $('#bill_street').val($('#mn_street').val())
-    $('#bill_city').val($('#mn_city').val())
+    $('#bill_name').val($('#mn_name').val());
+    $('#bill_birthday').val($('#mn_birthday').val());
+    $('#bill_ownerid').val($('#mn_ownerid').val());
+    $('#bill_phone').val($('#mn_phone').val());
+    $('#bill_street').val($('#mn_street').val());
+    $('#bill_city').val($('#mn_city').val());
     $('#bill_email').val($('#mn_email').val())    
 });
   $('#get_other').click(function(){
-     $('#other_name').val($('#mn_name').val())
-     $('#other_birthday').val($('#mn_birthday').val())
-     $('#other_ownerid').val($('#mn_ownerid').val())
-     $('#other_phone').val($('#mn_phone').val())
-     $('#other_street').val($('#mn_street').val())
-     $('#other_city').val($('#mn_city').val())
+     $('#other_name').val($('#mn_name').val());
+     $('#other_birthday').val($('#mn_birthday').val());
+     $('#other_ownerid').val($('#mn_ownerid').val());
+     $('#other_phone').val($('#mn_phone').val());
+     $('#other_street').val($('#mn_street').val());
+     $('#other_city').val($('#mn_city').val());
      $('#other_email').val($('#mn_email').val())    
  });
 </script>

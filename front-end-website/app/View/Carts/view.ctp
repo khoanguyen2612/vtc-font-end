@@ -1,20 +1,11 @@
 
-    <?php /*echo $this->element('home'); */?>
-    <?php /*echo Debugger::dump($products); */?>
-
-    <?php //echo Debugger::dump($hostings); ?>
-
     <!--// <script type="text/javascript">
-
         $(document).ready( function () {
             console.log( "ready!" );
             //alert("ready!");
         });
-
         function change_id() {
-
         };
-
     </script>//-->
 
 
@@ -379,11 +370,17 @@
 
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 domain-domain">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code">
+
                                 <h3>Mã giảm giá:</h3>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Số điện thoại">
-                                    <button class="btn btn-ok">Áp dụng</button>
+                                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code" id="gifcode_daily_ajax_sum_money_id">
+                                    <h6><span class="alert-info"></span></h6>
                                 </div>
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Số điện thoại" id="phone_gifcode" name="phone_gifcode" value="">
+                                    <button class="btn btn-ok" id="btn_gifcode_id">Áp dụng</button>
+                                </div>
+
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 domain-domain payment">
                                 <table class="table total-money">
@@ -411,12 +408,12 @@
                                             <button class="btn btn-continue hidden" type="button"><a href="">Tiếp tục</a></button>
                                             <button class="btn btn-continue" type="button">
                                                 <?php
-                                                echo $this->Html->link('Tiếp tục', array(
-                                                    'controller' => 'cart',
-                                                    'action' => 'checkout',
-                                                ),
-                                                    array('class' => '', 'escape' => false)
-                                                );
+                                                    echo $this->Html->link('Tiếp tục', array(
+                                                        'controller' => 'cart',
+                                                        'action' => 'checkout',
+                                                    ),
+                                                        array('class' => '', 'escape' => false)
+                                                    );
                                                 ?>
                                             </button>
                                         </td>
@@ -447,13 +444,19 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 support">
                                 <div>
-                                    <h4>Nhập nhân viên tư vấn : <?php echo $this->Html->image('icon-chat.png',array('class' => 'img'));?> </h4>
+                                    <h4>Nhập nhân viên tư vấn : <?php echo $this->Html->image('icon-chat.png', array('class' => 'img'));?> </h4>
+
+                                    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code" id="supporters_ajax_id">
+                                        <h6><span class="alert-success"></span></h6>
+                                    </div>
+
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Số điện thoại">
-                                        <button class="btn btn-nhap"> Cập nhật </button>
+                                        <input type="text" class="form-control" placeholder="Số điện thoại" value="" name="phone_support" id="phone_support">
+                                        <button class="btn btn-nhap" id="btn_supporters_ajax_id"> Cập nhật </button>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <?php
                         $modal = 1;
@@ -502,6 +505,123 @@
             </div>
         </div>
     </div>
+
+        <?php
+
+            //$data = json_encode($data);
+            $route_support = Router::url(array('controller' => 'carts', 'action' => 'gif_code_daily_ajax_sum_money'));
+            $str = $this->Html->scriptBlock('    
+                    $(document).ready(function () {
+                           $("#btn_gifcode_id").bind("click", function (event) {
+                                var data = { 
+                                     phone : $("#phone_gifcode").val(),
+                                };
+                                $.ajax({
+                                     type: "POST",
+                                     url: "' . $route_support . '",
+                                     data: JSON.stringify(data),
+                                     contentType: \'application/json\',
+                                     cache: false,
+                                }).done(function(data){
+                                     console.log("Response", data);
+                                });
+                                return false;
+                     });',
+                    array('inline' => true));
+
+            //-----------End Gif code---------//
+            //-----------Support--------------//
+
+            $route_support = Router::url(array('controller' => 'carts', 'action' => 'supporters_ajax'));
+            $str = $this->Html->scriptBlock('
+                   $(document).ready(function () {
+                           $("#btn_supporters_ajax_id").bind("click", function (event) {
+                                var data = { 
+                                     phone : $("#phone_support").val(),
+                                };
+                                $.ajax({
+                                      type: "POST",
+                                      url: "' . $route_support . '",
+                                      data: JSON.stringify(data),
+                                      contentType: \'application/json\',
+                                      cache: false,
+                                })
+                                .done(function(data){
+                                     console.log("Response", data);
+                                });
+                                return false;
+                           });
+                   });',
+                   array('inline' => true)
+            );
+
+            echo $this->Js->writeBuffer();
+
+        ?>
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $("#btn_gifcode_id").bind("click", function (event) {
+
+                    var data = {
+                        phone : $("#phone_gifcode").val(),
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/carts/gif_code_daily_ajax_sum_money",
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        cache: false,
+                    })
+
+                    .done(function (resp) {
+                         var data = JSON.parse(resp);
+                         $("#gifcode_daily_ajax_sum_money_id").append('<h5><span class="alert-info">' + data.phone_gif + '</span></h5>');
+                         console.log("done response", data);
+                         console.log("data.phone_support",  data['phone_support']);
+                    })
+                    .success(function (resp, textStatus){
+                         console.log("success response", resp);
+                         console.log("success textStatus", textStatus);
+                    });
+
+                    return false;
+                });
+
+                $("#btn_supporters_ajax_id").bind("click", function (event) {
+
+                    var data = {
+                        phone: $("#phone_support").val(),
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/carts/supporters_ajax",
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        cache: false,
+                    })
+                        .done(function (resp) {
+                            var data = JSON.parse(resp);
+                            $("#supporters_ajax_id").append('<h5><span class="alert-success">' + data.phone_support + '</span></h5>');
+                            console.log("done response", data);
+                            console.log("data.phone_support",  data['phone_support']);
+                        })
+                        .success(function (resp, textStatus){
+                            console.log("success response", resp);
+                            console.log("success textStatus", textStatus);
+                        });
+
+                    return false;
+                });
+
+            });
+
+        </script>
+
 
     <?php //echo $this->element('sql_dump'); ?>
 

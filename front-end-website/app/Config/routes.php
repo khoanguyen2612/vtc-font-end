@@ -72,6 +72,11 @@
     Router::connect('/cart/vtc_payment', array('controller' => 'Carts', 'action' => 'vtc_payment'));
     Router::connect('/carts/vtc_payment', array('controller' => 'Carts', 'action' => 'vtc_payment'));
 
+    Router::connect('/cart/gif_code_daily_ajax_sum_money', array('controller' => 'Carts', 'action' => 'gif_code_daily_ajax_sum_money'));
+    Router::connect('/carts/gif_code_daily_ajax_sum_money', array('controller' => 'Carts', 'action' => 'gif_code_daily_ajax_sum_money'));
+    Router::connect('/cart/supporters_ajax', array('controller' => 'Carts', 'action' => 'supporters_ajax'));
+    Router::connect('/carts/supporters_ajax', array('controller' => 'Carts', 'action' => 'supporters_ajax'));
+
     Router::connect('/cart/payment', array('controller' => 'Carts', 'action' => 'payment'));
     Router::connect('/carts/payment', array('controller' => 'Carts', 'action' => 'payment'));
 
