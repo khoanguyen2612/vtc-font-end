@@ -222,7 +222,7 @@
 									</a>
 								</li>
 							<?php } ?>
-							<a href="" class="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>">Xem thêm</a>
+							<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>" class="see_more">Xem thêm</a>
 						</ul>
 					</div>
 				</div>
@@ -243,7 +243,7 @@
 									</a>
 								</li>
 							<?php } ?>
-							<a href="" class="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>">Xem thêm</a>
+							<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>" class="see_more">Xem thêm</a>
 						</ul>
 					</div>
 				</div>
