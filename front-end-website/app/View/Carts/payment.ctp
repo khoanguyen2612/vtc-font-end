@@ -19,32 +19,9 @@
 
     <div class="cart">
         <div class="process">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <div class="step ">
-                            <h3>1</h3>
-                            <p>Giỏ hàng</p>
-                        </div>
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <div class="step ">
-                            <h3>2</h3>
-                            <p>Điền thông tin</p>
-                        </div>
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <div class="step processing">
-                            <h3>3</h3>
-                            <p>Thanh toán</p>
-                        </div>
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <div class="step">
-                            <h3>4</h3>
-                            <p>HOÀN TẤT</p>
-                        </div>
-                    </div>
+            <div class="process">
+                <div class="container">
+                    <?php echo $this->Html->image('button_step3.png', array('class'=>'img-responsive')); ?>
                 </div>
             </div>
         </div>
