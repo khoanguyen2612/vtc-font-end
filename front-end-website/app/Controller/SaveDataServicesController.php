@@ -1,27 +1,15 @@
 <?php 
 App::uses('AppController', 'Controller');
-class ManagerserversController extends AppController{
+class SaveDataServicesController extends AppController{
 
 	public $uses = array('ServiceRequest','Staticpages');
 	public $components = array('Session');
 
 	public function index(){
 		$content = $this->Staticpages->find('all',array(
-			'conditions'=>array('pagename'=>'managerservers')));
+			'conditions'=>array('pagename'=>'savedataservices')));
 		$this->set('content',$content);
 		$this->set('title_for_layout','Dịch vụ quản trị cloud server');
-	}
-
-	public function edit(){
-		$content = $this->Staticpages->find('all',array(
-			'conditions'=>array('pagename'=>'managerservers')));
-
-		$this->set('content',$content);
-		if(isset($_POST['content'])){
-			$data = $_POST['content'];
-			var_dump($_POST);;die;
-		}
-		
 	}
 
 	public function submit_info($pack_id = null){
@@ -37,7 +25,7 @@ class ManagerserversController extends AppController{
 					'email' => $this->request->data['ServiceRequest']['email'],
 					'address' => $this->request->data['ServiceRequest']['addr'],
 					'package_order' =>$pack_id,
-					'order_type' => 2
+					'order_type' => 4
 				);
 				if($this->ServiceRequest->save($this->data)){
 					$this->Session->setFlash(__('Yêu cầu của bạn đã được gửi,chúng tôi sẽ liên hệ lại theo số điện thoại bạn đã đăng ký'));
@@ -47,6 +35,17 @@ class ManagerserversController extends AppController{
 				$this->set('validationErrors',$this->ServiceRequest->validationErrors);
 			}
 		}	
+	}
+
+	public function edit(){
+		$content = $this->Staticpages->find('all',array(
+			'conditions'=>array('pagename'=>'savedataservices')));
+		$this->set('content',$content);
+		if(isset($_POST['content'])){
+			$data = $_POST['content'];
+			var_dump($_POST);die;
+		}
+		
 	}
 
 }

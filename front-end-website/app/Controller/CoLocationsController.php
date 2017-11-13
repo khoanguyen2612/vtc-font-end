@@ -1,5 +1,5 @@
 <?php 
-class LocationController extends AppController{
+class CoLocationsController extends AppController{
 	public $uses = array('ServiceRequest','Staticpages');
 	public $components = array('Session');
 	
@@ -42,7 +42,8 @@ class LocationController extends AppController{
 		$this->set('content',$content);
 		if(isset($_POST['content'])){
 			$data = $_POST['content'];
+			var_dump($_POST);die;
 		}
-		var_dump($data);
+		
 	}
 }

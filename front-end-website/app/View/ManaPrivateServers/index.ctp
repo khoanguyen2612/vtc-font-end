@@ -3,55 +3,11 @@
 		<img src="img/mana_server.jpg" alt="" id="lbanner_img" class="img-responsive">
 		<h1>DỊCH VỤ quản trị máy chủ</h1>
 	</div>
-	<div class="l_head">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 text-center">
-					<img src="img/icon_server_private1.png">
-					<h5>Bảo mật đa tẦng</h5>
-					<p>
-						Máy chủ của bạn được 
-						kiểm soát bởi hệ thống camer
-						giám sát bảo mật bằng vân tay ,
-						theo dõi từ xa
-					</p>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 text-center">
-					<img src="img/icon_server_private2.png">
-					<h5>Bảo mật đa tẦng</h5>
-					<p>
-						Máy chủ của bạn được 
-						kiểm soát bởi hệ thống camer
-						giám sát bảo mật bằng vân tay ,
-						theo dõi từ xa
-					</p>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 text-center">
-					<img src="img/icon_server_private3.png">
-					<h5>Bảo mật đa tẦng</h5>
-					<p>
-						Máy chủ của bạn được 
-						kiểm soát bởi hệ thống camer
-						giám sát bảo mật bằng vân tay ,
-						theo dõi từ xa
-					</p>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 text-center">
-					<img src="img/icon_server_private4.png">
-					<h5>Bảo mật đa tẦng</h5>
-					<p>
-						Máy chủ của bạn được 
-						kiểm soát bởi hệ thống camer
-						giám sát bảo mật bằng vân tay ,
-						theo dõi từ xa
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php echo eval("?>".$content['0']['Staticpages']['content']."<?php") ?>
+	<!-- for content page -->
+	<?php echo stripslashes($content['0']['Staticpages']['head_service']); ?>
+	<?php echo stripslashes($content['0']['Staticpages']['content']); ?>
+	<!-- end content page -->
 </div>
-
 <div class="contact_us">
 	<div class="container">
 		<h3 class="text-center">LIÊN HỆ VỚI CHÚNG TÔI</h3>
@@ -107,12 +63,12 @@
 	</div>
 </div>
 <style type="text/css">
-	.flash{
-		margin-top: 30px;
-		color: #e80000;
-		font-size: 24px;
-		font-weight: 600;
-		text-transform: uppercase;
-		text-align: center;	
-	}
+.flash{
+	margin-top: 30px;
+	color: #e80000;
+	font-size: 24px;
+	font-weight: 600;
+	text-transform: uppercase;
+	text-align: center;	
+}
 </style>

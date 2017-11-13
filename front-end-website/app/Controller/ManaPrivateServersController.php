@@ -1,13 +1,13 @@
 <?php 
 App::uses('AppController', 'Controller');
-class ManaserverprivateController extends AppController{
+class ManaPrivateServersController extends AppController{
 
 	public $uses = array('ServiceRequest','Staticpages');
 	public $components = array('Session');
 
 	public function index(){
 		$content = $this->Staticpages->find('all',array(
-			'conditions'=>array('pagename'=>'manaserverprivate')));
+			'conditions'=>array('pagename'=>'manaserverprivates')));
 		$this->set('content',$content);
 		$this->set('title_for_layout','Dịch vụ quản trị cloud server');
 	}
@@ -35,6 +35,17 @@ class ManaserverprivateController extends AppController{
 				$this->set('validationErrors',$this->ServiceRequest->validationErrors);
 			}
 		}	
+	}
+
+	public function edit(){
+		$content = $this->Staticpages->find('all',array(
+			'conditions'=>array('pagename'=>'manaprivateservers')));
+		$this->set('content',$content);
+		if(isset($_POST['content'])){
+			$data = $_POST['content'];
+			var_dump($_POST);die;
+		}
+		
 	}
 
 }
