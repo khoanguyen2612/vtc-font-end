@@ -1,21 +1,17 @@
 <?php
-/******************************************************************************
- * tue.phpmailer@gmail.com                                                    *
- ******************************************************************************/
-
 /**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.Config
  * @since         CakePHP(tm) v 0.2.9
- * @license       https://opensource.org/licenses/mit-license.php MIT License
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 /**
@@ -70,26 +66,37 @@
  */
 class DATABASE_CONFIG {
 
-	public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '',
-		'database' => 'dev_vtc_cloud',
-		'prefix' => '',
-		'encoding' => 'utf8',
-	);
+    public $default = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => '192.168.1.146',
+        'login' => 'vtc_user',
+        'password' => '123456@',
+        'database' => 'dev_vtc_cloud',
+        'prefix' => '',
+        'encoding' => 'utf8',
+    );
 
-	public $test = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => '192.168.1.146',
-		'login' => 'vtc_user',
-		'password' => '123456@',
-		'database' => 'db_vtc_cloud',
-		'prefix' => '',
-		'encoding' => 'utf8',
-	);
+    public $test = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => '192.168.1.146',
+        'login' => 'vtc_user',
+        'password' => '123456@',
+        'database' => 'db_vtc_cloud',
+        'prefix' => '',
+        'encoding' => 'utf8',
+    );
+
+   public $db_vtc_cloud = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => '192.168.1.146',
+        'login' => 'vtc_user',
+        'password' => '123456@',
+        'database' => 'db_vtc_cloud',
+        'prefix' => '',
+        'encoding' => 'utf8',
+    );
 
 }
