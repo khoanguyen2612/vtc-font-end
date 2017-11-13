@@ -12,6 +12,18 @@ class ManagerserversController extends AppController{
 		$this->set('title_for_layout','Dịch vụ quản trị cloud server');
 	}
 
+	public function edit(){
+		$content = $this->Staticpages->find('all',array(
+			'conditions'=>array('pagename'=>'managerservers')));
+
+		$this->set('content',$content);
+		if(isset($_POST['content'])){
+			$data = $_POST['content'];
+			var_dump($_POST);;die;
+		}
+		
+	}
+
 	public function submit_info($pack_id = null){
 		$this->set('title_for_layout','Điền thông tin liên hệ');
 		if($this->request->is('post')){

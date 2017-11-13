@@ -146,9 +146,6 @@
 	.online_sp{
 		height: 50px !important;
 	}
-	div.coppyright{
-		margin-bottom: 50px !important;
-	}
 	.online_sp img{
 		height: 50px !important;
 		width: 50px !important;
@@ -163,9 +160,6 @@
 @media (min-width: 500px) and (max-width: 879px ){
 	.online_sp{
 		height: 60px !important;
-	}
-	div.coppyright{
-		margin-bottom: 60px !important;
 	}
 	.online_sp strong.phone,#tv_ol strong{
 		display: block;
@@ -221,3 +215,25 @@
 		margin-bottom: 5px;
 	}
 }
+
+ @media only screen and (max-width : 1200px) {
+	.tech_sp{
+		margin-top: 100px !important;
+	}
+	footer{
+		background-size: cover !important;
+	}
+ }
+
+ @media only screen and (max-width : 992px) {
+	.messa_sp{
+		margin-top: 100px !important;
+	}
+
+  }
+
+  @media screen and (max-width: 768px) {
+  	.logo_div ul li{
+  		width: 100% !important;
+  	}
+  }
