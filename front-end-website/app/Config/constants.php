@@ -61,8 +61,9 @@ define('ACCOUNT_TYPE_ADMIN', 0);
 define('ACCOUNT_TYPE_REGISTER', 1);
 define('ACCOUNT_TYPE_DOMAIN', 2);
 define('ACCOUNT_TYPE_HOSTING', 3);
-define('ACCOUNT_TYPE_ACCOUNTANT', 8);
 define('ACCOUNT_TYPE_RESELLER', 4);
+define('ACCOUNT_TYPE_STAFF', 5);
+define('ACCOUNT_TYPE_ACCOUNTANT', 8);
 
 //Contact types
 define("CONTACT_TYPE_CONTACT", 0);
