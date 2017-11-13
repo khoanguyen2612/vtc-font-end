@@ -37,16 +37,16 @@ class ManaPrivateServersController extends AppController{
 		}	
 	}
 
-	public function edit(){
-		$content = $this->Staticpages->find('all',array(
-			'conditions'=>array('pagename'=>'manaprivateservers')));
-		$this->set('content',$content);
-		if(isset($_POST['content'])){
-			$data = $_POST['content'];
-			var_dump($_POST);die;
-		}
+	// public function edit(){
+	// 	$content = $this->Staticpages->find('all',array(
+	// 		'conditions'=>array('pagename'=>'manaprivateservers')));
+	// 	$this->set('content',$content);
+	// 	if(isset($_POST['content'])){
+	// 		$data = $_POST['content'];
+	// 		var_dump($_POST);die;
+	// 	}
 		
-	}
+	// }
 
 }
 ?>

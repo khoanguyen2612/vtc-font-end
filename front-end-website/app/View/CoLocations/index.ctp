@@ -1,6 +1,6 @@
 <div class="location_service">
 	<div class="l_banner">
-		<img src="img/l_banner.jpeg" alt="" id="lbanner_img" class="img-responsive">
+		<?php echo $this->Html->image('l_banner.jpeg',array('id'=>'lbanner_img','class'=>'img-responsive')); ?>
 		<div class="l_title">
 			<h1>DỊCH VỤ CHO THUÊ CHỖ ĐẶT THIẾT BỊ</h1>
 			<p> VTC mang đến không gian, hạ tầng chỗ đặt lý tưởng, công cụ quản lý thông minh, dịch vụ chất lượng, 
@@ -8,6 +8,9 @@
 			</p>
 		</div>
 	</div>
+	<?php echo $this->Form->create(false, array('url' => array('controller' => 'CoLocations', 'action' => 'submit_info'),'id' => 'Form_submit'));?>
+	<input type="hidden" name="packvalue" value="">
+	<?php echo $this->Form->end();?>
 	<!-- for content page -->
 	<?php echo stripslashes($content['0']['Staticpages']['head_service']); ?>
 	<?php echo stripslashes($content['0']['Staticpages']['content']); ?>
@@ -75,3 +78,11 @@
 	text-transform: uppercase;
 }
 </style>
+<script type="text/javascript">
+	$('.location_item a').click(function(event){
+		//alert($(this).attr('pack-val'));
+		$('input[name="packvalue"]').val($(this).attr('pack-val'));
+		$('#Form_submit').submit();
+		event.preventDefault();
+	});
+</script>

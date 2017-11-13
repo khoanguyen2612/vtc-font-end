@@ -42,6 +42,7 @@
 							<input type="text" class="form-control" id="addr"  name="data[ServiceRequest][addr]" required>
 						</div>
 					</div>
+					<input type="hidden" name="packvalue" value="<?php echo isset($packvalue)? $packvalue : ''; ?>">
 					<div class="form-group">        
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn btn-info">Gửi</button>
