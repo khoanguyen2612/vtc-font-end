@@ -11,6 +11,7 @@ class InfocartsController extends AppController
         if (!$this->Auth->loggedIn()) {
             return $this->redirect($this->Auth->loginAction);
         }
+        $this->layout = 'cart';
     }
 
     public function register()
