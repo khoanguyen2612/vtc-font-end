@@ -109,8 +109,8 @@ div.personal-info .button-info{
 }
 .logo_div li h3{
 	font-weight: bold;
-	margin-top: 5px;
-	font-size: 29px;
+	margin-top: 12px;
+	font-size: 23px;
 	color: #e83123;
 }
 .logo_div img.logo{
@@ -251,10 +251,10 @@ div.cloud-register small{
 	font-size: 12px;
 }
 #cloud_head{
-	margin-bottom: 140px;
+	margin-bottom: 65px;
 }
 #cloud_head h3{
-	margin-top: 90px;
+	margin-top: 60px;
 	font-size: 35px;
 	font-weight: 700;
 }
@@ -344,14 +344,14 @@ div.cloud-config p{
 /*---contact_us ----*/
 .contact_us{
 	background: url('../img/contactus_bg.jpeg') no-repeat center;
-	padding: 40px 0px 80px 0px;
+	padding: 20px 0px 80px 0px;
 	background-size: cover;
 	font-size: 18px;
 }
 .contact_us .row{
 	border-radius: 20px;
-	margin-top: 250px;
-	padding-bottom: 100px;
+	margin-top: 160px;
+	padding-bottom: 60px;
 	background: -webkit-linear-gradient(left, #126fbc, #2d89d5,#1775c3,#126fbc, #2d89d5,#1775c3);
 	background: -o-linear-gradient(left, #126fbc, #2d89d5,#1775c3,#126fbc, #2d89d5,#1775c3);
 	background: -moz-linear-gradient(left,#126fbc, #2d89d5,#1775c3,#126fbc, #2d89d5,#1775c3);
@@ -361,6 +361,7 @@ div.cloud-config p{
 	color: #2a363f;
 	font-size: 35px;
 	font-weight: 600;
+	margin-top: 0px;
 }
 .contact_us span,.contact_us p{
 	color: #fff;
@@ -385,7 +386,7 @@ div.cloud-config p{
 	border-radius: 50%;
 	width: 200px;
 	height: 200px;
-	margin-top: -200px;
+	margin-top: -185px;
 	margin-left: auto;
 	margin-right: auto;
 }
