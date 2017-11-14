@@ -19,7 +19,6 @@
         echo $this->Html->script('bootstrap.min.js') . "\n";
         echo $this->Html->css('cart-finish') . "\n";
         echo $this->Html->css('style') . "\n";
-        echo $this->Html->css('http://fonts.googleapis.com/css?family=Ruge+Boogie') . "\n";
         echo $this->Html->script('jssor.slider-26.3.0.min.js') . "\n";
 
         ?>
@@ -55,7 +54,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-12">
                     <div class="col-lg-6">
-                        <?php echo $this->Html->image('vtc-logo.png', array('class' => 'logo')); ?>
+                        <?php echo $this->Html->image('vtc-logo.png',array('class'=>'logo','url' => array('controller' => 'Home', 'action' => 'index'))); ?>
                     </div>
                     <div class="col-lg-6">
                         <ul class="list-group list-inline">

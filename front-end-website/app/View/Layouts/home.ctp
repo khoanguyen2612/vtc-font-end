@@ -26,8 +26,9 @@
                             <li><a href="">Giới thiệu</a></li>
                             <li><a href="">Liên hệ</a></li>
                             <li><a href="">Tuyển dụng</a></li>
-                            <li><a href="">Nạp tiền</a></li>
-                            <li><a href="">Tài khoản</a></li>
+                            <li>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'register'), true); ?>">Đăng Ký</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -38,7 +39,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
                         <div class="col-lg-6">
-                            <?php echo $this->Html->image('vtc-logo.png',array('class'=>'logo')); ?>
+                            <?php echo $this->Html->image('vtc-logo.png',array('class'=>'logo','url' => array('controller' => 'Home', 'action' => 'index'))); ?>
                         </div>
                         <div class="col-lg-6">
                             <ul class="list-group list-inline">
