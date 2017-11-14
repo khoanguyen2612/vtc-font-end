@@ -75,51 +75,51 @@
                             </a>
                         </li>
                         <li  class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tên miền</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TÊN MIỀN</a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="domain_price.html">Bảng giá tên miền</a>
+                                    <a href="domain_price.html">BẢNG GIÁ TÊN MIỀN</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">Kiểm tra tên miền</a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">KIỂM TRA TÊN MIỀN</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">Đăng ký tên miền</a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">ĐĂNG KÝ TÊN MIỀN</a>
                                 </li>
                                 <li>
-                                    <a href="domain_transfer.html">Chuyển đổi nhà cung cấp</a>
+                                    <a href="domain_transfer.html">CHUYỂN ĐỔI NHÀ CUNG CẤP</a>
                                 </li>
                             </ul>
                         </li>
                         <li  class="dropdown">
                             <a href="<?php echo $this->Html->url(array('controller' => 'cloudservers', 'action' => 'index'), true); ?>">
-                                Cloud server
+                                CLOUD SERVER
                             </a>
                         </li> 
-                        <li  class="dropdown"><a href="">Cloud storage</a></li>
+                        <li  class="dropdown"><a href="">CLOUD STORAGE</a></li>
                         <li  class="dropdown">
                             <a href="<?php echo $this->Html->url(array('controller' => 'ssl', 'action' => 'index'), true); ?>">
                                 SSL
                             </a>
                         </li>
-                        <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller' => 'CoLocations', 'action' => 'index'), true); ?>">co-location</a></li>
+                        <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller' => 'CoLocations', 'action' => 'index'), true); ?>">CO-LOCATION</a></li>
                         <li  class="dropdown">
                             <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">dịch vụ gia tăng</a>
+                            aria-expanded="false">DỊCH VỤ GIA TĂNG</a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="<?php echo $this->Html->url(array('controller' => 'ManaPrivateServers', 'action' => 'index'), true); ?>">
-                                        Quản trị Máy chủ
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'Managerservers', 'action' => 'index'), true); ?>">
+                                        QUẢN TRỊ CLOUD SERVER
                                     </a>
                                 </li> 
                                 <li>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'ManaPrivateServers', 'action' => 'index'), true); ?>">
-                                        Quản trị Máy chủ riêng
+                                        QUẢN TRỊ MÁY CHỦ RIÊNG
                                     </a>
                                 </li> 
                                 <li>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'SaveDataServices', 'action' => 'index'), true); ?>">
-                                        Sao lưu dữ liệu
+                                        SAO LƯU DỮ LIỆU
                                     </a>
                                 </li> 
                             </ul>

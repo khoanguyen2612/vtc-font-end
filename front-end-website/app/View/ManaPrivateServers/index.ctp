@@ -1,7 +1,7 @@
 <div class="location_service">
 	<div class="mana_banner">
 		<img src="img/mana_server.jpg" alt="" id="lbanner_img" class="img-responsive">
-		<h1>DỊCH VỤ quản trị máy chủ</h1>
+		<h1>DỊCH VỤ QUẢN TRỊ MÁY CHỦ RIÊNG</h1>
 	</div>
 	<?php echo $this->Session->flash(); ?>
 	<!-- for content page -->
