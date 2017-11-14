@@ -75,6 +75,13 @@
 }
 
 @media screen and (max-width: 535px) {
+	/*fix css news home page*/
+	.news_area li{
+		padding: 10px 0px !important;
+	}
+	#post_news h4, #post_noti h4{
+		padding: 20px 0px !important;
+	}
 	div.img-avatar{
 		margin-top: -25%;
 	}
