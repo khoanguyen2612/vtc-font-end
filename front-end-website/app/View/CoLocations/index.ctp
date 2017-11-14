@@ -21,36 +21,38 @@
 <div class="contact_us">
 	<div class="container">
 		<h3 class="text-center">LIÊN HỆ VỚI CHÚNG TÔI</h3>
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-			<div class="sale">
-				<div class="img_radius">
-					<?php echo $this->Html->image('sale.jpeg') ?>
+		<div class="row">
+			<div class="col-md-6 col-lg-4">
+				<div class="sale">
+					<div class="img_radius">
+						<img src="img/sale.jpeg">
+					</div>
+					<h5>Nhân viên kinh doanh 1</h5>
+					<p>Ms Thiên Thanh: </p>
+					<span>(08) 4450 3077</span>
+					<h5>Nhân viên kinh doanh 2</h5>
+					<p>Ms Thiên Thanh:</p>
+					<span> (08) 4450 3077</span>
 				</div>
-				<h5>Nhân viên kinh doanh 1</h5>
-				<p>Ms Thiên Thanh: </p>
-				<span>(08) 4450 3077</span>
-				<h5>Nhân viên kinh doanh 2</h5>
-				<p>Ms Thiên Thanh:</p>
-				<span> (08) 4450 3077</span>
 			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-			<div class="messa_sp">
-				<div class="img_radius">
-					<?php echo $this->Html->image('messa_sp.jpeg') ?>
+			<div class="col-md-6 col-lg-4">
+				<div class="messa_sp">
+					<div class="img_radius">
+						<img src="img/messa_sp.jpeg">
+					</div>
+					<h5>Chăm sóc khách hàng</h5>
+					<span>19006868</span>
 				</div>
-				<h5>Chăm sóc khách hàng</h5>
-				<span>19006868</span>
 			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-			<div class="tech_sp">
-				<div class="img_radius">
-					<?php echo $this->Html->image('tech_sp.jpeg') ?>
+			<div class="col-md-6 col-lg-4">
+				<div class="tech_sp">
+					<div class="img_radius">
+						<img src="img/tech_sp.jpeg">
+					</div>
+					<h5>Hỗ trợ kỹ thuật</h5>
+					<p>Mr Thiên Thanh:</p>
+					<span>(08) 4450 3077</span>
 				</div>
-				<h5>Hỗ trợ kỹ thuật</h5>
-				<p>Mr Thiên Thanh:</p>
-				<span>(08) 4450 3077</span>
 			</div>
 		</div>
 	</div>
