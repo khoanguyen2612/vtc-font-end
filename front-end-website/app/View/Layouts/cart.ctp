@@ -3,7 +3,6 @@
 
     <head>
         <title><?php echo $title_for_layout ?></title>
-
         <?php echo $this->html->meta('icon',
             'vtc-logo.png',
             array('type' => 'icon'));
@@ -22,28 +21,25 @@
         echo $this->Html->script('jssor.slider-26.3.0.min.js') . "\n";
 
         ?>
-
     </head>
-
     <body>
-
-
     <div class="topnav">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <a href="<?php echo $this->Html->url('/cart/', true); ?>">
                         <?php echo $this->Html->image('mana_cart.png'); ?>
-                        Quản lý đơn hàng (<?php echo " <span id='id_count_carts'>" . $n_item_cart . " </span>"; ?>)
-                    </a>
+                        Quản lý đơn hàng  (<?php echo " <span id='id_count_carts'>" . $n_item_cart . " </span>"; ?>)
+                     </a>
                 </div>
                 <div class="col-lg-6">
                     <ul class="list-inline pull-right">
                         <li><a href="">Giới thiệu</a></li>
                         <li><a href="">Liên hệ</a></li>
                         <li><a href="">Tuyển dụng</a></li>
-                        <li><a href="">Nạp tiền</a></li>
-                        <li><a href="">Tài khoản</a></li>
+                        <li>
+                            <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'register'), true); ?>">Đăng Ký</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -59,12 +55,12 @@
                     <div class="col-lg-6">
                         <ul class="list-group list-inline">
                             <li class="list-group-item">
-                                <?php echo $this->Html->image('top-phone-icon.png', array('class' => 'pull-left')); ?>
+                                <?php echo $this->Html->image('top-phone-icon.png',array('class'=>'pull-left')); ?>
                                 <p><strong>Miền Nam:</strong>(08) 4450 3077</p>
                                 <p><strong>Miền Nam:</strong>(08) 4450 3077</p>
                             </li>
                             <li class="list-group-item">
-                                <?php echo $this->Html->image('24h_phone_icon.png', array('class' => 'pull-left')); ?>
+                                <?php echo $this->Html->image('24h_phone_icon.png',array('class'=>'pull-left')); ?>
                                 <h3>(04) 4450 5566</h3>
                             </li>
                         </ul>
@@ -73,7 +69,6 @@
             </div>
         </div>
     </div>
-
     <?php echo $this->fetch('content'); ?>
 
     <div class="contac_info">
