@@ -39,7 +39,7 @@
 	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
 }
 .send_info{
-	background-color: #2A363F;
+	background-color: #847d7d;
 	padding-bottom: 40px;
 }
 input[type=submit]{
