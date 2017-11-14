@@ -543,14 +543,11 @@ a.icon{
 	-webkit-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
-
 .panel-login>.panel-heading a.active{
 	font-size: 25px;
 	color:#000;
 }
-
 div.coppyright{
-	margin-top: 15px;
 	background-color: #2a363f;
 	padding-top: 24px;
 	padding-bottom: 70px;
