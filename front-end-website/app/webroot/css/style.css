@@ -3,9 +3,8 @@
 @import url(sub_page.css);
 @import url(page_news.css);
 @import url(static_page.css);
-@import url('font_import.css');
 body{
-	font-family: "Myriad Pro",sans-serif, Serif;
+	font-family: Arial,sans-serif, Serif;
 	color: #2a363f;
 }
 /*== prfile-user, profile-group ===*/
