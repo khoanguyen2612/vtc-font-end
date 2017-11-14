@@ -6,35 +6,37 @@ class ManaPrivateServersController extends AppController{
 	public $components = array('Session');
 
 	public function index(){
+		$this->set('title_for_layout','Dịch vụ quản trị cloud server');
 		$content = $this->Staticpages->find('all',array(
 			'conditions'=>array('pagename'=>'manaserverprivates')));
 		$this->set('content',$content);
-		$this->set('title_for_layout','Dịch vụ quản trị cloud server');
+		if($this->request->is('post')){
+			$this->redirect(array(
+				'action' => 'submit_info',
+				'package'=>$this->request->data['pack_id']
+			));
+		}
 	}
 
-	public function submit_info($pack_id = null){
-		$this->set('title_for_layout','Điền thông tin liên hệ');
+	public function submit_info(){
+		$this->set('title_for_layout','Nhập Thông Tin');
+		if(!isset($this->params['named']['package'])){
+			$this->redirect(array('action'=>'index'));
+		}
 		if($this->request->is('post')){
-			$this->ServiceRequest->set($this->request->data);
+			$this->ServiceRequest->set($this->data);
 			if($this->ServiceRequest->validates()){
-				$this->data = array(
-					'name' => $this->request->data['ServiceRequest']['name'],
-					'birthday' => $this->request->data['ServiceRequest']['birth'],
-					'CMND' => $this->request->data['ServiceRequest']['cmnd'],
-					'phone' => $this->request->data['ServiceRequest']['phone'],
-					'email' => $this->request->data['ServiceRequest']['email'],
-					'address' => $this->request->data['ServiceRequest']['addr'],
-					'package_order' =>$pack_id,
-					'order_type' => 4
-				);
-				if($this->ServiceRequest->save($this->data)){
-					$this->Session->setFlash(__('Yêu cầu của bạn đã được gửi,chúng tôi sẽ liên hệ lại theo số điện thoại bạn đã đăng ký'));
+				$data = $this->data;
+				$data['ServiceRequest']['order_type'] = 4;//dich vu quan tri server rieng 
+				$data['ServiceRequest']['package_order'] = $this->params['named']['colo'];
+				if($this->ServiceRequest->save($data)){
+					$this->Session->setFlash('Yêu cầu của bạn đã được gửi','default',array('class'=>'alert alert-info text-center'));
 					return $this->redirect(array('action'=>'index'));
 				}
-			}else{
+			}else{	
 				$this->set('validationErrors',$this->ServiceRequest->validationErrors);
 			}
-		}	
+		}
 	}
 
 	// public function edit(){

@@ -8,13 +8,15 @@
 			</p>
 		</div>
 	</div>
-	<?php echo $this->Form->create(false, array('url' => array('controller' => 'CoLocations', 'action' => 'submit_info'),'id' => 'Form_submit'));?>
-	<input type="hidden" name="packvalue" value="">
-	<?php echo $this->Form->end();?>
 	<!-- for content page -->
+	<?php echo $this->Session->flash(); ?>
 	<?php echo stripslashes($content['0']['Staticpages']['head_service']); ?>
 	<?php echo stripslashes($content['0']['Staticpages']['content']); ?>
 	<!-- end content page -->
+	
+	<?php echo $this->Form->create(false,array('id'=>'submit'));?>
+	<input type="hidden" name="pack_id" value="">
+	<?php echo $this->Form->end();?>
 </div>
 <div class="contact_us">
 	<div class="container">
@@ -70,19 +72,11 @@
 		</div>
 	</div>
 </div>
-<style type="text/css">
-.flash{
-	color: #e80000;
-	font-size: 24px;
-	font-weight: 600;
-	text-transform: uppercase;
-}
-</style>
 <script type="text/javascript">
 	$('.location_item a').click(function(event){
 		//alert($(this).attr('pack-val'));
-		$('input[name="packvalue"]').val($(this).attr('pack-val'));
-		$('#Form_submit').submit();
+		$('input[name="pack_id"]').val($(this).attr('pack-val'));
+		$('#submit').submit();
 		event.preventDefault();
 	});
 </script>

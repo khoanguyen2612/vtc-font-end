@@ -6,6 +6,12 @@ class ServiceRequest extends AppModel {
     public $useTable = 'service_request';
 
     public $validate = array(
+        'name' => array(
+            'name length' => array(
+                'rule' => array('minLength', '2'),
+                'message' => 'Tên từ 2 kí tự trở lên'
+            )
+        ),
     	'phone' => array(
     		'check num' => array(
     			'rule' => 'numeric',
@@ -16,15 +22,11 @@ class ServiceRequest extends AppModel {
     			'message' => 'Vui lòng nhập số điện thoại hợp lệ'
     		)
     	),
-    	'cmnd' => array(
-                'numeric' => array(
-                    'rule' => 'numeric',
-                    'message' => 'Số CMND nhập định dạng chữ số',
-                ),
-                'too long'=>array(
-                    'rule' => array('between', 9, 10),
-                    'message' => 'Số CMT không hợp lệ',
-                ),
+    	'address' => array(
+                'notBlank' => array(
+                    'rule' => 'notBlank',
+                    'message' => 'Nhập vào trường địa chỉ',
+                )
             ),
     	'email' => array(
     		'rule' => 'email',

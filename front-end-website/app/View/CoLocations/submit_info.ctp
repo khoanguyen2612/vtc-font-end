@@ -1,83 +1,55 @@
-	<div class="container submit_info">
-		<div class="row">
-			<form class="form-horizontal" action="" method="post">
-				<div class="col-lg-9">
-					<h4>Quý khách vui lòng nhập đầy đủ thông tin dưới đây</h4>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="name">Họ tên:</label>
-						<div class="col-sm-10">
-							<input type="name" class="form-control" id="name" name="data[ServiceRequest][name]" required>
+<div class="container send_info">
+	<div class="row centered-form">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 style="text-align:center;margin: 0;font-weight: 600">NHẬP THÔNG TIN LIÊN HỆ</h3>
+				</div>
+				<div class="panel-body">
+					<form role="form" method="POST" action="">
+						<div class="form-group">
+							<input type="text" name="data[ServiceRequest][name]" id="name" class="form-control input-sm" placeholder="Họ Tên">
+							<p class="error"><?php echo isset($validationErrors['name'])? $validationErrors['name'][0]:''; ?></p>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="birth">Ngày sinh</label>
-						<div class="col-sm-10">          
-							<input type="date" class="form-control" id="birth"  name="data[ServiceRequest][birth]" required="">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="cmnd">Số CMND</label>
-						<div class="col-sm-10">          
-							<input type="text" class="form-control" id="cmnd" name="data[ServiceRequest][cmnd]">
-							<p class="error"><?php echo isset($validationErrors['cmnd'])? $validationErrors['cmnd'][0]:''; ?></p>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="phone">Số điện thoại:</label>
-						<div class="col-sm-10">          
-							<input type="text" class="form-control" id="phone"  name="data[ServiceRequest][phone]">
+						<div class="form-group">
+							<input type="email" name="data[ServiceRequest][email]" id="email" class="form-control input-sm" placeholder="Địa Chỉ Email">
+							<p class="error"><?php echo isset($validationErrors['email'])? $validationErrors['email'][0]:''; ?></p>
+						</div>		
+						<div class="form-group">
+							<input type="text" name="data[ServiceRequest][phone]" id="phone" class="form-control input-sm" placeholder="Số Điện Thoại">
 							<p class="error"><?php echo isset($validationErrors['phone'])? $validationErrors['phone'][0]:''; ?></p>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="email">Email</label>
-						<div class="col-sm-10">          
-							<input type="text" class="form-control" id="email"  name="data[ServiceRequest][email]">
-							<p class="error"><?php echo isset($validationErrors['email'])? $validationErrors['email'][0]:''; ?></p>
+						<div class="form-group">
+							<input type="text" name="data[ServiceRequest][address]" class="form-control input-sm" placeholder="Địa Chỉ Liên Hệ">
+							<p class="error"><?php echo isset($validationErrors['address'])? $validationErrors['address'][0]:''; ?></p>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="addr">Địa chỉ liên lạc:</label>
-						<div class="col-sm-10">          
-							<input type="text" class="form-control" id="addr"  name="data[ServiceRequest][addr]" required>
-						</div>
-					</div>
-					<input type="hidden" name="packvalue" value="<?php echo isset($packvalue)? $packvalue : ''; ?>">
-					<div class="form-group">        
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-info">Gửi</button>
-						</div>
-					</div>
+						<input type="submit" value="GỬI YÊU CẦU" class="btn btn-info btn-block">
+					</form>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
-	<style type="text/css">
-	.submit_info label{
-		text-transform: uppercase;
-		text-align: left !important;
-	}
-	.submit_info input{
-		border-radius: 3px;
-	}
-	.submit_info input[type=date]{
-		width: 160px;
-	}
-	.submit_info .error{
+</div>
+<style type="text/css">
+.centered-form{
+	margin-top: 60px;
+}
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+.send_info{
+	background-color: #2A363F;
+	padding-bottom: 40px;
+}
+input[type=submit]{
+	display: block;
+	margin:auto;
+	width: 200px !important;
+}
+.error{
+		margin-left: 5px;
 		color:#ea1e1e;
 		padding: 5px 0px;
-	}
-	.submit_info .package_info{
-		margin-top: 30px;
-	}
-	.submit_info .package_name{
-		margin-top: 20px;
-	}
-	.submit_info h4{
-		margin: 30px auto 30px auto;
-	}
-	.submit_info button{
-		display: block;
-		margin: auto;
-	}
+}
 </style>
