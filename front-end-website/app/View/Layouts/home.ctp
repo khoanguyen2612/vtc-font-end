@@ -40,7 +40,7 @@
                             </li>
                             <?php } else { ?>
                                 <li>
-                                    <a href="<?php //echo $this->Html->url(array('controller' => 'Members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php //echo $this->Html->url(array('controller' => 'Members', 'action' => 'register'), true); ?>">Đăng Ký</a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'register'), true); ?>">Đăng Ký</a>
                                 </li>
                             <?php } ?>
                         </ul>

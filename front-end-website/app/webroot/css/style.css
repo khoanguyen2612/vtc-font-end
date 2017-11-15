@@ -85,10 +85,20 @@ div.personal-info .button-info{
 	padding-left: 30px;
 }
 .topnav ul.menu-user{
+	background-color: #2A363F;
 	left: 30px;
+	margin: 9px 0 0;
 }
 .topnav ul.menu-user li{
 	padding: 0px;
+}
+.topnav ul.menu-user li a{
+	color: #fff;
+	padding: 3px 8px;
+	background-color: inherit;
+}
+.topnav ul.menu-user li a:hover{
+	background-color: #bdf9bb;
 }
 /*---*/
 
