@@ -82,7 +82,13 @@ div.personal-info .button-info{
 	font-weight: 700;
 }
 .topnav li{
-	/*padding-left: 30px !important;*/
+	padding-left: 30px;
+}
+.topnav ul.menu-user{
+	left: 30px;
+}
+.topnav ul.menu-user li{
+	padding: 0px;
 }
 /*---*/
 

@@ -26,37 +26,23 @@
                             <li><a href="">Giới thiệu</a></li>
                             <li><a href="">Liên hệ</a></li>
                             <li><a href="">Tuyển dụng</a></li>
-                            <!-- <li>
-                                <a href="<?php //echo $this->Html->url(array('controller' => 'Members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php //echo $this->Html->url(array('controller' => 'Members', 'action' => 'register'), true); ?>">Đăng Ký</a>
-                            </li> -->
                             <?php if (isset($login)) { ?>
-
-                                <li class="hover_bg">
-                                    <ul class="">
-                                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                <?php echo "<span class='glyphicon glyphicon-user'></span>  "; echo $login;?><b class="caret"></b></a>
-                                            <ul class="dropdown-menu menu-user">
-
-                                                <li>
-                                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => $profile), true); ?>">
-                                                        <span class="glyphicon glyphicon-wrench"></span> Cài đặt</a></li>
-                                                <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ
-                                                        hỗ trợ</a></li>
-                                                <li>
-                                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'logout'), true); ?>"><span
-                                                                class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <?php echo "<span class='glyphicon glyphicon-user'></span>  "; echo $login;?><b class="caret"></b></a>
+                                <ul class="dropdown-menu menu-user">
+                                <li>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => $profile), true); ?>"><span class="glyphicon glyphicon-wrench"></span> Cập Nhật Thông Tin Tài Khoản</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ hỗ trợ</a></li>
+                                <li>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'logout'), true); ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
                                 </li>
+                                </ul>
+                            </li>
                             <?php } else { ?>
-                                <li class="hover_bg">
-                                    
-                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'login'), true); ?>"><span class='glyphicon glyphicon-user'></span> Đăng nhập | </a>
-                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'register'), true); ?>">Đăng ký</a>
+                                <li>
+                                    <a href="<?php //echo $this->Html->url(array('controller' => 'Members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php //echo $this->Html->url(array('controller' => 'Members', 'action' => 'register'), true); ?>">Đăng Ký</a>
                                 </li>
                             <?php } ?>
-
                         </ul>
                     </div>
                 </div>
