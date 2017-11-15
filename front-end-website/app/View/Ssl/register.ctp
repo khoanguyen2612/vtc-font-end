@@ -70,7 +70,7 @@
 		           		</form>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6" >
 					<div class="ssl-reg">
 						<?php echo $this->Form->create('ServiceRequest',array("url" => array('controller' => 'ssl','action' => 'register'))); ?>
 							<div class="get_account_info ssl-02">
