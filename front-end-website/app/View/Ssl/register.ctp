@@ -2,15 +2,10 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <?php echo $this->Html->css('ssl.css'). "\n"; ?>
-	<div class="pay_step">
-		<?php echo $this->Html->image('SSL.png',array('class'=>'img-responsive')); ?>
-	</div>
 	<div class="ssl-procedure ssl-register">
 		<div class="container">
 			
 			<div class="row ssl-step ">
-			<?php echo $this->Form->create('ServiceRequest',array("url" => array('controller' => 'ssl','action' => 'register'))); 
-			?>
 				<div class="col-xs-12 text-center">
 					<h3><b>GÓI SSL LỰA CHỌN</b></h3>
 				</div>
@@ -18,11 +13,7 @@
 					<div class="ssl-reg">
 						<div class="ssl-01">
 							<strong>
-							<select id="" name="data[ServiceRequest][ssl_id]" class='ssl_choise'>
-								<!-- <option value="0">ALPHA SSL</option>
-								<option value="1" selected='selected'>DOMAIN SSL</option>
-								<option value="2">ORGANIZATION SSL</option>
-								<option value="3">EXTENDED SSL</option> -->
+							<select id="ssl_choise" name="ssl_id" class='ssl_choise' >
 								<?php foreach ($ssl as $item) {
 									if(isset($ssl_id)&&$ssl_id==$item['ProductPrice']['id']){
 										echo '<option selected value="'.$item['ProductPrice']['id'].'">'.$item['ProductPrice']['product_name'].'</option>';
@@ -33,93 +24,143 @@
 							</select>
 							</strong>
 						</div>
+						<?php echo $this->Session->flash();?> 
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="ssl-reg">
+						<?php echo $this->Form->create('Account',array("url" => array('controller' => 'ssl','action' => 'register'))); ?>
 						<div class="get_account_info ssl-02">
 							<label>
 								<i></i>
 								Thông tin liên hệ
 							</label>
 							<!-- <form action="" method=""> -->
-							<?php echo $this->Session->flash();?> 
+
+							<input name="data[ssl_id]" type="hidden" value="" class="value_ssl_id">
 								<div class="form-group">
-									<label  class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Họ tên:</label>
-									<!-- <input type="text" name="name" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<?php
-							                echo $this->Form->input('name',array(
-							                    'type' => 'text',
-							                    'label' => false,
-							                    'placeholder' => 'Nhập tên',
-							                    'class' => 'form-control',
-							                    'required' => true,
-							                    ));
-							              ?>
-						            </div>
+									<?php
+						                echo $this->Form->input('nickname',array(
+						                    'type' => 'text',
+						                    'label' => 'Tên đăng nhập:',
+						                    'class' => 'form-control',
+						                    'required' => true,
+						                    ));
+						            ?>
 								</div>
 								<div class="form-group">
-									<label  class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Email:</label>
-									<!-- <input type="email" name="email" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<?php
-											echo $this->Form->input('email',array(
-												'type' => 'email',
-												'class' => 'form-control',
-												'label' => false,
-												'placeholder' => 'Nhập email',
-												'required' => true,
-											));
-							            ?>						            </div>
-								</div>
-								<div class="form-group">
-									<label  class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Điện thoại:</label>
-									<!-- <input type="text" name="phonenumber" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<?php
-											echo $this->Form->input('phone',array(
-												'type' => 'text',
-												'class' => 'form-control',
-												'label' => false,
-												'placeholder' => 'Nhập số điện thoại',
-												'required' => true,
-											));
-										?>
-									</div>
-								</div>
-								<div class="form-group">
-									<label  class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Công ty:</label>
-									<!-- <input type="text" name="organization" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<?php
-											echo $this->Form->input('company',array(
-												'type' => 'text',
-												'class' => 'form-control',
-												'label' => false,
-												'placeholder' => 'Nhập tên tổ chức',
-												'required' => true,
-											));
-										?>
-									</div>
+									<?php
+										echo $this->Form->input('login_password',array(
+											'type' => 'password',
+											'class' => 'form-control',
+											'label' => 'Mật khẩu:',
+											'required' => true,
+										));
+						            ?>		
 								</div>
 							
 						</div>
+						<div align="center">
+							<?php
+								echo $this->Form->button('ĐĂNG NHẬP',array(
+								'class' => 'btn btn-ssl',
+								));
+							?>
+		               </div>
+		           		</form>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="ssl-reg">
+						<?php echo $this->Form->create('ServiceRequest',array("url" => array('controller' => 'ssl','action' => 'register'))); ?>
+							<div class="get_account_info ssl-02">
+								<label>
+									<i></i>
+									Thông tin liên hệ
+								</label>
+								<!-- <form action="" method=""> -->
+								<input name="data[ssl_id]" type="hidden" value="" class="value_ssl_id">
+									<div class="form-group">
+										<label  class="col-lg-3 col-md-3 col-sm-4 col-xs-4">Họ tên:</label>
+										<!-- <input type="text" name="name" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
+										<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+											<?php
+								                echo $this->Form->input('name',array(
+								                    'type' => 'text',
+								                    'label' => false,
+								                    'placeholder' => 'Nhập tên',
+								                    'class' => 'form-control',
+								                    'required' => true,
+								                    ));
+								              ?>
+							            </div>
+									</div>
+									<div class="form-group">
+										<label  class="col-lg-3 col-md-3 col-sm-4 col-xs-4">Email:</label>
+										<!-- <input type="email" name="email" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
+										<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+											<?php
+												echo $this->Form->input('email',array(
+													'type' => 'email',
+													'class' => 'form-control',
+													'label' => false,
+													'placeholder' => 'Nhập email',
+													'required' => true,
+												));
+								            ?>						            
+								        </div>
+									</div>
+									<div class="form-group">
+										<label  class="col-lg-3 col-md-3 col-sm-4 col-xs-4">Điện thoại:</label>
+										<!-- <input type="text" name="phonenumber" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
+										<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+											<?php
+												echo $this->Form->input('phone',array(
+													'type' => 'text',
+													'class' => 'form-control',
+													'label' => false,
+													'placeholder' => 'Nhập số điện thoại',
+													'required' => true,
+												));
+											?>
+										</div>
+									</div>
+									<div class="form-group">
+										<label  class="col-lg-3 col-md-3 col-sm-4 col-xs-4">Công ty:</label>
+										<!-- <input type="text" name="organization" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
+										<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+											<?php
+												echo $this->Form->input('company',array(
+													'type' => 'text',
+													'class' => 'form-control',
+													'label' => false,
+													'placeholder' => 'Nhập tên tổ chức',
+													'required' => true,
+												));
+											?>
+										</div>
+									</div>
+								
+							</div>
+							<div align="center">
+								<?php
+									echo $this->Form->button('ĐĂNG KÝ NGAY',array(
+									'class' => 'btn btn-ssl',
+									));
+								?>
+	               			</div>
+               			</form>
 
 					</div>
 				</div>
-			<!-- <h2><a href="#" class="btn btn-ssl"><b>ĐĂNG KÝ NGAY</b></a><br></h2> -->
-				<div align="center">
-					<?php
-						echo $this->Form->button('ĐĂNG KÝ NGAY',array(
-						'class' => 'btn btn-ssl',
-						));
-					?>
-               </div>
-			</form>
+			
 			</div>
 
 		</div>	
 	</div>
 <style type="text/css">
 	.ssl-step .ssl-reg{
-		margin: 0px 13%;
+		/*margin: 0px 13%;*/
 	}
 	.ssl_choise {
 		background: #005faf;
@@ -136,7 +177,7 @@
 	}
 	.ssl-02 .form-group {
 		margin: 20px 0px;
-		height: 30px;
+		min-height: 30px;
 	}
 	.form-group input{
 		padding:5px;	
@@ -149,3 +190,15 @@
     color:#c90425;
   }
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+	    var ssl_id;
+	    ssl_id = $("#ssl_choise").val();
+		jQuery(".value_ssl_id").val(ssl_id);
+	    $("#ssl_choise").change(function(){	    	
+	    	ssl_id = $("#ssl_choise").val();
+	    	jQuery(".value_ssl_id").val(ssl_id);
+	    	console.log(ssl_id);
+	    });
+	});
+</script>
