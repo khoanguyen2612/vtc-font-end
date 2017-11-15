@@ -86,6 +86,7 @@ div.personal-info .button-info{
 }
 .topnav ul.menu-user{
 	left: 30px;
+	margin: 8px 0 0;
 }
 .topnav ul.menu-user li{
 	padding: 0px;
