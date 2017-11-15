@@ -2,23 +2,13 @@
 	<div class="container-fluid">
 		<h3 class="text-center">KIỂM TRA TÊN MIỀN</h3>
 		<ul class="nav nav-tabs container">
-			<li class="active"><a data-toggle="tab" href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'register_domain'),true);?>">Đăng ký tên miền</a></li>
-			<li><a data-toggle="tab" href="#transfer">Chuyển đổi nhà cung cấp</a></li>
-			<li><a data-toggle="tab" href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'result_search'),true);?>">Kiểm tra tên miền</a></li>
-			<li><a data-toggle="tab" href="#price_menu">Bảng giá tên miền</a></li>
+			<li><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'register_domain'),true);?>">Đăng ký tên miền</a></li>
+			<li><a href="">Chuyển đổi nhà cung cấp</a></li>
+			<li class="active"><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'result_search'),true);?>">Kiểm tra tên miền</a></li>
+			<li><a href="">Bảng giá tên miền</a></li>
 		</ul>
 		<hr>
 		<div class="tab-content container">
-			<div id="regis" class="tab-pane fade">
-				<div class="row">
-					<!-- register domain div -->
-				</div>
-			</div>
-			<div id="transfer" class="tab-pane fade">
-				<div class="row">
-					<!-- transerfer div -->
-				</div>
-			</div>
 			<div id="check" class="tab-pane fade in active">
 				<div class="row">
 					<form action="" method="POST">
@@ -34,7 +24,6 @@
 								<li><input type="radio" name="product_id" value="<?php echo $item['ProductPrice']['id']; ?>"><label><?php echo $item['ProductPrice']['product_name']; ?></label></li>
 								<?php }  ?>
 							</ul>
-
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
 							<p><span>3</span>Click để kiểm tra</p>
@@ -78,10 +67,7 @@
 													<td>X</td>
 													<td>X</td>
 													<td>X</td>
-
 												<?php } ?>
-												
-
 											</tr>
 
 										</tbody>
@@ -90,7 +76,6 @@
 							</div>
 						</div>
 				<?php } ?>
-
 				<?php if(isset($request2)) { ?>
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -108,9 +93,7 @@
 											</tr>
 										</thead>
 										<tbody>
-
 											<tr>
-
 												<?php if ($output['status'] == "available"){ ?>
 													<td><?php echo $request2 ?></td>
 													<td><?php echo "Có thể đăng ký"; ?></td>
@@ -118,7 +101,6 @@
 													<td><?php echo $prod_name['ProductPrice']['bk_price'] ?></td>
 													<td><?php echo $prod_name['ProductPrice']['price_transfer'] ?></td>
 													<td><a class="btn btn-success" href="#" role="button">Đặt mua</a></td>
-
 												<?php } else { ?>
 													<td><?php echo $request2 ?></td>
 													<td><?php echo "Tên miền đã tồn tại"; ?></td>
@@ -126,23 +108,14 @@
 													<td>X</td>
 													<td>X</td>
 													<td>X</td>
-
 												<?php } ?>
-												
-
 											</tr>
-
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</div>
 				<?php } ?>
-			</div>
-			<div id="price_menu" class="tab-pane fade">
-				<div class="row">
-					<!-- price_dmain div -->
-				</div>
 			</div>
 		</div>
 	</div>

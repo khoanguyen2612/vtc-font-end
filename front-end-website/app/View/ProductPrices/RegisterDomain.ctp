@@ -2,11 +2,21 @@
 		<div class="container-fluid">
 			<h3 class="text-center">ĐĂNG KÍ THÊM TÊN MIỀN</h3>
 			<ul class="nav nav-tabs container">
-				<li class="active"><a data-toggle="tab" href="#regis">Đăng ký tên miền</a></li>
-				<li><a data-toggle="tab" href="#transfer">Chuyển đổi nhà cung cấp</a></li>
-				<li><a data-toggle="tab" href="#check">Kiểm tra tên miền</a></li>
-				<li><a data-toggle="tab" href="#price_menu">Bảng giá tên miền</a></li>
-			</ul>
+	            <li class="active">
+	                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">
+	                 Đăng ký tên miền
+	                </a>
+	            </li>
+	            <li>
+	                <a href="">Chuyển đổi nhà cung cấp</a>
+	            </li>
+	            <li>
+	                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">
+	                Kiểm tra tên miền
+	                </a>
+	            </li>
+	            <li><a href="">Bảng giá tên miền</a></li>
+	        </ul>
 			<hr>
 		</div>
 		<div class="container">
@@ -15,16 +25,16 @@
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<p class="p-add"> Đăng kí tên miền để bảo vệ thương hiệu của bạn</p>
 						</div>
-				<form action="" method="POST">
-						<div>
-							<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-								<input type="text" name="add-domain" class="form-control input-add" placeholder="Nhập tên miền muốn đăng kí...">
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-								<button type="submit" class="btn btn-add-domain">Kiểm tra</button>
-							</div>
-						</div>
-				</form>
+						<form action="" method="POST">
+								<div>
+									<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+										<input type="text" name="add-domain" class="form-control input-add" placeholder="Nhập tên miền muốn đăng kí...">
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+										<button type="submit" class="btn btn-add-domain">Kiểm tra</button>
+									</div>
+								</div>
+						</form>
 						<?php if(isset($request)) { ?>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<p class="p-add"> Kết quả kiểm tra</p>

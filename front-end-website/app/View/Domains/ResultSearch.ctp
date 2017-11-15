@@ -2,11 +2,21 @@
 	<div class="container-fluid">
 		<h3 class="text-center">KIỂM TRA TÊN MIỀN</h3>
 		<ul class="nav nav-tabs container">
-			<li class="active"><a data-toggle="tab" href="#regis">Đăng ký tên miền</a></li>
-			<li><a data-toggle="tab" href="#transfer">Chuyển đổi nhà cung cấp</a></li>
-			<li><a data-toggle="tab" href="#check">Kiểm tra tên miền</a></li>
-			<li><a data-toggle="tab" href="#price_menu">Bảng giá tên miền</a></li>
-		</ul>
+            <li class="active">
+                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">
+                 Đăng ký tên miền
+                </a>
+            </li>
+            <li>
+                <a href="">Chuyển đổi nhà cung cấp</a>
+            </li>
+            <li>
+                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">
+                Kiểm tra tên miền
+                </a>
+            </li>
+            <li><a href="">Bảng giá tên miền</a></li>
+        </ul>
 		<hr>
 		<div class="tab-content container">
 			<div id="regis" class="tab-pane fade">

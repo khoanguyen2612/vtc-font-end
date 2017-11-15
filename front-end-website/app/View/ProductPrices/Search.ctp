@@ -1,23 +1,26 @@
-
 <div class="search-domain">
 		<div class="container-fluid">
 			<h3 class="text-center">KIỂM TRA TÊN MIỀN</h3>
-			<ul class="nav nav-tabs container">
-				<li><a data-toggle="tab" href="#regis">Đăng ký tên miền</a></li>
-				<li><a data-toggle="tab" href="#transfer">Chuyển đổi nhà cung cấp</a></li>
-				<li class="active"><a data-toggle="tab" href="#check">Kiểm tra tên miền</a></li>
-				<li><a data-toggle="tab" href="#price_menu">Bảng giá tên miền</a></li>
-			</ul>
+				<ul class="nav nav-tabs container">
+					<li>
+						<a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'register_domain'),true);?>">
+						Đăng ký tên miền
+						</a>
+					</li>
+					<li>
+						<a href="">Chuyển đổi nhà cung cấp</a>
+					</li>
+					<li class="active">
+						<a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'result_search'),true);?>">
+						Kiểm tra tên miền
+						</a>
+					</li>
+					<li>
+						<a href="">Bảng giá tên miền</a>
+					</li>
+				</ul>
 			<hr>
 			<div class="tab-content container">
-				<div id="regis" class="tab-pane fade ">
-					<h3>regis</h3>
-					<p>Some content.</p>
-				</div>
-				<div id="transfer" class="tab-pane fade">
-					<h3>Menu 1</h3>
-					<p>transfer content in menu 1.</p>
-				</div>
 				<div id="check" class="tab-pane fade in active">
 					<div class="row">
 						<form action="" method="POST">
@@ -25,21 +28,18 @@
 								<p><span>1</span>Nhập các tên miền cần kiểm tra</p>
 								<textarea rows="4" cols="50" name="search"></textarea>
 							</div>
-							<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-								
+							<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">							
 									<ul class="list-inline domain_name">
 										<?php foreach ($data as $item) { ?>
 												<li><input type="radio" name="product_id" value="<?php echo $item['product_price']['id'] ?>"><label><?php echo $item['product_price']['product_name'] ?></label></li>
 										<?php }  ?>
-									</ul>
-								
+									</ul>							
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
 								<p><span>3</span>Click để kiểm tra</p>
 								<button type="submit">Kiểm tra</button>
 							</div>
 						</form>
-
 					</div>
 					<hr>
 					<div class="row">

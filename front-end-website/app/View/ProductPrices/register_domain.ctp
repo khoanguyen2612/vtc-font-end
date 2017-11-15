@@ -3,14 +3,20 @@
     <div class="container-fluid">
         <h3 class="text-center">ĐĂNG KÍ THÊM TÊN MIỀN</h3>
         <ul class="nav nav-tabs container">
-            <li class="active"><a data-toggle="tab"
-                                  href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">Đăng
-                    ký tên miền</a></li>
-            <li><a data-toggle="tab" href="#transfer">Chuyển đổi nhà cung cấp</a></li>
-            <li><a data-toggle="tab"
-                   href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">Kiểm
-                    tra tên miền</a></li>
-            <li><a data-toggle="tab" href="#price_menu">Bảng giá tên miền</a></li>
+            <li class="active">
+                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">
+                 Đăng ký tên miền
+                </a>
+            </li>
+            <li>
+                <a href="">Chuyển đổi nhà cung cấp</a>
+            </li>
+            <li>
+                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">
+                Kiểm tra tên miền
+                </a>
+            </li>
+            <li><a href="">Bảng giá tên miền</a></li>
         </ul>
         <hr>
     </div>
@@ -31,19 +37,15 @@
                         </div>
                     </div>
                 </form>
-
-
                 <?php if (isset($request1)) { ?>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p class="p-add"> Kết quả kiểm tra</p>
                 </div>
-
                 <div id="loading" style="display: none; position: static; top: 100px; left: auto">
                     <div class="alert alert-info" role="alert">
-                        <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...
+                        <i class=" fa fa-spinner fa-spin"></i>Đang thêm sản phẩm vào giỏ hàng...
                     </div>
                 </div>
-
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-domain-domain">
                     <div class="table-responsive add-on">
                         <table class="table table-bordered">
@@ -112,12 +114,9 @@
                             </tr>
                             </tbody>
                         </table>
-
-
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <p class="p-add"> Kết quả gợi ý thêm </p>
                         </div>
-
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-domain-domain">
                             <div class="table-responsive add-on">
                                 <table class="table table-bordered">
@@ -241,16 +240,11 @@
                                 <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...
                             </div>
                         </div>
-
-
                         <?php } ?>
-
                         <?php if (isset($request2)) { ?>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <p class="p-add"> Kết quả kiểm tra</p>
                             </div>
-
-
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-domain-domain">
                                 <div class="table-responsive add-on">
                                     <table class="table table-bordered">
@@ -413,7 +407,6 @@
                 </div>
             </div>
         </div>
-
         <?php
         $update_ajax_it = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_it'));
         $str = $this->Html->scriptBlock('
@@ -434,8 +427,6 @@
         echo $str;
         echo $this->Js->writeBuffer();
         ?>
-
-
         <script type="text/javascript">
             $(document).ready(function () {
                 $('.button1').click(function () {
@@ -465,53 +456,53 @@
                 });
             });
         </script>
-        <style type="text/css">
-            .md-cn {
-                width: 100%;
-                padding: 0%;
-                height: auto;
-            }
+<style type="text/css">
+    .md-cn {
+        width: 100%;
+        padding: 0%;
+        height: auto;
+    }
 
-            .modal-lg {
-                padding: unset;
-            }
+    .modal-lg {
+        padding: unset;
+    }
 
-            .modal-header {
-                padding: 20px;
-                background: #e67237;
-                color: #fff;
-            }
+    .modal-header {
+        padding: 20px;
+        background: #e67237;
+        color: #fff;
+    }
 
-            .whois-body {
-                margin: 10px 50px;
-                text-align: left;
+    .whois-body {
+        margin: 10px 50px;
+        text-align: left;
 
-            }
+    }
 
-            .whois-section {
-                margin-bottom: 15px;
+    .whois-section {
+        margin-bottom: 15px;
 
-            }
+    }
 
-            .whois-item {
-                background: #005faf;
-                color: #fff;
-                padding: 10px;
-                font-size: 24px;
-            }
+    .whois-item {
+        background: #005faf;
+        color: #fff;
+        padding: 10px;
+        font-size: 24px;
+    }
 
-            .whois-content {
-                line-height: 30px;
-                padding-top: 10px;
-            }
+    .whois-content {
+        line-height: 30px;
+        padding-top: 10px;
+    }
 
-            .whois-content-1 {
-                line-height: 15px;
-                padding-top: 20px;
-            }
+    .whois-content-1 {
+        line-height: 15px;
+        padding-top: 20px;
+    }
 
-            .dcol {
-                float: left;
-                width: 50%;
-            }
-        </style>
+    .dcol {
+        float: left;
+        width: 50%;
+    }
+</style>
