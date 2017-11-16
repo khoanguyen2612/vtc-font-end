@@ -265,9 +265,12 @@ $config['option_language'] = array("deu" => __("Deutsch"),
 Configure::write(
  'ProductType', array(
    '1' => 'Domain',
-   '2' => 'Window',
-   '3' => 'Linux',
-   '6' => 'Vps')
+   '2' => 'Window Cloud Server',
+   '3' => 'Linux Cloud Server',
+   '4' => 'Cloud Storage',
+   '5' => 'SSL',
+   '6' => 'Co-Location',
+   '7' => 'Value Added Service')
  );
  
 Configure::write(
