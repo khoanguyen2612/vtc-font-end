@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 class InfocartsController extends AppController
 {
     public $uses = array('Account', 'Contact');
-
+    public $components = ('Session');
     public function beforeFilter()
     {
         parent::beforeFilter();
@@ -56,14 +56,13 @@ class InfocartsController extends AppController
                 );
                 $this->Contact->set($this->data);
                 if ($this->Contact->validate_cn()) {
-                    $this->Contact->save($data);
+                    $this->Session->write('info_owner', $data);
                     return $this->redirect(array('controller' => 'carts', 'action' => 'payment'));
                 }else{
                   $this->set('Errors',$this->Contact->validationErrors);
               }
           } else
           if (!empty($this->data['Contact']['name_tc'])) {
-            pr($this->data);
             $data = array(
                 array(
                     'lname' => $this->data['Contact']['name_tc'],
@@ -108,7 +107,7 @@ class InfocartsController extends AppController
             );
             $this->Contact->set($this->data);
             if ($this->Contact->validate_tc()) {
-              if(  $this->Contact->saveMany($data))
+                $this->Session->write('info_owner', $data);
                 $this->redirect(array('controller' => 'carts', 'action' => 'payment'));
         }else{
          $this->set('Errors',$this->Contact->validationErrors);
