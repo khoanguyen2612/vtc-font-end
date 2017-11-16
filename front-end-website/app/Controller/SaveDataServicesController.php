@@ -3,7 +3,6 @@ App::uses('AppController', 'Controller');
 class SaveDataServicesController extends AppController{
 
 	public $uses = array('ServiceRequest','Staticpages');
-	public $components = array('Session');
 
 	public function index(){
 		$this->set('title_for_layout','Dịch vụ quản trị cloud server');

@@ -2,8 +2,7 @@
 class CoLocationsController extends AppController{
 
 	public $uses = array('ServiceRequest','Staticpages');
-	public $components = array('Session');
-	
+
 	public function index(){
 		$this->set('title_for_layout', 'Dịch vụ thuê chỗ đặt máy chủ');
 		$content = $this->Staticpages->find('all',array(

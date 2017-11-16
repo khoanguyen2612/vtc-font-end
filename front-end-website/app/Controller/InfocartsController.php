@@ -4,7 +4,6 @@ App::uses('AppController', 'Controller');
 class InfocartsController extends AppController
 {
     public $uses = array('Account', 'Contact');
-    public $components = ('Session');
     public function beforeFilter()
     {
         parent::beforeFilter();
