@@ -216,14 +216,14 @@
 									$date = $item['News']['created_date'];
 									$date1=strtotime(date($date));
 								?>
+									<span><?php echo date('d/m/y',$date1); ?></span>
 									<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'notificion_maintain',$item['News']['id']));?>">
-										<span><?php echo date('d/m/y',$date1); ?></span>
 										<span><?php echo $item['News']['title'] ?></span>
 									</a>
 								</li>
 							<?php } ?>
-							<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>" class="see_more">Xem thêm</a>
 						</ul>
+						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>" class="see_more">Xem thêm</a>
 					</div>
 				</div>
 				<div class="line-devide hidden-xs hidden-sm"></div>
@@ -233,18 +233,15 @@
 						<ul class="list-group">
 							<?php foreach ($notif as $item) { ?>
 								<li class="list-group-item">
-								<?php 
-									$date = $item['News']['created_date'];
-									$date1=strtotime(date($date));
-								?>
-									<a href="">
+								<?php $date = $item['News']['created_date']; $date1=strtotime(date($date));?>
 										<span><?php echo date('d/m/y',$date1); ?></span>
+									<a href="">
 										<span><?php echo $item['News']['title'] ?></span>
 									</a>
 								</li>
 							<?php } ?>
-							<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>" class="see_more">Xem thêm</a>
 						</ul>
+						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>" class="see_more">Xem thêm</a>
 					</div>
 				</div>
 			</div>
