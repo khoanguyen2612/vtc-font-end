@@ -381,11 +381,13 @@ div.cloud-config p{
 .contact_us span,.contact_us p{
 	color: #fff;
 	font-weight: 400;
+	font-size: 16px;
+	margin: 0px;
 }
 .contact_us h5{
 	color: #fdf405;
 	margin-top: 20px;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 500;
 }
 .sale,.messa_sp,.tech_sp{

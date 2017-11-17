@@ -166,10 +166,9 @@
 					<div class="img_radius">
 						<?php echo $this->Html->image('sale.jpeg') ?>
 					</div>
-					<h5>Nhân viên kinh doanh 1</h5>
+					<h5>Nhân viên kinh doanh</h5>
 					<p>Ms Thiên Thanh: </p>
 					<span>(08) 4450 3077</span>
-					<h5>Nhân viên kinh doanh 2</h5>
 					<p>Ms Thiên Thanh:</p>
 					<span> (08) 4450 3077</span>
 				</div>
