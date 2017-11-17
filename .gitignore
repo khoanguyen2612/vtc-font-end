@@ -1,13 +1,4 @@
 
-# Created by https://www.gitignore.io/api/cakephp
-# CakePHP 2
+database.php
 
-/app/tmp/*
-/app/Config/core.php
-/app/Config/database.php
-/vendors/*
-/front-end-website/app/Config/database.php
 
-# End of https://www.gitignore.io/api/cakephp
-.gitignore
-/front-end-website/.gitignore
