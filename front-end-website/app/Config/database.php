@@ -69,10 +69,10 @@ class DATABASE_CONFIG {
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
-        'host' => '127.0.0.1',
-        'login' => 'root',
-        'password' => '',
-        'database' => 'vtc',
+        'host' => '192.168.1.146',
+        'login' => 'vtc_user',
+        'password' => '123456@',
+        'database' => 'dev_vtc_cloud',
         'prefix' => '',
         'encoding' => 'utf8',
     );
