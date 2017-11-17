@@ -112,9 +112,20 @@
                         </li> 
                         <li  class="dropdown"><a href="">CLOUD STORAGE</a></li>
                         <li  class="dropdown">
-                            <a href="<?php echo $this->Html->url(array('controller' => 'ssl', 'action' => 'index'), true); ?>">
-                                SSL
-                            </a>
+                            <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">SSL</a>
+                             <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'DefineSsl', 'action' => 'index'), true); ?>">
+                                        SSL là gì ?
+                                    </a>
+                                </li> 
+                                <li>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'ssl', 'action' => 'index'), true); ?>">
+                                        Đăng Ký dịch vụ SSL
+                                    </a>
+                                </li> 
+                            </ul>
                         </li>
                         <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller' => 'CoLocations', 'action' => 'index'), true); ?>">CO-LOCATION</a></li>
                         <li  class="dropdown">
