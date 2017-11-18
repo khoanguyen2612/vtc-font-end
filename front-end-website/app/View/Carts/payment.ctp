@@ -1,21 +1,3 @@
-<?php /*echo $this->element('home'); */ ?>
-<?php /*echo Debugger::dump($products); */ ?>
-
-<?php //echo Debugger::dump($hostings); ?>
-
-<!--// <script type="text/javascript">
-
-    $(document).ready( function () {
-        console.log( "ready!" );
-        //alert("ready!");
-    });
-
-    function change_id() {
-
-    };
-
-</script>//-->
-
 
     <div class="cart">
         <div class="process">
@@ -64,7 +46,7 @@
                                        id="txtUrlReturn"/>
                                 <input name="txtSecret" type="text" value="<?php echo "VtcPay_Codelovers_2017" ?>"
                                        id="txtSecret"/>
-                                <input name="txtTotalAmount" type="text" value="<?php echo round($total_payment/100) ?>"
+                                <input name="txtTotalAmount" type="text" value="<?php echo round($total_payment) ?>"
                                        id="txtTotalAmount"/>
                                 <input name="txtCurency" type="text" value="VND" id="txtCurency"/> &nbsp;<i>VND/USD</i>
                                 <input name="txtWebsiteID" type="text" value="10059" id="txtWebsiteID"/>

@@ -639,10 +639,9 @@ class CartsController extends AppController
                 $total_money_finish = $total_money - $total_money_vat;
 
                 $this->response->body(json_encode(array(
-                    'total_money' => $total_money,
-                    'total_money_vat' => $total_money_vat,
-                    'total_money_finish' => $total_money_finish,
-
+                    'total_money' =>  number_format( $total_money,0,',','.'),
+                    'total_money_vat' => number_format( $total_money_vat,0,',','.'),
+                    'total_money_finish' => number_format( $total_money_finish,0,',','.'),
                 )));
 
                 $this->response->send();

@@ -14,7 +14,7 @@
     <p class="active"><?php echo $cart['product']['quantity']; ?></p>
 </td>
 <td>
-    <p><?php echo $cart['product']['price']; ?> VNĐ</p>
+    <p><?php echo number_format($cart['product']['price'],0,',','.'); ?> VNĐ</p>
     <div class="product-removal">
         <button type="button" class="remove-item" data-toggle="modal"
                 data-target="#myModal<?=$cart['product']['id'] ?>">

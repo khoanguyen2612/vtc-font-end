@@ -98,8 +98,8 @@
                                     </td>
                                     <td><?php echo $order_detail['quantity']; ?></td>
                                     <td>
-                                        <p class="line-through"><?php echo $order_detail['discount']; ?> VNĐ</p>
-                                        <h4><?php echo $order_detail['price']; ?> VNĐ</h4>
+                                        <p class="line-through"><?php echo number_format( $order_detail['discount'],0,',','.') ; ?> VNĐ</p>
+                                        <h4><?php echo number_format( $order_detail['price'],0,',','.') ; ?> VNĐ</h4>
                                     </td>
                                 </tr>
                                 <?php
@@ -113,15 +113,15 @@
                                 <tbody>
                                     <tr>
                                         <td>Tổng cộng(Chưa VAT): </td>
-                                        <td> <?php echo $total_money; ?> VNĐ</td>
+                                        <td> <?php echo number_format( $total_money,0,',','.'); ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td>Số tiền giảm giá: </td>
-                                        <td> - <?php echo $total_money - $total_payment; ?> VNĐ</td>
+                                        <td> - <?php echo number_format( ($total_money - $total_payment),0,',','.'); ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td> VAT: </td>
-                                        <td><?php echo $total_vat; ?> VNĐ</td>
+                                        <td><?php echo number_format( $total_vat,0,',','.'); ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td> Mã giảm giá: </td>
@@ -129,7 +129,7 @@
                                     </tr>
                                     <tr class="into-money">
                                         <td>Thành tiền:</td>
-                                        <td class="into-total"> <?php echo $total_payment; ?> VNĐ</td>
+                                        <td class="into-total"> <?php echo number_format( $total_payment,0,',','.'); ?> VNĐ</td>
                                     </tr>
                                 </tbody>
                             </table>

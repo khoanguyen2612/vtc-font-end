@@ -4,5 +4,5 @@
 -->
 
 
-<?php echo $total_money; ?>
+<?php echo  number_format( $total_money,0,',','.'); ?>
 

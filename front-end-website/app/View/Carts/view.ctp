@@ -1,14 +1,4 @@
 
-    <!--// <script type="text/javascript">
-        $(document).ready( function () {
-            console.log( "ready!" );
-            //alert("ready!");
-        });
-        function change_id() {
-        };
-    </script>//-->
-
-
     <div class="cart">
         <div class="process">
             <div class="process">
@@ -56,7 +46,7 @@
                                                 <p class="active"><?php echo $order_detail['quantity']; ?></p>
                                             </td>
                                             <td>
-                                                <p><?php echo $order_detail['price']; ?> VNĐ</p>
+                                                <p><?php echo number_format( $order_detail['price'],0,',','.' ); ?> VNĐ</p>
                                                 <div class="product-removal">
                                                     <button type="button" class="remove-item" data-toggle="modal"
                                                             data-target="#myModal<?php echo $modal ?>">
@@ -242,7 +232,7 @@
                                                     <tr>
                                                         <td>
                                                             <h4><?php echo $hosting['product_name']; ?> </h4>
-                                                            <p>Giảm <?php echo $hosting['price_2']; ?> vnđ/năm</p>
+                                                            <p>Giảm <?php echo number_format( $hosting['price_2'],0,',','.'); ?> vnđ/năm</p>
                                                         </td>
                                                         <td>
                                                             <?php
@@ -258,8 +248,8 @@
                                                                 );
                                                             ?>
 
-                                                            <h2><?php echo $hosting['price_1']; ?> vnđ/năm</h2>
-                                                            <p class="p1"><?php echo $hosting['price']; ?>VND/năm</p>
+                                                            <h2><?php echo number_format( $hosting['price_1'] ,0,',','.'); ?> vnđ/năm</h2>
+                                                            <p class="p1"><?php echo number_format( $hosting['price'],0,',','.'); ?> VND/năm</p>
 
                                                             <?php
 
@@ -364,7 +354,7 @@
                                     <tbody>
                                     <tr>
                                         <td>Tạm tính (Chưa VAT):</td>
-                                        <td id="total-money"><?php echo $total_money; ?> VNĐ</td>
+                                        <td id="total-money"><?php echo number_format($total_money,0,',','.' ); ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td>Giảm giá:</td>
@@ -372,12 +362,12 @@
                                     </tr>
                                     <tr>
                                         <td>VAT (10%)</td>
-                                        <td id="total-money-vat"><?php echo round($total_money * 10 / 100); ?> VNĐ</td>
+                                        <td id="total-money-vat"><?php echo number_format(round($total_money * 10 / 100),0,',','.' ); ?> VNĐ</td>
                                     </tr>
                                     <tr>
                                         <td><b>Thành tiền:</b></td>
                                         <td id="total-money-finish">
-                                            <b><?php echo $total_money - round($total_money * 10 / 100); ?> VNĐ</b></td>
+                                            <b><?php echo number_format(($total_money - round($total_money * 10 / 100)),0,',','.' ) ; ?> VNĐ</b></td>
                                     </tr>
 
                                     <tr>

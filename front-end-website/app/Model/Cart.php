@@ -45,9 +45,9 @@ class Cart extends AppModel
        /* if (!is_null($all_cart) && is_array($all_cart)) {
             $all_item = array_shift($all_cart);  // shift an element off the beginning of array
         }
+        */
 
-        return count($all_item);*/
-        return count($all_cart) - 1;
+        return count($all_cart);
     }
 
     /*
