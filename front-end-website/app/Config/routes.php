@@ -77,6 +77,9 @@
     Router::connect('/cart/supporters_ajax', array('controller' => 'Carts', 'action' => 'supporters_ajax'));
     Router::connect('/carts/supporters_ajax', array('controller' => 'Carts', 'action' => 'supporters_ajax'));
 
+    Router::connect('/cart/ajax_otp_change_year_money', array('controller' => 'Carts', 'action' => 'ajax_otp_change_year_money'));
+    Router::connect('/carts/ajax_otp_change_year_money', array('controller' => 'Carts', 'action' => 'ajax_otp_change_year_money'));
+
     Router::connect('/cart/payment', array('controller' => 'Carts', 'action' => 'payment'));
     Router::connect('/carts/payment', array('controller' => 'Carts', 'action' => 'payment'));
 

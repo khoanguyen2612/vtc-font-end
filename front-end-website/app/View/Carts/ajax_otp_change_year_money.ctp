@@ -4,6 +4,6 @@
 -->
 
 
-<?php echo $n_item; ?>
+<?php echo number_format( $total_money,0,',','.'); ?>
 
 

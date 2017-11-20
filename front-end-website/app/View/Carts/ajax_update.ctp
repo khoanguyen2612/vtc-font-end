@@ -8,13 +8,20 @@
     <p class="vps"><?php echo $cart['product']['type']; ?></p>
 </td>
 <td>
-    <!--<select disabled class="hidden">
-        <option> năm</option>
-    </select>-->
-    <p class="active"><?php echo $cart['product']['quantity']; ?></p>
+    <select name="product_year" class="select_opt" id="id_opt_<?=$cart['product']['id'] ?>">
+        <option> 1 năm</option>
+        <option> 2 năm</option>
+        <option> 3 năm</option>
+        <option> 4 năm</option>
+        <option> 5 năm</option>
+    </select>
+    <p class="active hidden"><?php echo $cart['product']['quantity']; ?></p>
 </td>
 <td>
-    <p><?php echo number_format($cart['product']['price'],0,',','.'); ?> VNĐ</p>
+    <p id="id_opt_<?=$cart['product']['id'] ?>">
+        <?php echo number_format($cart['product']['price'],0,',','.'); ?> VNĐ
+    </p>
+
     <div class="product-removal">
         <button type="button" class="remove-item" data-toggle="modal"
                 data-target="#myModal<?=$cart['product']['id'] ?>">
@@ -49,10 +56,8 @@
                     <h4>Bạn muốn xóa dịch vụ này? </h4>
                 </div>
                 <div class="modal-body">
-                    <button type="submit" class="btn btn-success" id="remove-product">Đồng ý
-                    </button>
-                    <button type="submit" class="btn btn-danger" data-dismiss="modal">Hủy
-                    </button>
+                    <button type="submit" class="btn btn-success" id="remove-product">Đồng ý </button>
+                    <button type="submit" class="btn btn-danger" data-dismiss="modal">Hủy </button>
                 </div>
             </div>
         </div>

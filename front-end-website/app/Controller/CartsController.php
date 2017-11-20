@@ -205,8 +205,8 @@ class CartsController extends AppController
             array( 'order' => array('Order.id' => 'asc') )
         );*/
 
-        $this->Order->setDataSource('db_vtc_cloud');
-        $this->Product->setDataSource('db_vtc_cloud');
+        //$this->Order->setDataSource('db_vtc_cloud');
+        //$this->Product->setDataSource('db_vtc_cloud');
 
 
         $cart = $this->Cart->readCart();
@@ -272,14 +272,16 @@ class CartsController extends AppController
                 $cart['list'][] = $item;
                 $tmp['order'] = array('id' => $order_id);
                 $tmp['product'] = $item;
+                //number year exp
+                $tmp['year_exp'] = 1;
+                //add new field
                 $cart[] = $tmp;
             }
 
-            // ksort($cart);
             // re soft list key of array
             // sort($cart);
-
             $this->Cart->saveCart($cart);
+
         };
 
         $conditions = array(
@@ -410,6 +412,10 @@ class CartsController extends AppController
                 $order_detail['product_name'] = $cart['product']['product_name'];
                 // for view layout
                 $order_detail['type'] = $p_type;
+                // for view layout
+                //number year exp
+                $order_detail['year_exp'] = 1;
+
                 $cart['product'] = $order_detail;
 
             }
@@ -649,7 +655,64 @@ class CartsController extends AppController
 
             }
         }
+    }
 
+    public function ajax_otp_change_year_money()
+    {
+
+        $this->autoRender = false;
+        $this->request->onlyAllow('ajax'); // No direct access via browser URL
+
+        $resp = $this->request->data;
+
+        if ($this->RequestHandler->isAjax()) {
+            Configure::write('debug', 0);
+        }
+
+        if ($this->RequestHandler->isAjax()) {
+
+            if ($this->request->is('post')) {
+
+                $cart = $this->Cart->readCart();
+
+                if (isset($cart['list']))
+                    $all_item = array_shift($cart);  // shift an element off the beginning of array
+                else
+                    $all_item = $cart;
+
+                $total_money = 0;
+                $products = $all_item;
+
+                if (count($products) > 0) {
+                    foreach ($products as $it) {
+                        $total_money += $it['price'] * $it['quantity'];
+                    }
+                }
+
+                var_dump($cart);
+                //total money for number year product
+                $cost = $resp['price'];
+                $year = $resp['year'];
+
+                $total_money = $total_money;
+
+                $this->Session->delete('total_money');
+                $this->Session->write('total_money', $total_money);
+
+                $total_money_vat = round($total_money * 10 / 100);
+                $total_money_finish = $total_money - $total_money_vat;
+
+                $this->response->body(json_encode(array(
+                    'total_money' =>  number_format( $total_money,0,',','.'),
+                    'total_money_vat' => number_format( $total_money_vat,0,',','.'),
+                    'total_money_finish' => number_format( $total_money_finish,0,',','.'),
+                )));
+
+                $this->response->send();
+                $this->_stop();
+
+            }
+        }
     }
 
     public function gif_code_daily_ajax_sum_money()
