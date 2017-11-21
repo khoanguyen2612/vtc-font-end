@@ -48,6 +48,8 @@
     if (Configure::read('debug') > 0) {
         $duration = '+1 seconds';
     }
+    
+
 
 /**
  * Configure the Error handler used to handle errors for your application. By default
@@ -239,8 +241,8 @@
  * the cake shell command: cake schema create Sessions
  */
 	Configure::write('Session', array(
-		'defaults' => 'php'
-		//'defaults' => 'cake'
+		//'defaults' => 'php'
+		'defaults' => 'cake'
 	));
 
 /**

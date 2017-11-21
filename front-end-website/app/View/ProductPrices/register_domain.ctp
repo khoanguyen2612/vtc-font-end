@@ -452,15 +452,15 @@
                             $('#demo').html(result);
 
                         }
-                    });
-                });
-            });
-        </script>
+})
+})
+})
+</script>
 <style type="text/css">
     .md-cn {
         width: 100%;
-        padding: 0%;
-        height: auto;
+        0%;
+        auto;
     }
 
     .modal-lg {
@@ -487,7 +487,7 @@
     .whois-item {
         background: #005faf;
         color: #fff;
-        padding: 10px;
+        10px;
         font-size: 24px;
     }
 
@@ -503,6 +503,6 @@
 
     .dcol {
         float: left;
-        width: 50%;
+        50%;
     }
 </style>

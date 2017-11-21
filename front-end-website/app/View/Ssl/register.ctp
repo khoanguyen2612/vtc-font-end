@@ -164,8 +164,8 @@
 	}
 	.ssl_choise {
 		background: #005faf;
-		width: 100%;
-		height: 50px;
+		100%;
+		50px;
 		color: #fff;
 		font-size: 20px;
 	}
@@ -184,7 +184,7 @@
 	}
 	.ssl-register h2{
 		text-align: center;
-		margin: 40px;
+		40px;
 	}
   div.error-message{
     color:#c90425;
@@ -199,6 +199,6 @@
 	    	ssl_id = $("#ssl_choise").val();
 	    	jQuery(".value_ssl_id").val(ssl_id);
 	    	console.log(ssl_id);
-	    });
-	});
+})
+})
 </script>

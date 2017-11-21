@@ -39,7 +39,7 @@ $(document).ready(function(){
 		var tis = $(this);
 		$.post(tis.attr('action'),tis.serialize(),function(data){
 			$('#cart-counter').text(data);
-		});
-	});
-});
+})
+})
+})
 </script>

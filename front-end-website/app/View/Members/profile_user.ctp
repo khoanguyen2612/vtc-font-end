@@ -173,6 +173,6 @@
 	    ?><h6 class="text-muted">Click to select</h6>',
 	    layoutTemplates: {main2: '{preview} {remove} {browse}'},
 	    allowedFileExtensions: ["jpg", "png", "gif"]
-	});
-</script>
+    })
+    </script>
 <?php echo $this->fetch('script'); ?>

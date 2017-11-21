@@ -27,11 +27,11 @@
 			a {font-size: 120%}
 			li {line-height: 140%}
 			.test-menu {float:left; margin-right: 24px;}
-			.test-results {float:left; width: 67%;}
+			.test-results {float:left; 67%;}
 			ul.tests {margin: 0; font-size:12px;}
 			ul.tests li {
 				list-style: none;
-				margin: 14px 0;
+				14px 0;
 				padding-left: 20px;
 			}
 			ul.tests li span {
@@ -52,7 +52,7 @@
 				background: #fff2f2 url(<?php echo $baseDir; ?>img/test-fail-icon.png) 5px 5px no-repeat;
 				border-top: 1px dotted red;
 				border-bottom: 1px dotted red;
-				padding:5px 10px 2px 25px;
+				5px 10px 2px 25px;
 			}
 			ul.tests li.pass {
 				background-color: #f2fff2;
@@ -75,7 +75,7 @@
 
 			div.code-coverage-results div.code-line {
 				padding-left:5px;
-				display:block;
+				block;
 				margin-left:10px;
 			}
 			.coverage-toggle {
@@ -89,17 +89,17 @@
 			div.code-coverage-results div.uncovered span.content { background:#ecc; }
 			div.code-coverage-results div.covered span.content { background:#cec; }
 			div.code-coverage-results div.ignored span.content { color:#aaa; }
-			div.code-coverage-results div:hover {
+			div.code-coverage-results hover {
 				background:#e8e8e8;
-				cursor: pointer;
+				pointer;
 			}
 			div.code-coverage-results div.covered:hover span.content { background:#b4edb4;}
 			div.code-coverage-results div.uncovered:hover span.content { background:#edb4b4;}
 			div.code-coverage-results span.line-num {
 				color:#666;
-				display:block;
-				float:left;
-				width:20px;
+				block;
+				left;
+				20px;
 				text-align:right;
 				margin-right:5px;
 			}
@@ -119,8 +119,8 @@
 			div.code-coverage-results div.realstart { margin-top:0px; }
 			div.code-coverage-results p.note {
 				color:#bbb;
-				padding:5px;
-				margin:5px 0 10px;
+				5px;
+				5px 0 10px;
 				font-size:10px;
 			}
 			div.code-coverage-results span.result-bad { color: #a00; }
@@ -129,7 +129,7 @@
 
 			div#version {
 				padding-top: 2px;
-				float: right;
+				right;
 				padding-left: 20px;
 			}
 		</style>

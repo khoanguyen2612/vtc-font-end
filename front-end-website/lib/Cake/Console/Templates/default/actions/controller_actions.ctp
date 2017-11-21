@@ -36,10 +36,10 @@
  */
 	public function <?php echo $admin ?>view($id = null) {
 		if (!$this-><?php echo $currentModelName; ?>->exists($id)) {
-			throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'));
-		}
-		$options = array('conditions' => array('<?php echo $currentModelName; ?>.' . $this-><?php echo $currentModelName; ?>->primaryKey => $id));
-		$this->set('<?php echo $singularName; ?>', $this-><?php echo $currentModelName; ?>->find('first', $options));
+    throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'))
+}
+$options = array('conditions' = > array('<?php echo $currentModelName; ?>.'.$this - > <?php echo $currentModelName; ?>- > primaryKey = > $id))
+$this->set('<?php echo $singularName; ?>', $this-><?php echo $currentModelName; ?>->find('first', $options));
 	}
 
 <?php $compact = array(); ?>
@@ -54,11 +54,11 @@
 			if ($this-><?php echo $currentModelName; ?>->save($this->request->data)) {
 <?php if ($wannaUseSession): ?>
 				$this->Flash->success(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
+return $this - > redirect(array('action' = > 'index'))
+} else {
 				$this->Flash->error(__('The <?php echo strtolower($singularHumanName); ?> could not be saved. Please, try again.'));
 <?php else: ?>
-				return $this->flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' => 'index'));
+return $this - > flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' = > 'index'))
 <?php endif; ?>
 			}
 		}
@@ -89,22 +89,22 @@
  */
 	public function <?php echo $admin; ?>edit($id = null) {
 		if (!$this-><?php echo $currentModelName; ?>->exists($id)) {
-			throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'));
-		}
+    throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'))
+}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this-><?php echo $currentModelName; ?>->save($this->request->data)) {
 <?php if ($wannaUseSession): ?>
 				$this->Flash->success(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
+return $this - > redirect(array('action' = > 'index'))
+} else {
 				$this->Flash->error(__('The <?php echo strtolower($singularHumanName); ?> could not be saved. Please, try again.'));
 <?php else: ?>
-				return $this->flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' => 'index'));
+return $this - > flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' = > 'index'))
 <?php endif; ?>
 			}
 		} else {
-			$options = array('conditions' => array('<?php echo $currentModelName; ?>.' . $this-><?php echo $currentModelName; ?>->primaryKey => $id));
-			$this->request->data = $this-><?php echo $currentModelName; ?>->find('first', $options);
+    $options = array('conditions' = > array('<?php echo $currentModelName; ?>.'.$this - > <?php echo $currentModelName; ?>- > primaryKey = > $id))
+$this->request->data = $this-><?php echo $currentModelName; ?>->find('first', $options);
 		}
 <?php
 		foreach (array('belongsTo', 'hasAndBelongsToMany') as $assoc):
@@ -133,8 +133,8 @@
 	public function <?php echo $admin; ?>delete($id = null) {
 		$this-><?php echo $currentModelName; ?>->id = $id;
 		if (!$this-><?php echo $currentModelName; ?>->exists()) {
-			throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'));
-		}
+    throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'))
+}
 		$this->request->allowMethod('post', 'delete');
 		if ($this-><?php echo $currentModelName; ?>->delete()) {
 <?php if ($wannaUseSession): ?>
@@ -142,11 +142,11 @@
 		} else {
 			$this->Flash->error(__('The <?php echo strtolower($singularHumanName); ?> could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+return $this - > redirect(array('action' = > 'index'))
 <?php else: ?>
-			return $this->flash(__('The <?php echo strtolower($singularHumanName); ?> has been deleted.'), array('action' => 'index'));
-		} else {
-			return $this->flash(__('The <?php echo strtolower($singularHumanName); ?> could not be deleted. Please, try again.'), array('action' => 'index'));
-		}
+return $this - > flash(__('The <?php echo strtolower($singularHumanName); ?> has been deleted.'), array('action' = > 'index'))
+} else {
+    return $this - > flash(__('The <?php echo strtolower($singularHumanName); ?> could not be deleted. Please, try again.'), array('action' = > 'index'))
+}
 <?php endif; ?>
 	}
