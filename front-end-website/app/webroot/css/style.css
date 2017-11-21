@@ -312,6 +312,12 @@ div.cloud-config p{
 	background: #f2f2f2;
 	margin-top: 50px;
 }
+.our_service h3{
+	color: #2a363f;
+    font-size: 27px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
 /****************mid_slide **************/
 .mid_slide .container-fluid{
 	position: relative;
@@ -449,7 +455,7 @@ div.cloud-config p{
 	padding: 8px 26px;
 }
 .news_area span{
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 500;
 }
 .news_area li{
@@ -464,6 +470,9 @@ div.cloud-config p{
 	margin-top: 20px;
 	border-radius: 8px;
 	padding-bottom: 26px;
+}
+.news_area h4 a{
+	padding-left: 15px;
 }
 .news_area a{
 	color: #2a363f;
