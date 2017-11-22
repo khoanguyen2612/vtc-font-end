@@ -1,3 +1,28 @@
+<SCRIPT LANGUAGE="JavaScript">
+
+//<!-- Begin
+var mikExp = /[$\\@\\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|\!]/;
+function dodacheck(val) {
+var strPass = val.value;
+var strLength = strPass.length;
+var lchar = val.value.charAt((strLength) - 1);
+if(lchar.search(mikExp) != -1) {
+var tst = val.value.substring(0, (strLength) - 1);
+val.value = tst;
+   }
+}
+
+//  End -->
+</script>
+<!-- <script>
+    function a(){
+    // var a = document.getElementById("qwe").value;
+    var a = document.getElementById("input");
+    dodacheck(a);
+}
+</script> -->
+
+
 <div class="banner">
 	<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1920px;height:600px;overflow:hidden;visibility:hidden;background-color:#24262e;">
 		<div data-u="slides" style="cursor:default;position:relative;top:0px;left:400px;width:1520px;height:600px;overflow:hidden;">
@@ -44,19 +69,22 @@
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 				<label>Tìm kiếm tên miền của bạn:</label>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="search">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="search" onKeyUp="a()">
 				<?php echo $this->Form->create('Data',array(
 						"url" => array('controller' => 'ProductPrices','action' => 'register_domain'),
-						'class' => 'form-horizontal',)); 
+						'class' => 'form-horizontal',
+						'name' => 'abc')); 
 				?>
 				<?php
 			        echo $this->Form->input('add-domain',array(
 			            'type' => 'text',
 			            'label' => false,
+			            'name' => 'search',
 			            'placeholder' => 'Viết tên miền của bạn vào đây....',
 			            'required' => true,
 			            'id' => 'input',
-			            'class' => 'form-control'
+			            'class' => 'form-control',
+			            'onKeyUp' => 'javascript:dodacheck(abc.search)',
 			        ));
 			    ?>
 			</div>

@@ -1,3 +1,20 @@
+<SCRIPT LANGUAGE="JavaScript">
+
+<!-- Begin
+var mikExp = /[$\\@\\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|\!\-]/;
+function dodacheck(val) {
+var strPass = val.value;
+var strLength = strPass.length;
+var lchar = val.value.charAt((strLength) - 1);
+if(lchar.search(mikExp) != -1) {
+var tst = val.value.substring(0, (strLength) - 1);
+val.value = tst;
+   }
+}
+
+//  End -->
+</script>
+	
 <div class="search-domain">
 	<div class="container-fluid">
 		<h3 class="text-center">KIỂM TRA TÊN MIỀN</h3>
@@ -11,11 +28,11 @@
 		<div class="tab-content container">
 			<div id="check" class="tab-pane fade in active">
 				<div class="row">
-					<form action="" method="POST">
+					<form name="abc" method="POST">
 						<?php echo $this->Session->flash();?> 
 						<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
 							<p><span>1</span>Nhập các tên miền cần kiểm tra</p>
-							<textarea rows="4" cols="50" name="search"></textarea>
+							<textarea rows="4" cols="50" name="search" onKeyUp="javascript:dodacheck(abc.search);" ></textarea>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
 							<p><span>2</span>Chọn đuôi tên miền cần kiểm tra</p>
