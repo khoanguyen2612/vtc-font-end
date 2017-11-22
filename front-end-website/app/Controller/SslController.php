@@ -29,7 +29,7 @@
 				$ssl=$this->ProductPrice->find('all', array('conditions' => array('ProductPrice.product_type' => "6" ) ));
 				$this->set('ssl',$ssl);
 				if($this->request->is('post')){
-					// pr($this->request->data);
+					pr($this->request->data);
 					if(isset($this->request->data['ServiceRequest'])){
 						$this->request->data['ServiceRequest']['order_type']=3;
 						$this->request->data['ServiceRequest']['ssl_id']=$this->request->data['ssl_id'];
@@ -57,7 +57,6 @@
 										$data['ServiceRequest']['company']=$user['Organization']['organ_name'];
 									}
 									if($this->ServiceRequest->save($data)){
-										$this->Auth->logout();
 										$this->render('complete');
 									}
 								}

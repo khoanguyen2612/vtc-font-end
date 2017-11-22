@@ -154,7 +154,7 @@
                                     </div>
                                 </td>
                                 <td>Ngân hàng TMCP Ngoại Thương (VCB) - SỞ GIAO DỊCH
-                                    Số tài khoả0011001894899
+                                    Số tài khoản: 0011001894899
                                 </td>
                             </tr>
                             <tr>
@@ -168,7 +168,7 @@
                                     </div>
                                 </td>
                                 <td>Ngân hàng TMCP Quân đội(MB) - CN Hai Bà Trưng
-                                    Số tài khoả0551100239007
+                                    Số tài khoản: 0551100239007
                                 </td>
                             </tr>
                             <tr>
@@ -182,7 +182,7 @@
                                     </div>
                                 </td>
                                 <td>Ngân hàng TMCP Xuất nhập khẩu (EXB) - CN Hai Bà Trưng
-                                    Số tài khoả170214851010357
+                                    Số tài khoản: 170214851010357
                                 </td>
                             </tr>
                             <tr>
@@ -196,7 +196,7 @@
                                     </div>
                                 </td>
                                 <td>Ngân hàng TMCP Công thương - CN Chương Dương
-                                    Số tài khoả102010001202443
+                                    Số tài khoản: 102010001202443
                                 </td>
                             </tr>
                             </tbody>

@@ -2,8 +2,8 @@
 <pre><code>
 #header h1 a {
 	display: block;
-	300px;
-	80px;
+	width: 300px;
+	height: 80px;
 }</code></pre>
 <table>
 <th align="right" valign="top"

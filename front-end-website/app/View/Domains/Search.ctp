@@ -65,4 +65,4 @@
             $("#userError").html(userChar);
             $("#userError").html(userTaken);
         }
-})   -- >
+    });   -->

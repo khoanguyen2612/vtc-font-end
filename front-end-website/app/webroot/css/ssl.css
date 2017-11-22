@@ -142,35 +142,6 @@
 	.ssl_choise{
 		background: #005faf;
 	}
-	.ssl-register .get_account_info .text-center h4{
-		color: #f37636;
-		font-weight: bold;
-		margin-bottom: 45px;
-	}
-	.ssl-register .get_account_info .text-center span{
-		font-weight: bold;
-	}
-	.blue{
-		color: #005faf;
-	}
-	.ssl-reg{
-		position: relative;
-	}
-	.ssl-reg .button-ssl{
-		position: absolute;
-		top: 330px;
-		left: 25%;
-
-		/*text-align: center;*/
-	}
-	.ssl-dn-dk{
-		padding: 0px;
-	}
-	.ssl-dn-dk>div{
-		padding: 0px 30px;
-		height: 450px;
-		border-right: 1px solid #f3f3f3;
-	}
 	.ff5c93{
 		color: #ff5c93;
 	}

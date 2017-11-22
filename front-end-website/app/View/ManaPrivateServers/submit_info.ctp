@@ -44,12 +44,12 @@
 }
 input[type=submit]{
 	display: block;
-	auto;
-	200px !important;
+	margin:auto;
+	width: 200px !important;
 }
 .error{
 		margin-left: 5px;
 		color:#ea1e1e;
-		5px 0px;
+		padding: 5px 0px;
 }
 </style>
