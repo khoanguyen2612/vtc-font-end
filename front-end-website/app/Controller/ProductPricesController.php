@@ -152,8 +152,8 @@
 	        		{
 	        			$request = ($this->request->data['Data']);
 	        			//pr($request); die;
-	        			$check = strstr($request['add-domain'], '.');
-	        			$str = str_replace( $check, '', $request['add-domain'] );
+	        			$check = strstr($request['add_doamin'], '.');
+	        			$str = str_replace( $check, '', $request['add_doamin'] );
 	        			$this->set('check',$check);
 	        			        			
 						if 
@@ -163,7 +163,7 @@
 								{
 									$data1=$this->ProductPrice->find('all');
 									$this->set('data1',$data1);
-									$request1 = $request['add-domain'];
+									$request1 = $request['add_doamin'];
 									$this->set('request1',$request1);
 									//--------------------------------------------------------------------------
 										$checkDomain = array(  "name" => $request1, "registrar" => "inet");
@@ -242,7 +242,7 @@
 										
 										foreach($data1 as $item)
 										{
-											$test = $request['add-domain'].$item['ProductPrice']['product_name'];
+											$test = $request['add_doamin'].$item['ProductPrice']['product_name'];
 											//pr($test); die;
 											//CHECK
 											$checkDomain = array(  "name" => $test, "registrar" => "inet");
@@ -281,8 +281,8 @@
         		else 
         			{
         				$request = ($this->request->data);
-        				$check = strstr($request['add-domain'], '.');
-        				$str = str_replace( $check, '', $request['add-domain'] );
+        				$check = strstr($request['add_doamin'], '.');
+        				$str = str_replace( $check, '', $request['add_doamin'] );
         				$this->set('check',$check);
 
         				if 
@@ -292,7 +292,7 @@
 							{
 									$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
 									$this->set('data1',$data1);
-									$request1 = $request['add-domain'];
+									$request1 = $request['add_doamin'];
 									$this->set('request1',$request1);
 									
 									//--------------------------------------------------------------------------
@@ -377,7 +377,7 @@
 										$i=0;
 										foreach($data1 as $item)
 										{
-											$test = $request['add-domain'].$item['ProductPrice']['product_name'];
+											$test = $request['add_doamin'].$item['ProductPrice']['product_name'];
 
 											//CHECK
 											$checkDomain = array(  "name" => $test, "registrar" => "inet");
