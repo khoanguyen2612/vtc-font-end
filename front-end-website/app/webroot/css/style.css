@@ -1972,8 +1972,7 @@ div.price-list .price-domain-vn{
 	padding-top: 70px;
 }
 div.price-domain-vn .table-bordered>thead:first-child>tr:first-child>th{
-	background-color: #07d769;
-	color: #fff;
+	background-color: #bfe4f7;
 }
 div.price-list .table-bordered > thead > tr,
 div.price-list .table-bordered > tbody > tr {
@@ -1998,14 +1997,14 @@ div.price-list .table-bordered > tbody > tr{
 	width: 128px;
 }
 div.price-domain-internal .table-bordered>thead:first-child>tr:first-child>th{
-	background-color: #d70746;
-	color: #fff;
+	background-color: #ffe3d5;
+	/*color: #fff;*/
 }
 .search-domain .price-domain-vn table > thead > tr{
-	border-top: 5px #07d769 solid;
+	border-top: 5px #bfe4f7 solid;
 }
 .search-domain .price-domain-internal table > thead > tr{
-	border-top: 5px #d70746 solid;
+	border-top: 5px #ffe3d5 solid;
 }
 .price-domain-internal table > thead > tr > th:nth-child(1){
 	width: 30%;
@@ -2038,10 +2037,9 @@ div.price-domain-internal .table-bordered>thead:first-child>tr:first-child>th{
 	margin-top: 5px;
 }
 .price-list .table-borered{
-	border: none;
 }
 .price-list .table>thead:first-child>tr:first-child>th{
-	border: none;
+	/*border: none;*/
 }
 div.other-domain-attached .table-bordered>thead:first-child>tr:first-child>th{
 	background-color: #888888;
@@ -2051,14 +2049,14 @@ div.other-domain-attached .table-bordered>thead:first-child>tr:first-child>th{
 .domain-vn th:nth-child(3),
 .domain-vn th:nth-child(4),
 .domain-vn th:nth-child(5){
-	background-color: #2a363f !important;
+	background-color: #f1f1f1 !important;
 }
 .domain-international th:nth-child(2),
 .domain-international th:nth-child(3),
 .domain-international th:nth-child(4),
 .domain-international th:nth-child(5)
 {
-	background-color: #2a363f !important;
+	background-color: #f1f1f1 !important;
 }
 .add-domain-domain .add-on thead{
 	background-color: #0060af;
