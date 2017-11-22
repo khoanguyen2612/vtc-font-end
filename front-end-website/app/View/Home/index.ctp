@@ -14,13 +14,7 @@ val.value = tst;
 
 //  End -->
 </script>
-<!-- <script>
-    function a(){
-    // var a = document.getElementById("qwe").value;
-    var a = document.getElementById("input");
-    dodacheck(a);
-}
-</script> -->
+
 
 
 <div class="banner">
@@ -72,19 +66,18 @@ val.value = tst;
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="search" onKeyUp="a()">
 				<?php echo $this->Form->create('Data',array(
 						"url" => array('controller' => 'ProductPrices','action' => 'register_domain'),
-						'class' => 'form-horizontal',
-						'name' => 'abc')); 
+						'name' => 'abc',
+						'class' => 'form-horizontal',)); 
 				?>
 				<?php
-			        echo $this->Form->input('add-domain',array(
+			        echo $this->Form->input('add_doamin',array(
 			            'type' => 'text',
 			            'label' => false,
-			            'name' => 'search',
 			            'placeholder' => 'Viết tên miền của bạn vào đây....',
 			            'required' => true,
-			            'id' => 'input',
+			            'id' => 'add_domain',
 			            'class' => 'form-control',
-			            'onKeyUp' => 'javascript:dodacheck(abc.search)',
+			            'onKeyUp' => 'javascript:dodacheck(abc.add_domain)'
 			        ));
 			    ?>
 			</div>

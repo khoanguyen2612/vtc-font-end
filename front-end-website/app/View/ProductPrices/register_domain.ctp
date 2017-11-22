@@ -51,7 +51,7 @@ val.value = tst;
                 <form name="xyz" method="POST">
                     <div>
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                            <input type="text" id="input" name="add-domain" class="form-control input-add"
+                            <input type="text" id="input" name="add_doamin" class="form-control input-add"
                                    placeholder="Nhập tên miền muốn đăng kí..." onKeyUp="a()" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
@@ -299,7 +299,7 @@ val.value = tst;
 
                                                     ?></td>
                                                 <td>
-                                                    <p class="p-name"><?php echo($test = $request2['add-domain'] . $item['ProductPrice']['product_name']); ?></p>
+                                                    <p class="p-name"><?php echo($test = $request2['add_doamin'] . $item['ProductPrice']['product_name']); ?></p>
                                                 </td>
                                                 <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
                                                 <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p></td>
@@ -335,7 +335,7 @@ val.value = tst;
                                                     <?php
 
                                                     $cart = array();
-                                                    $cart['product']['product_name'] = $request2['add-domain'] . $item['ProductPrice']['product_name'];
+                                                    $cart['product']['product_name'] = $request2['add_doamin'] . $item['ProductPrice']['product_name'];
                                                     $cart['product']['price'] = $item['ProductPrice']['price'] + $item['ProductPrice']['bk_price'];
                                                     $cart['product']['product_type'] = 7;
 
