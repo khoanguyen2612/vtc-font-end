@@ -38,7 +38,7 @@ val.value = tst;
 							<p><span>2</span>Chọn đuôi tên miền cần kiểm tra</p>
 							<ul class="list-inline domain_name">
 								<?php foreach ($data as $item) { ?>
-								<li><input type="radio" name="product_id" value="<?php echo $item['ProductPrice']['id']; ?>"><label><?php echo $item['ProductPrice']['product_name']; ?></label></li>
+								<li><input type="checkbox" name="product_id" value="<?php echo $item['ProductPrice']['id']; ?>"><label><?php echo $item['ProductPrice']['product_name']; ?></label></li>
 								<?php }  ?>
 							</ul>
 						</div>
