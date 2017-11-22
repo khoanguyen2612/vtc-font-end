@@ -78,11 +78,11 @@
                     <h3>VTC CLOUD Nhà cung cấp tên miền và Cloud server số 1 Việt Nam</h3>
                     <p>
                         Nhà cung cấp tên miền và Cloud server số 1 Việt Nam <br>
-                        Trụ sở chính: Toà nhà VTC, 23 Phố Lạc Trung, Vĩnh Tuy, Hai Bà Trưng, Hà Nội <br>
-                        VP miền Nam: Tầng 4, 88A-B Trần Huy Liệu, P.15, Q. Phú Nhuận, Tp. Hồ Chí Minh <br>
-                        Hotline: Miền Nam: (08) 4450 3077 - Miền Bắc: (04) 4450 5566 <br>
+                        Trụ sở chíToà nhà VTC, 23 Phố Lạc Trung, Vĩnh Tuy, Hai Bà Trưng, Hà Nội <br>
+                        VP miền Tầng 4, 88A-B Trần Huy Liệu, P.15, Q. Phú Nhuận, Tp. Hồ Chí Minh <br>
+                        Hotline: Miền (08) 4450 3077 - Miền Bắ(04) 4450 5566 <br>
                         Email: cloud.info@vtc.vn <br>
-                        Hotline: Miền Nam: (08) 4450 3077 - Miền Bắc: (04) 4450 5566
+                        Hotline: Miền (08) 4450 3077 - Miền Bắ(04) 4450 5566
                     </p>
                 </div>
             </div>

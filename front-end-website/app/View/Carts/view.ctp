@@ -29,24 +29,44 @@
                                 <!-- HERE IS THE SEARCH FILTER -->
                                 <script type="text/javascript">
                                     $(document).ready(function () {
-                                        $('.select_opt').bind("change keyup input", function () {
+                                        $('.select_opt').bind("change keyup input", function (event) {
+
+                                            //var id_select =(event.target.id).substr(0,1);
+                                            var id_select = event.target.id;
+                                            var data = {
+                                                total: $("p#id_opt_" + id_select).val(),
+                                                before: $("p#id_opt_" + id_select).attr('data'),
+                                                year: $this.value(),
+                                            };
+
+
                                             $.ajax({
-                                                //async: true,
-                                                //type: "POST",
-                                                //url: <?= $opt_url?>, // This one should sent data to index action of the typology controller for processing
-                                                //data: $this.id().serialize(), // 3 param for money, // get all the select opt id data..
+                                                    async: true,
+                                                    type: "POST",
+                                                    url: <?= $opt_url?>, // This one should sent data to index action of the typology controller for processing
+                                                    JSON.stringify(data), // 3 param for money, // get all the select opt id data..
                                                 // You will get all the select data..
-                                                //success: function (data) {
-                                                //    Console.log($this.id());
-                                                //    $(".select_opt").html(data);
-                                                //    $this.id().html(data);
-                                                }
-                                            });
+                                                contentType;
+                                        :
+                                            'application/json',
+                                                cache;
+                                        :
+                                            false,
+                                                success;
+                                        :
+
+                                            function (data) {
+                                                Console.log(id_select);
+                                                //$(".select_opt").html(data);
+                                                //$("#" + event.target.id).html(data);
+
+                                            }
+                                        })
 
                                             event.preventDefault();
                                             return false;
-                                        });
-                                    });
+                                        })
+                                    })
 
                                 </script>
 
@@ -92,7 +112,7 @@
 
                                             </td>
                                             <td>
-                                                <p id="id_opt_<?=$order_detail['id'] ?>"><?php echo number_format( $order_detail['price'],0,',','.' ); ?> VNĐ</p>
+                                                <p id="id_opt_<?=$order_detail['id'] ?>" data="<?=$order_detail['price'] ?>"><?php echo number_format( $order_detail['price'],0,',','.' ); ?> VNĐ</p>
                                                 <div class="product-removal">
                                                     <button type="button" class="remove-item" data-toggle="modal" data-target="#myModal<?php echo $modal ?>"> </button>
                                                 </div>
@@ -598,12 +618,12 @@
                     .success(function (resp, textStatus){
                          console.log("success response", resp);
                          console.log("success textStatus", textStatus);
-                    });
+    });
 
-                    return false;
-                });
+    return false;
+    });
 
-                $("#btn_supporters_ajax_id").bind("click", function (event) {
+    $("#btn_supporters_ajax_id").bind("click", function (event) {
 
                     var data = {
                         phone: $("#phone_support").val(),
@@ -625,14 +645,15 @@
                         .success(function (resp, textStatus){
                             console.log("success response", resp);
                             console.log("success textStatus", textStatus);
-                        });
+    });
 
-                    return false;
-                });
+    return false;
+    })
 
-            });
 
-        </script>
+    })
+
+    </script>
 
 
     <?php //echo $this->element('sql_dump'); ?>

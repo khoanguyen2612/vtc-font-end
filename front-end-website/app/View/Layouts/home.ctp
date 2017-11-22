@@ -105,13 +105,21 @@
                                 </li>
                             </ul>
                         </li>
-                        <li  class="dropdown">
+
+                        <li class="dropdown">
                             <a href="<?php echo $this->Html->url(array('controller' => 'cloudservers', 'action' => 'index'), true); ?>">
                                 CLOUD SERVER
                             </a>
                         </li> 
-                        <li  class="dropdown"><a href="">CLOUD STORAGE</a></li>
-                        <li  class="dropdown">
+
+                        <!--// add menu for Storage Cloud
+                            tue.phpmailer@ //-->
+                        <li class="dropdown">
+                            <a href="<?php echo $this->Html->url(array('controller' => 'Storage', 'action' => 'index'), true); ?>">CLOUD STORAGE</a>
+                        </li>
+
+
+                        <li class="dropdown">
                             <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">SSL</a>
                              <ul class="dropdown-menu">
@@ -127,6 +135,7 @@
                                 </li> 
                             </ul>
                         </li>
+
                         <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller' => 'CoLocations', 'action' => 'index'), true); ?>">CO-LOCATION</a></li>
                         <li  class="dropdown">
                             <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
