@@ -38,5 +38,5 @@
 	$(function () {
     CKEDITOR.config.contentsCss = [CKEDITOR.basePath + 'contents.css'];
 });
-	editor.config.allowedContent = true;
+editor.config.allowedContent = true;
 </script>
