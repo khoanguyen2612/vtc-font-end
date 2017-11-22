@@ -1,3 +1,22 @@
+<SCRIPT LANGUAGE="JavaScript">
+
+//<!-- Begin
+var mikExp = /[$\\@\\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|\!]/;
+function dodacheck(val) {
+var strPass = val.value;
+var strLength = strPass.length;
+var lchar = val.value.charAt((strLength) - 1);
+if(lchar.search(mikExp) != -1) {
+var tst = val.value.substring(0, (strLength) - 1);
+val.value = tst;
+   }
+}
+
+//  End -->
+</script>
+
+
+
 <div class="banner">
 	<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1920px;height:600px;overflow:hidden;visibility:hidden;background-color:#24262e;">
 		<div data-u="slides" style="cursor:default;position:relative;top:0px;left:400px;width:1520px;height:600px;overflow:hidden;">
@@ -44,19 +63,21 @@
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 				<label>Tìm kiếm tên miền của bạn:</label>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="search">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="search" onKeyUp="a()">
 				<?php echo $this->Form->create('Data',array(
 						"url" => array('controller' => 'ProductPrices','action' => 'register_domain'),
+						'name' => 'abc',
 						'class' => 'form-horizontal',)); 
 				?>
 				<?php
-			        echo $this->Form->input('add-domain',array(
+			        echo $this->Form->input('add_doamin',array(
 			            'type' => 'text',
 			            'label' => false,
 			            'placeholder' => 'Viết tên miền của bạn vào đây....',
 			            'required' => true,
-			            'id' => 'input',
-			            'class' => 'form-control'
+			            'id' => 'add_domain',
+			            'class' => 'form-control',
+			            'onKeyUp' => 'javascript:dodacheck(abc.add_domain)'
 			        ));
 			    ?>
 			</div>
@@ -254,11 +275,11 @@
 				<h3>VTC CLOUD Nhà cung cấp tên miền và Cloud server số 1 Việt Nam</h3>
 				<p>
 					Nhà cung cấp tên miền và Cloud server số 1 Việt Nam <br>
-					Trụ sở chíToà nhà VTC, 23 Phố Lạc Trung, Vĩnh Tuy, Hai Bà Trưng, Hà Nội  <br>
-					VP miền Tầng 4, 88A-B Trần Huy Liệu, P.15, Q. Phú Nhuận, Tp. Hồ Chí Minh  <br>
-					Hotline: Miền (08) 4450 3077 - Miền Bắ(04) 4450 5566  <br>
+					Trụ sở chính: Toà nhà VTC, 23 Phố Lạc Trung, Vĩnh Tuy, Hai Bà Trưng, Hà Nội  <br>
+					VP miền Nam: Tầng 4, 88A-B Trần Huy Liệu, P.15, Q. Phú Nhuận, Tp. Hồ Chí Minh  <br>
+					Hotline: Miền Nam: (08) 4450 3077 - Miền Bắc: (04) 4450 5566  <br>
 					Email: cloud.info@vtc.vn  <br>
-					Hotline: Miền (08) 4450 3077 - Miền Bắ(04) 4450 5566
+					Hotline: Miền Nam: (08) 4450 3077 - Miền Bắc: (04) 4450 5566
 				</p>
 			</div>
 		</div>

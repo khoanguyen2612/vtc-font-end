@@ -63,5 +63,5 @@
 		$('input[name="pack_id"]').val($(this).attr('pack-val'));
 		$('#submit').submit();
 		event.preventDefault();
-})
+	});
 </script>

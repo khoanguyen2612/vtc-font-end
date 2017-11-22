@@ -391,8 +391,8 @@
             }
         }
     }
-})
-}
+});
+    }
     function getAccInfo(data){
       $.ajax({
           url: 'getInfoAccount',
@@ -420,28 +420,27 @@
             $('#city_tc').val(result.Account.address);
             $('#email_tc').val(result.Account.email); 
         }
-})
-}
+    });
+  }
 
   $(document).ready(function() {
      $('.comfirm label input[type=checkbox]').change(function(){
         $('.comfirm label').toggleClass('agree');
-});
-if($('.comfirm input[type=checkbox]').prop('checked')){
+    });
+     if($('.comfirm input[type=checkbox]').prop('checked')){
          $('.comfirm label').addClass('agree');
      }
      $('form').on('submit', function(e){
         if(!$('.comfirm input[type=checkbox]').prop('checked'))
         {
             alert('Bạn chưa chọn đồng ý với các điều khoản');
-e.preventDefault();
+            e.preventDefault();
         }
 
+    });
+ });
 
-})
-});
-
-$('button[type=submit]').click(function(){
+  $('button[type=submit]').click(function(){
      if ($('#cn').hasClass('active')) {
         $('#group').find('input[required]').removeAttr('required');
         $('#group input').val('');
@@ -451,14 +450,14 @@ $('button[type=submit]').click(function(){
  }
 });
 
-// lay thong tin chu the ten mien
+  // lay thong tin chu the ten mien
   $('#get_mana').click(function(){
     $('#mn_street').val($('#street_tc').val());
     $('#mn_phone').val($('#phone_tc').val());
     $('#mn_city').val($('#city_tc').val());
     $('#mn_email').val($('#email_tc').val());
 });
-// lay thong tin nguoi quan ly
+  // lay thong tin nguoi quan ly
   $('#get_bill').click(function(){
     $('#bill_name').val($('#mn_name').val());
     $('#bill_birthday').val($('#mn_birthday').val());
@@ -466,17 +465,15 @@ $('button[type=submit]').click(function(){
     $('#bill_phone').val($('#mn_phone').val());
     $('#bill_street').val($('#mn_street').val());
     $('#bill_city').val($('#mn_city').val());
-    $('#bill_email').val($('#mn_email').val())
-
+    $('#bill_email').val($('#mn_email').val())    
 });
-$('#get_other').click(function(){
+  $('#get_other').click(function(){
      $('#other_name').val($('#mn_name').val());
      $('#other_birthday').val($('#mn_birthday').val());
      $('#other_ownerid').val($('#mn_ownerid').val());
      $('#other_phone').val($('#mn_phone').val());
      $('#other_street').val($('#mn_street').val());
      $('#other_city').val($('#mn_city').val());
-     $('#other_email').val($('#mn_email').val())
-
-})
+     $('#other_email').val($('#mn_email').val())    
+ });
 </script>

@@ -18,7 +18,7 @@
     <p class="active hidden"><?php echo $cart['product']['quantity']; ?></p>
 </td>
 <td>
-    <p id="id_opt_<?=$cart['product']['id'] ?>" data="<?=$cart['product']['price'] ?>">
+    <p id="id_opt_<?=$cart['product']['id'] ?>">
         <?php echo number_format($cart['product']['price'],0,',','.'); ?> VNĐ
     </p>
 

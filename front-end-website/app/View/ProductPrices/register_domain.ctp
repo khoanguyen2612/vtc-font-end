@@ -1,4 +1,26 @@
+<SCRIPT LANGUAGE="JavaScript">
 
+//<!-- Begin
+var mikExp = /[$\\@\\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|\!\-]/;
+function dodacheck(val) {
+var strPass = val.value;
+var strLength = strPass.length;
+var lchar = val.value.charAt((strLength) - 1);
+if(lchar.search(mikExp) != -1) {
+var tst = val.value.substring(0, (strLength) - 1);
+val.value = tst;
+   }
+}
+
+//  End -->
+</script>
+<script>
+    function a(){
+    // var a = document.getElementById("qwe").value;
+    var a = document.getElementById("input");
+    dodacheck(a);
+}
+</script>
 <div class="search-domain">
     <div class="container-fluid">
         <h3 class="text-center">ĐĂNG KÍ THÊM TÊN MIỀN</h3>
@@ -26,11 +48,11 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p class="p-add"> Đăng kí tên miền để bảo vệ thương hiệu của bạn</p>
                 </div>
-                <form action="" method="POST">
+                <form name="xyz" method="POST">
                     <div>
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                            <input type="text" id="input" name="add-domain" class="form-control input-add"
-                                   placeholder="Nhập tên miền muốn đăng kí...">
+                            <input type="text" id="input" name="add_doamin" class="form-control input-add"
+                                   placeholder="Nhập tên miền muốn đăng kí..." onKeyUp="a()" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                             <button type="submit" class="btn btn-add-domain">Kiểm tra</button>
@@ -277,7 +299,7 @@
 
                                                     ?></td>
                                                 <td>
-                                                    <p class="p-name"><?php echo($test = $request2['add-domain'] . $item['ProductPrice']['product_name']); ?></p>
+                                                    <p class="p-name"><?php echo($test = $request2['add_doamin'] . $item['ProductPrice']['product_name']); ?></p>
                                                 </td>
                                                 <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
                                                 <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p></td>
@@ -313,7 +335,7 @@
                                                     <?php
 
                                                     $cart = array();
-                                                    $cart['product']['product_name'] = $request2['add-domain'] . $item['ProductPrice']['product_name'];
+                                                    $cart['product']['product_name'] = $request2['add_doamin'] . $item['ProductPrice']['product_name'];
                                                     $cart['product']['price'] = $item['ProductPrice']['price'] + $item['ProductPrice']['bk_price'];
                                                     $cart['product']['product_type'] = 7;
 
@@ -452,15 +474,15 @@
                             $('#demo').html(result);
 
                         }
-})
-})
-})
-</script>
+                    });
+                });
+            });
+        </script>
 <style type="text/css">
     .md-cn {
         width: 100%;
-        0%;
-        auto;
+        padding: 0%;
+        height: auto;
     }
 
     .modal-lg {
@@ -487,7 +509,7 @@
     .whois-item {
         background: #005faf;
         color: #fff;
-        10px;
+        padding: 10px;
         font-size: 24px;
     }
 
@@ -503,6 +525,6 @@
 
     .dcol {
         float: left;
-        50%;
+        width: 50%;
     }
 </style>

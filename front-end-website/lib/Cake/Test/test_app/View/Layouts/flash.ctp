@@ -8,9 +8,9 @@
 <meta http-equiv="Refresh" content="<?php echo $pause?>;url=<?php echo $url?>"/>
 <?php } ?>
 <style><!--
-P { text-align:center; bold 1.1em sans-serif }
+P { text-align:center; font:bold 1.1em sans-serif }
 A { color:#444; text-decoration:none }
-HOVER { text-decoration: underline; color:#44E }
+A:HOVER { text-decoration: underline; color:#44E }
 --></style>
 </head>
 <body>

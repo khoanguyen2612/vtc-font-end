@@ -174,23 +174,23 @@
 	.nav-tabs>li {
 	    float: left;
 	    margin-bottom: -1px;
-	    50%;
+	    width: 50%;
 	}
 	#select_os a {
 	    text-decoration: none !important;
 	    color: #29353f;
-	    inline-block;
-	    100%;
-	    left;
+	    display: inline-block;
+	    width: 100%;
+	    float: left;
 	    text-align: center;
-	    20px 0px;
-	    pointer;
+	    padding: 20px 0px;
+	    cursor: pointer;
 	}
 	.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
 	    color: #555;
-	    default;
+	    cursor: default;
 	    
-    	1px solid #29353f;
+    	border: 1px solid #29353f;
 	    background-color: #29353f !important;
 	    color: #fff !important;
 	}
@@ -215,7 +215,7 @@ $(document).ready(function(){
                 success : function (result){
                 	$('#plan-data').html(result)
                 }
-    })
-    })
-    })
-    </script>
+        	});
+        });
+ });
+</script>
