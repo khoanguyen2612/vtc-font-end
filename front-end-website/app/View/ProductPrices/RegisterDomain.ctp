@@ -178,15 +178,15 @@
 	                	$('#demo').html(result);
 
 	                }
-})
-})
-})
+	        	});
+	        });
+ }); 
 </script>
 <style type="text/css">
 	.md-cn {
 	    width: 100%;
-	    0%;
-	    auto;
+	    padding: 0%;
+	    height: auto;
 	}
 	.modal-lg{
 	  padding: unset;
@@ -208,7 +208,7 @@
 	.whois-item{
 	    background: #005faf;
 	    color: #fff;
-	    10px;
+	    padding: 10px;
 	    font-size: 24px;
 	    }
 	.whois-content {
@@ -221,6 +221,6 @@
 	}
 	.dcol {
 	    float: left;
-	    50%;
+	    width: 50%;
 	}
 </style>

@@ -474,15 +474,15 @@ val.value = tst;
                             $('#demo').html(result);
 
                         }
-})
-})
-})
-</script>
+                    });
+                });
+            });
+        </script>
 <style type="text/css">
     .md-cn {
         width: 100%;
-        0%;
-        auto;
+        padding: 0%;
+        height: auto;
     }
 
     .modal-lg {
@@ -509,7 +509,7 @@ val.value = tst;
     .whois-item {
         background: #005faf;
         color: #fff;
-        10px;
+        padding: 10px;
         font-size: 24px;
     }
 
@@ -525,6 +525,6 @@ val.value = tst;
 
     .dcol {
         float: left;
-        50%;
+        width: 50%;
     }
 </style>

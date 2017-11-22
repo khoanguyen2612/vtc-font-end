@@ -790,59 +790,8 @@ class CartsController extends AppController
         }
 
     }
-    
-    /*  ***************************** */
-    /*  **  Write log to system   **  */
-    /*  ** tue.phpmailer@gmail.com ** */
-    /*  ***************************** */
-    
-    private function _log ($logs = array()) {
-        
-        
-        /**
-         * Configures default file logging options
-         */
-        
-        App::uses('CakeLog', 'Log');
-    
-        // Configure tmp/logs/cart.log to receive the two configured types (log levels), but only
-        // those with `orders` and `payments` as scope
-        CakeLog::config('cart', array(
-            
-            'engine' => 'FileLog',
-            'types' => array('warning', 'error'),
-            'scopes' => array('orders', 'payments'),
-            'file' => 'cart.log',
-            
-        ));
 
-        // Configure tmp/logs/payments.log to receive the two configured types, but only
-        // those with `payments` as scope
-        CakeLog::config('payment', array(
-            
-            'engine' => 'SysLog',
-            'types' => array('info', 'error', 'warning'),
-            'scopes' => array('payment'),
-            
-        ));
-    
-        CakeLog::warning('This gets written only to cart stream', 'orders');
-        CakeLog::warning('This gets written to both cart and payments streams', 'payment');
-        CakeLog::warning('This gets written to both cart and payments streams', 'unknown');
-    
-        // CakeLog::emergency($message, $scope = array());
-        // CakeLog::alert($message, $scope = array());
-        // CakeLog::critical($message, $scope = array());
-        // CakeLog::error($message, $scope = array());
-        // CakeLog::warning($message, $scope = array());
-        // CakeLog::notice($message, $scope = array());
-        // CakeLog::info($message, $scope = array());
-        // CakeLog::debug($message, $scope = array());
-        
-        
-    }
-    
-    
+
     public function checkout()
     {
 

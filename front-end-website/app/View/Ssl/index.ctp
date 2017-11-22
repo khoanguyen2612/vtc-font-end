@@ -11,8 +11,11 @@
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 					<label>Tìm kiếm gói SSL</label>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" id="search">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="search">
 					<input type="text" name="domain" id="input" class="form-control" placeholder="http://Tên miền">
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					<button type="submit">Tìm kiểm</button>
 				</div>
 			</form>
 		</div>
@@ -42,12 +45,12 @@
 								<h2><b><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> đ/năm</b></h2>
 							</div>
 							<div class="ssl-2">
-								<p><i class="material-icons" style="font-size:15px">lock</i>https:// Tên miền</p>
+								<p><i class="material-icons" style="font-size:15px">lock</i>html:// Tên miền</p>
 							</div>
 							<div class="ssl-3">
 								<ul>
 									<li>Cấp phát nhanh chóng.</li>
-									<li>Lựa chọn lý tưởng cho các website non trẻ</li>
+									<li>Lực chọn lý tưởng cho các website non trẻ</li>
 								</ul>
 									<!-- <a href="#" class="btn btn-ssl">ĐĂNG KÝ NGAY</a><br> -->
 									<input onclick="submitdomainSSLform('<?php echo $item['ProductPrice']['id'] ?>')" type="button" class="btn btn-ssl" value="ĐĂNG KÝ NGAY"><br>

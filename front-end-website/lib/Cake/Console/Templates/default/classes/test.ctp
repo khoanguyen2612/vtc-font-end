@@ -61,9 +61,9 @@ class <?php echo $fullClassName; ?>Test extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-    unset($this - ><?php echo $className; ?>)
+		unset($this-><?php echo $className; ?>);
 
-parent::tearDown();
+		parent::tearDown();
 	}
 
 <?php endif; ?>
