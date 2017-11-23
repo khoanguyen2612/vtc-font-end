@@ -52,6 +52,11 @@ Configure::write(
                                'tw','com.tw','org.tw','us','co.uk','me.uk','org.uk','biz','info'
     )
 	); 
+//Domain_type
+define("INTERNATIONAL_DOMAIN","0");
+define("VIETNAM_DOMAIN","1");
+//Domain_common)
+define("COMMON_DOMAIN","1");
 
 define("TRIAL_CLOUD_TIME", "9");
 define("FREE_CLOUD_TIME", "9");
