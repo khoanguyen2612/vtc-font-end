@@ -24,11 +24,11 @@
 						else
 						{
 							
-							$this->Session->setFlash('Mật khẩu không đúng, vui lòng thử lại!','default',array('class'=>'alert alert-danger'));
+							$this->Session->setFlash('Tài khoản không đúng, vui lòng thử lại!','default',array('class'=>'alert alert-danger'));
 						}
 					}
 					else{
-						$this->Session->setFlash('Tài khoản này chưa được kích hoạt','default',array('class'=>'alert alert-danger'));
+						$this->Session->setFlash('Tài khoản này chưa được kích hoạt, vui lòng vào mail đăng ký tài khoản để kích hoạt','default',array('class'=>'alert alert-danger'));
 					}
 				}
 				else{
@@ -59,7 +59,6 @@
         	if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
 			if($this->request->is('post')){
 				$Data_Form=$this->request->data;
-
 
 				$Data_Form['Account']['login_password']=$Data_Form['Account']['original_password'];
 				$Data_Form['Account']['login_id']=$Data_Form['Account']['nickname'];
@@ -104,6 +103,8 @@
 							    $this->Session->setFlash($mess_error,'default',array('class'=>'alert alert-danger'));
 							}
 							
+					}else{
+						$this->set('tab',$this->request->data['tab']);
 					}
 
 				}
@@ -135,7 +136,9 @@
 							    $this->Session->setFlash($mess_error,'default',array('class'=>'alert alert-danger'));
 							}
 
-				}
+				}else{
+						$this->set('tab',$this->request->data['tab']);
+					}
 			}
 		}
 

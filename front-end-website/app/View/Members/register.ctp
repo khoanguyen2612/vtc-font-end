@@ -3,13 +3,37 @@
   <div class="form-register">
     <h3>Nhập thông tin khách hàng</h3>
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#person">Cá Nhân</a></li>
-      <li><a data-toggle="tab" href="#company">Tổ Chức</a></li>
+<!--       <li class="active"><a data-toggle="tab" href="#person">Cá Nhân</a></li>
+      <li><a data-toggle="tab" href="#company">Tổ Chức</a></li> -->
+      <?php 
+        if(isset($tab)){
+              if($tab==1){
+                echo '<li class="active"><a data-toggle="tab" href="#person">Cá Nhân</a></li><li><a data-toggle="tab" href="#company">Tổ Chức</a></li>';
+              }else{
+                echo '<li><a data-toggle="tab" href="#person">Cá Nhân</a></li><li class="active"><a data-toggle="tab" href="#company">Tổ Chức</a></li>';
+              }
+        }
+        else{
+            echo '<li class="active"><a data-toggle="tab" href="#person">Cá Nhân</a></li><li><a data-toggle="tab" href="#company">Tổ Chức</a></li>';
+        }
+      ?>
     </ul>
 
     <div class="tab-content">
       <p>Quý khách vui lòng điền đầy đủ thông tin Tiếng Việt có dấu</p>
-      <div id="person" class="tab-pane fade in active">
+      <?php 
+        if(isset($tab)){
+              if($tab==1){
+                echo '<div id="person" class="tab-pane fade in active">';
+              }else{
+                echo '<div id="person" class="tab-pane fade">';
+              }
+        }
+        else{
+            echo '<div id="person" class="tab-pane fade in active">';
+        }
+      ?>
+      <!-- <div id="person" class="tab-pane fade in active"> -->
         <!-- <form class="form-horizontal" action="" method="post"> -->
           <?php echo $this->Form->create('Account', 
             array(
@@ -17,6 +41,7 @@
               'class' => 'form-horizontal',
                 )); 
           ?>
+          <input name="data[tab]" type="hidden" value="1">
           <div class="form-group required">
             <label class="control-label col-sm-3" for="nickname">Nhập tên đăng nhập:</label>
             <div class="col-sm-8">
@@ -108,7 +133,14 @@
         <!-- </form> -->
         <?php echo $this->Form->end(); ?>
       </div>
-      <div id="company" class="tab-pane fade">
+      <?php 
+        if(isset($tab) && ($tab==0)){
+          echo '<div id="company" class="tab-pane fade in active">';
+        }else{
+          echo '<div id="company" class="tab-pane fade">';
+        }
+      ?>
+      <!-- <div id="company" class="tab-pane fade"> -->
         <!-- <form class="form-horizontal" action="/action_page.php"> -->
           <?php echo $this->Form->create('Account', 
             array(
@@ -116,6 +148,7 @@
               'class' => 'form-horizontal',
                 )); 
           ?>
+          <input name="data[tab]" type="hidden" value="0">
           <div class="form-group required">
             <label class="control-label col-sm-3" for="nickname">Nhập tên đăng nhập:</label>
             <div class="col-sm-8">

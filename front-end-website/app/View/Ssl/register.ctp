@@ -202,7 +202,6 @@
 	    $("#ssl_choise").change(function(){	    	
 	    	ssl_id = $("#ssl_choise").val();
 	    	jQuery(".value_ssl_id").val(ssl_id);
-	    	console.log(ssl_id);
 	    });
 	});
 </script>
