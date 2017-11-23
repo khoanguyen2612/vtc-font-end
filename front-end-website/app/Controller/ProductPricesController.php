@@ -436,6 +436,14 @@
 			}
 		}
 
+		public function price(){
+			$data=$this->ProductPrice->find('all', array( 
+				'conditions' => array( 'ProductPrice.product_type' => "1"),
+			));
+			$this->set('data',$data);
+
+		}
+
     }
 ?>
 

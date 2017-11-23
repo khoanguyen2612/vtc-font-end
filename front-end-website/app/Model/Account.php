@@ -9,16 +9,20 @@ class Account extends AppModel {
             'nickname' =>array(
                 'too long'=>array(
                     'rule' => array('between', 5, 32),
-                    'message' => 'Tài khoản phải lớn 5 ký tự'
+                    'message' => 'Tên đăng nhập phải lớn 5 ký tự'
                 ),
                 'not empty' => array(
                     'rule' => 'notBlank',
-                    'message' => 'Tài khoản không được để trống'
+                    'message' => 'Tên đăng nhập không được để trống'
                 ),
                 'duplicate nickname' => array(
                     'rule'=>'isUnique',
-                    'message' => 'Tài khoản này đã có người dùng'
-                )
+                    'message' => 'Tên đăng nhập này đã có người dùng'
+                ),
+                'format nickname' => array(
+                    'rule'=> '/^[a-zA-Z0-9]{5,}$/i',
+                    'message' => 'Tên đăng nhập chỉ gồm chữ cái và số, không được có các ký tự đặc biệt'
+                ),
             ),
             'original_password' => array(
                 'too long' => array(
@@ -32,7 +36,11 @@ class Account extends AppModel {
                 'Match Password' => array(
                     'rule' => 'matchPasswords',
                     'message' => 'Không trùng khớp mật khẩu'
-                )
+                ),
+                'format nickname' => array(
+                    'rule'=> '/^[a-zA-Z0-9]{5,}$/i',
+                    'message' => 'Mật khẩu chỉ gồm chữ cái và số, không được có các ký tự đặc biệt'
+                ),
             ),
             'confirm_password' => array(
                 'too long' => array(
@@ -42,7 +50,11 @@ class Account extends AppModel {
                 'not empty' => array(
                     'rule' => 'notBlank',
                     'message' => 'Vui lòng xác nhận mật khẩu'
-                )
+                ),
+                'format nickname' => array(
+                    'rule'=> '/^[a-zA-Z0-9]{5,}$/i',
+                    'message' => 'Mật khẩu chỉ gồm chữ cái và số, không được có các ký tự đặc biệt'
+                ),
             ),
             'email' => array(
                 'valid email' => array(

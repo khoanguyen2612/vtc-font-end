@@ -17,10 +17,10 @@
 								<form id="login-form" action="" method="POST" role="form" style="display: block;">
 									<?php echo $this->Session->flash();?> 
 									<div class="form-group">
-										<input type="text" name="data[Account][nickname]" tabindex="1" class="form-control" placeholder="Tên đăng nhập" value="">
+										<input type="text" name="data[Account][nickname]" tabindex="1" class="form-control" placeholder="Tên đăng nhập" value="" required>
 									</div>
 									<div class="form-group">
-										<input type="password" name="data[Account][login_password]" tabindex="2" class="form-control" placeholder="Mật khẩu">
+										<input type="password" name="data[Account][login_password]" tabindex="2" class="form-control" placeholder="Mật khẩu" required>
 									</div>
 									<div class="form-group text-center">
 										<input type="checkbox" tabindex="3" name="remember" id="remember">
