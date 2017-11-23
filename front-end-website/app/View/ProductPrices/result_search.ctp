@@ -22,7 +22,9 @@ val.value = tst;
 			<li><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'register_domain'),true);?>">Đăng ký tên miền</a></li>
 			<li><a href="">Chuyển đổi nhà cung cấp</a></li>
 			<li class="active"><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'result_search'),true);?>">Kiểm tra tên miền</a></li>
-			<li><a href="">Bảng giá tên miền</a></li>
+			<li>
+			<a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">Bảng giá tên miền</a>
+			</li>
 		</ul>
 		<hr>
 		<div class="tab-content container">
