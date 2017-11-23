@@ -2,7 +2,7 @@
 		<div class="container-fluid">
 			<h3 class="text-center">BẢNG GIÁ TÊN MIỀN</h3>
 			<ul class="nav nav-tabs container">
-	            <li class="active">
+	            <li>
 	                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">
 	                 Đăng ký tên miền
 	                </a>
@@ -15,7 +15,7 @@
 	                Kiểm tra tên miền
 	                </a>
 	            </li>
-	            <li><a href="">Bảng giá tên miền</a></li>
+	            <li class="active"><a href="">Bảng giá tên miền</a></li>
 	        </ul>
 			<hr>
 		</div>
