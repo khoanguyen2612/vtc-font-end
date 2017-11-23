@@ -228,7 +228,7 @@ val.value = tst;
 			<div class="row">
 				<div class="col-md-6 col-lg-6">
 					<div id="post_news">
-						<h4 class="text-center"><a href="">Tin tức</a></h4>
+						<h4 class="text-center"><a>Tin tức</a></h4>
 						<ul class="list-group">
 							<?php foreach ($news as $item) { ?>
 								<li class="list-group-item">
@@ -243,25 +243,25 @@ val.value = tst;
 								</li>
 							<?php } ?>
 						</ul>
-						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>" class="see_more">Xem thêm</a>
+						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist#notificion'),true);?>" class="see_more">Xem thêm</a>
 					</div>
 				</div>
 				<div class="line-devide hidden-xs hidden-sm"></div>
 				<div class="col-md-6 col-lg-6">
 					<div id="post_noti">
-						<h4 class="text-center"><a href="">Thông báo</a></h4>
+						<h4 class="text-center"><a>Thông báo</a></h4>
 						<ul class="list-group">
 							<?php foreach ($notif as $item) { ?>
 								<li class="list-group-item">
 								<?php $date = $item['News']['created_date']; $date1=strtotime(date($date));?>
 										<span><?php echo date('d/m/y',$date1); ?></span>
-									<a href="">
+									<a href="<?php echo $this->Html->url(array('controller' => 'News','action' => 'notificion_maintain',$item['News']['id']));?>">
 										<span><?php echo $item['News']['title'] ?></span>
 									</a>
 								</li>
 							<?php } ?>
 						</ul>
-						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist'),true);?>" class="see_more">Xem thêm</a>
+						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist','active' => '#news'),true);?>" class="see_more">Xem thêm</a>
 					</div>
 				</div>
 			</div>

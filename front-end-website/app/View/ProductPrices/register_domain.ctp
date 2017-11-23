@@ -38,7 +38,7 @@ val.value = tst;
                 Kiểm tra tên miền
                 </a>
             </li>
-            <li><a href="">Bảng giá tên miền</a></li>
+            <li><a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">Bảng giá tên miền</a></li>
         </ul>
         <hr>
     </div>
@@ -78,7 +78,7 @@ val.value = tst;
                                 <th>Phí duy trì</th>
                                 <th> Phí đăng kí</th>
                                 <th> Thông tin Whois</th>
-                                <th>Thêm vào giỏ</th>
+                                <th>Thêm vào giỏ hàng</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -149,7 +149,7 @@ val.value = tst;
                                         <th>Phí duy trì</th>
                                         <th> Phí đăng kí</th>
                                         <th> Thông tin Whois</th>
-                                        <th>Thêm vào giỏ</th>
+                                        <th>Thêm vào giỏ hàng</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -251,10 +251,10 @@ val.value = tst;
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                            <button type="submit" class="btn btn-all"> Chọn tất cả</button>
+                            <!-- <button type="submit" class="btn btn-all"> Chuyển đến giỏ hàng</button> -->
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 add-continue">
-                            <button type="submit" class="btn btn-add-continue"> Tiếp tục</button>
+                            <button type="submit" class="btn btn-add-continue"> Chuyển đến giỏ hàng</button>
                         </div>
 
                         <div id="loading" style="display: none;">
@@ -277,7 +277,7 @@ val.value = tst;
                                             <th>Phí duy trì</th>
                                             <th> Phí đăng kí</th>
                                             <th> Thông tin Whois</th>
-                                            <th>Thêm vào giỏ</th>
+                                            <th>Thêm vào giỏ hàng</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -379,10 +379,10 @@ val.value = tst;
                                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                    <button type="submit" class="btn btn-all"> Chọn tất cả</button>
+                                    <!-- <button type="submit" class="btn btn-all"> Chuyển đến giỏ hàng</button> -->
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 add-continue">
-                                    <button type="submit" class="btn btn-add-continue"> Tiếp tục</button>
+                                    <button type="submit" class="btn btn-add-continue"> Chuyển đến giỏ hàng </button>
                                 </div>
                                 <div id="loading" style="display: none; position: static; top: 100px; left: auto">
                                     <div class="alert alert-info" role="alert">
