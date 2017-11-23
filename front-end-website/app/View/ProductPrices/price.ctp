@@ -50,7 +50,7 @@
 										
 										<?php
 											foreach ($data as $item) {
-												if($item['ProductPrice']['vn']==1){
+												if($item['ProductPrice']['domain_type']==1){
 										?>
 													<tr>
 														<td><?php echo 'xyz'.$item['ProductPrice']['product_name'];?> </td>
@@ -82,7 +82,7 @@
 									<tbody>
 										<?php
 											foreach ($data as $item) {
-												if(empty($item['ProductPrice']['vn'])){
+												if($item['ProductPrice']['domain_type']==0){
 										?>
 													<tr>
 														<td><?php echo 'xyz'.$item['ProductPrice']['product_name'];?> </td>

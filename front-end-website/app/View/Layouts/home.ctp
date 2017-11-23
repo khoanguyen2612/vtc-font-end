@@ -92,7 +92,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TÊN MIỀN</a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="domain_price.html">BẢNG GIÁ TÊN MIỀN</a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">BẢNG GIÁ TÊN MIỀN</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">KIỂM TRA TÊN MIỀN</a>
