@@ -50,17 +50,20 @@
     <!-- HERE IS THE CLICK FILTER -->
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.test_now_reg_storage').bind("click", function (event) {
+
+            $('.now_reg_storage hidden').bind("click", function (event) {
 
                 var id_select = (event.target.id).substr(0, 15);
                 var data = { };
 
                 alert(id_select);
+                alert("form#" + id_select);
 
-                $("form#" + id_select).submit();
+                //$("form#" + id_select).submit();
+                $("form#" + id_select).trigger('submit');
                 //submitDetailsForm(event.target.id);
 
-                $('form[id='+ id_select + ']').submit();
+                //$('form[id='+ id_select + ']').submit();
 
                 Console.log("ID click a href" + id_select);
                 //event.preventDefault();
@@ -72,7 +75,8 @@
                 $("#" + id).submit();
             }
 
-        })
+        });
+
     </script>
     <div class="cloud_storage">
         <div class="container">
@@ -105,7 +109,7 @@
 
                                 <p class="l_price"> <?php echo (string) number_format('1690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
                                 <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php //echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_1_link" class="now_reg_storage hidden"  > ĐĂNG KÝ NGAY</a>
+                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_1_link" class="now_reg_storage hidden"  > ĐĂNG KÝ NGAY</a>
                             </div>
 
                         <?php
@@ -152,7 +156,7 @@
                                 </p>
                                 <p class="l_price"> <?php echo (string) number_format('2690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
                                 <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php //echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_2_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
+                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_2_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
                             </div>
 
                         <?php
@@ -199,7 +203,7 @@
                                 </p>
                                 <p class="l_price"> <?php echo (string) number_format('3690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
                                 <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php //echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_3_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
+                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_3_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
                             </div>
 
                         <?php
@@ -246,7 +250,7 @@
                                 </p>
                                 <p class="l_price"> <?php echo (string) number_format('4690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
                                 <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php //echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_4_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
+                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_4_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
                             </div>
 
                         <?php
@@ -293,7 +297,7 @@
                                 </p>
                                 <p class="l_price"> <?php echo (string) number_format('5690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
                                 <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php //echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_5_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
+                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_5_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
                             </div>
 
                         <?php
@@ -387,13 +391,12 @@
         </div>
     </div>
 
-    <?php //echo $this->Html->css('customer_home.css') . "\n"; ?>
-    <?php echo $this->Html->css('storage_service.css') . "\n"; ?>
+    <?php echo $this->Html->css('storage_service.css'); ?>
     <style type="text/css">
-        .l_package {
-             background-color: #f3f3f3;
-        }
 
+        .l_package {
+            background-color: #f3f3f3;
+        }
         button {
             font-size: 16px;
             margin-top: 45px;
@@ -406,8 +409,7 @@
             border-radius: 2px;
             border: none;
         }
-
-         button:hover {
+        button:hover {
             text-decoration: none;
             background-color: #2a1aa3;
         }

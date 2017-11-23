@@ -86,6 +86,16 @@
     Router::connect('/cart/finish', array('controller' => 'Carts', 'action' => 'finish'));
     Router::connect('/carts/finish', array('controller' => 'Carts', 'action' => 'finish'));
 
+    /* tue.phpmailer@gmail.com config route Storage Cloud URL */
+    Router::connect('/storage', array('controller' => 'Storage', 'action' => 'index'));
+    Router::connect('/storage/', array('controller' => 'Storage', 'action' => 'index'));
+    Router::connect('/storage/chosen_capacity', array('controller' => 'Storage', 'action' => 'chosen_capacity'));
+    Router::connect('/storage/chosen_capacity/', array('controller' => 'Storage', 'action' => 'chosen_capacity'));
+    Router::connect('/storage/change_money', array('controller' => 'Storage', 'action' => 'change_money'));
+    Router::connect('/storage/change_money/', array('controller' => 'Storage', 'action' => 'change_money'));
+    /* tue.phpmailer@gmail.com config route Storage Cloud URL */
+
+
 
     /* tue.phpmailer@gmail.com add route for KhoaND */
     Router::connect('/cart/register', array('controller' => 'Infocarts', 'action' => 'register'));
