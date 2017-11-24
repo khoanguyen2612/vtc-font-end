@@ -11,10 +11,24 @@
 			
 			$this->set('data',$data);
 			if($this->request->is('post')){
-				// pr($this->request->data);die;
-				// $this->set('ssl_id',$this->request->data['ssl_id']);
-				$this->register($this->request->data['ssl_id']);
-				// echo 'abc';die;
+				if($this->Auth->user()){
+						$user=$this->Auth->user();
+									$data['ServiceRequest']=array(
+										'order_type' => 3,
+										'name' => $user['name'],
+										'email' =>$user['email'],
+										'phone' => $user['phonenumber'],
+										'ssl_id' => $this->request->data['ssl_id']
+									);
+									if(!empty($user['Organization']['organ_name'])){
+										$data['ServiceRequest']['company']=$user['Organization']['organ_name'];
+									}
+									if($this->ServiceRequest->save($data)){
+										$this->render('complete');
+									}
+				}else{
+					$this->register($this->request->data['ssl_id']);
+				}
 			}
 		}
 
@@ -29,7 +43,6 @@
 				$ssl=$this->ProductPrice->find('all', array('conditions' => array('ProductPrice.product_type' => "6" ) ));
 				$this->set('ssl',$ssl);
 				if($this->request->is('post')){
-					// pr($this->request->data);
 					if(isset($this->request->data['ServiceRequest'])){
 						$this->request->data['ServiceRequest']['order_type']=3;
 						$this->request->data['ServiceRequest']['ssl_id']=$this->request->data['ssl_id'];

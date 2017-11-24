@@ -9,21 +9,31 @@
 		public function login($token=null){
 			$this->set('title_for_layout', 'Đăng nhập');
         	if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
-
+        	setcookie('remember',1, -1);
         	if($this->request->is('post')){
         		$nickname=$this->request->data['Account']['nickname'];
 				$user=$this->Account->find('first',array('conditions'=>array('Account.nickname'=>$nickname)));
-				// pr($user);die;
 				if(!empty($user)){
 					if($user['Account']['status']==1){
+						$year =  time() + 86400;
+			            if(!empty($this->request->data['Account']['remember'])) {
+			                setcookie('username', $this->request->data['Account']['nickname'], $year);
+			                setcookie('passwd', $this->request->data['Account']['login_password'], $year);
+			                setcookie('remember', $this->request->data['Account']['remember'], $year);
+			            }else{
+			                unset($_COOKIE['username']);
+			                unset($_COOKIE['passwd']);
+			                unset($_COOKIE['remember']);
+			                setcookie('username', null, -1);
+			                setcookie('passwd', null, -1);
+			                setcookie('remember', null, -1);
+			            }
 						if($this->Auth->login())
 						{
-							// pr($this->Auth->user());die;
 							return $this->redirect($this->Auth->redirectUrl($this->Auth->loginRedirect));
 						}
 						else
 						{
-							
 							$this->Session->setFlash('Tài khoản không đúng, vui lòng thử lại!','default',array('class'=>'alert alert-danger'));
 						}
 					}
@@ -32,6 +42,12 @@
 					}
 				}
 				else{
+					unset($_COOKIE['username']);
+	                unset($_COOKIE['passwd']);
+	                unset($_COOKIE['remember']);
+	                setcookie('username', null, -1);
+	                setcookie('passwd', null, -1);
+	                setcookie('remember', null, -1);
 					$this->Session->setFlash('Tài khoản không đúng, vui lòng thử lại!','default',array('class'=>'alert alert-danger'));
 				}
 			}
@@ -50,7 +66,7 @@
 		}
 
 		public function logout(){
-			$this->redirect($this->Auth->logout());
+			return $this->redirect($this->Auth->logout());
 		}
 
 
