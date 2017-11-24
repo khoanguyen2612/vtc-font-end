@@ -18,7 +18,9 @@ class Cart extends AppModel
     public function addProduct($cart_item = array())
     {
 
-        $all_cart = is_null(CakeSession::read('cart') ) ?  array() : CakeSession::read('cart');
+        $check_cart = CakeSession::read('cart');
+        $all_cart = ( !isset($check_cart) ) ?  array() : CakeSession::read('cart');
+        $all_cart = ( is_null($check_cart) ) ?  array() : CakeSession::read('cart');
 
         //array_unshift($all_cart, $cart_item); // push value elements onto first array
 
@@ -40,14 +42,12 @@ class Cart extends AppModel
     {
 
         $all_cart = $this->readProduct();
-        //Debugger::dump($all_cart);
 
-       /* if (!is_null($all_cart) && is_array($all_cart)) {
-            $all_item = array_shift($all_cart);  // shift an element off the beginning of array
+        if (isset($all_cart['list'])) {
+            return count($all_cart['list']);
         }
-        */
-
-        return count($all_cart);
+        else
+            return count($all_cart);
     }
 
     /*
@@ -92,16 +92,41 @@ class Cart extends AppModel
     public function remove_it($id_it = null)
     {
 
+        $id_it = (int) $id_it;
+
         $al_it_cart = $this->readProduct();
 
-        //CakeSession::delete('cart');
+        if ( !isset($al_it_cart['list']) ) {
+            return $al_it_cart;
+        }
 
-        //Debugger::dump($al_it_cart);
+
+        //Debugger::dump($id_it); Debugger::dump($al_it_cart);
 
         $list_item_in_cart = $al_it_cart['list'];
         unset($al_it_cart['list']);
 
-        if (!is_null($id_it) && $id_it > 0) {
+        if ( count($al_it_cart) == 1 ) {
+
+            if ( $id_it > 0 ) {
+
+                foreach ($al_it_cart as $key => $item) {
+                    if ((int)$item['product']['id'] == $id_it) {
+                        $key_store = $key;
+                        break;
+                    }
+                }
+
+                if (isset($key_store)) {
+                    CakeSession::delete('cart');
+                    return null;
+                };
+
+            }
+
+        }
+
+        if ( $id_it > 0 ) {
 
             foreach ($al_it_cart as $key => $item) {
                 if ((int)$item['product']['id'] == $id_it) {
@@ -110,11 +135,12 @@ class Cart extends AppModel
                 }
             }
 
-            if (isset($key_store) && $key_store > 0) {
+            if (isset($key_store)) {
                 unset($al_it_cart[$key_store]);
             };
 
             $key_store = null;
+
             foreach ($list_item_in_cart as $key => $item) {
                 if ((int)$item['id'] == $id_it) {
                     $key_store = $key;
@@ -122,17 +148,22 @@ class Cart extends AppModel
                 }
             }
 
-            if (isset($key_store) && $key_store > 0) {
+            if (!is_null($key_store)) {
                 unset($list_item_in_cart[$key_store]);
             };
 
         }
+
+        //Debugger::dump($key_store); die();
+
+        $cart = array();
 
         $cart['list'] = $list_item_in_cart;
         foreach ($al_it_cart as $item) {
             $cart[] = $item;
         }
 
+        CakeSession::delete('cart');
         return $this->saveCart($cart);
 
     }

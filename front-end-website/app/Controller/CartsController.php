@@ -199,21 +199,8 @@ class CartsController extends AppController
 
         ini_set('memory_limit', '-1');
 
-        /* tue.phpmailer@gmail.com get data for first */
-        /*$order_schema = $this->Order->find('first',
-            //array( 'order' => array('Order.id' => 'desc') )
-            array( 'order' => array('Order.id' => 'asc') )
-        );*/
-
-        //$this->Order->setDataSource('db_vtc_cloud');
-        //$this->Product->setDataSource('db_vtc_cloud');
-
 
         $cart = $this->Cart->readCart();
-
-        //$this->Order->recursive = 2;
-
-        //$this->Order->OrderDetail->attach('Containable');
 
         $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
         $order = $order_schema['Order'];
@@ -221,11 +208,6 @@ class CartsController extends AppController
 
         $order_id = $order['id'];
         $product_in_order = $order_schema['OrderDetail'];
-
-        //Debugger::dump($product_in_order);
-        //Debugger::dump($order_schema);
-        /*$od = $this->OrderDetail->findByOrderId('614');
-        Debugger::dump($od);*/
 
 
         if (is_null($cart) || empty($cart) || !count($cart)) {
@@ -272,6 +254,7 @@ class CartsController extends AppController
                 $cart['list'][] = $item;
                 $tmp['order'] = array('id' => $order_id);
                 $tmp['product'] = $item;
+
                 //number year exp
                 $tmp['year_exp'] = 1;
                 //add new field
@@ -280,7 +263,10 @@ class CartsController extends AppController
 
             // re soft list key of array
             // sort($cart);
-            $this->Cart->saveCart($cart);
+
+            // List product exist in order db
+            // $this->Cart->saveCart($cart);
+
 
         };
 
@@ -306,12 +292,17 @@ class CartsController extends AppController
         $total_money = 0;
         $n_item_cart = $this->Cart->getCount();
 
+        $cart = $this->Cart->readCart(); //Debugger::dump($cart);
+
         if (isset($cart['list']))
             $all_item = array_shift($cart);  // shift an element off the beginning of array
         else
             $all_item = $cart;
 
+
         $products = $all_item;
+        // Not load exist from db
+        //$products = array();
 
         if (count($products) > 0) {
             foreach ($products as $it) {
@@ -332,6 +323,7 @@ class CartsController extends AppController
         $this->set(compact('list_hosting'));
 
     }
+
 
     public function update()
     {
@@ -537,6 +529,7 @@ class CartsController extends AppController
 
             $order_code = $this->Session->read('order_code');
             $total_money = $this->Session->read('total_money');
+
             $total_vat = round($total_money * 10 / 100);
             $total_payment = $total_money - round($total_money * 10 / 100);
 
