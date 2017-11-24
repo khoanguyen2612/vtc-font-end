@@ -33,11 +33,14 @@ class CartsController extends AppController
             $this->layout = 'ajax_cart';
         }
 
+        $n_item_cart = $this->Cart->getCount();
 
-        $this->Session->write('order_code', 'CL_VTC_AZ_');
-        $this->Session->write('total_money', 0);
+        if ($n_item_cart == 0) {
+            $this->Session->delete('order_code');
+        }
 
         $cart = $this->Cart->readCart();
+        $this->Session->write('total_money', 0);
 
         if (isset($cart) && !is_null($cart)) {
 
@@ -59,22 +62,22 @@ class CartsController extends AppController
             $this->Session->write('total_money', $total_money);
         }
 
-
         $this->Order->setDataSource('db_vtc_cloud');
         $this->Product->setDataSource('db_vtc_cloud');
         $this->OrderDetail->setDataSource('db_vtc_cloud');
-        //$this->Plan->setDataSource('db_vtc_cloud');
-        //$results = $this->Order->query('SELECT * FROM orders WHERE id= "614"');
-        //Debugger::dump($results);
-
 
         //$this->Order->recursive = -1;
-        $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
-        $order = $order_schema['Order'];
-        //Debugger::dump($order_schema);
+        //$order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
+        //$order = $order_schema['Order'];
+        // load count sum element of item
+        //$this->Session->delete('order_code');
 
-        $this->Session->delete('order_code');
-        $this->Session->write('order_code', $order['order_code']);
+        $_tmp = $this->Session->read('order_code');
+        //Debugger::dump($_tmp);
+        if ( !isset($_tmp) || is_null($_tmp) ) {
+            $this->Session->write('order_code', 'MSHĐ_A'. rand(11111111, 22222222). 'Z'. rand(11111111, 22222222));
+        }
+
 
     }
 
@@ -189,8 +192,7 @@ class CartsController extends AppController
         $this->response->body(json_encode($cart));
         $this->response->send();
         $this->_stop();
-        //Debugger::dump($cart);
-        //return;
+
 
     }
 
@@ -199,25 +201,31 @@ class CartsController extends AppController
 
         ini_set('memory_limit', '-1');
 
+        // to view layout
+        $order_id = '614'; // example
+        $order_code = $this->Session->read('order_code');
 
         $cart = $this->Cart->readCart();
+        // load count sum element of item
+        $n_item_cart = $this->Cart->getCount();
 
-        $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
+        if ($n_item_cart == 0) {
+            // Create new Order to DB
+            $order = array();
+            //$order['order_code'] = $this->Session->read('order_code');
+        }
+
+        /* DONT LOAD EXIST PRODUCT IN DB */
+        /*$order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
         $order = $order_schema['Order'];
         $order_code = $order['order_code'];
-
         $order_id = $order['id'];
         $product_in_order = $order_schema['OrderDetail'];
 
-
         if (is_null($cart) || empty($cart) || !count($cart)) {
-
             foreach ($product_in_order as $p_item) {
-
                 $this->Product->recursive = 2;
                 $_p = $this->Product->findById($p_item['product_id']);
-
-                //Debugger::dump($_p);
 
                 if (count($_p) > 0) {
 
@@ -244,8 +252,6 @@ class CartsController extends AppController
 
                     $p_item['type'] = $p_type;
                     $products[] = $p_item;
-
-
                 }
             }
 
@@ -260,15 +266,13 @@ class CartsController extends AppController
                 //add new field
                 $cart[] = $tmp;
             }
-
             // re soft list key of array
             // sort($cart);
 
             // List product exist in order db
             // $this->Cart->saveCart($cart);
-
-
-        };
+            // don'n load exist product
+        };*/
 
         $conditions = array(
             'OR' => array(
@@ -290,15 +294,12 @@ class CartsController extends AppController
         }
 
         $total_money = 0;
-        $n_item_cart = $this->Cart->getCount();
-
         $cart = $this->Cart->readCart(); //Debugger::dump($cart);
 
         if (isset($cart['list']))
             $all_item = array_shift($cart);  // shift an element off the beginning of array
         else
             $all_item = $cart;
-
 
         $products = $all_item;
         // Not load exist from db
@@ -318,7 +319,7 @@ class CartsController extends AppController
         $this->set(compact('products'));
 
         $this->set(compact('order_id'));
-        $this->set(compact('order'));
+        //$this->set(compact('order'));
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
 
@@ -441,10 +442,8 @@ class CartsController extends AppController
 
             $order_code = $this->Session->read('order_code');
             $total_money = $this->Session->read('total_money');
-
             $total_payment = $total_money - round($total_money * 10 / 100);
-
-            $order_code = $order_code. rand(20000, 99999);
+            //$order_code = $order_code. rand(20000, 99999);
 
             $this->set(compact('order_code'));
             $this->set(compact('total_payment'));
@@ -549,6 +548,9 @@ class CartsController extends AppController
 
             $this->set(compact('date_day'));
             $this->set(compact('time_h'));
+
+            // This save Cart to DB
+            $this->Cart->saveDbCart();
 
         }
 
@@ -684,7 +686,6 @@ class CartsController extends AppController
                     }
                 }
 
-                var_dump($cart);
                 //total money for number year product
                 $cost = $resp['price'];
                 $year = $resp['year'];

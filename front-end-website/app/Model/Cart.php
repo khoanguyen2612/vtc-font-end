@@ -178,8 +178,38 @@ class Cart extends AppModel
     public function saveDbCart()
     {
 
+        // Save Order to DB
+        $order = $order_detail = array();
+
+        // get all item cart
         $all_cart = $this->readProduct();
-        $order_detail = array();
+        if (isset($all_cart['list']))
+            $all_item = array_shift($all_cart);  // shift an element off the beginning of array
+        // end get all item cart
+
+        // init Order
+        $order['id'] = null;
+        $order['order_type'] = '1';
+        $order['order_code'] = CakeSession::read('order_code');
+        $order['order_datetime'] = CakeTime::format(date('m/d/Y H:i:s'), '%m/%d/%Y %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
+        $order['order_status'] = '3';
+        $order['no_more_email'] = '1';
+
+        try {
+
+            App::import('Model', 'Order');
+            $Order = new Order();
+            $Order->setDataSource('default');
+            $result = $Order->save($order);
+
+        } catch (Exception $e) {
+             echo 'Error insert order_detail:' . $e->getMessage();
+        }
+
+        Debugger::dump($order);
+        Debugger::dump($all_cart);
+        Debugger::dump($result);
+        die();
 
         if (!empty($all_cart)) {
 
@@ -227,6 +257,7 @@ class Cart extends AppModel
 
                     App::import('Model', 'OrderDetail');
                     $OrderDetail = new OrderDetail();
+                    $OrderDetail->setDataSource('default');
                     $OrderDetail->save($order_detail);
 
                 } catch (Exception $e) {
@@ -237,7 +268,9 @@ class Cart extends AppModel
 
         }
 
+        CakeSession::delete('order_code');
         return CakeSession::delete('cart');
+
     }
 
     private function saveDbItemCart($item)

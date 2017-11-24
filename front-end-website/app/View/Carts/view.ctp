@@ -383,14 +383,19 @@
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 domain-domain">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code">
 
-                                <h3>Mã giảm giá:</h3>
-                                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code" id="gifcode_daily_ajax_sum_money_id">
+                                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code">
                                     <h6><span class="alert-info"></span></h6>
                                 </div>
 
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Số điện thoại" id="phone_gifcode" name="phone_gifcode" value="">
-                                    <button class="btn btn-ok" id="btn_gifcode_id">Áp dụng</button>
+                                <div class="form-inline" id="ma-giam-gia">
+                                    <label class="control-label" for="phone_gifcode"><span class="ma-giam-gia">Mã giảm giá:</span></label>
+                                    <input class="form-control" type="text" id="phone_gifcode" name="phone_gifcode" value="" placeholder="" >
+                                    <button class="form-controlbtn btn-ok" id="btn_gifcode_id"> Áp dụng </button>
+                                </div>
+
+                                <!-- AJAX update code status -->
+                                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code" id="gifcode_daily_ajax_sum_money_id">
+                                    <h6><span class="alert-info"></span></h6>
                                 </div>
 
                             </div>
@@ -463,7 +468,7 @@
                                     </div>
 
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Số điện thoại" value="" name="phone_support" id="phone_support">
+                                        <input type="text" class="form-control" placeholder="" value="" name="phone_support" id="phone_support">
                                         <button class="btn btn-nhap" id="btn_supporters_ajax_id"> Cập nhật </button>
                                     </div>
                                 </div>
@@ -633,6 +638,29 @@
             });
 
         </script>
+
+        <!-- [Fix] CSS/HTML hiển thị tiền thanh toán trong Giỏ hàng -->
+        <!-- [Fix] CSS/HTML hiển thị Mã giảm giá trong Giỏ hàng -->
+        <style type="text/css">
+
+            .total-money > tbody > tr > td, .total-money > thead > tr > th {
+                height: 55px;
+            }
+
+            .ma-giam-gia {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            #ma-giam-gia input {
+                width: 125px;
+            }
+
+            #phone_gifcode {
+                margin-bottom: 0;
+            }
+
+        </style>
 
 
     <?php //echo $this->element('sql_dump'); ?>
