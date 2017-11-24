@@ -56,7 +56,10 @@
     Router::connect('/carts/update', array('controller' => 'Carts', 'action' => 'update'));
 
 	Router::connect('/cart/del', array('controller' => 'Carts', 'action' => 'remove'));
-	Router::connect('/carts/del', array('controller' => 'Carts', 'action' => 'remove'));
+    Router::connect('/carts/del', array('controller' => 'Carts', 'action' => 'remove'));
+    Router::connect('/cart/remove', array('controller' => 'Carts', 'action' => 'remove'));
+    Router::connect('/carts/remove', array('controller' => 'Carts', 'action' => 'remove'));
+
 
     Router::connect('/cart/update_ajax_it', array('controller' => 'Carts', 'action' => 'update_ajax_it'));
     Router::connect('/carts/update_ajax_it', array('controller' => 'Carts', 'action' => 'update_ajax_it'));

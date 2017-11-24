@@ -1,25 +1,26 @@
 <SCRIPT LANGUAGE="JavaScript">
 
-//<!-- Begin
-var mikExp = /[$\\@\\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|\!\-]/;
-function dodacheck(val) {
-var strPass = val.value;
-var strLength = strPass.length;
-var lchar = val.value.charAt((strLength) - 1);
-if(lchar.search(mikExp) != -1) {
-var tst = val.value.substring(0, (strLength) - 1);
-val.value = tst;
-   }
-}
+    //<!-- Begin
+var mikExp = /[$\\@\\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|\!\-]/
 
-//  End -->
+function dodacheck(val) {
+        var strPass = val.value;
+        var strLength = strPass.length;
+        var lchar = val.value.charAt((strLength) - 1);
+        if (lchar.search(mikExp) != -1) {
+            var tst = val.value.substring(0, (strLength) - 1);
+            val.value = tst;
+        }
+    }
+
+    //  End -->
 </script>
 <script>
-    function a(){
-    // var a = document.getElementById("qwe").value;
-    var a = document.getElementById("input");
-    dodacheck(a);
-}
+    function a() {
+        // var a = document.getElementById("qwe").value;
+        var a = document.getElementById("input");
+        dodacheck(a);
+    }
 </script>
 <div class="search-domain">
     <div class="container-fluid">
@@ -27,7 +28,7 @@ val.value = tst;
         <ul class="nav nav-tabs container">
             <li class="active">
                 <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">
-                 Đăng ký tên miền
+                    Đăng ký tên miền
                 </a>
             </li>
             <li>
@@ -35,10 +36,12 @@ val.value = tst;
             </li>
             <li>
                 <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">
-                Kiểm tra tên miền
+                    Kiểm tra tên miền
                 </a>
             </li>
-            <li><a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">Bảng giá tên miền</a></li>
+            <li>
+                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">Bảng
+                    giá tên miền</a></li>
         </ul>
         <hr>
     </div>
@@ -52,7 +55,7 @@ val.value = tst;
                     <div>
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
                             <input type="text" id="input" name="add_doamin" class="form-control input-add"
-                                   placeholder="Nhập tên miền muốn đăng kí..." onKeyUp="a()" >
+                                   placeholder="Nhập tên miền muốn đăng kí..." onKeyUp="a()">
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                             <button type="submit" class="btn btn-add-domain">Kiểm tra</button>
@@ -89,7 +92,7 @@ val.value = tst;
                                     if ($output['status'] == "available") {
                                         echo "<img src='../app/webroot/img/icon-check.png'>";
                                     } else {
-                                        echo "<img src='../app/webroot/img/icon-del.png'>";
+                                    echo "<img src='../app/webroot/img/icon-del.png'>";
                                     }
 
                                     ?>
@@ -97,31 +100,35 @@ val.value = tst;
                                 </td>
                                 <td><?php echo $request1 ?></td>
                                 <?php foreach ($data1 as $item) { ?>
-                                    <?php if ($item['ProductPrice']['product_name'] == $check) { ?>
-                                        <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
-                                        <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p>
-                                        </td>
+                                <?php if ($item['ProductPrice']['product_name'] == $check) { ?>
+                                <td>
+                                    <p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?>
+                                        VNĐ</p></td>
+                                <td>
+                                    <p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?>
+                                        VNĐ</p>
+                                </td>
 
-                                    <?php }
+                                <?php }
                                 } ?>
                                 <td>
                                     <?php if ($output['status'] != 'available') { ?>
-                                        <form action="" method="POST">
-                                            <input type="hidden" class="domain_name" name="domain_name"
-                                                   value='<?php echo $request1 ?>'>
+                                    <form action="" method="POST">
+                                        <input type="hidden" class="domain_name" name="domain_name"
+                                               value='<?php echo $request1 ?>'>
 
-                                            <div class='btn btn-danger button1' data-toggle="modal"
-                                                 data-target="#myModal">Whois <img
-                                                        src='../app/webroot/img/icon-whois.png'></div>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="myModal" role="dialog">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content md-cn" id="demo">
+                                        <div class='btn btn-danger button1' data-toggle="modal"
+                                             data-target="#myModal">Whois <img
+                                                src='../app/webroot/img/icon-whois.png'></div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content md-cn" id="demo">
 
-                                                    </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
+                                    </form>
 
                                     <?php } ?>
 
@@ -129,8 +136,8 @@ val.value = tst;
 
                                 <td>
                                     <?php if ($output['status'] == 'available') { ?>
-                                        <input type="checkbox" class="add-domain-checkbox" name="">
-                                        <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                    <input type="checkbox" class="add-domain-checkbox" name="">
+                                    <label for="demo" class="demoCheck demoCheckLabel"></label>
                                     <?php } ?>
                                 </td>
                             </tr>
@@ -158,52 +165,58 @@ val.value = tst;
                                     $i = 0;
                                     $do_id = 0;
                                     foreach ($data as $item) { ?>
-                                        <tr>
+                                    <tr>
 
-                                            <td><?php
+                                        <td><?php
 
                                                 if ($output2[$i]['status'] == "available") {
                                                     echo "<img src='../app/webroot/img/icon-check.png'>";
-                                                } else {
-                                                    echo "<img src='../app/webroot/img/icon-del.png'>";
-                                                }
+                                            } else {
+                                            echo "<img src='../app/webroot/img/icon-del.png'>";
+                                            }
 
 
-                                                ?></td>
-                                            <td>
-                                                <p class="p-name"><?php echo($test = $request3 . $item['ProductPrice']['product_name']); ?></p>
-                                            </td>
-                                            <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
-                                            <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p></td>
-                                            <td>
-                                                <?php if ($output2[$i]['status'] != 'available') { ?>
-                                                    <form action="" method="POST">
-                                                        <input type="hidden" class="domain_name" name="domain_name"
-                                                               value='<?php echo $test ?>'>
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <p class="p-name"><?php echo($test = $request3 . $item['ProductPrice']['product_name']); ?></p>
+                                        </td>
+                                        <td>
+                                            <p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?>
+                                                VNĐ</p></td>
+                                        <td>
+                                            <p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?>
+                                                VNĐ</p></td>
+                                        <td>
+                                            <?php if ($output2[$i]['status'] != 'available') { ?>
+                                            <form action="" method="POST">
+                                                <input type="hidden" class="domain_name" name="domain_name"
+                                                       value='<?php echo $test ?>'>
 
-                                                        <div class='btn btn-danger button1' data-toggle="modal"
-                                                             data-target="#myModal">Whois <img
-                                                                    src='../app/webroot/img/icon-whois.png'></div>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="myModal" role="dialog">
-                                                            <div class="modal-dialog modal-lg">
-                                                                <div class="modal-content md-cn" id="demo">
+                                                <div class='btn btn-danger button1' data-toggle="modal"
+                                                     data-target="#myModal">Whois <img
+                                                        src='../app/webroot/img/icon-whois.png'></div>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="myModal" role="dialog">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content md-cn" id="demo">
 
-                                                                </div>
-                                                            </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
+                                                </div>
+                                            </form>
 
-                                                <?php }
-                                                
+                                            <?php }
+
                                                 ?>
-                                            </td>
-                                            <td>
-                                                <?php if ($output2[$i]['status'] == 'available') { ?>
-                                                    <input type="checkbox" class="add-domain-checkbox" id="domain_item_id<?=$do_id?>" name="">
-                                                    <label for="demo" class="demoCheck demoCheckLabel"></label>
-                                                <?php } $i++; ?>
-                                                <?php
+                                        </td>
+                                        <td>
+                                            <?php if ($output2[$i]['status'] == 'available') { ?>
+                                            <input type="checkbox" class="add-domain-checkbox"
+                                                   id="domain_item_id<?=$do_id?>" name="">
+                                            <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                            <?php } $i++; ?>
+                                            <?php
                                                 $cart = array();
                                                 $cart['product']['product_name'] = $request3 . $item['ProductPrice']['product_name'];
                                                 $cart['product']['price'] = $item['ProductPrice']['price'] + $item['ProductPrice']['bk_price'];
@@ -215,33 +228,33 @@ val.value = tst;
                                                 $data = json_encode($cart);
 
                                                 $str = $this->Html->scriptBlock('
-                                                                    $(document).ready(function () {
-                                                                      $("#domain_item_id' . $do_id . '").bind("change", function (event) {
-                                                                             if (this.checked) { 
-                                                                                 $.ajax({
-                                                                                      async: true, beforeSend: function (XMLHttpRequest) {
-                                                                                        $(\'#loading\').fadeIn(1000);
-                                                                                      }, cache: false, complete: function (XMLHttpRequest, textStatus) {
-                                                                                        $(\'#loading\').fadeOut(1000);
-                                                                                        update_ajax_it();
-                                                                                      }, data: ' . $data . ', type: "POST", url: "\/carts\/add_domain"
-                                                                                 });
-                                                                             }
-                                                                                                                                                   
-                                                                            return false;
-                                                                      });
-                                                                    });       
-                                                                    ', array('inline' => true));
+                                            $(document).ready(function () {
+                                            $("#domain_item_id' . $do_id . '").bind("change", function (event) {
+                                            if (this.checked) {
+                                            $.ajax({
+                                            async: true, beforeSend: function (XMLHttpRequest) {
+                                            $(\'#loading\').fadeIn(1000);
+                                            }, cache: false, complete: function (XMLHttpRequest, textStatus) {
+                                            $(\'#loading\').fadeOut(1000);
+                                            update_ajax_it();
+                                            }, data: ' . $data . ', type: "POST", url: "\/carts\/add_domain"
+                                            });
+                                            }
 
-                                                echo $str;
-                                                echo $this->Js->writeBuffer();
+                                            return false;
+                                            });
+                                            });
+                                            ', array('inline' => true));
 
-                                                ?>
+                                            echo $str;
+                                            echo $this->Js->writeBuffer();
 
-                                            </td>
+                                            ?>
 
-                                        </tr>
-                                        <?php
+                                        </td>
+
+                                    </tr>
+                                    <?php
                                         $do_id++;
                                     } ?>
                                     </tbody>
@@ -264,75 +277,82 @@ val.value = tst;
                         </div>
                         <?php } ?>
                         <?php if (isset($request2)) { ?>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <p class="p-add"> Kết quả kiểm tra</p>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-domain-domain">
-                                <div class="table-responsive add-on">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Tên miền</th>
-                                            <th>Phí duy trì</th>
-                                            <th> Phí đăng kí</th>
-                                            <th> Thông tin Whois</th>
-                                            <th>Thêm vào giỏ hàng</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <p class="p-add"> Kết quả kiểm tra</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-domain-domain">
+                            <div class="table-responsive add-on">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Tên miền</th>
+                                        <th>Phí duy trì</th>
+                                        <th> Phí đăng kí</th>
+                                        <th> Thông tin Whois</th>
+                                        <th>Thêm vào giỏ hàng</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-                                        <?php
+                                    <?php
                                         $i = 0;
                                         $do_id = 0;
                                         foreach ($data as $item) { ?>
-                                            <tr>
+                                    <tr>
 
-                                                <td><?php
+                                        <td><?php
 
                                                     if ($output1[$i]['status'] == "available") {
                                                         echo "<img src='../app/webroot/img/icon-check.png'>";
-                                                    } else {
-                                                        echo "<img src='../app/webroot/img/icon-del.png'>";
-                                                    }
+                                            } else {
+                                            echo "<img src='../app/webroot/img/icon-del.png'>";
+                                            }
 
 
-                                                    ?></td>
-                                                <td>
-                                                    <p class="p-name"><?php echo($test = $request2['add_doamin'] . $item['ProductPrice']['product_name']); ?></p>
-                                                </td>
-                                                <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
-                                                <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p></td>
-                                                <td>
-                                                    <?php if ($output1[$i]['status'] != 'available'){ ?>
-                                                    <form action="" method="POST">
-                                                        <input type="hidden" class="domain_name" name="domain_name"
-                                                               value='<?php echo $test ?>'>
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <p class="p-name"><?php echo($test = $request2['add_doamin'] . $item['ProductPrice']['product_name']); ?></p>
+                                        </td>
+                                        <td>
+                                            <p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?>
+                                                VNĐ</p></td>
+                                        <td>
+                                            <p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?>
+                                                VNĐ</p></td>
+                                        <td>
+                                            <?php if ($output1[$i]['status'] != 'available'){ ?>
+                                            <form action="" method="POST">
+                                                <input type="hidden" class="domain_name" name="domain_name"
+                                                       value='<?php echo $test ?>'>
 
-                                                        <div class='btn btn-danger button1' data-toggle="modal"
-                                                             data-target="#myModal">Whois <img
-                                                                    src='../app/webroot/img/icon-whois.png'></div>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="myModal" role="dialog">
-                                                            <div class="modal-dialog modal-lg">
-                                                                <div class="modal-content md-cn" id="demo">
+                                                <div class='btn btn-danger button1' data-toggle="modal"
+                                                     data-target="#myModal">Whois <img
+                                                        src='../app/webroot/img/icon-whois.png'></div>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="myModal" role="dialog">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content md-cn" id="demo">
 
-                                                                </div>
-                                                            </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
+                                                </div>
+                                            </form>
 
-                                                    <?php }
-                                                   
-                                                    ?><!-- <button type='submit' class='btn btn-danger'>Whois <img src='../app/webroot/img/icon-whois.png'></button> -->
-                                                </td>
-                                                <td>
-                                                    <?php if ($output1[$i]['status'] == 'available'){ ?>
-                                                        <input type="checkbox" class="add-domain-checkbox" id="domain_item_id<?=$do_id?>" name="">
-                                                        <label for="demo" class="demoCheck demoCheckLabel"></label>
-                                                    <?php } $i++; ?>
+                                            <?php }
 
-                                                    <?php
+                                                    ?>
+                                            <!-- <button type='submit' class='btn btn-danger'>Whois <img src='../app/webroot/img/icon-whois.png'></button> -->
+                                        </td>
+                                        <td>
+                                            <?php if ($output1[$i]['status'] == 'available'){ ?>
+                                            <input type="checkbox" class="add-domain-checkbox"
+                                                   id="domain_item_id<?=$do_id?>" name="">
+                                            <label for="demo" class="demoCheck demoCheckLabel"></label>
+                                            <?php } $i++; ?>
+
+                                            <?php
 
                                                     $cart = array();
                                                     $cart['product']['product_name'] = $request2['add_doamin'] . $item['ProductPrice']['product_name'];
@@ -345,52 +365,52 @@ val.value = tst;
                                                     $data = json_encode($cart);
 
                                                     $str = $this->Html->scriptBlock('
-                                                                $(document).ready(function () {
-                                                                  $("#domain_item_id' . $do_id . '").bind("change", function (event) {
-                                                                         if (this.checked) { 
-                                                                             $.ajax({
-                                                                                  async: true, beforeSend: function (XMLHttpRequest) {
-                                                                                    $(\'#loading\').fadeIn(1000);
-                                                                                  }, cache: false, complete: function (XMLHttpRequest, textStatus) {
-                                                                                    $(\'#loading\').fadeOut(1000);
-                                                                                    update_ajax_it();
-                                                                                  }, data: ' . $data . ', type: "POST", url: "\/carts\/add_domain"
-                                                                             });
-                                                                         }
-                                                                                                                                               
-                                                                        return false;
-                                                                  });
-                                                                });       
-                                                                ', array('inline' => true));
+                                                        $(document).ready(function () {
+                                                        $("#domain_item_id' . $do_id . '").bind("change", function (event) {
+                                                        if (this.checked) {
+                                                        $.ajax({
+                                                        async: true, beforeSend: function (XMLHttpRequest) {
+                                                        $(\'#loading\').fadeIn(1000);
+                                                        }, cache: false, complete: function (XMLHttpRequest, textStatus) {
+                                                        $(\'#loading\').fadeOut(1000);
+                                                        update_ajax_it();
+                                                        }, data: ' . $data . ', type: "POST", url: "\/carts\/add_domain"
+                                                        });
+                                                        }
+            
+                                                        return false;
+                                                        });
+                                                        });
+                                            ', array('inline' => true));
 
-                                                    echo $str;
-                                                    echo $this->Js->writeBuffer();
-                                                    ?>
+                                            echo $str;
+                                            echo $this->Js->writeBuffer();
+                                            ?>
 
-                                                </td>
+                                        </td>
 
-                                            </tr>
-                                            <?php
+                                    </tr>
+                                    <?php
                                             $do_id++;
                                         } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                    <!-- <button type="submit" class="btn btn-all"> Chuyển đến giỏ hàng</button> -->
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 add-continue">
-                                    <button type="submit" class="btn btn-add-continue"> Chuyển đến giỏ hàng </button>
-                                </div>
-                                <div id="loading" style="display: none; position: static; top: 100px; left: auto">
-                                    <div class="alert alert-info" role="alert">
-                                        <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...
-                                    </div>
-                                </div>
-
+                                    </tbody>
+                                </table>
                             </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <!-- <button type="submit" class="btn btn-all"> Chuyển đến giỏ hàng</button> -->
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 add-continue">
+                                <button type="submit" class="btn btn-add-continue"> Chuyển đến giỏ hàng</button>
+                            </div>
+                            <div id="loading" style="display: none; position: static; top: 100px; left: auto">
+                                <div class="alert alert-info" role="alert">
+                                    <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...
+                                </div>
+                            </div>
+
+                        </div>
                         <?php } ?>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 explain">
                             <p class="p-explain"> Bảng chú thích các kí hiệu</p>
@@ -407,7 +427,7 @@ val.value = tst;
                                 <tr>
                                     <td>
                                         <button type="submit" class="btn btn-danger">Whois <img
-                                                    src="../app/webroot/img/icon-whois.png"></button>
+                                                src="../app/webroot/img/icon-whois.png"></button>
                                     </td>
                                     <td>Xem thông tin tin miền</td>
                                 </tr>
@@ -429,26 +449,30 @@ val.value = tst;
                 </div>
             </div>
         </div>
+
         <?php
-        $update_ajax_it = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_it'));
+            /*  tue.phpmailer@gmail.com   */
+            /*  ***********************   */
+            $update_ajax_it = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_it'));
         $str = $this->Html->scriptBlock('
-                                    function update_ajax_it() {
-                                        $.ajax({
-                                            dataType: "html",
-                                            type: "POST",
-                                            evalScripts: true,
-                                            url: \'' . $update_ajax_it . '\',
-                                            data: ({type:\'del\'}),
-                                            success: function (data, textStatus){
-                                                $("#id_count_carts").html(data);
-                                            }
-                                        });
-                                    };
-  
-                                    ', array('inline' => true));
+        function update_ajax_it() {
+        $.ajax({
+        dataType: "html",
+        type: "POST",
+        evalScripts: true,
+        url: \'' . $update_ajax_it . '\',
+        data: ({type:\'del\'}),
+        success: function (data, textStatus){
+        $("#id_count_carts").html(data);
+        }
+        });
+        };
+
+        ', array('inline' => true));
         echo $str;
         echo $this->Js->writeBuffer();
         ?>
+
         <script type="text/javascript">
             $(document).ready(function () {
                 $('.button1').click(function () {
@@ -474,57 +498,57 @@ val.value = tst;
                             $('#demo').html(result);
 
                         }
-                    });
-                });
-            });
-        </script>
-<style type="text/css">
-    .md-cn {
-        width: 100%;
-        padding: 0%;
-        height: auto;
-    }
+})
+})
+})
+</script>
+        <style type="text/css">
+            .md-cn {
+                width: 100%;
+                0%;
+                auto;
+            }
 
-    .modal-lg {
-        padding: unset;
-    }
+            .modal-lg {
+                padding: unset;
+            }
 
-    .modal-header {
-        padding: 20px;
-        background: #e67237;
-        color: #fff;
-    }
+            .modal-header {
+                padding: 20px;
+                background: #e67237;
+                color: #fff;
+            }
 
-    .whois-body {
-        margin: 10px 50px;
-        text-align: left;
+            .whois-body {
+                margin: 10px 50px;
+                text-align: left;
 
-    }
+            }
 
-    .whois-section {
-        margin-bottom: 15px;
+            .whois-section {
+                margin-bottom: 15px;
 
-    }
+            }
 
-    .whois-item {
-        background: #005faf;
-        color: #fff;
-        padding: 10px;
-        font-size: 24px;
-    }
+            .whois-item {
+                background: #005faf;
+                color: #fff;
+                10px;
+                font-size: 24px;
+            }
 
-    .whois-content {
-        line-height: 30px;
-        padding-top: 10px;
-    }
+            .whois-content {
+                line-height: 30px;
+                padding-top: 10px;
+            }
 
-    .whois-content-1 {
-        line-height: 15px;
-        padding-top: 20px;
-    }
+            .whois-content-1 {
+                line-height: 15px;
+                padding-top: 20px;
+            }
 
-    .dcol {
-        float: left;
-        width: 50%;
-    }
-</style>
+            .dcol {
+                float: left;
+                50%;
+            }
+        </style>
