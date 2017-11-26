@@ -37,7 +37,9 @@
 
 	/* tue.phpmailer@gmail.com config route URL */
 	Router::connect('/carts', array('controller' => 'Carts', 'action' => 'view'));
-	Router::connect('/cart/', array('controller' => 'Carts', 'action' => 'view'));
+	Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
+    Router::connect('/carts/', array('controller' => 'Carts', 'action' => 'view'));
+    Router::connect('/cart/', array('controller' => 'Carts', 'action' => 'view'));
 
     Router::connect('/carts/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
 	Router::connect('/cart/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));

@@ -182,13 +182,10 @@ class Cart extends AppModel
     }
 
 
-    function changeDbSource($database = 'default') {
-
-
-    }
-
     public function saveDbCart()
     {
+
+        Configure::write('debug', 0);
 
         // Save Order to DB
         $order = $order_detail = array();
@@ -196,16 +193,22 @@ class Cart extends AppModel
         // get all item cart
         $all_cart = $this->readProduct();
         if (isset($all_cart['list']))
-            $all_item = array_shift($all_cart);  // shift an element off the beginning of array
+            $all_item = array_shift($all_cart);  // shift an element off the beginning of array ---> UNSET value $all_cart['list'])
         // end get all item cart
 
         // init Order
+        $user = CakeSession::read("Auth.User");
+        $_acc_id = ( isset($user) && isset($user['id'])) ? $user['id'] : null;
+        $_name_acc = ( isset($user) && isset($user['name'])) ? $user['name'] : null;
+        $_address_acc = ( isset($user) && isset($user['address'])) ? $user['address'] : null;
+
+
         $data = array
         (
             'Order' => array
             (
-                //'id' => $Order->getNextPrimaryId(),
-                //'id' => null,
+                //'id' => null, // for new create a Order
+                'account_id' => $_acc_id,
                 'order_type' => '1',
                 'order_code' => CakeSession::read('order_code'),
                 'order_datetime' => CakeTime::format(date('m/d/Y H:i:s'), '%m/%d/%Y %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh'),
@@ -219,74 +222,79 @@ class Cart extends AppModel
 
         $db = ConnectionManager::getDataSource('default');
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $data = $db->create($Order,
-                        array('order_type', 'order_code', 'order_datetime', 'order_status', 'no_more_email'),
-                        array('1', CakeSession::read('order_code'), date("Y-m-d H:i:s"), '3', '1')
+
+        $_result = $db->create($Order, array('accountant', 'name','address_payment','account_id', 'order_type', 'order_code', 'order_datetime', 'order_status', 'no_more_email'),
+                                       array($_name_acc, $_name_acc, $_address_acc, $_acc_id, '1', CakeSession::read('order_code'), date("Y-m-d H:i:s"), '3', '1')
         );
 
         $_new_order_id = $db->lastInsertId();
 
-        try {
+        if (!empty($all_cart) && count($all_cart) > 0) {
 
-            if (!empty($all_cart)) {
+            foreach ($all_cart as $item) {
+                $order_detail['order_id'] = $_new_order_id;
+                $order_detail['product_id'] = $item['product']['id'];
+                $order_detail['domain_name'] = $item['product']['product_name'];
 
-                foreach ($all_cart as $item) {
+                $order_detail['action_id'] = 0;
+                $order_detail['order_type'] = 1;
+                $order_detail['order_dtl_status'] = 1;
+                $order_detail['price'] = $item['product']['price']; // int
+                $order_detail['quantity'] = 1;  // int
+                $order_detail['amount'] = 0;
+                $order_detail['total'] = 0;
+                $order_detail['discount'] = 0;
+                $order_detail['code_affilates'] = 'CODE_AFF_0321A';
+                $order_detail['code_qc'] = 'CODE_QC_0321A';
+                $order_detail['notes'] = 'Thông tin note khách hàng mua sản phẩm'; // string
+                $order_detail['payment_method'] = 0;
 
-                    $order_detail['order_id'] = $_new_order_id;
-                    $order_detail['product_id'] = $item['product']['id'];
-                    $order_detail['domain_name'] = $item['product']['product_name'];
+                $date_getmoney = CakeTime::format(date('Y-m-d H:i:s'), '%Y-%m-%d %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
 
-                    $order_detail['action_id'] = 0;
-                    $order_detail['order_type'] = 1;
-                    $order_detail['order_dtl_status'] = 1;
-                    $order_detail['price'] = $item['product']['price']; // int
-                    $order_detail['quantity'] = 1;  // int
-                    $order_detail['amount'] = 0;
-                    $order_detail['total'] = 0;
-                    $order_detail['discount'] = 0;
-                    $order_detail['code_affilates'] = 'CODE_AFF_0321A';
-                    $order_detail['code_qc'] = 'CODE_QC_0321A';
-                    $order_detail['notes'] = 'Thông tin note khách hàng mua sản phẩm'; // string
-                    $order_detail['payment_method'] = 0;
+                $order_detail['date_getmoney'] = $date_getmoney; // string, varchar
 
-                    $date_getmoney = CakeTime::format(date('Y-m-d H:i:s'), '%Y-%m-%d %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
+                $order_detail['money_kd'] = 0;
+                $order_detail['flg_renew'] = 0;
+                $order_detail['hosting_id'] = 0;
+                $order_detail['customer_id'] = 0;
+                $order_detail['campainh'] = 'ký tự, unknow value ?';  // varchar
+                $order_detail['totenten'] = 'ký tự, unknow value ?';  // varchar
+                $order_detail['csr_string'] = 'ký tự, unknow value ?';  // varchar
+                $order_detail['payment_activator'] = 'Người active Payment'; // string
+                $order_detail['auth_code_tranfer'] = 'ACT_0321A'; // string
+                $order_detail['detail_id_sub'] = 0;
+                $order_detail['flg_smartphone'] = 0;
+                $order_detail['user_confirm_active'] = 'UCA_0321A'; // string
 
-                    $order_detail['date_getmoney'] = $date_getmoney; // string, varchar
+                $order_detail['ketoan_update'] = $date_getmoney;  // datetime
 
-                    $order_detail['money_kd'] = 0;
-                    $order_detail['flg_renew'] = 0;
-                    $order_detail['hosting_id'] = 0;
-                    $order_detail['customer_id'] = 0;
-                    $order_detail['campainh'] = 'ký tự, unknow value ?';  // varchar
-                    $order_detail['totenten'] = 'ký tự, unknow value ?';  // varchar
-                    $order_detail['csr_string'] = 'ký tự, unknow value ?';  // varchar
-                    $order_detail['payment_activator'] = 'Người active Payment'; // string
-                    $order_detail['auth_code_tranfer'] = 'ACT_0321A'; // string
-                    $order_detail['detail_id_sub'] = 0;
-                    $order_detail['flg_smartphone'] = 0;
-                    $order_detail['user_confirm_active'] = 'UCA_0321A'; // string
+                $order_detail['note_ketoan'] = 'Ghi nhớ cho kế toán'; // string
 
-                    $order_detail['ketoan_update'] = $date_getmoney;  // datetime
+                try {
 
-                    $order_detail['note_ketoan'] = 'Ghi nhớ cho kế toán'; // string
+                    App::import('Model', 'OrderDetail');
+                    $OrderDetail = new OrderDetail();
+                    $OrderDetail->setDataSource('default');
+                    $OrderDetail->save($order_detail);
 
-                    try {
+                    throw new RuntimeException();
 
-                        App::import('Model', 'OrderDetail');
-                        $OrderDetail = new OrderDetail();
-                        $OrderDetail->setDataSource('default');
-                        $OrderDetail->save($order_detail);
-
-                    } catch (Exception $e) {
-                        echo 'Error insert order_detail:' . $e->getMessage();
-                    }
-
+                } catch (Exception $e) {
+                    throw new Exception('Error insert order_detail:' . $e->getMessage());
                 }
 
             }
 
+        }
+        else {
+            // write log empty cart
+        }
+
+        try {
+            // write log empty cart
+            throw new RuntimeException();
         } catch (Exception $e) {
-             echo 'Error insert order_detail:' . $e->getMessage();
+            //throw new Exception('Error insert order_detail:' . $e->getMessage());
         }
 
         CakeSession::delete('order_code');

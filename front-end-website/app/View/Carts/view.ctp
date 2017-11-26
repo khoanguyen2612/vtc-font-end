@@ -14,6 +14,11 @@
                     <h3>CÁC BƯỚC THANH TOÁN</h3>
                 </div>
 
+                    <!--// The above will output fast message for Note!-->
+                    <div id="flashMessage" class="message alert">
+                        <?php echo $this->Session->flash(); ?>
+                    </div>
+
                     <div class="row">
                         <!--  -->
                         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">

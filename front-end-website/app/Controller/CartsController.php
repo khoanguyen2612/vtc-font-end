@@ -176,6 +176,10 @@ class CartsController extends AppController
                 $order_detail['product_name'] = $cart['product']['product_name'];
                 // for view layout
                 $order_detail['type'] = $p_type;
+                // addon year in product
+                $order_detail['year'] = 1;
+
+                //add to cart
                 $cart['product'] = $order_detail;
 
             }
@@ -186,14 +190,20 @@ class CartsController extends AppController
                 $this->Cart->addProduct($cart);
             }
 
-
         }
 
         $this->response->body(json_encode($cart));
         $this->response->send();
         $this->_stop();
 
+    }
 
+    /* add domain to cart in ProductPrice controller, register_domain.ctp, result_search.ctp */
+    public function do_in_cart() {
+        $this->redirect(array("controller" => "carts",
+                "action" => "view",
+            )
+        );
     }
 
     public function view($param = null)
@@ -427,8 +437,6 @@ class CartsController extends AppController
 
         $this->redirect(array("controller" => "home",
                 "action" => "index",
-                //"param" => "val",
-                //"param_1" => "val1")
             )
         );
 
@@ -436,8 +444,23 @@ class CartsController extends AppController
 
     public function payment()
     {
-        $res = $this->request->data;
+        // Check product in cart shopping
 
+        $n_item_cart = $this->Cart->getCount();
+
+        if ( is_null($n_item_cart) || $n_item_cart == 0 ) {
+            //$this->autoRender = false;
+
+            // In the controller cart .
+            $this->Session->setFlash('Lets by sell own\' production, please !');
+
+            $this->redirect(array("controller" => "carts",
+                    "action" => "view",
+                )
+            );
+        }
+
+        $res = $this->request->data;
         if ($this->request->is('post') || $this->request->is('get')) {
 
             $order_code = $this->Session->read('order_code');
@@ -503,6 +526,23 @@ class CartsController extends AppController
 
     public function finish()
     {
+
+        // Check return in VTC redirect
+
+        // Check product in cart shopping
+        $n_item_cart = $this->Cart->getCount();
+
+        if ( is_null($n_item_cart) || $n_item_cart == 0 ) {
+
+            // In the controller cart .
+            $this->Session->setFlash('Lets by sell own\' production, please !');
+
+            $this->redirect(array("controller" => "carts",
+                    "action" => "view",
+                )
+            );
+        }
+
         // Payment port return GET/POST
         $res = $this->request->data;
 
