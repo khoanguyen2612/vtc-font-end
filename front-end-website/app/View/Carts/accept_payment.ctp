@@ -195,7 +195,6 @@
     </div>
 
 
-
     <?php  echo $this->Html->css('customer_home.css') . "\n"; ?>
 
     <style type="text/css">
