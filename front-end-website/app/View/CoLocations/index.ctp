@@ -9,11 +9,9 @@
 		</div>
 	</div>
 	<!-- for content page -->
-	<?php echo $this->Session->flash(); ?>
 	<?php echo stripslashes($content['0']['Staticpages']['head_service']); ?>
 	<?php echo stripslashes($content['0']['Staticpages']['content']); ?>
 	<!-- end content page -->
-	
 	<?php echo $this->Form->create(false,array('id'=>'submit'));?>
 	<input type="hidden" name="pack_id" value="">
 	<?php echo $this->Form->end();?>
