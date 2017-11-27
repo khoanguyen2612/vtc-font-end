@@ -357,7 +357,7 @@
 <script type="text/javascript">
     function getSavedRecord(id){
         $.ajax({
-            url : "getSaveRecord",
+            url : "<?php echo $this->Html->url(array('controller' => 'Infocarts', 'action' => 'getSaveRecord'), true); ?>",
             type : "post",
             dataType:"json",
             data : {
@@ -393,7 +393,7 @@
     }
     function getAccInfo(type_acc){
       $.ajax({
-          url: 'getInfoAccount',
+          url: "<?php echo $this->Html->url(array('controller' => 'Infocarts', 'action' => 'getInfoAccount'), true); ?>",
           type: 'POST',
           dataType: 'json',
           data: {type: type_acc},
