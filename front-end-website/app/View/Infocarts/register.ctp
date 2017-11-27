@@ -2,7 +2,7 @@
     <div class="process">
         <div class="process">
             <div class="container">
-                    <?php echo $this->Html->image('button_step2.png',array('class'=>'img-responsive')); ?>
+                <?php echo $this->Html->image('button_step2.png',array('class'=>'img-responsive')); ?>
             </div>
         </div>
     </div>
@@ -13,11 +13,11 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div role="tabpanel">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active" id="cn">
-                                <a href="#personal" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">CÁ NHÂN</a>
+                            <li role="presentation" class="<?php echo (!isset($ErrorsForm))?'active':''; ?>" id="cn">
+                                <a href="#personal" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="<?php echo (!isset($ErrorsForm))?'true':'false'; ?>">CÁ NHÂN</a>
                             </li>
-                            <li role="presentation" class="" id="tc">
-                                <a href="#group" aria-controls="tab" role="tab" data-toggle="tab" aria-expanded="false">TỔ CHỨC</a>
+                            <li role="presentation" class="<?php echo (isset($ErrorsForm))?'active':''; ?>" id="tc">
+                                <a href="#group" aria-controls="tab" role="tab" data-toggle="tab" aria-expanded="<?php echo (isset($ErrorsForm))?'true':'false'; ?>">TỔ CHỨC</a>
                             </li>
                         </ul>
                         <?php echo $this->Form->create('Contact',array(
@@ -26,7 +26,7 @@
                         )); 
                         ?>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="personal">
+                            <div role="tabpanel" class="tab-pane <?php echo (!isset($ErrorsForm))?'active':''; ?>" id="personal">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 select_info_save">
                                     <span class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Chọn bản khai đã lưu:</span>
                                     <select onchange="getSavedRecord(this.value)" name="" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -98,7 +98,7 @@
                             </div>
                             <!-- end personal -->
                             <!-- group info  -->
-                            <div role="tabpanel" class="tab-pane" id="group">
+                            <div role="tabpanel" class="tab-pane <?php echo (isset($ErrorsForm))?'active':''; ?>" id="group">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 select_info_save">
                                     <span class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Chọn bản khai đã lưu:</span>
                                     <select name="" class="col-lg-8 col-md-8 col-sm-8 col-xs-12" onchange="getSavedRecord(this.value)">
@@ -193,11 +193,11 @@
                                         <div class="form-group gender">
                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Giới tính</label>
                                             <label>
-                                                <input type="radio" name="data[Contact][mn_gender]" value="1" required>
+                                                <input type="radio" name="data[Contact][mn_gender]" value="1" required role="sex">
                                                 <span>Nam</span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="data[Contact][mn_gender]" value="0" required>
+                                                <input type="radio" name="data[Contact][mn_gender]" value="0" required role="sex">
                                                 <span>Nữ</span>
                                             </label>
                                         </div>
@@ -249,11 +249,11 @@
                                         <div class="form-group gender">
                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Giới tính</label>
                                             <label>
-                                                <input type="radio" name="data[Contact][bill_gender]" value="1" required>
+                                                <input type="radio" name="data[Contact][bill_gender]" value="1" required role="sex">
                                                 <span>Nam</span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="data[Contact][bill_gender]" value="0" required>
+                                                <input type="radio" name="data[Contact][bill_gender]" value="0" required role="sex">
                                                 <span>Nữ</span>
                                             </label>
                                         </div>
@@ -305,11 +305,11 @@
                                         <div class="form-group gender">
                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Giới tính</label>
                                             <label>
-                                                <input type="radio" name="other_gender" value="1">
+                                                <input type="radio" name="other_gender" value="1" role="sex">
                                                 <span>Nam</span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="other_gender" value="0">
+                                                <input type="radio" name="other_gender" value="0" role="sex">
                                                 <span>Nữ</span>
                                             </label>
                                         </div>
@@ -322,9 +322,8 @@
                             </div>
                             <div>
                                 <?php if(isset($Errors)): ?>
-
                                     <?php foreach($Errors as $val): ?>
-                                     <div class="alert alert-warning">
+                                       <div class="alert alert-warning">
                                         <?php echo $val['0']; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -367,52 +366,54 @@
             success : function (data){
                 if(data.status == '1'){
                     if(data.Contact.role_flg == 'I'){
-                     $('#name_cn').val(data.Contact.lname);
-                     $('#birthday_cn').val(data.Contact.birthday);
-                     $('#ownerid_cn').val(data.Contact.ownerid);
-                     $('#phone_cn').val(data.Contact.phone);
-                     $('#street_cn').val(data.Contact.street1);
-                     $('#city_cn').val(data.Contact.city);
-                     $('#email_cn').val(data.Contact.email);
-                     if(data.Contact.sex == 1){
-                       $('#personal input#male').attr('checked','true');
-                   }
-                   else if(data.Contact.sex == 0){
-                    $('#personal input#female').attr('checked','true');
+                       $('#name_cn').val(data.Contact.lname);
+                       $('#birthday_cn').val(data.Contact.birthday);
+                       $('#ownerid_cn').val(data.Contact.ownerid);
+                       $('#phone_cn').val(data.Contact.phone);
+                       $('#street_cn').val(data.Contact.street1);
+                       $('#city_cn').val(data.Contact.city);
+                       $('#email_cn').val(data.Contact.email);
+                       if(data.Contact.sex == 1){
+                         $('#personal input#male').attr('checked','true');
+                     }
+                     else if(data.Contact.sex == 0){
+                        $('#personal input#female').attr('checked','true');
+                    }
+                }else if(data.Contact.role_flg == 'R'){
+                    $('#name_tc').val(data.Contact.organization);
+                    $('#street_tc').val(data.Contact.street1);
+                    $('#phone_tc').val(data.Contact.phone);
+                    $('#ownerid_tc').val(data.Contact.ownerid);
+                    $('#city_tc').val(data.Contact.city);
+                    $('#email_tc').val(data.Contact.email); 
                 }
-
-            }else if(data.Contact.role_flg == 'R'){
-                $('#name_tc').val(data.Contact.organization);
-                $('#street_tc').val(data.Contact.street1);
-                $('#phone_tc').val(data.Contact.phone);
-                $('#ownerid_tc').val(data.Contact.ownerid);
-                $('#city_tc').val(data.Contact.city);
-                $('#email_tc').val(data.Contact.email); 
             }
         }
+    });
     }
-});
-    }
-    function getAccInfo(data){
+    function getAccInfo(type_acc){
       $.ajax({
           url: 'getInfoAccount',
           type: 'POST',
           dataType: 'json',
-          data: {type: data},
+          data: {type: type_acc},
       })
       .done(function(result) {
-        console.log(result);
-        if(data == 'I'){
-            $('#birthday_cn').val(result.Account.birthday);
+        if(type_acc == 'I'){
+            $('#birthday_cn').attr('value',result.Account.birthday);
             $('#ownerid_cn').val(result.Account.CMTND);
             $('#phone_cn').val(result.Account.phonenumber);
             $('#email_cn').val(result.Account.email);
-            $('#name_cn').val(result.Account.login_id);
+            $('#name_cn').val(result.Account.name);
             $('#street_cn').val(result.Account.add_contact);
             $('#city_cn').val(result.Account.address); 
-        }
-        if(data = 'R'){
-
+            if(result.Account.sex == 1){
+                         $('#personal input#male').attr('checked','true');
+                     }
+                     else if(result.Account.sex == 0){
+                        $('#personal input#female').attr('checked','true');
+                    }
+        }else if(type_acc == 'R'){
             $('#name_tc').val(result.Organization.organ_name);
             $('#street_tc').val(result.Account.add_contact);
             $('#phone_tc').val(result.Organization.phonenumber2);
@@ -424,30 +425,30 @@
   }
 
   $(document).ready(function() {
-     $('.comfirm label input[type=checkbox]').change(function(){
-        $('.comfirm label').toggleClass('agree');
+   $('.comfirm label input[type=checkbox]').change(function(){
+    $('.comfirm label').toggleClass('agree');
     });
-     if($('.comfirm input[type=checkbox]').prop('checked')){
-         $('.comfirm label').addClass('agree');
-     }
-     $('form').on('submit', function(e){
-        if(!$('.comfirm input[type=checkbox]').prop('checked'))
-        {
-            alert('Bạn chưa chọn đồng ý với các điều khoản');
-            e.preventDefault();
-        }
+   if($('.comfirm input[type=checkbox]').prop('checked')){
+       $('.comfirm label').addClass('agree');
+   }
+   $('form').on('submit', function(e){
+    if(!$('.comfirm input[type=checkbox]').prop('checked'))
+    {
+        alert('Bạn chưa chọn đồng ý với các điều khoản');
+        e.preventDefault();
+    }
 
-    });
- });
+});
+});
 
   $('button[type=submit]').click(function(){
-     if ($('#cn').hasClass('active')) {
-        $('#group').find('input[required]').removeAttr('required');
-        $('#group input').val('');
-    }else{
-     $('#personal').find('input[required]').removeAttr('required');
-     $('#personal input').val('');
- }
+   if ($('#cn').hasClass('active')) {
+    $('#group').find('input[required]').removeAttr('required');
+    $('#group input').val('');
+}else{
+   $('#personal').find('input[required]').removeAttr('required');
+   $('#personal input').val('');
+}
 });
 
   // lay thong tin chu the ten mien
@@ -465,15 +466,25 @@
     $('#bill_phone').val($('#mn_phone').val());
     $('#bill_street').val($('#mn_street').val());
     $('#bill_city').val($('#mn_city').val());
-    $('#bill_email').val($('#mn_email').val())    
+    $('#bill_email').val($('#mn_email').val());
+    if($('#manager input[role=sex]:checked').attr('value') == '1'){
+        $('#bill input[value=1]').prop('checked',true);
+    }else if($('#manager input[role=sex]:checked').attr('value') == '0'){
+        $('#bill input[value=0]').prop('checked',true);
+    }
 });
   $('#get_other').click(function(){
-     $('#other_name').val($('#mn_name').val());
-     $('#other_birthday').val($('#mn_birthday').val());
-     $('#other_ownerid').val($('#mn_ownerid').val());
-     $('#other_phone').val($('#mn_phone').val());
-     $('#other_street').val($('#mn_street').val());
-     $('#other_city').val($('#mn_city').val());
-     $('#other_email').val($('#mn_email').val())    
- });
+   $('#other_name').val($('#mn_name').val());
+   $('#other_birthday').val($('#mn_birthday').val());
+   $('#other_ownerid').val($('#mn_ownerid').val());
+   $('#other_phone').val($('#mn_phone').val());
+   $('#other_street').val($('#mn_street').val());
+   $('#other_city').val($('#mn_city').val());
+   $('#other_email').val($('#mn_email').val())
+   if($('#bill input[role=sex]:checked').attr('value') == '1'){
+        $('#other input[value=1]').prop('checked',true);
+    }else if($('#bill input[role=sex]:checked').attr('value') == '0'){
+        $('#other input[value=0]').prop('checked',true);
+    }  
+});
 </script>
