@@ -460,16 +460,66 @@ class CartsController extends AppController
             );
         }
 
+        $id_acc = $this->Auth->User('id');
+        $user_info = $this->Account->findById($id_acc);
+        $name = $user_info['Account']['name'];
+
         $res = $this->request->data;
+
         if ($this->request->is('post') || $this->request->is('get')) {
 
             $order_code = $this->Session->read('order_code');
             $total_money = $this->Session->read('total_money');
             $total_payment = $total_money - round($total_money * 10 / 100);
-            //$order_code = $order_code. rand(20000, 99999);
 
+            $this->set(compact('n_item_cart'));
+            $this->set(compact('name'));
             $this->set(compact('order_code'));
             $this->set(compact('total_payment'));
+        }
+
+    }
+
+    public function accept_payment()
+    {
+
+        // Check product in cart shopping
+        $n_item_cart = $this->Cart->getCount();
+
+        if ( is_null($n_item_cart) || $n_item_cart == 0 ) {
+
+            //$this->autoRender = false;
+
+            // In the controller cart .
+            $this->Session->setFlash('Lets by sell own\' production, please !');
+
+            $this->redirect(array("controller" => "carts",
+                    "action" => "view",
+                )
+            );
+
+        }
+
+        $id_acc = $this->Auth->User('id');
+        $user_info = $this->Account->findById($id_acc);
+        $name = $user_info['Account']['name'];
+
+        $res = $this->request->data;
+
+        $add_curent_money = (isset( $res['Payment']) )? $res['Payment']['add_curent_money'] : 0;
+
+        if ($this->request->is('post') || $this->request->is('get')) {
+
+            $order_code = $this->Session->read('order_code');
+            $total_money = $this->Session->read('total_money');
+            $total_payment = $total_money - round($total_money * 10 / 100);
+
+            $this->set(compact('n_item_cart'));
+            $this->set(compact('name'));
+            $this->set(compact('add_curent_money'));
+            $this->set(compact('order_code'));
+            $this->set(compact('total_payment'));
+
         }
 
     }
@@ -877,8 +927,7 @@ class CartsController extends AppController
         
         
     }
-    
-    
+
     public function checkout()
     {
 

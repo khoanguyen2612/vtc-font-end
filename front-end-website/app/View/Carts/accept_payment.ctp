@@ -1,5 +1,5 @@
 
-    <div class="logo_div">
+ <div class="logo_div">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-12">
@@ -29,6 +29,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="account-cart">
         <div class="container">
@@ -91,63 +92,43 @@
     <div class="user_pay">
         <div class="container">
             <div class="row">
-
-                <?php
-                    echo $this->Form->create('Payment', array('type' => 'POST',
-                            'url' => array('controller' => 'carts', 'action' => 'accept_payment'),
-                            'id' => "form2",
-                            'name' => "form2",
-                            'class' => 'form',
-                            'role' => 'form',
-                        )
-                    );
-                ?>
-
                 <div class="col-lg-12">
+                    <h4><i class="star"></i>Hình thức thanh toán</h4>
 
-                    <h4><i class="star"></i>Số tiền cần nạp thêm</h4>
                     <?php
-                        echo $this->Form->input('add_curent_money', array(
-                                'id' => "add_curent_money",
-                                //'name' => "add_curent_money",
-                                'class' => '',
-                                'type' => 'text',
-                                'value' => '',
-                                'label' => false,
+                        echo $this->Form->create(null, array('type' => 'POST',
+                                'url' => array('controller' => 'carts', 'action' => 'vtc_payment'),
+                                'id' => "form2",
+                                'name' => "form2",
+                                'class' => 'form',
+                                'role' => 'form',
                             )
                         );
                     ?>
 
-                </div>
-
-                <div class="col-lg-12">
-                    <h4><i class="star"></i>Chọn phương thức thanh toán</h4>
-                    <p class="title"> Bạn vui lòng chọn một trong số các hình thức thanh toán bên dưới:</p>
-                </div>
-
-                <div class="col-lg-12">
+                    <div class="hidden">
+                        <input name="txtOrderID" type="text" value="<?php echo $order_code ?>" id="txtOrderID"/>
+                        <input name="txtCustomerFirstName" type="text" value="Nguyễn Tài" id="txtCustomerFirstName"/>
+                        <input name="txtCustomerLastName" type="text" value="Tuệ" id="txtCustomerLastName"/>
+                        <input name="txtBillAddress" type="text" value="Hà Nội" id="txtBillAddress"/>
+                        <input name="txtCity" type="text" value="Hà Nội" id="txtCity"/>
+                        <input name="txtCustomerEmail" type="text" value="nguyentaitue@codelovers.vn" id="txtCustomerEmail"/>
+                        <input name="txtCustomerMobile" type="text" value="<?php echo "0916298481" ?>" id="txtCustomerMobile"/>
+                        <input name="txtParamExt" type="text" value="" id="txtParamExt"/>
+                        <input name="txtParamLanguage" type="text" value="vi" id="txtParamLanguage"/>
+                        <input name="txtUrlReturn" type="text" value="<?php echo "http://vtc.codelovers.vn/carts/finish/" ?>" id="txtUrlReturn"/>
+                        <input name="txtSecret" type="text" value="<?php echo "VtcPay_Codelovers_2017" ?>" id="txtSecret"/>
+                        <input name="txtTotalAmount" type="text" value="<?php echo round($total_payment) ?>" id="txtTotalAmount"/>
+                        <input name="txtCurency" type="text" value="VND" id="txtCurency"/> &nbsp;<i>VND/USD</i>
+                        <input name="txtWebsiteID" type="text" value="10059" id="txtWebsiteID"/>
+                        <input name="txtReceiveAccount" type="text" value="<?php echo "0916298481" ?>" id="txtReceiveAccount"/>
+                        <input name="txtDescription" type="text" value="<?php echo $order_code ?> services" id="txtDescription"/>
+                    </div>
 
                     <?php echo $this->Form->end(); ?>
 
-                    <style type="text/css">
 
-                        /* reset color in link text */
-                        a {
-                            color: inherit; /* blue colors for links too */
-                            text-decoration: inherit; /* no underline */
-                        }
-
-                        a:hover {
-                            cursor: pointer;
-                            color: inherit; /* blue colors for links too */
-                            text-decoration: inherit; /* no underline */
-                        }
-
-                    </style>
-
-                    <p id="pay_ol" class="">
-                        <a class="text" id="btnContinue" data-i18n="website.continue" onClick='submitDetailsForm()' >THANH TOÁN TRỰC TUYẾN </a>
-                    </p>
+                    <p id="pay_ol" class=""> THANH TOÁN TRỰC TUYẾN </p>
 
                     <script language="javascript" type="text/javascript">
                         function submitDetailsForm() {
@@ -191,10 +172,29 @@
                         </li>
                     </ul>
 
+                    <h4> <i class="star"></i>SỐ DƯ TIỀN NẠP </h4>
+
+                    <div class="money_inf">
+                        <p>
+                            <strong>Số tiền được nạp: </strong>
+                            <span><?php echo number_format((int) $add_curent_money,0,',','.' ); ?> VNĐ</span>
+                        </p>
+                        <p>
+                            <strong>Tổng số dư: </strong>
+                            <span> VNĐ</span>
+                        </p>
+                    </div>
+
+                    <div class="text-center">
+                        <a class="text pay-btn" id="btnContinue" data-i18n="website.continue" onClick='submitDetailsForm()' >Thực hiện thanh toán online</a>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+
 
     <?php  echo $this->Html->css('customer_home.css') . "\n"; ?>
 
@@ -204,11 +204,59 @@
             background-color: #f3f3f3;
         }
 
+        .money_inf p{
+            margin-bottom: 20px;
+        }
+
+        .money_inf{
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .user_pay strong{
+            color: #0060AF;
+            font-size: 18px;
+            margin-left: 5%;
+        }
+
+        .user_pay span{
+            margin-left: 8%;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
         .user_pay .row{
             margin-top: 10px;
             margin-bottom: 30px;
             padding-bottom: 60px;
             background-color: #fff;
+        }
+
+        #pay-btn{
+            text-decoration: none;
+            margin-top: 20px;
+            width: 50%;
+            background-color: #f37636;
+            color: #fff;
+            border-radius: 6px;
+            display: inline-block;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /** fix css **/
+        .pay-btn{
+            text-decoration: none;
+            margin-top: 20px;
+            width: 50%;
+            background-color: #f37636;
+            color: #fff;
+            border-radius: 6px;
+            display: inline-block;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: 600;
         }
 
         .star{
@@ -235,7 +283,6 @@
         }
 
         .user_pay input[type=text]{
-            border:solid 1px #29353f;
             width: 50%;
             margin: auto;
             display: block;
@@ -260,6 +307,24 @@
 
     </style>
 
+
+    <style type="text/css">
+
+        /* reset color in link text */
+        a {
+            color: inherit; /* blue colors for links too */
+            text-decoration: inherit; /* no underline */
+        }
+
+         a:hover {
+            cursor: pointer;
+            color: inherit; /* blue colors for links too */
+            color: white; /* blue colors for links too */
+            text-decoration: inherit; /* no underline */
+            text-decoration: none; /* no underline */
+        }
+
+    </style>
 
     <?php //echo $this->element('sql_dump'); ?>
 
