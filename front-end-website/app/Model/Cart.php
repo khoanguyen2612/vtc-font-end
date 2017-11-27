@@ -7,10 +7,16 @@ App::uses('AppModel', 'Model');
 App::uses('CakeSession', 'Model/Datasource');
 App::uses('CakeTime', 'Utility');
 
+App::import('Model', 'Order');
+App::import('Model', 'OrderDetail');
+
 class Cart extends AppModel
 {
 
-    public $useTable = false;
+    //public $useTable = false;
+    public $useTable = 'orders';
+    public $actsAs = array('Containable');
+
 
     /*
      * add a product to cart
@@ -175,8 +181,11 @@ class Cart extends AppModel
         return CakeSession::delete('cart');
     }
 
+
     public function saveDbCart()
     {
+
+        Configure::write('debug', 0);
 
         // Save Order to DB
         $order = $order_detail = array();
@@ -184,38 +193,46 @@ class Cart extends AppModel
         // get all item cart
         $all_cart = $this->readProduct();
         if (isset($all_cart['list']))
-            $all_item = array_shift($all_cart);  // shift an element off the beginning of array
+            $all_item = array_shift($all_cart);  // shift an element off the beginning of array ---> UNSET value $all_cart['list'])
         // end get all item cart
 
         // init Order
-        $order['id'] = null;
-        $order['order_type'] = '1';
-        $order['order_code'] = CakeSession::read('order_code');
-        $order['order_datetime'] = CakeTime::format(date('m/d/Y H:i:s'), '%m/%d/%Y %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
-        $order['order_status'] = '3';
-        $order['no_more_email'] = '1';
+        $user = CakeSession::read("Auth.User");
+        $_acc_id = ( isset($user) && isset($user['id'])) ? $user['id'] : null;
+        $_name_acc = ( isset($user) && isset($user['name'])) ? $user['name'] : null;
+        $_address_acc = ( isset($user) && isset($user['address'])) ? $user['address'] : null;
 
-        try {
 
-            App::import('Model', 'Order');
-            $Order = new Order();
-            $Order->setDataSource('default');
-            $result = $Order->save($order);
+        $data = array
+        (
+            'Order' => array
+            (
+                //'id' => null, // for new create a Order
+                'account_id' => $_acc_id,
+                'order_type' => '1',
+                'order_code' => CakeSession::read('order_code'),
+                'order_datetime' => CakeTime::format(date('m/d/Y H:i:s'), '%m/%d/%Y %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh'),
+                'order_status' => '3',
+                'no_more_email' => '1',
+            )
+        );
 
-        } catch (Exception $e) {
-             echo 'Error insert order_detail:' . $e->getMessage();
-        }
+        App::import('Model', 'Order');
+        $Order = new Order();
 
-        Debugger::dump($order);
-        Debugger::dump($all_cart);
-        Debugger::dump($result);
-        die();
+        $db = ConnectionManager::getDataSource('default');
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
 
-        if (!empty($all_cart)) {
+        $_result = $db->create($Order, array('accountant', 'name','address_payment','account_id', 'order_type', 'order_code', 'order_datetime', 'order_status', 'no_more_email'),
+                                       array($_name_acc, $_name_acc, $_address_acc, $_acc_id, '1', CakeSession::read('order_code'), date("Y-m-d H:i:s"), '3', '1')
+        );
+
+        $_new_order_id = $db->lastInsertId();
+
+        if (!empty($all_cart) && count($all_cart) > 0) {
 
             foreach ($all_cart as $item) {
-
-                $order_detail['order_id'] = $item['order']['id'];
+                $order_detail['order_id'] = $_new_order_id;
                 $order_detail['product_id'] = $item['product']['id'];
                 $order_detail['domain_name'] = $item['product']['product_name'];
 
@@ -260,18 +277,30 @@ class Cart extends AppModel
                     $OrderDetail->setDataSource('default');
                     $OrderDetail->save($order_detail);
 
+                    throw new RuntimeException();
+
                 } catch (Exception $e) {
-                    echo 'Error insert order_detail:' . $e->getMessage();
+                    throw new Exception('Error insert order_detail:' . $e->getMessage());
                 }
 
             }
 
         }
+        else {
+            // write log empty cart
+        }
+
+        try {
+            // write log empty cart
+            throw new RuntimeException();
+        } catch (Exception $e) {
+            //throw new Exception('Error insert order_detail:' . $e->getMessage());
+        }
 
         CakeSession::delete('order_code');
         return CakeSession::delete('cart');
-
     }
+
 
     private function saveDbItemCart($item)
     {
