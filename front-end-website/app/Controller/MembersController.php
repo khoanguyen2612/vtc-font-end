@@ -4,51 +4,38 @@
 
 	class MembersController extends AppController{
 		public $uses = array('Account','Organization');
-		public $components = array('Email');
+		public $components = array('Email','LoginAccount');
 
 		public function login($token=null){
 			$this->set('title_for_layout', 'Đăng nhập');
         	if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
         	setcookie('remember',1, -1);
+        	if(!isset($_SESSION['fail'])){
+        		$_SESSION['fail']=0;
+        	}
+        	// $this->Session->destroy();
+        	// pr($_SESSION);die;
         	if($this->request->is('post')){
-        		$nickname=$this->request->data['Account']['nickname'];
-				$user=$this->Account->find('first',array('conditions'=>array('Account.nickname'=>$nickname)));
-				if(!empty($user)){
-					if($user['Account']['status']==1){
-						$year =  time() + 86400;
-			            if(!empty($this->request->data['Account']['remember'])) {
-			                setcookie('username', $this->request->data['Account']['nickname'], $year);
-			                setcookie('passwd', $this->request->data['Account']['login_password'], $year);
-			                setcookie('remember', $this->request->data['Account']['remember'], $year);
-			            }else{
-			                unset($_COOKIE['username']);
-			                unset($_COOKIE['passwd']);
-			                unset($_COOKIE['remember']);
-			                setcookie('username', null, -1);
-			                setcookie('passwd', null, -1);
-			                setcookie('remember', null, -1);
-			            }
-						if($this->Auth->login())
-						{
-							return $this->redirect($this->Auth->redirectUrl($this->Auth->loginRedirect));
-						}
-						else
-						{
-							$this->Session->setFlash('Tài khoản không đúng, vui lòng thử lại!','default',array('class'=>'alert alert-danger'));
-						}
+        		if($_SESSION['fail']>=3){
+	        		if(!empty($this->request->data['g-recaptcha-response'])){
+						$captcha = $this->request->data['g-recaptcha-response'];
 					}
-					else{
-						$this->Session->setFlash('Tài khoản này chưa được kích hoạt, vui lòng vào mail đăng ký tài khoản để kích hoạt','default',array('class'=>'alert alert-danger'));
+
+					if(!isset($captcha)){
+						$this->Session->setFlash('Vui lòng check captcha','default',array('class'=>'alert alert-danger'));
+					}else{
+						 
+						$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LcLNjoUAAAAANQJsCDfCYZ_VJBaLApaJl2Nww1-&response=".$captcha);
+						$response = json_decode($response, TRUE);
+						if($response['success'] == false){
+							$this->Session->setFlash('Vì lý do nào đó, bạn hay thử lại!','default',array('class'=>'alert alert-danger'));
+						}else{
+							$this->LoginAccount->remember_account($this->request->data);
+						}
 					}
 				}
 				else{
-					unset($_COOKIE['username']);
-	                unset($_COOKIE['passwd']);
-	                unset($_COOKIE['remember']);
-	                setcookie('username', null, -1);
-	                setcookie('passwd', null, -1);
-	                setcookie('remember', null, -1);
-					$this->Session->setFlash('Tài khoản không đúng, vui lòng thử lại!','default',array('class'=>'alert alert-danger'));
+					$this->LoginAccount->remember_account($this->request->data);
 				}
 			}
 			if(!empty($token)){
@@ -216,14 +203,16 @@
 		                    $u['Account']['tokenhash']=$new_hash;
 
 		                    if($this->request->is('post')){
-		                    	
+		                    	// pr($this->request->data);die;
 			                    $this->request->data['Account']['login_password']=$this->request->data['Account']['original_password'];
 			                    $this->request->data['Account']['tokenhash']=$new_hash;
 			                    
 			                    $this->request->data['Account']['id']=$u['Account']['id'];
-
+			                    // pr($this->request->data['Account']);die;
+			                    $this->Account->set($this->request->data['Account']);
 			                    
-			                    if($this->Account->save($this->request->data)){
+			                    if($this->Account->validates()){
+			                    	$this->Account->save($this->request->data);
 									$this->Session->setFlash('Mật khẩu đã được thay đổi, Hãy đăng nhập bằng mật khẩu mới','default',array('class'=>'alert alert-success'));
 		                            $this->redirect(array('controller'=>'members','action'=>'login'));
 								}

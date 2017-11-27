@@ -26,6 +26,14 @@
 										<input type="checkbox" name="data[Account][remember]" id="remember" checked="checked" value="1">
 										<label for="remember"> Nhớ mật khẩu</label>
 									</div>
+									<?php 
+										if($_SESSION['fail']>=3){
+									?>
+									<div class="text-center"><span>Bạn đã nhập sai nhiều lần, vui lòng check captcha</span></div>
+									<div class="g-recaptcha" data-sitekey="6LcLNjoUAAAAAJPG2t3EWJgQ0gagZRKa8g7E7MNY"></div>
+									<?php
+										}
+									?>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-xs-6 col-xs-offset-3 col-sm-offset-3">
@@ -54,3 +62,11 @@
 			</div>
 		</div>
 	</div>
+
+<style type="text/css">
+	
+.panel-body .g-recaptcha > div{
+	margin:auto;
+	margin-bottom: 20px;
+}
+</style>
