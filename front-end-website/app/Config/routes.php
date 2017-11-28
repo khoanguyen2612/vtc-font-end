@@ -88,6 +88,9 @@
     Router::connect('/cart/payment', array('controller' => 'Carts', 'action' => 'payment'));
     Router::connect('/carts/payment', array('controller' => 'Carts', 'action' => 'payment'));
 
+    Router::connect('/cart/accept_payment', array('controller' => 'Carts', 'action' => 'accept_payment'));
+    Router::connect('/carts/accept_payment', array('controller' => 'Carts', 'action' => 'accept_payment'));
+
     Router::connect('/cart/finish', array('controller' => 'Carts', 'action' => 'finish'));
     Router::connect('/carts/finish', array('controller' => 'Carts', 'action' => 'finish'));
 
