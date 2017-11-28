@@ -8,6 +8,7 @@
         <?php echo $this->Html->css('bootstrap.min.css') . "\n"; ?>
         <?php echo $this->Html->script('jquery.min.js') . "\n"; ?>
         <?php echo $this->Html->script('bootstrap.min.js') . "\n"; ?>
+        <script src='https://www.google.com/recaptcha/api.js?hl=vi'></script>
         <?php echo $this->Html->css('style.css') . "\n"; ?>
         <?php echo $this->Html->script('jssor.slider-26.3.0.min.js') . "\n"; ?>
     </head>
