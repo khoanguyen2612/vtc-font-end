@@ -506,6 +506,7 @@ class CartsController extends AppController
 
         $res = $this->request->data;
 
+        // add current input money
         $add_curent_money = (isset( $res['Payment']) )? $res['Payment']['add_curent_money'] : 0;
 
         if ($this->request->is('post') || $this->request->is('get')) {
