@@ -16,15 +16,16 @@
         <div class="topnav">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <a href="<?php echo $this->Html->url('/cart/', true); ?>">
                             <?php echo $this->Html->image('mana_cart.png'); ?>
                             Quản lý đơn hàng  (<?php echo " <span id='id_count_carts'>" . $n_item_cart . " </span>"; ?>)
                          </a>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-7">
                         <ul class="list-inline pull-right">
                             <li><a href="">Giới thiệu</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'News', 'action' => 'news_menulist'), true); ?>">Tin Tức</a></li>
                             <li><a href="">Liên hệ</a></li>
                             <li><a href="">Tuyển dụng</a></li>
                             <?php if (isset($login)) { ?>
