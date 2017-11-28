@@ -362,16 +362,16 @@
                                                         </td>
                                                     </tr>
 
-                                              <!--  <div class="row">
-                                                    <div class="col-xs-6">
-                                                        <h4><?php /*echo $hosting['product_name']; */?> </h4>
-                                                        <p>Giảm <?php /*echo $hosting['price_2']; */?> vnđ/năm</p>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <h2><?php /*echo $hosting['price_1']; */?> vnđ/năm</h2>
-                                                        <p class="p1"><?php /*echo $hosting['price']; */?>VND/năm</p>
-                                                    </div>
-                                                </div>-->
+                                                    <!--<div class="row">
+                                                        <div class="col-xs-6">
+                                                            <h4><?php /*echo $hosting['product_name']; */?> </h4>
+                                                            <p>Giảm <?php /*echo $hosting['price_2']; */?> vnđ/năm</p>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <h2><?php /*echo $hosting['price_1']; */?> vnđ/năm</h2>
+                                                            <p class="p1"><?php /*echo $hosting['price']; */?>VND/năm</p>
+                                                        </div>
+                                                    </div>-->
 
                                             <?php
                                                 $id_form ++;
@@ -649,24 +649,32 @@
         <style type="text/css">
 
             .total-money > tbody > tr > td, .total-money > thead > tr > th {
+
                 height: 55px;
             }
 
             .ma-giam-gia {
+
                 font-size: 20px;
                 font-weight: bold;
             }
 
             #ma-giam-gia input {
+
                 width: 125px;
             }
 
             #phone_gifcode {
+
                 margin-bottom: 0;
             }
 
-        </style>
+            .total-money .btn-continue {
 
+                line-height: 40px;
+            }
+
+        </style>
 
     <?php //echo $this->element('sql_dump'); ?>
 

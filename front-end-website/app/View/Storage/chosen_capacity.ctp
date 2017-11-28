@@ -1,6 +1,5 @@
-
-    <!--// Storage menu //-->
-    <nav class="navbar navbar-default" id="menuNavbar">
+ <!--// Storage menu //-->
+    <nav class="navbar navbar-default hidden" id="menuNavbar">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">

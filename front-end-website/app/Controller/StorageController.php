@@ -19,7 +19,7 @@
          * @var mixed
          */
         public $storage;
-        public $uses = array('Product', 'Cart', 'Order', 'OrderDetail');
+        public $uses = array('Product', 'Cart', 'Order', 'OrderDetail', 'ProductPrice');
         public $components = array('Acl', 'RequestHandler');
         public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
 
@@ -27,6 +27,9 @@
         {
             parent::beforeFilter();
             $this->_request_head_log();
+
+            //$this->ProductPrice->setDataSource('default');
+
         }
 
         /** before redict check login **/
@@ -50,7 +53,18 @@
         /*  index view  */
         public function index()
         {
+
+            Configure::write('debug', 2);
             $this->layout = "home";
+
+            $all_storage = $this->ProductPrice->find('all',
+                array ( 'fields' => array('product_id', 'product_key', 'product_type', 'product_name', 'product_description', 'price', 'except_hdd'),
+                        'conditions' => array('product_name LIKE' => '%CLOUD SERVER%'),
+                        'recursive' => 0,
+                )
+            );
+
+            $this->set(compact('all_storage'));
 
         }
 
@@ -58,6 +72,19 @@
         public function view()
         {
             $this->layout = "home";
+
+            $all_storage = $this->ProductPrice->find('list', array(
+                'fields' => array('product_id', 'product_key', 'product_type', 'product_name', 'product_description', 'price', 'except_hdd'),
+                'conditions' => array('product_name LIKE' => '%CLOUD SERVER%'),
+                'recursive' => 0
+            ));
+
+            Configure::write('debug', 2);
+            Debugger::dump($all_storage);
+
+
+
+            $this->set(compact('all_storage'));
 
         }
 
@@ -67,9 +94,10 @@
             $this->layout = "home";
 
             $request = $this->request->data;
-            $storage = $request['Storage'];
+            $storage = isset($request['Storage']) ? $request['Storage']: array();
 
             if ($this->request->is('post')) {
+
                 $this->set(compact('storage'));
             } else {
                 $this->redirect('/storage/');

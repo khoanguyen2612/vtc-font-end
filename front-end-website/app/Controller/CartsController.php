@@ -641,7 +641,11 @@ class CartsController extends AppController
             $this->set(compact('time_h'));
 
             // This save Cart to DB
-            $this->Cart->saveDbCart();
+            try {
+                $this->Cart->saveDbCart();
+            } catch (Exception $e) {
+                $this->Session->setFlash('Lỗi database MySQL: ' . $e->getMessage());
+            }
 
         }
 

@@ -271,21 +271,19 @@ class Cart extends AppModel
                 $order_detail['note_ketoan'] = 'Ghi nhớ cho kế toán'; // string
 
                 try {
-
                     App::import('Model', 'OrderDetail');
                     $OrderDetail = new OrderDetail();
                     $OrderDetail->setDataSource('default');
                     $OrderDetail->save($order_detail);
 
                     throw new RuntimeException();
-
                 } catch (Exception $e) {
-                    throw new Exception('Error insert order_detail:' . $e->getMessage());
+                    throw new Exception('Error insert table order_detail ' . $e->getMessage());
                 }
 
             }
-
         }
+
         else {
             // write log empty cart
         }
