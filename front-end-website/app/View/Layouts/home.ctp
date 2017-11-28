@@ -112,7 +112,7 @@
                                 CLOUD SERVER
                             </a>
                         </li> 
-                        <li  class="dropdown"><a href="">CLOUD STORAGE</a></li>
+                        <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller' => 'Storage', 'action' => 'index'), true); ?>">CLOUD STORAGE</a></li>
                         <li  class="dropdown">
                             <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">SSL</a>
