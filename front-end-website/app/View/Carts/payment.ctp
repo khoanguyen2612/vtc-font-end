@@ -31,8 +31,8 @@
                   $sign_secret = "VtcPay_Codelovers_2017";
                   $vtc_acc = "0916298481";
                   $customer_mobile = "0916298481";
-                  //$url_return = "http://vtc.codelovers.vn/carts/finish/";
-                  $url_return = "http://vtccloud.code:8080/carts/finish/";
+                  $url_return = "http://vtc.codelovers.vn/carts/finish/";
+                  //$url_return = "http://vtccloud.code:8080/carts/finish/";
                   $website_id = "10059";
                   // information of customer
                   $param_ext = "";
