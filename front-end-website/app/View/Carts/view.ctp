@@ -16,7 +16,7 @@
 
                     <!--// The above will output fast message for Note!-->
                     <div id="flashMessage" class="message alert">
-                        <?php echo $this->Session->flash(); ?>
+                        <code><?php echo $this->Session->flash(); ?></code>
                     </div>
 
                     <div class="row">
@@ -427,17 +427,14 @@
 
                                     <tr>
                                         <td colspan="2" class="continue">
-                                            <button class="btn btn-continue hidden" type="button"><a href="">Tiếp tục</a></button>
-                                            <button class="btn btn-continue" type="button">
                                                 <?php
                                                     echo $this->Html->link('Tiếp tục', array(
                                                         'controller' => 'cart',
                                                         'action' => 'checkout',
                                                     ),
-                                                        array('class' => '', 'escape' => false)
+                                                        array('class' => 'btn btn-continue', 'escape' => false)
                                                     );
                                                 ?>
-                                            </button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -445,17 +442,16 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="buy">
-                                            <button class="btn btn-buy hidden" type="button"> Mua thêm các dịch vụ </button>
-                                            <button class="btn btn-buy" type="button">
+
                                                 <?php
-                                                echo $this->Html->link('Mua thêm các dịch vụ', array(
-                                                    'controller' => 'cart',
-                                                    'action' => 'continuebuy',
-                                                ),
-                                                    array('class' => '', 'escape' => false)
-                                                );
+                                                    echo $this->Html->link('Mua thêm các dịch vụ', array(
+                                                        'controller' => 'cart',
+                                                        'action' => 'continuebuy',
+                                                    ),
+                                                        array('class' => 'btn btn-buy', 'escape' => false)
+                                                    );
                                                 ?>
-                                            </button>
+
 
                                         </td>
                                     </tr>
@@ -648,29 +644,27 @@
         <!-- [Fix] CSS/HTML hiển thị Mã giảm giá trong Giỏ hàng -->
         <style type="text/css">
 
-            .total-money > tbody > tr > td, .total-money > thead > tr > th {
-
+            .total-money > tbody > tr > td,
+            .total-money > thead > tr > th {
                 height: 55px;
             }
 
             .ma-giam-gia {
-
                 font-size: 20px;
                 font-weight: bold;
             }
 
             #ma-giam-gia input {
-
                 width: 125px;
             }
 
             #phone_gifcode {
-
                 margin-bottom: 0;
             }
 
-            .total-money .btn-continue {
-
+            .total-money .btn-continue,
+            .total-money .btn-buy,
+            .total-money .btn-buy:hover {
                 line-height: 40px;
             }
 

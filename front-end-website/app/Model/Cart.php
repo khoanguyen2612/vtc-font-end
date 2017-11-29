@@ -99,41 +99,31 @@ class Cart extends AppModel
     {
 
         $id_it = (int) $id_it;
-
         $al_it_cart = $this->readProduct();
 
         if ( !isset($al_it_cart['list']) ) {
             return $al_it_cart;
         }
 
-
-        //Debugger::dump($id_it); Debugger::dump($al_it_cart);
-
         $list_item_in_cart = $al_it_cart['list'];
         unset($al_it_cart['list']);
 
         if ( count($al_it_cart) == 1 ) {
-
             if ( $id_it > 0 ) {
-
                 foreach ($al_it_cart as $key => $item) {
                     if ((int)$item['product']['id'] == $id_it) {
                         $key_store = $key;
                         break;
                     }
                 }
-
                 if (isset($key_store)) {
                     CakeSession::delete('cart');
                     return null;
                 };
-
             }
-
         }
 
         if ( $id_it > 0 ) {
-
             foreach ($al_it_cart as $key => $item) {
                 if ((int)$item['product']['id'] == $id_it) {
                     $key_store = $key;
@@ -146,34 +136,25 @@ class Cart extends AppModel
             };
 
             $key_store = null;
-
             foreach ($list_item_in_cart as $key => $item) {
                 if ((int)$item['id'] == $id_it) {
                     $key_store = $key;
                     break;
                 }
             }
-
             if (!is_null($key_store)) {
                 unset($list_item_in_cart[$key_store]);
             };
-
         }
 
-        //Debugger::dump($key_store); die();
-
         $cart = array();
-
         $cart['list'] = $list_item_in_cart;
         foreach ($al_it_cart as $item) {
             $cart[] = $item;
         }
-
         CakeSession::delete('cart');
         return $this->saveCart($cart);
-
     }
-
 
     public function checkoutCart()
     {
@@ -181,30 +162,22 @@ class Cart extends AppModel
         return CakeSession::delete('cart');
     }
 
-
     public function saveDbCart()
     {
-
-        Configure::write('debug', 0);
-
+        Configure::write('debug', 2);
         // Save Order to DB
-        $order = $order_detail = array();
-
+        $order_detail = array();
         // get all item cart
         $all_cart = $this->readProduct();
         if (isset($all_cart['list']))
-            $all_item = array_shift($all_cart);  // shift an element off the beginning of array ---> UNSET value $all_cart['list'])
+            array_shift($all_cart);  // shift an element off the beginning of array ---> UNSET value $all_cart['list'])
         // end get all item cart
-
         // init Order
         $user = CakeSession::read("Auth.User");
         $_acc_id = ( isset($user) && isset($user['id'])) ? $user['id'] : null;
         $_name_acc = ( isset($user) && isset($user['name'])) ? $user['name'] : null;
         $_address_acc = ( isset($user) && isset($user['address'])) ? $user['address'] : null;
-
-
-        $data = array
-        (
+        $_new_order = array (
             'Order' => array
             (
                 //'id' => null, // for new create a Order
@@ -216,31 +189,33 @@ class Cart extends AppModel
                 'no_more_email' => '1',
             )
         );
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $db = ConnectionManager::getDataSource('default');
 
         App::import('Model', 'Order');
         $Order = new Order();
+        $_new_order_id = null;
 
-        $db = ConnectionManager::getDataSource('default');
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-
-        $_result = $db->create($Order, array('accountant', 'name','address_payment','account_id', 'order_type', 'order_code', 'order_datetime', 'order_status', 'no_more_email'),
-                                       array($_name_acc, $_name_acc, $_address_acc, $_acc_id, '1', CakeSession::read('order_code'), date("Y-m-d H:i:s"), '3', '1')
-        );
+        try {
+            $db->create($Order, array('accountant', 'name','address_payment','account_id', 'order_type', 'order_code', 'order_datetime', 'order_status', 'no_more_email'),
+                array($_name_acc, $_name_acc, $_address_acc, $_acc_id, '1', CakeSession::read('order_code'), date("Y-m-d H:i:s"), '3', '1')
+            );
+        } catch (Exception $e) {
+            throw new Exception('Error insert table order ' . $e->getMessage());
+        };
 
         $_new_order_id = $db->lastInsertId();
-
-        if (!empty($all_cart) && count($all_cart) > 0) {
+        if (!empty($all_cart) && count($all_cart) > 0 && $_new_order_id > 0) {
 
             foreach ($all_cart as $item) {
                 $order_detail['order_id'] = $_new_order_id;
                 $order_detail['product_id'] = $item['product']['id'];
                 $order_detail['domain_name'] = $item['product']['product_name'];
-
                 $order_detail['action_id'] = 0;
                 $order_detail['order_type'] = 1;
                 $order_detail['order_dtl_status'] = 1;
                 $order_detail['price'] = $item['product']['price']; // int
-                $order_detail['quantity'] = 1;  // int
+                $order_detail['quantity'] = ($item['product']['month_exp'] == 0) ? $item['product']['month_exp'] : $item['product']['year_exp'];  // int
                 $order_detail['amount'] = 0;
                 $order_detail['total'] = 0;
                 $order_detail['discount'] = 0;
@@ -248,11 +223,8 @@ class Cart extends AppModel
                 $order_detail['code_qc'] = 'CODE_QC_0321A';
                 $order_detail['notes'] = 'Thông tin note khách hàng mua sản phẩm'; // string
                 $order_detail['payment_method'] = 0;
-
                 $date_getmoney = CakeTime::format(date('Y-m-d H:i:s'), '%Y-%m-%d %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
-
                 $order_detail['date_getmoney'] = $date_getmoney; // string, varchar
-
                 $order_detail['money_kd'] = 0;
                 $order_detail['flg_renew'] = 0;
                 $order_detail['hosting_id'] = 0;
@@ -265,9 +237,7 @@ class Cart extends AppModel
                 $order_detail['detail_id_sub'] = 0;
                 $order_detail['flg_smartphone'] = 0;
                 $order_detail['user_confirm_active'] = 'UCA_0321A'; // string
-
                 $order_detail['ketoan_update'] = $date_getmoney;  // datetime
-
                 $order_detail['note_ketoan'] = 'Ghi nhớ cho kế toán'; // string
 
                 try {
@@ -276,36 +246,27 @@ class Cart extends AppModel
                     $OrderDetail->setDataSource('default');
                     $OrderDetail->save($order_detail);
 
-                    throw new RuntimeException();
                 } catch (Exception $e) {
                     throw new Exception('Error insert table order_detail ' . $e->getMessage());
-                }
-
+                };
             }
         }
 
         else {
-            // write log empty cart
+            CakeSession::delete('order_code');
+            return CakeSession::delete('cart');
+                // write log empty cart
         }
-
-        try {
-            // write log empty cart
-            throw new RuntimeException();
-        } catch (Exception $e) {
-            //throw new Exception('Error insert order_detail:' . $e->getMessage());
-        }
-
+        //delete session after save production in DB
         CakeSession::delete('order_code');
         return CakeSession::delete('cart');
     }
 
 
-    private function saveDbItemCart($item)
+    private function saveDbItemCart($item =array())
     {
-
         $order_detail = array();
         if (!empty($item)) {
-
             $order_detail['order_id'] = $item['order']['id'];
             $order_detail['product_id'] = $item['product']['id'];
             $order_detail['domain_name'] = $item['product']['product_name'];

@@ -109,31 +109,34 @@
         public function add_to_cart()
         {
             $this->layout = "home";
-
             $request = $this->request->data;
-            $storage = $request['Storage'];
+            $storage = isset($request['Storage']) ? $request['Storage'] : array();
 
-
+            /*
             $cart = $this->Cart->readCart();
-
             if (isset($cart['list']))
                 // shift an element off the beginning of array
                 $all_item = array_shift($cart);
             else
                 $all_item = $cart;
+            $products = $all_item;
+            */
 
-            //$products = $all_item;
+            /*$cart = $this->Cart->readCart();
+            Debugger::dump($cart);
+            $this->Session->delete('cart');
+            die();*/
 
-
+            $cart = array();
             if ($this->request->is('post')) {
 
-                if (!empty($request) && count($request) > 0 && count($request['Storage'] > 0)) {
-
+                if ( !empty($request) && count($request) > 0 && count($storage) > 0 ) {
                     // Debugger::dump($cart);
                     // define 1 product in order detail item to add on to cart,
+
                     // for Database
                     $order_detail['id'] = rand(95000, 99999);  // new id for item in OrderDetail on to session Cart
-
+                    // detail for Order detail
                     $order_detail['order_id'] = 614;
                     $order_detail['product_id'] = 14;
                     $order_detail['domain_name'] = $storage['l_capacity'];
@@ -149,11 +152,8 @@
                     $order_detail['code_qc'] = 'CODE_QC_0321A';
                     $order_detail['notes'] = 'Thông tin note khách hàng mua sản phẩm'; // string
                     $order_detail['payment_method'] = 0;
-
                     $date_getmoney = CakeTime::format(date('Y-m-d H:i:s'), '%Y-%m-%d %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
-
                     $order_detail['date_getmoney'] = $date_getmoney; // string, varchar
-
                     $order_detail['money_kd'] = 0;
                     $order_detail['flg_renew'] = 0;
                     $order_detail['hosting_id'] = 0;
@@ -166,12 +166,11 @@
                     $order_detail['detail_id_sub'] = 0;
                     $order_detail['flg_smartphone'] = 0;
                     $order_detail['user_confirm_active'] = 'UCA_0321A'; // string
-
                     $order_detail['ketoan_update'] = $date_getmoney;  // datetime
                     $order_detail['note_ketoan'] = 'Ghi nhớ cho kế toán'; // string
-
                     // Update field product of cart array
                     // for view layout
+                    // Type: 5 --> is Cloud Storage package product
                     switch ((string) 5) {
                         case '1':
                             $p_type = 'Domain';
@@ -185,45 +184,36 @@
                         case '4':
                             $p_type = 'Other';
                             break;
-
                         case '5':
                             $p_type = 'Cloud Storage';
                             break;
-
                         default :
                             $p_type = 'Other';
                             break;
                     }
 
-                    $order_detail['product_type'] = 15;
+                    $order_detail['product_type'] = 5;
                     $order_detail['product_name'] =  $storage['l_capacity'];
-
                     // for view layout
-                    $order_detail['type'] = 'Cloud Storage';
-
+                    $order_detail['type'] = $p_type; // 'Cloud Storage';
                     // for view layout
                     //number year exp
-                    $order_detail['year_exp'] = $storage['month'];
-
+                    $order_detail['year_exp'] = 0;
+                    $order_detail['month_exp'] = $storage['month'];
+                    //add product to cart
                     $cart['product'] = $order_detail;
-
                 }
 
                 $this->Cart->addProduct($cart);
-
             }
 
             if ($this->request->is('post')) {
-
                 $this->set(compact('storage'));
-
             } else {
-
                 $this->redirect('/cart/');
             }
 
-                $this->redirect('/cart/');
-
+            $this->redirect('/cart/');
         }
 
         /*  money currency chosen capacity view  */

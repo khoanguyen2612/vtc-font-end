@@ -8,7 +8,6 @@
     </div>
 
     <div class="container payment-method">
-
         <div class="row">
             <h3> CHỌN PHƯƠNG THỨC THANH TOÁN</h3>
             <p> Quý khách vui lòng lựa chọn các hình thức thanh toán bên dưới :</p>
@@ -27,24 +26,44 @@
                         )
                     );
                 ?>
-                <div class="hidden">
-                    <input name="txtOrderID" type="text" value="<?php echo $order_code ?>" id="txtOrderID"/>
-                    <input name="txtCustomerFirstName" type="text" value="Nguyễn Tài" id="txtCustomerFirstName"/>
-                    <input name="txtCustomerLastName" type="text" value="Tuệ" id="txtCustomerLastName"/>
-                    <input name="txtBillAddress" type="text" value="Hà Nội" id="txtBillAddress"/>
-                    <input name="txtCity" type="text" value="Hà Nội" id="txtCity"/>
-                    <input name="txtCustomerEmail" type="text" value="nguyentaitue@codelovers.vn" id="txtCustomerEmail"/>
-                    <input name="txtCustomerMobile" type="text" value="<?php echo " 0916298481" ?>" id="txtCustomerMobile"/>
-                    <input name="txtParamExt" type="text" value="" id="txtParamExt"/>
-                    <input name="txtParamLanguage" type="text" value="vi" id="txtParamLanguage"/>
-                    <input name="txtUrlReturn" type="text" value="<?php echo " http://vtc.codelovers.vn/carts/finish/" ?>" id="txtUrlReturn"/>
-                    <input name="txtSecret" type="text" value="<?php echo " VtcPay_Codelovers_2017" ?>" id="txtSecret"/>
-                    <input name="txtTotalAmount" type="text" value="<?php echo round($total_payment) ?>" id="txtTotalAmount"/>
-                    <input name="txtCurency" type="text" value="VND" id="txtCurency"/> &nbsp;<i>VND/USD</i>
-                    <input name="txtWebsiteID" type="text" value="10059" id="txtWebsiteID"/>
-                    <input name="txtReceiveAccount" type="text" value="<?php echo " 0916298481" ?>" id="txtReceiveAccount"/>
-                    <input name="txtDescription" type="text" value="<?php echo $order_code ?> services" id="txtDescription"/>
-                </div>
+                <?php
+                  // connect to VTC pay
+                  $sign_secret = "VtcPay_Codelovers_2017";
+                  $vtc_acc = "0916298481";
+                  $customer_mobile = "0916298481";
+                  //$url_return = "http://vtc.codelovers.vn/carts/finish/";
+                  $url_return = "http://vtccloud.code:8080/carts/finish/";
+                  $website_id = "10059";
+                  // information of customer
+                  $param_ext = "";
+                  $param_language = "vi";
+                  $customer_email = "nguyentaitue@codelovers.vn";
+                  $first_name =  $last_name =  "Nguyễn Tài Tuệ";
+                  $bill_address =  $customer_city =  "Hà Nội";
+                  $curency =  "VND/USD";
+
+                  //tmp for fixed Order code dup
+                  $order_code = $order_code .rand(10, 200);
+
+                ?>
+                    <div class="hidden">
+                        <input name="txtOrderID" type="text" value="<?php echo $order_code?>" id="txtOrderID"/>
+                        <input name="txtCustomerFirstName" type="text" value="<?=$first_name?>" id="txtCustomerFirstName"/>
+                        <input name="txtCustomerLastName" type="text" value="<?=$last_name?>" id="txtCustomerLastName"/>
+                        <input name="txtBillAddress" type="text" value="<?= $bill_address ?>" id="txtBillAddress"/>
+                        <input name="txtCity" type="text" value="<?= $customer_city ?>" id="txtCity"/>
+                        <input name="txtCustomerEmail" type="text" value="<?= $customer_email ?>" id="txtCustomerEmail"/>
+                        <input name="txtCustomerMobile" type="text" value="<?php echo $customer_mobile ?>" id="txtCustomerMobile"/>
+                        <input name="txtParamExt" type="text" value="<?=$param_ext ?>" id="txtParamExt"/>
+                        <input name="txtParamLanguage" type="text" value="<?=$param_language?>" id="txtParamLanguage"/>
+                        <input name="txtUrlReturn" type="text" value="<?php echo $url_return ?>" id="txtUrlReturn"/>
+                        <input name="txtSecret" type="text" value="<?php echo $sign_secret ?>" id="txtSecret"/>
+                        <input name="txtTotalAmount" type="text" value="<?php echo round($total_payment) ?>" id="txtTotalAmount"/>
+                        <input name="txtCurency" type="text" value="VND" id="txtCurency"/> &nbsp;<i><?=$curency ?></i>
+                        <input name="txtWebsiteID" type="text" value="<?=$website_id ?>" id="txtWebsiteID"/>
+                        <input name="txtReceiveAccount" type="text" value="<?php echo $vtc_acc ?>" id="txtReceiveAccount"/>
+                        <input name="txtDescription" type="text" value="<?php echo $order_code ?> services" id="txtDescription"/>
+                    </div>
                 <?php echo $this->Form->end(); ?>
 
                 <a class="btn" id="btnContinue" data-i18n="website.continue" onClick='submitDetailsForm()' style="padding: 12px 40px;"><p class="btn">Thanh toán trực tuyến</p></a>
