@@ -91,7 +91,7 @@
 
                     <?php
                         $i = 0;
-                        $_c = count($all_storage) - 2;
+                        $_c = count($all_storage) - 1;
                     foreach ($all_storage as $value) {
                         if ($_c == $i) break;
                     ?>
@@ -111,9 +111,9 @@
 
                             ?>
                             <div class="location_item">
-                                <h3>STORE <?= $i+1?></h3>
+                                <h3> <?php echo $value['ProductPrice']['product_name'] ;?> </h3>
                                 <p>
-                                    Dung lượng: <?php echo (string) $value['ProductPrice']['product_description'] ;?> <br>
+                                    Dung lượng: <?php echo  $value['ProductPrice']['product_description'] ;?> <br>
                                     Đơn giá tính theo GB/tháng <br>
                                 </p>
 
@@ -164,9 +164,7 @@
 
                     <div class="col-md-12 col-lg-12">
                         <?php
-
                             $_c = count($all_storage) - 1;
-
                             echo $this->Form->create('Storage',
                                 array('type' => 'POST',
                                     'url' => array('controller' => 'storage', 'action' => 'chosen_capacity'),
@@ -178,7 +176,7 @@
                             );
                         ?>
                         <div class="location_item">
-                            <h3>STORE <?= $_c?></h3>
+                            <h3><?php echo $all_storage[$_c]['ProductPrice']['product_name'];?></h3>
                             <p>
                                 Dung lượng: <?php echo (string) $all_storage[$_c]['ProductPrice']['product_description'];?> <br>
                                 Đơn giá tính theo GB/tháng <br>
