@@ -113,6 +113,11 @@
                             <div class="location_item">
                                 <h3>STORE <?= $i+1?></h3>
                                 <p>
+                                    Dung lượng: <?php echo (string) $value['ProductPrice']['product_description'] ;?> <br>
+                                    Đơn giá tính theo GB/tháng <br>
+                                </p>
+
+                                <p class="hidden">
                                     Dung lượng: <?php echo (string) round($value['ProductPrice']['except_hdd']/1024) . ' MB' ;?> <br>
                                     Đơn giá tính theo GB/tháng <br>
                                 </p>
@@ -142,7 +147,8 @@
                                         'id' => "id_l_capacity_{$i}",
                                         'type' => 'hidden',
                                         //'name' => 'l_capacity',
-                                        'value' =>  'Dung lượng: '. (string) round($value['ProductPrice']['except_hdd']/1024). ' MB',
+                                        //'value' =>  'Dung lượng: '. (string) round($value['ProductPrice']['except_hdd']/1024). ' MB',
+                                        'value' =>  'Dung lượng: '. (string) $value['ProductPrice']['product_description'],
                                     )
                                 );
 
@@ -174,10 +180,14 @@
                         <div class="location_item">
                             <h3>STORE <?= $_c?></h3>
                             <p>
-                                Dung lượng: <?php echo (string) round($all_storage[$_c]['ProductPrice']['except_hdd']/1024) . ' MB' ;?> <br>
+                                Dung lượng: <?php echo (string) $all_storage[$_c]['ProductPrice']['product_description'];?> <br>
                                 Đơn giá tính theo GB/tháng <br>
                             </p>
 
+                            <p class="hidden">
+                                Dung lượng: <?php echo (string) round($all_storage[$_c]['ProductPrice']['except_hdd']/1024) . ' MB' ;?> <br>
+                                Đơn giá tính theo GB/tháng <br>
+                            </p>
                             <p class="l_price">
                                 <?php echo (string) number_format($all_storage[$_c]['ProductPrice']['price'],0,',','.' ); ?> <span> VNĐ/THÁNG</span>
                             </p>
@@ -201,7 +211,8 @@
                                 'id' => "id_l_capacity_$_c",
                                 'type' => 'hidden',
                                 //'name' => 'l_capacity',
-                                'value' => (string) round($all_storage[$_c]['ProductPrice']['except_hdd']/1024) . ' MB',
+                                //'value' => (string) round($all_storage[$_c]['ProductPrice']['except_hdd']/1024) . ' MB',
+                                'value' => (string) $all_storage[$_c]['ProductPrice']['product_description'],
                             )
                         );
 
