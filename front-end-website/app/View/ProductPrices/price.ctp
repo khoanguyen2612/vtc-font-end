@@ -1,3 +1,27 @@
+<SCRIPT LANGUAGE="JavaScript">
+
+    //<!-- Begin
+    var mikExp = /[$\\@\\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|\!\-]/;
+
+    function dodacheck(val) {
+        var strPass = val.value;
+        var strLength = strPass.length;
+        var lchar = val.value.charAt((strLength) - 1);
+        if (lchar.search(mikExp) != -1) {
+            var tst = val.value.substring(0, (strLength) - 1);
+            val.value = tst;
+        }
+    }
+
+    //  End -->
+</script>
+<script>
+    function a() {
+// var a = document.getElementById("qwe").value;
+        var a = document.getElementById("input");
+        dodacheck(a);
+    }
+</script>
 	<div class="search-domain">
 		<div class="container-fluid">
 			<h3 class="text-center">BẢNG GIÁ TÊN MIỀN</h3>
@@ -21,18 +45,20 @@
 		</div>
 		<div class="container">
 			<div class="row">
-				<form>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 price-list">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<p class="p-add"> Đăng kí tên miền để bảo vệ thương hiệu của bạn</p>
 						</div>
 						<div>
-							<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-								<input type="text" name="add-domain" class="form-control input-add" placeholder="Nhập tên miền muốn đăng kí...">
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-								<button type="submit" class="btn btn-add-domain">Kiểm tra</button>
-							</div>
+							<form action='/domain/register' method='post'>
+								<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+									<input type="text" id="input" name="add_doamin" class="form-control input-add"
+                                   placeholder="Nhập tên miền muốn đăng kí..." onKeyUp="a()">
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+									<button type="submit" class="btn btn-add-domain">Kiểm tra</button>
+								</div>
+							</form>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 price-domain-vn">
 							<div class="table-responsive price-list-domain">
@@ -54,8 +80,8 @@
 										?>
 													<tr>
 														<td><?php echo 'xyz'.$item['ProductPrice']['product_name'];?> </td>
+														<td><?php if($item['ProductPrice']['price_start']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price_start'];}?></td>
 														<td><?php if($item['ProductPrice']['price']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price'];}?></td>
-														<td><?php if($item['ProductPrice']['bk_price']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['bk_price'];}?></td>
 														<td><?php if($item['ProductPrice']['price_transfer']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price_transfer'];}?></td>
 														<td><button type="button" class="btn btn-register"> Đăng kí </button></td>
 													</tr>	
@@ -86,8 +112,8 @@
 										?>
 													<tr>
 														<td><?php echo 'xyz'.$item['ProductPrice']['product_name'];?> </td>
+														<td><?php if($item['ProductPrice']['price_start']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price_start'];}?></td>
 														<td><?php if($item['ProductPrice']['price']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price'];}?></td>
-														<td><?php if($item['ProductPrice']['bk_price']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['bk_price'];}?></td>
 														<td><?php if($item['ProductPrice']['price_transfer']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price_transfer'];}?></td>
 														<td><button type="button" class="btn btn-register"> Đăng kí </button></td>
 													</tr>	
@@ -133,7 +159,6 @@
 							</div>
 						</div>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -145,3 +170,12 @@
 		border-top: 5px #ffe3d5 solid;
 	}
 </style>
+<script type="text/javascript">
+	jQuery(document).ready(function($){ 
+		$(".btn-register").click(function () {
+			$('body,html').animate({
+				scrollTop: 200
+			})
+		})
+});
+</script>

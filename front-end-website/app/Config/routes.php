@@ -119,6 +119,7 @@
 	//Router::connect('/domain/RegisterDomain', array('controller' => 'ProductPrices', 'action' => 'registerdomain'));
 	//Router::connect('/productprices/resultsearch', array('controller' => 'ProductPrices', 'action' => 'result_search'));
 	//Router::connect('/productprices/registerdomain', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
+        Router::connect('/domain/price', array('controller' => 'ProductPrices', 'action' => 'price'));
 
     Router::parseExtensions('json', 'xml');
 
