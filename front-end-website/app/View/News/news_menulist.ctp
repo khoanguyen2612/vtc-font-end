@@ -11,7 +11,7 @@
           </li>
         </ul>
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="news">
+          <div role="tabpanel" class="tab-pane active css" id="news">
             <?php foreach ($top_new as $top) { ?>
               <div id="topnews" class="row">
                 <div class="img_news col-sm-8 col-md-8 col-lg-8">
@@ -46,7 +46,7 @@
               ?>
             </ul>
           </div>
-          <div role="tabpanel" class="tab-pane" id="notificion">
+          <div role="tabpanel" class="tab-pane css" id="notificion">
             <?php foreach ($top_new1 as $top) { ?>
               <div id="topnews" class="row">
                 <div class="img_news col-sm-8 col-md-8 col-lg-8">
