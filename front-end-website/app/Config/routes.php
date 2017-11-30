@@ -95,6 +95,7 @@
     /* tue.phpmailer@gmail.com add route for ThangDH */
     Router::connect('/domain/register', array('controller' => 'ProductPrices', 'action' => 'register_domain'));
     Router::connect('/domain/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
+    Router::connect('/domain/transfer', array('controller' => 'ProductPrices', 'action' => 'domain_transfer'));
     Router::connect('/new/menunew', array('controller' => 'News', 'action' => 'news_menulist'));
     Router::connect('/new/detailnew', array('controller' => 'News', 'action' => 'notificion_maintain'));
     //Router::connect('/Domains/search', array('controller' => 'ProductPrices', 'action' => 'result_search'));
