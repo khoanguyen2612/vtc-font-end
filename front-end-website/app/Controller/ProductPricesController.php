@@ -445,7 +445,7 @@
 		}
 
 
-		public function curl_register(){
+		public function curl_register($rig_info){
 
 			//-----------------------------------------------------------------------
 						$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);
@@ -466,80 +466,96 @@
 
 
 			//data demo
-			$rig_info = array(
-				"name"=> "inet.vn",
-				"period"=> 1,
-				"customerId"=> 30582,
-				"registrar"=> "inet",
-				"nsList"=> array(
-					["hostname"=> "ns1.inet.vn"],
-					["hostname"=> "ns2.inet.vn"]
-					),
-				"contacts"=> array(
-					[
-					"fullname"=> "Công ty cổ phần iNET",
-					"organization"=> true,
-					"email"=> "tenmien@inet.vn",
-					"country"=> "VN",
-					"province"=> "HNI",
-					"address"=> "247 cau giay",
-					"phone"=> "0438385588",
-					"fax"=> "0438385588",
-					"type"=> "registrant",
-					"dataExtend"=> array(
-						"gender"=>"male",
-						"idNumber"=>"030810700",
-						"birthday"=>"19/05/1971"
-						)
-					],
-					[
-					"fullname"=> "Nguyễn Văn A",
-					"organization"=> false,
-					"email"=> "abc@inet.vn",
-					"country"=> "VN",
-					"province"=> "HNI",
-					"address"=> "247 cau giay",
-					"phone"=> "0974019049",
-					"fax"=> "0974019049",
-					"type"=> "admin",
-					"dataExtend"=> array(
-						"gender"=>"male",
-						"idNumber"=>"030810700",
-						"birthday"=>"19/05/1971"
-						)
-					],
-					[
-					"fullname"=> "Nguyễn Văn A",
-					"email"=> "abc@inet.vn",
-					"country"=> "VN",
-					"province"=> "HNI",
-					"address"=> "247 cau giay",
-					"phone"=> "0974019049",
-					"fax"=> "0974019049",
-					"type"=> "technique",
-					"dataExtend"=> array(
-						"gender"=>"male",
-						"idNumber"=>"030810700",
-						"birthday"=>"19/05/1971"
-						)
-					],
-					[
-					"fullname"=> "Nguyễn Văn A",
-					"email"=> "abc@inet.vn",
-					"country"=> "VN",
-					"province"=> "HNI",
-					"address"=> "247 cau giay",
-					"phone"=> "0974019049",
-					"fax"=> "0974019049",
-					"type"=> "billing",
-					"dataExtend"=> array(
-						"gender"=>"male",
-						"idNumber"=>"030810700",
-						"birthday"=>"19/05/1971"
-						)
-					]
-				)
-			);
+			$organization=true;
+			if($organization){
+				$rig_info = array(
+					"name"=> "inet.vn",
+					"period"=> 1,
+					"customerId"=> 30582,
+					"registrar"=> "inet",
+					"nsList"=> array(
+						["hostname"=> "ns1.inet.vn"],
+						["hostname"=> "ns2.inet.vn"]
+						),
+					"contacts"=> array(
+						[
+						"fullname"=> "Công ty cổ phần iNET",
+						"organization"=> true,
+						"email"=> "tenmien@inet.vn",
+						"country"=> "VN",
+						"province"=> "HNI",
+						"address"=> "247 cau giay",
+						"phone"=> "0438385588",
+						"fax"=> "0438385588",
+						"type"=> "registrant",
+						"dataExtend"=> array(
+							"gender"=>"male",
+							"idNumber"=>"030810700",
+							"birthday"=>"19/05/1971"
+							)
+						],
+						[
+						"fullname"=> "Nguyễn Văn A",
+						"email"=> "abc@inet.vn",
+						"country"=> "VN",
+						"province"=> "HNI",
+						"address"=> "247 cau giay",
+						"phone"=> "0974019049",
+						"fax"=> "0974019049",
+						"type"=> "technique",
+						"dataExtend"=> array(
+							"gender"=>"male",
+							"idNumber"=>"030810700",
+							"birthday"=>"19/05/1971"
+							)
+						],
+						[
+						"fullname"=> "Nguyễn Văn A",
+						"email"=> "abc@inet.vn",
+						"country"=> "VN",
+						"province"=> "HNI",
+						"address"=> "247 cau giay",
+						"phone"=> "0974019049",
+						"fax"=> "0974019049",
+						"type"=> "billing",
+						"dataExtend"=> array(
+							"gender"=>"male",
+							"idNumber"=>"030810700",
+							"birthday"=>"19/05/1971"
+							)
+						]
+					)
+				);
+			}
+			else{
+				$rig_info = array(
+					"name"=> "inet.vn",
+					"period"=> 1,
+					"customerId"=> 30582,
+					"registrar"=> "inet",
+					"nsList"=> array(
+						["hostname"=> "ns1.inet.vn"],
+						["hostname"=> "ns2.inet.vn"]
+						),
+					"contacts"=> array(
+						[
+						"fullname"=> "Nguyễn Văn A",
+						"organization"=> false,
+						"email"=> "abc@inet.vn",
+						"country"=> "VN",
+						"province"=> "HNI",
+						"address"=> "247 cau giay",
+						"phone"=> "0974019049",
+						"fax"=> "0974019049",
+						"type"=> "admin",
+						"dataExtend"=> array(
+							"gender"=>"male",
+							"idNumber"=>"030810700",
+							"birthday"=>"19/05/1971"
+							)
+						],					)
+				);
+			}
 			//--------
 						$data_string = json_encode($rig_info);
 						$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/create");

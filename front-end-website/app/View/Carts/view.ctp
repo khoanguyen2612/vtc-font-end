@@ -653,18 +653,31 @@
             }
 
             .ma-giam-gia {
-                font-size: 20px;
+                /*font-size: 20px;*/
                 font-weight: bold;
             }
-
+            .sale-code, .support {
+                 padding-bottom: 0px; 
+            }
             #ma-giam-gia input {
-                width: 125px;
+                width: 155px;
+                height: 35px;
             }
 
             #phone_gifcode {
-                margin-bottom: 0;
-            }
+                margin-top: 20px;
+                margin-bottom: 20px;
 
+            }
+            .content h3 {
+                padding-bottom: 0px;
+            }
+            .alert {                
+                margin-bottom: 0px;
+            }
+            .sale-code .btn-ok {
+                height: 35px;
+            }
         </style>
 
 
