@@ -18,11 +18,13 @@ val.value = tst;
 <div class="search-domain">
 		<div class="container-fluid">
 			<h3 class="text-center">KIỂM TRA TÊN MIỀN</h3>
-			<ul class="nav nav-tabs container">
-				<li><a href="Domain_Add.html">Đăng ký tên miền</a></li>
-				<li><a href="domain_transfer.html">Chuyển đổi nhà cung cấp</a></li>
-				<li class="active"><a href="Domain_search.html">Kiểm tra tên miền</a></li>
-				<li><a href="domain_price.html">Bảng giá tên miền</a></li>
+				<ul class="nav nav-tabs container">
+			<li><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'register_domain'),true);?>">Đăng ký tên miền</a></li>
+			<li><a href="">Chuyển đổi nhà cung cấp</a></li>
+			<li class="active"><a href="<?php echo $this->Html->url(array('controller'=>'ProductPrices','action'=>'result_search'),true);?>">Kiểm tra tên miền</a></li>
+			<li>
+			<a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">Bảng giá tên miền</a>
+			</li>
 			</ul>
 			<hr>
 			<div class="container">

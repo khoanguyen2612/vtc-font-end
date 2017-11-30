@@ -15,7 +15,9 @@
                 Kiểm tra tên miền
                 </a>
             </li>
-            <li><a href="">Bảng giá tên miền</a></li>
+            <li>
+            	<a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">Bảng giá tên miền</a>
+            </li>
         </ul>
 		<hr>
 		<div class="tab-content container">

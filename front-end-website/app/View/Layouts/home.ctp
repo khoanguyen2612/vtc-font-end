@@ -8,6 +8,7 @@
         <?php echo $this->Html->css('bootstrap.min.css') . "\n"; ?>
         <?php echo $this->Html->script('jquery.min.js') . "\n"; ?>
         <?php echo $this->Html->script('bootstrap.min.js') . "\n"; ?>
+        <script src='https://www.google.com/recaptcha/api.js?hl=vi'></script>
         <?php echo $this->Html->css('style.css') . "\n"; ?>
         <?php echo $this->Html->script('jssor.slider-26.3.0.min.js') . "\n"; ?>
     </head>
@@ -15,15 +16,16 @@
         <div class="topnav">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <a href="<?php echo $this->Html->url('/cart/', true); ?>">
                             <?php echo $this->Html->image('mana_cart.png'); ?>
                             Quản lý đơn hàng  (<?php echo " <span id='id_count_carts'>" . $n_item_cart . " </span>"; ?>)
                          </a>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-7">
                         <ul class="list-inline pull-right">
                             <li><a href="">Giới thiệu</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'News', 'action' => 'news_menulist'), true); ?>">Tin Tức</a></li>
                             <li><a href="">Liên hệ</a></li>
                             <li><a href="">Tuyển dụng</a></li>
                             <?php if (isset($login)) { ?>
@@ -40,7 +42,7 @@
                             </li>
                             <?php } else { ?>
                                 <li>
-                                    <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'register'), true); ?>">Đăng Ký</a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'register'), true); ?>">Đăng Ký</a>
                                 </li>
                             <?php } ?>
                         </ul>
@@ -92,7 +94,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TÊN MIỀN</a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="domain_price.html">BẢNG GIÁ TÊN MIỀN</a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">BẢNG GIÁ TÊN MIỀN</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">KIỂM TRA TÊN MIỀN</a>
@@ -110,7 +112,7 @@
                                 CLOUD SERVER
                             </a>
                         </li> 
-                        <li  class="dropdown"><a href="">CLOUD STORAGE</a></li>
+                        <li  class="dropdown"><a href="<?php echo $this->Html->url(array('controller' => 'Storage', 'action' => 'index'), true); ?>">CLOUD STORAGE</a></li>
                         <li  class="dropdown">
                             <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">SSL</a>

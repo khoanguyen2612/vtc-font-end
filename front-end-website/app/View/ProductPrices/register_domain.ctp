@@ -1,25 +1,26 @@
 <SCRIPT LANGUAGE="JavaScript">
 
-//<!-- Begin
-var mikExp = /[$\\@\\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|\!\-]/;
-function dodacheck(val) {
-var strPass = val.value;
-var strLength = strPass.length;
-var lchar = val.value.charAt((strLength) - 1);
-if(lchar.search(mikExp) != -1) {
-var tst = val.value.substring(0, (strLength) - 1);
-val.value = tst;
-   }
-}
+    //<!-- Begin
+    var mikExp = /[$\\@\\\#%\^\&\*\(\)\[\]\+\_\{\}\`\~\=\|\!\-]/;
 
-//  End -->
+    function dodacheck(val) {
+        var strPass = val.value;
+        var strLength = strPass.length;
+        var lchar = val.value.charAt((strLength) - 1);
+        if (lchar.search(mikExp) != -1) {
+            var tst = val.value.substring(0, (strLength) - 1);
+            val.value = tst;
+        }
+    }
+
+    //  End -->
 </script>
 <script>
-    function a(){
-    // var a = document.getElementById("qwe").value;
-    var a = document.getElementById("input");
-    dodacheck(a);
-}
+    function a() {
+// var a = document.getElementById("qwe").value;
+        var a = document.getElementById("input");
+        dodacheck(a);
+    }
 </script>
 <div class="search-domain">
     <div class="container-fluid">
@@ -27,7 +28,7 @@ val.value = tst;
         <ul class="nav nav-tabs container">
             <li class="active">
                 <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'register_domain'), true); ?>">
-                 Đăng ký tên miền
+                    Đăng ký tên miền
                 </a>
             </li>
             <li>
@@ -35,10 +36,12 @@ val.value = tst;
             </li>
             <li>
                 <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">
-                Kiểm tra tên miền
+                    Kiểm tra tên miền
                 </a>
             </li>
-            <li><a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">Bảng giá tên miền</a></li>
+            <li>
+                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'price'), true); ?>">Bảng
+                    giá tên miền</a></li>
         </ul>
         <hr>
     </div>
@@ -52,7 +55,7 @@ val.value = tst;
                     <div>
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
                             <input type="text" id="input" name="add_doamin" class="form-control input-add"
-                                   placeholder="Nhập tên miền muốn đăng kí..." onKeyUp="a()" >
+                                   placeholder="Nhập tên miền muốn đăng kí..." onKeyUp="a()">
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                             <button type="submit" class="btn btn-add-domain">Kiểm tra</button>
@@ -98,8 +101,12 @@ val.value = tst;
                                 <td><?php echo $request1 ?></td>
                                 <?php foreach ($data1 as $item) { ?>
                                     <?php if ($item['ProductPrice']['product_name'] == $check) { ?>
-                                        <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
-                                        <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p>
+                                        <td>
+                                            <p class="p-money"><?php echo number_format($item['ProductPrice']['price'], 0, ',', '.') ?>
+                                                VNĐ</p></td>
+                                        <td>
+                                            <p class="img-fee"><?php echo number_format($item['ProductPrice']['bk_price'], 0, ',', '.') ?>
+                                                VNĐ</p>
                                         </td>
 
                                     <?php }
@@ -169,12 +176,17 @@ val.value = tst;
                                                 }
 
 
-                                                ?></td>
+                                                ?>
+                                            </td>
                                             <td>
                                                 <p class="p-name"><?php echo($test = $request3 . $item['ProductPrice']['product_name']); ?></p>
                                             </td>
-                                            <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
-                                            <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p></td>
+                                            <td>
+                                                <p class="p-money"><?php echo number_format($item['ProductPrice']['price'], 0, ',', '.') ?>
+                                                    VNĐ</p></td>
+                                            <td>
+                                                <p class="img-fee"><?php echo number_format($item['ProductPrice']['bk_price'], 0, ',', '.') ?>
+                                                    VNĐ</p></td>
                                             <td>
                                                 <?php if ($output2[$i]['status'] != 'available') { ?>
                                                     <form action="" method="POST">
@@ -194,15 +206,15 @@ val.value = tst;
                                                         </div>
                                                     </form>
 
-                                                <?php }
-                                                
-                                                ?>
+                                                <?php } ?>
                                             </td>
                                             <td>
                                                 <?php if ($output2[$i]['status'] == 'available') { ?>
-                                                    <input type="checkbox" class="add-domain-checkbox" id="domain_item_id<?=$do_id?>" name="">
+                                                    <input type="checkbox" class="add-domain-checkbox"
+                                                           id="domain_item_id<?= $do_id ?>" name="">
                                                     <label for="demo" class="demoCheck demoCheckLabel"></label>
-                                                <?php } $i++; ?>
+                                                <?php }
+                                                $i++; ?>
                                                 <?php
                                                 $cart = array();
                                                 $cart['product']['product_name'] = $request3 . $item['ProductPrice']['product_name'];
@@ -215,23 +227,23 @@ val.value = tst;
                                                 $data = json_encode($cart);
 
                                                 $str = $this->Html->scriptBlock('
-                                                                    $(document).ready(function () {
-                                                                      $("#domain_item_id' . $do_id . '").bind("change", function (event) {
-                                                                             if (this.checked) { 
-                                                                                 $.ajax({
-                                                                                      async: true, beforeSend: function (XMLHttpRequest) {
-                                                                                        $(\'#loading\').fadeIn(1000);
-                                                                                      }, cache: false, complete: function (XMLHttpRequest, textStatus) {
-                                                                                        $(\'#loading\').fadeOut(1000);
-                                                                                        update_ajax_it();
-                                                                                      }, data: ' . $data . ', type: "POST", url: "\/carts\/add_domain"
-                                                                                 });
-                                                                             }
-                                                                                                                                                   
-                                                                            return false;
-                                                                      });
-                                                                    });       
-                                                                    ', array('inline' => true));
+                                                    $(document).ready(function () {
+                                                    $("#domain_item_id' . $do_id . '").bind("change", function (event) {
+                                                        if (this.checked) {
+                                                            $.ajax({
+                                                            async: true, beforeSend: function (XMLHttpRequest) {
+                                                            $(\'#loading\').fadeIn(1000);
+                                                            }, cache: false, complete: function (XMLHttpRequest, textStatus) {
+                                                            $(\'#loading\').fadeOut(1000);
+                                                            update_ajax_it();
+                                                            }, data: ' . $data . ', type: "POST", url: "\/carts\/add_domain"
+                                                            });
+                                                        }
+
+                                                        return false;
+                                                    });
+                                                    });
+                                                    ', array('inline' => true));
 
                                                 echo $str;
                                                 echo $this->Js->writeBuffer();
@@ -297,12 +309,17 @@ val.value = tst;
                                                     }
 
 
-                                                    ?></td>
+                                                    ?>
+                                                </td>
                                                 <td>
                                                     <p class="p-name"><?php echo($test = $request2['add_doamin'] . $item['ProductPrice']['product_name']); ?></p>
                                                 </td>
-                                                <td><p class="p-money"><?php echo number_format( $item['ProductPrice']['price'],0,',','.')?> VNĐ</p></td>
-                                                <td><p class="img-fee"><?php echo number_format( $item['ProductPrice']['bk_price'],0,',','.')?> VNĐ</p></td>
+                                                <td>
+                                                    <p class="p-money"><?php echo number_format($item['ProductPrice']['price'], 0, ',', '.') ?>
+                                                        VNĐ</p></td>
+                                                <td>
+                                                    <p class="img-fee"><?php echo number_format($item['ProductPrice']['bk_price'], 0, ',', '.') ?>
+                                                        VNĐ</p></td>
                                                 <td>
                                                     <?php if ($output1[$i]['status'] != 'available'){ ?>
                                                     <form action="" method="POST">
@@ -323,48 +340,56 @@ val.value = tst;
                                                     </form>
 
                                                     <?php }
-                                                   
+
                                                     ?><!-- <button type='submit' class='btn btn-danger'>Whois <img src='../app/webroot/img/icon-whois.png'></button> -->
                                                 </td>
                                                 <td>
-                                                    <?php if ($output1[$i]['status'] == 'available'){ ?>
-                                                        <input type="checkbox" class="add-domain-checkbox" id="domain_item_id<?=$do_id?>" name="">
+                                                    <?php if ($output1[$i]['status'] == 'available') { ?>
+                                                        <input type="checkbox" class="add-domain-checkbox"
+                                                               id="domain_item_id<?= $do_id ?>" name="">
                                                         <label for="demo" class="demoCheck demoCheckLabel"></label>
-                                                    <?php } $i++; ?>
+                                                    <?php }
+                                                    $i++; ?>
 
                                                     <?php
 
-                                                    $cart = array();
-                                                    $cart['product']['product_name'] = $request2['add_doamin'] . $item['ProductPrice']['product_name'];
-                                                    $cart['product']['price'] = $item['ProductPrice']['price'] + $item['ProductPrice']['bk_price'];
-                                                    $cart['product']['product_type'] = 7;
+                                                        $cart = array();
+                                                        $cart['product']['product_name'] = $request2['add_doamin'] . $item['ProductPrice']['product_name'];
+                                                        $cart['product']['price'] = $item['ProductPrice']['price'] + $item['ProductPrice']['bk_price'];
+                                                        $cart['product']['product_type'] = 7;
 
-                                                    //checkbox id is checked
-                                                    $cart['checkbox']['id'] = "domain_item_id{$do_id}";
+                                                        //checkbox id is checked
+                                                        $cart['checkbox']['id'] = "domain_item_id{$do_id}";
 
-                                                    $data = json_encode($cart);
+                                                        $data = json_encode($cart);
 
-                                                    $str = $this->Html->scriptBlock('
-                                                                $(document).ready(function () {
-                                                                  $("#domain_item_id' . $do_id . '").bind("change", function (event) {
-                                                                         if (this.checked) { 
-                                                                             $.ajax({
-                                                                                  async: true, beforeSend: function (XMLHttpRequest) {
-                                                                                    $(\'#loading\').fadeIn(1000);
-                                                                                  }, cache: false, complete: function (XMLHttpRequest, textStatus) {
-                                                                                    $(\'#loading\').fadeOut(1000);
-                                                                                    update_ajax_it();
-                                                                                  }, data: ' . $data . ', type: "POST", url: "\/carts\/add_domain"
-                                                                             });
-                                                                         }
-                                                                                                                                               
-                                                                        return false;
-                                                                  });
-                                                                });       
-                                                                ', array('inline' => true));
+                                                        $str = $this->Html->scriptBlock('
+                                                            $(document).ready(function () {
+                                                                $("#domain_item_id' . $do_id . '").bind("change", function (event) {
+                                                                    if (this.checked) {
+                                                                        $.ajax({
+                                                                            cache: false,
+                                                                            data: ' . $data . ',
+                                                                            type: "POST",
+                                                                            url: "\/carts\/add_domain",
+                                                                            async: true,
+                                                                            beforeSend: function (XMLHttpRequest) {
+                                                                            },
+                                                                            complete: function (XMLHttpRequest, textStatus) {
+                                                                                //update_ajax_it();
+                                                                                console.log("add product item to cart sucesss");
+                                                                            },
+                                                                        });
+                                                                    }
+                                                                    
+                                                                    return false;
+                                                                });
+                                                            }); 
+                                                        ', array('inline' => true));
 
-                                                    echo $str;
-                                                    echo $this->Js->writeBuffer();
+                                                        echo $str;
+                                                        echo $this->Js->writeBuffer();
+
                                                     ?>
 
                                                 </td>
@@ -382,11 +407,27 @@ val.value = tst;
                                     <!-- <button type="submit" class="btn btn-all"> Chuyển đến giỏ hàng</button> -->
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 add-continue">
-                                    <button type="submit" class="btn btn-add-continue"> Chuyển đến giỏ hàng </button>
+                                    <button type="submit" class="btn btn-add-continue" id="go_to_cart"> Chuyển đến giỏ hàng</button>
                                 </div>
+
+                                <?php
+                                    // tue.phpmailer@gmail.com
+                                    $str = $this->Html->scriptBlock('$(document).ready(function () {
+                                                                        $("#go_to_cart").bind("submit click", function (event) {
+                                                                           $(location).attr(\'href\',\'/cart/\');
+                                                                           return false;
+                                                                        });
+                                                                      }); 
+                                                            ', array('inline' => true));
+
+                                    echo $str;
+                                    echo $this->Js->writeBuffer();
+
+                                ?>
+
                                 <div id="loading" style="display: none; position: static; top: 100px; left: auto">
                                     <div class="alert alert-info" role="alert">
-                                        <i class=" fa fa-spinner fa-spin"></i> Đang thêm sản phẩm vào giỏ hàng...
+                                        <i class=" fa fa-spinner fa-spin"></i> Bạn đã chọn sản phẩm domain.
                                     </div>
                                 </div>
 
@@ -422,39 +463,38 @@ val.value = tst;
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-
-                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
                     </div>
                 </div>
             </div>
         </div>
+
         <?php
         $update_ajax_it = Router::url(array('controller' => 'carts', 'action' => 'update_ajax_it'));
         $str = $this->Html->scriptBlock('
-                                    function update_ajax_it() {
-                                        $.ajax({
-                                            dataType: "html",
-                                            type: "POST",
-                                            evalScripts: true,
-                                            url: \'' . $update_ajax_it . '\',
-                                            data: ({type:\'del\'}),
-                                            success: function (data, textStatus){
-                                                $("#id_count_carts").html(data);
-                                            }
-                                        });
-                                    };
-  
-                                    ', array('inline' => true));
+                        function update_ajax_it() {
+                            $.ajax({
+                            dataType: "html",
+                            type: "POST",
+                            evalScripts: true,
+                            url: \'' . $update_ajax_it . '\',
+                            data: ({type:\'del\'}),
+                            success: function (data, textStatus){
+                                $("#id_count_carts").html(data);
+                            }
+                        });
+                    }; ',
+            array('inline' => true));
         echo $str;
         echo $this->Js->writeBuffer();
         ?>
+
         <script type="text/javascript">
             $(document).ready(function () {
                 $('.button1').click(function () {
                     console.log($(this).parent().children(".domain_name").val());
-                    // alert('1');
-                    // $('#myModal').modal('show');
+// alert('1');
+// $('#myModal').modal('show');
 
                     $.ajax({
                         url: "<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'whois_domain'))?>",
@@ -465,12 +505,12 @@ val.value = tst;
                         },
                         success: function (result) {
 
-                            // alert('2')
-                            // var datadomain = jQuery.parseJSON(result);
-                            // obj = JSON.parse(obj);
-                            // console.log(obj);
-                            // alert( obj['code']);
-                            // alert(result);
+// alert('2')
+// var datadomain = jQuery.parseJSON(result);
+// obj = JSON.parse(obj);
+// console.log(obj);
+// alert( obj['code']);
+// alert(result);
                             $('#demo').html(result);
 
                         }
@@ -478,53 +518,53 @@ val.value = tst;
                 });
             });
         </script>
-<style type="text/css">
-    .md-cn {
-        width: 100%;
-        padding: 0%;
-        height: auto;
-    }
+        <style type="text/css">
+            .md-cn {
+                width: 100%;
+                padding: 0%;
+                height: auto;
+            }
 
-    .modal-lg {
-        padding: unset;
-    }
+            .modal-lg {
+                padding: unset;
+            }
 
-    .modal-header {
-        padding: 20px;
-        background: #e67237;
-        color: #fff;
-    }
+            .modal-header {
+                padding: 20px;
+                background: #e67237;
+                color: #fff;
+            }
 
-    .whois-body {
-        margin: 10px 50px;
-        text-align: left;
+            .whois-body {
+                margin: 10px 50px;
+                text-align: left;
 
-    }
+            }
 
-    .whois-section {
-        margin-bottom: 15px;
+            .whois-section {
+                margin-bottom: 15px;
 
-    }
+            }
 
-    .whois-item {
-        background: #005faf;
-        color: #fff;
-        padding: 10px;
-        font-size: 24px;
-    }
+            .whois-item {
+                background: #005faf;
+                color: #fff;
+                padding: 10px;
+                font-size: 24px;
+            }
 
-    .whois-content {
-        line-height: 30px;
-        padding-top: 10px;
-    }
+            .whois-content {
+                line-height: 30px;
+                padding-top: 10px;
+            }
 
-    .whois-content-1 {
-        line-height: 15px;
-        padding-top: 20px;
-    }
+            .whois-content-1 {
+                line-height: 15px;
+                padding-top: 20px;
+            }
 
-    .dcol {
-        float: left;
-        width: 50%;
-    }
-</style>
+            .dcol {
+                float: left;
+                width: 50%;
+            }
+        </style>

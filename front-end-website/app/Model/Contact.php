@@ -76,8 +76,8 @@ class Contact extends AppModel {
 			'name' => array
 			(
 				'sizeName' => array(
-					'rule' =>array('minLength', 5),
-					'message' => 'Tên chủ thể không được ít hơn 5 ký tự'
+					'rule' =>array('minLength', 2),
+					'message' => 'Tên chủ thể không được ít hơn 2 ký tự'
 				)
 			),
 			'phone' => array(
@@ -115,13 +115,7 @@ class Contact extends AppModel {
 	function  validate_tc(){
 
 		$this->validate = array(
-			// 'name_tc' => array(
-			// 	'sizeName' => array(
-			// 		'rule' =>array('minLength', 5),
-			// 		'message' => 'Tên chủ thể không được ít hơn 5 ký tự'
-			// 	)
 
-			// ),
 			'email_tc' => array(
 				'emailformat' => array(
 					'rule' => 'email',

@@ -37,7 +37,9 @@
 
 	/* tue.phpmailer@gmail.com config route URL */
 	Router::connect('/carts', array('controller' => 'Carts', 'action' => 'view'));
-	Router::connect('/cart/', array('controller' => 'Carts', 'action' => 'view'));
+	Router::connect('/cart', array('controller' => 'Carts', 'action' => 'view'));
+    Router::connect('/carts/', array('controller' => 'Carts', 'action' => 'view'));
+    Router::connect('/cart/', array('controller' => 'Carts', 'action' => 'view'));
 
     Router::connect('/carts/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
 	Router::connect('/cart/continuebuy', array('controller' => 'Carts', 'action' => 'continue_buy_product'));
@@ -56,7 +58,10 @@
     Router::connect('/carts/update', array('controller' => 'Carts', 'action' => 'update'));
 
 	Router::connect('/cart/del', array('controller' => 'Carts', 'action' => 'remove'));
-	Router::connect('/carts/del', array('controller' => 'Carts', 'action' => 'remove'));
+    Router::connect('/carts/del', array('controller' => 'Carts', 'action' => 'remove'));
+    Router::connect('/cart/remove', array('controller' => 'Carts', 'action' => 'remove'));
+    Router::connect('/carts/remove', array('controller' => 'Carts', 'action' => 'remove'));
+
 
     Router::connect('/cart/update_ajax_it', array('controller' => 'Carts', 'action' => 'update_ajax_it'));
     Router::connect('/carts/update_ajax_it', array('controller' => 'Carts', 'action' => 'update_ajax_it'));
@@ -83,8 +88,21 @@
     Router::connect('/cart/payment', array('controller' => 'Carts', 'action' => 'payment'));
     Router::connect('/carts/payment', array('controller' => 'Carts', 'action' => 'payment'));
 
+    Router::connect('/cart/accept_payment', array('controller' => 'Carts', 'action' => 'accept_payment'));
+    Router::connect('/carts/accept_payment', array('controller' => 'Carts', 'action' => 'accept_payment'));
+
     Router::connect('/cart/finish', array('controller' => 'Carts', 'action' => 'finish'));
     Router::connect('/carts/finish', array('controller' => 'Carts', 'action' => 'finish'));
+
+    /* tue.phpmailer@gmail.com config route Storage Cloud URL */
+    Router::connect('/storage', array('controller' => 'Storage', 'action' => 'index'));
+    Router::connect('/storage/', array('controller' => 'Storage', 'action' => 'index'));
+    Router::connect('/storage/chosen_capacity', array('controller' => 'Storage', 'action' => 'chosen_capacity'));
+    Router::connect('/storage/chosen_capacity/', array('controller' => 'Storage', 'action' => 'chosen_capacity'));
+    Router::connect('/storage/change_money', array('controller' => 'Storage', 'action' => 'change_money'));
+    Router::connect('/storage/change_money/', array('controller' => 'Storage', 'action' => 'change_money'));
+    /* tue.phpmailer@gmail.com config route Storage Cloud URL */
+
 
 
     /* tue.phpmailer@gmail.com add route for KhoaND */

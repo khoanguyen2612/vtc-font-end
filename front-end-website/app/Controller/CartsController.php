@@ -33,11 +33,14 @@ class CartsController extends AppController
             $this->layout = 'ajax_cart';
         }
 
+        $n_item_cart = $this->Cart->getCount();
 
-        $this->Session->write('order_code', 'CL_VTC_AZ_');
-        $this->Session->write('total_money', 0);
+        if ($n_item_cart == 0) {
+            $this->Session->delete('order_code');
+        }
 
         $cart = $this->Cart->readCart();
+        $this->Session->write('total_money', 0);
 
         if (isset($cart) && !is_null($cart)) {
 
@@ -59,22 +62,22 @@ class CartsController extends AppController
             $this->Session->write('total_money', $total_money);
         }
 
-
         $this->Order->setDataSource('db_vtc_cloud');
         $this->Product->setDataSource('db_vtc_cloud');
         $this->OrderDetail->setDataSource('db_vtc_cloud');
-        //$this->Plan->setDataSource('db_vtc_cloud');
-        //$results = $this->Order->query('SELECT * FROM orders WHERE id= "614"');
-        //Debugger::dump($results);
-
 
         //$this->Order->recursive = -1;
-        $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
-        $order = $order_schema['Order'];
-        //Debugger::dump($order_schema);
+        //$order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
+        //$order = $order_schema['Order'];
+        // load count sum element of item
+        //$this->Session->delete('order_code');
 
-        $this->Session->delete('order_code');
-        $this->Session->write('order_code', $order['order_code']);
+        $_tmp = $this->Session->read('order_code');
+        //Debugger::dump($_tmp);
+        if ( !isset($_tmp) || is_null($_tmp) ) {
+            $this->Session->write('order_code', 'MSHĐ_A'. rand(11111111, 22222222). 'Z'. rand(11111111, 22222222));
+        }
+
 
     }
 
@@ -173,6 +176,10 @@ class CartsController extends AppController
                 $order_detail['product_name'] = $cart['product']['product_name'];
                 // for view layout
                 $order_detail['type'] = $p_type;
+                // addon year in product
+                $order_detail['year'] = 1;
+
+                //add to cart
                 $cart['product'] = $order_detail;
 
             }
@@ -183,15 +190,20 @@ class CartsController extends AppController
                 $this->Cart->addProduct($cart);
             }
 
-
         }
 
         $this->response->body(json_encode($cart));
         $this->response->send();
         $this->_stop();
-        //Debugger::dump($cart);
-        //return;
 
+    }
+
+    /* add domain to cart in ProductPrice controller, register_domain.ctp, result_search.ctp */
+    public function do_in_cart() {
+        $this->redirect(array("controller" => "carts",
+                "action" => "view",
+            )
+        );
     }
 
     public function view($param = null)
@@ -199,43 +211,31 @@ class CartsController extends AppController
 
         ini_set('memory_limit', '-1');
 
-        /* tue.phpmailer@gmail.com get data for first */
-        /*$order_schema = $this->Order->find('first',
-            //array( 'order' => array('Order.id' => 'desc') )
-            array( 'order' => array('Order.id' => 'asc') )
-        );*/
-
-        //$this->Order->setDataSource('db_vtc_cloud');
-        //$this->Product->setDataSource('db_vtc_cloud');
-
+        // to view layout
+        $order_id = '614'; // example
+        $order_code = $this->Session->read('order_code');
 
         $cart = $this->Cart->readCart();
+        // load count sum element of item
+        $n_item_cart = $this->Cart->getCount();
 
-        //$this->Order->recursive = 2;
+        if ($n_item_cart == 0) {
+            // Create new Order to DB
+            $order = array();
+            //$order['order_code'] = $this->Session->read('order_code');
+        }
 
-        //$this->Order->OrderDetail->attach('Containable');
-
-        $order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
+        /* DONT LOAD EXIST PRODUCT IN DB */
+        /*$order_schema = $this->Order->findById('614'); // 1430, 614, 1477 high total cost money
         $order = $order_schema['Order'];
         $order_code = $order['order_code'];
-
         $order_id = $order['id'];
         $product_in_order = $order_schema['OrderDetail'];
 
-        //Debugger::dump($product_in_order);
-        //Debugger::dump($order_schema);
-        /*$od = $this->OrderDetail->findByOrderId('614');
-        Debugger::dump($od);*/
-
-
         if (is_null($cart) || empty($cart) || !count($cart)) {
-
             foreach ($product_in_order as $p_item) {
-
                 $this->Product->recursive = 2;
                 $_p = $this->Product->findById($p_item['product_id']);
-
-                //Debugger::dump($_p);
 
                 if (count($_p) > 0) {
 
@@ -262,8 +262,6 @@ class CartsController extends AppController
 
                     $p_item['type'] = $p_type;
                     $products[] = $p_item;
-
-
                 }
             }
 
@@ -272,17 +270,19 @@ class CartsController extends AppController
                 $cart['list'][] = $item;
                 $tmp['order'] = array('id' => $order_id);
                 $tmp['product'] = $item;
+
                 //number year exp
                 $tmp['year_exp'] = 1;
                 //add new field
                 $cart[] = $tmp;
             }
-
             // re soft list key of array
             // sort($cart);
-            $this->Cart->saveCart($cart);
 
-        };
+            // List product exist in order db
+            // $this->Cart->saveCart($cart);
+            // don'n load exist product
+        };*/
 
         $conditions = array(
             'OR' => array(
@@ -304,7 +304,7 @@ class CartsController extends AppController
         }
 
         $total_money = 0;
-        $n_item_cart = $this->Cart->getCount();
+        $cart = $this->Cart->readCart(); //Debugger::dump($cart);
 
         if (isset($cart['list']))
             $all_item = array_shift($cart);  // shift an element off the beginning of array
@@ -312,6 +312,8 @@ class CartsController extends AppController
             $all_item = $cart;
 
         $products = $all_item;
+        // Not load exist from db
+        //$products = array();
 
         if (count($products) > 0) {
             foreach ($products as $it) {
@@ -327,11 +329,12 @@ class CartsController extends AppController
         $this->set(compact('products'));
 
         $this->set(compact('order_id'));
-        $this->set(compact('order'));
+        //$this->set(compact('order'));
         $this->set(compact('order_code'));
         $this->set(compact('list_hosting'));
 
     }
+
 
     public function update()
     {
@@ -340,19 +343,16 @@ class CartsController extends AppController
         $this->autoRender = false;
         $this->request->onlyAllow('ajax'); // No direct access via browser URL
 
-        //Debugger::dump($this->Order->findById($request['cart']['order']['id']));
-
-        $cart = $request['cart'];
+        $cart = isset($request['cart']) ? $request['cart'] : array();
 
         if ($this->request->is('post')) {
-            if (!empty($request) && count($request) > 0 && count($request['cart'] > 0)) {
+            if ( !empty($request) && count($request) > 0 && count($cart) > 0 ) {
 
-                //Debugger::dump($cart);
                 // define 1 product in order detail item to add on to cart,
                 // for Database
                 $order_detail['id'] = rand(95000, 99999);  // new id for item in OrderDetail on to session Cart
-
-                $order_detail['order_id'] = $cart['order']['id'];
+                // detail for Order detail
+                $order_detail['order_id'] = null; // for new Order create, //$cart['order']['id'];
                 $order_detail['product_id'] = $cart['product']['id'];
                 $order_detail['domain_name'] = $cart['product']['product_name'];
                 $order_detail['action_id'] = 0;
@@ -367,11 +367,8 @@ class CartsController extends AppController
                 $order_detail['code_qc'] = 'CODE_QC_0321A';
                 $order_detail['notes'] = 'Thông tin note khách hàng mua sản phẩm'; // string
                 $order_detail['payment_method'] = 0;
-
                 $date_getmoney = CakeTime::format(date('Y-m-d H:i:s'), '%Y-%m-%d %H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
-
                 $order_detail['date_getmoney'] = $date_getmoney; // string, varchar
-
                 $order_detail['money_kd'] = 0;
                 $order_detail['flg_renew'] = 0;
                 $order_detail['hosting_id'] = 0;
@@ -384,13 +381,11 @@ class CartsController extends AppController
                 $order_detail['detail_id_sub'] = 0;
                 $order_detail['flg_smartphone'] = 0;
                 $order_detail['user_confirm_active'] = 'UCA_0321A'; // string
-
                 $order_detail['ketoan_update'] = $date_getmoney;  // datetime
                 $order_detail['note_ketoan'] = 'Ghi nhớ cho kế toán'; // string
-
                 // Update field product of cart array
                 // for view layout
-                switch ((string)$cart['product']['product_type']) {
+                switch ( (string) $cart['product']['product_type']) {
                     case '1':
                         $p_type = 'Domain';
                         break;
@@ -402,6 +397,9 @@ class CartsController extends AppController
                         break;
                     case '4':
                         $p_type = 'Other';
+                        break;
+                    case '5':
+                        $p_type = 'Cloud Storage';
                         break;
                     default :
                         $p_type = 'Other';
@@ -415,11 +413,10 @@ class CartsController extends AppController
                 // for view layout
                 //number year exp
                 $order_detail['year_exp'] = 1;
-
+                $order_detail['month_exp'] = 0;
+                //add product to cart
                 $cart['product'] = $order_detail;
-
             }
-
             $this->Cart->addProduct($cart);
         }
 
@@ -434,8 +431,6 @@ class CartsController extends AppController
 
         $this->redirect(array("controller" => "home",
                 "action" => "index",
-                //"param" => "val",
-                //"param_1" => "val1")
             )
         );
 
@@ -443,17 +438,83 @@ class CartsController extends AppController
 
     public function payment()
     {
+        // Check product in cart shopping
+
+        $n_item_cart = $this->Cart->getCount();
+
+        if ( is_null($n_item_cart) || $n_item_cart == 0 ) {
+            //$this->autoRender = false;
+
+            // In the controller cart .
+            $this->Session->setFlash('Lets by sell own\' production, please !');
+
+            $this->redirect(array("controller" => "carts",
+                    "action" => "view",
+                )
+            );
+        }
+
+        $id_acc = $this->Auth->User('id');
+        $user_info = $this->Account->findById($id_acc);
+        $name = $user_info['Account']['name'];
+
         $res = $this->request->data;
 
         if ($this->request->is('post') || $this->request->is('get')) {
 
             $order_code = $this->Session->read('order_code');
             $total_money = $this->Session->read('total_money');
-
             $total_payment = $total_money - round($total_money * 10 / 100);
 
+            $this->set(compact('n_item_cart'));
+            $this->set(compact('name'));
             $this->set(compact('order_code'));
             $this->set(compact('total_payment'));
+        }
+
+    }
+
+    public function accept_payment()
+    {
+
+        // Check product in cart shopping
+        $n_item_cart = $this->Cart->getCount();
+
+        if ( is_null($n_item_cart) || $n_item_cart == 0 ) {
+
+            //$this->autoRender = false;
+
+            // In the controller cart .
+            $this->Session->setFlash('Lets by sell own\' production, please !');
+
+            $this->redirect(array("controller" => "carts",
+                    "action" => "view",
+                )
+            );
+
+        }
+
+        $id_acc = $this->Auth->User('id');
+        $user_info = $this->Account->findById($id_acc);
+        $name = $user_info['Account']['name'];
+
+        $res = $this->request->data;
+
+        // add current input money
+        $add_curent_money = (isset( $res['Payment']) )? $res['Payment']['add_curent_money'] : 0;
+
+        if ($this->request->is('post') || $this->request->is('get')) {
+
+            $order_code = $this->Session->read('order_code');
+            $total_money = $this->Session->read('total_money');
+            $total_payment = $total_money - round($total_money * 10 / 100);
+
+            $this->set(compact('n_item_cart'));
+            $this->set(compact('name'));
+            $this->set(compact('add_curent_money'));
+            $this->set(compact('order_code'));
+            $this->set(compact('total_payment'));
+
         }
 
     }
@@ -510,51 +571,83 @@ class CartsController extends AppController
 
     public function finish()
     {
-        // Payment port return GET/POST
-        $res = $this->request->data;
 
-        $id_acc = $this->Auth->User('id');
-        $user_info = $this->Account->findById($id_acc);
-
-        $u_name = $email = $cmtnd = $phone = '';
-
-        if (count($user_info) > 0) {
-
-            $u_name = $user_info['Account']['name'];
-            $email = $user_info['Account']['email'];
-            $cmtnd = $user_info['Account']['CMTND'];
-            $phone = $user_info['Account']['phonenumber'];
-
+        // Check product in cart shopping
+        $n_item_cart = $this->Cart->getCount();
+        if ( is_null($n_item_cart) || $n_item_cart == 0 ) {
+            // In the controller cart .
+            $this->Session->setFlash('Lets by sell own\' production, please !');
+            $this->redirect(array("controller" => "carts",
+                    "action" => "view",
+                )
+            );
         }
+        // Payment port return GET/POST
+        // Check return in VTC redirect
+        // URL is string return in VTC redirect
+        $url_query = $this->request->query;
+        // can also access it via an array
+        //$url_return = $this->request->here;
+        if ( count($url_query) > 0 ) {
 
-        $cart = $this->Cart->readCart();
+            $id_acc = $this->Auth->User('id');
+            $user_info = $this->Account->findById($id_acc);
 
-        $products = $cart['list'];
+            $u_name = $email = $cmtnd = $phone = '';
 
-        if ($this->request->is('post') || $this->request->is('get')) {
+            if (count($user_info) > 0) {
 
-            $order_code = $this->Session->read('order_code');
-            $total_money = $this->Session->read('total_money');
-            $total_vat = round($total_money * 10 / 100);
-            $total_payment = $total_money - round($total_money * 10 / 100);
+                $u_name = $user_info['Account']['name'];
+                $email = $user_info['Account']['email'];
+                $cmtnd = $user_info['Account']['CMTND'];
+                $phone = $user_info['Account']['phonenumber'];
 
-            $date_day = CakeTime::format(date('Y/m/d'), '%Y/%m/%d', 'N/A', 'Asia/Ho_Chi_Minh');
-            $time_h = CakeTime::format(date('H:i:s'), '%H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
+            }
 
-            $this->set(compact('u_name'));
-            $this->set(compact('email'));
-            $this->set(compact('cmtnd'));
-            $this->set(compact('phone'));
+            $cart = $this->Cart->readCart();
+            $products = isset($cart['list']) ? $cart['list'] : array() ;
 
-            $this->set(compact('products'));
-            $this->set(compact('order_code'));
-            $this->set(compact('total_money'));
-            $this->set(compact('total_payment'));
-            $this->set(compact('total_vat'));
+            if ($this->request->is('post') || $this->request->is('get')) {
 
-            $this->set(compact('date_day'));
-            $this->set(compact('time_h'));
+                $order_code = $this->Session->read('order_code');
+                $total_money = $this->Session->read('total_money');
 
+                $total_vat = round($total_money * 10 / 100);
+                $total_payment = $total_money - round($total_money * 10 / 100);
+
+                $date_day = CakeTime::format(date('Y/m/d'), '%Y/%m/%d', 'N/A', 'Asia/Ho_Chi_Minh');
+                $time_h = CakeTime::format(date('H:i:s'), '%H:%M:%S', 'N/A', 'Asia/Ho_Chi_Minh');
+
+                $this->set(compact('u_name'));
+                $this->set(compact('email'));
+                $this->set(compact('cmtnd'));
+                $this->set(compact('phone'));
+
+                $this->set(compact('products'));
+                $this->set(compact('order_code'));
+                $this->set(compact('total_money'));
+                $this->set(compact('total_payment'));
+                $this->set(compact('total_vat'));
+
+                $this->set(compact('date_day'));
+                $this->set(compact('time_h'));
+
+                // This save Cart to DB
+                try {
+                    $this->Cart->saveDbCart();
+                } catch (Exception $e) {
+                    $this->Session->setFlash('Lỗi database MySQL: ' . $e->getMessage());
+                }
+
+            }
+
+        } else {
+            // In the controller cart .
+            $this->Session->setFlash('Không nhận được phản hồi từ cổng thanh toán trực tuyến, vui lòng xem lại thông tin mua hàng hoặc liên hệ support.');
+            $this->redirect(array("controller" => "carts",
+                    "action" => "view",
+                )
+            );
         }
 
     }
@@ -689,7 +782,6 @@ class CartsController extends AppController
                     }
                 }
 
-                var_dump($cart);
                 //total money for number year product
                 $cost = $resp['price'];
                 $year = $resp['year'];
@@ -790,7 +882,57 @@ class CartsController extends AppController
         }
 
     }
+    
+    /*  ***************************** */
+    /*  **  Write log to system   **  */
+    /*  ** tue.phpmailer@gmail.com ** */
+    /*  ***************************** */
+    
+    private function _log ($logs = array()) {
+        
+        
+        /**
+         * Configures default file logging options
+         */
+        
+        App::uses('CakeLog', 'Log');
+    
+        // Configure tmp/logs/cart.log to receive the two configured types (log levels), but only
+        // those with `orders` and `payments` as scope
+        CakeLog::config('cart', array(
+            
+            'engine' => 'FileLog',
+            'types' => array('warning', 'error'),
+            'scopes' => array('orders', 'payments'),
+            'file' => 'cart.log',
+            
+        ));
 
+        // Configure tmp/logs/payments.log to receive the two configured types, but only
+        // those with `payments` as scope
+        CakeLog::config('payment', array(
+            
+            'engine' => 'SysLog',
+            'types' => array('info', 'error', 'warning'),
+            'scopes' => array('payment'),
+            
+        ));
+    
+        CakeLog::warning('This gets written only to cart stream', 'orders');
+        CakeLog::warning('This gets written to both cart and payments streams', 'payment');
+        CakeLog::warning('This gets written to both cart and payments streams', 'unknown');
+    
+        // CakeLog::emergency($message, $scope = array());
+        // CakeLog::alert($message, $scope = array());
+        // CakeLog::critical($message, $scope = array());
+        // CakeLog::error($message, $scope = array());
+        // CakeLog::warning($message, $scope = array());
+        // CakeLog::notice($message, $scope = array());
+        // CakeLog::info($message, $scope = array());
+        // CakeLog::debug($message, $scope = array());
+        
+        
+    }
 
     public function checkout()
     {

@@ -30,16 +30,30 @@
                     <a href="<?php echo $this->Html->url('/cart/', true); ?>">
                         <?php echo $this->Html->image('mana_cart.png'); ?>
                         Quản lý đơn hàng  (<?php echo " <span id='id_count_carts'>" . $n_item_cart . " </span>"; ?>)
-                     </a>
+                    </a>
                 </div>
                 <div class="col-lg-6">
                     <ul class="list-inline pull-right">
                         <li><a href="">Giới thiệu</a></li>
                         <li><a href="">Liên hệ</a></li>
                         <li><a href="">Tuyển dụng</a></li>
-                        <li>
-                            <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php echo $this->Html->url(array('controller' => 'Members', 'action' => 'register'), true); ?>">Đăng Ký</a>
-                        </li>
+                        <?php if (isset($login)) { ?>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <?php echo "<span class='glyphicon glyphicon-user'></span>  "; echo $login;?><b class="caret"></b></a>
+                                <ul class="dropdown-menu menu-user">
+                                    <li>
+                                        <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => $profile), true); ?>"><span class="glyphicon glyphicon-wrench"></span> Cập Nhật Thông Tin Tài Khoản</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ hỗ trợ</a></li>
+                                    <li>
+                                        <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'logout'), true); ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php } else { ?>
+                            <li>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'login'), true); ?>"><span class="glyphicon glyphicon-user"></span> Đăng Nhập | </a> <a href="<?php echo $this->Html->url(array('controller' => 'members', 'action' => 'register'), true); ?>">Đăng Ký</a>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

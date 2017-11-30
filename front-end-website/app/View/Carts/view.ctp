@@ -14,6 +14,11 @@
                     <h3>CÁC BƯỚC THANH TOÁN</h3>
                 </div>
 
+                    <!--// The above will output fast message for Note!-->
+                    <div id="flashMessage" class="message alert">
+                        <code><?php echo $this->Session->flash(); ?></code>
+                    </div>
+
                     <div class="row">
                         <!--  -->
                         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
@@ -357,16 +362,16 @@
                                                         </td>
                                                     </tr>
 
-                                              <!--  <div class="row">
-                                                    <div class="col-xs-6">
-                                                        <h4><?php /*echo $hosting['product_name']; */?> </h4>
-                                                        <p>Giảm <?php /*echo $hosting['price_2']; */?> vnđ/năm</p>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <h2><?php /*echo $hosting['price_1']; */?> vnđ/năm</h2>
-                                                        <p class="p1"><?php /*echo $hosting['price']; */?>VND/năm</p>
-                                                    </div>
-                                                </div>-->
+                                                    <!--<div class="row">
+                                                        <div class="col-xs-6">
+                                                            <h4><?php /*echo $hosting['product_name']; */?> </h4>
+                                                            <p>Giảm <?php /*echo $hosting['price_2']; */?> vnđ/năm</p>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <h2><?php /*echo $hosting['price_1']; */?> vnđ/năm</h2>
+                                                            <p class="p1"><?php /*echo $hosting['price']; */?>VND/năm</p>
+                                                        </div>
+                                                    </div>-->
 
                                             <?php
                                                 $id_form ++;
@@ -383,14 +388,19 @@
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 domain-domain">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code">
 
-                                <h3>Mã giảm giá:</h3>
-                                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code" id="gifcode_daily_ajax_sum_money_id">
+                                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code">
                                     <h6><span class="alert-info"></span></h6>
                                 </div>
 
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Số điện thoại" id="phone_gifcode" name="phone_gifcode" value="">
-                                    <button class="btn btn-ok" id="btn_gifcode_id">Áp dụng</button>
+                                <div class="form-inline" id="ma-giam-gia">
+                                    <label class="control-label" for="phone_gifcode"><span class="ma-giam-gia">Mã giảm giá:</span></label>
+                                    <input class="form-control" type="text" id="phone_gifcode" name="phone_gifcode" value="" placeholder="" >
+                                    <button class="form-controlbtn btn-ok" id="btn_gifcode_id"> Áp dụng </button>
+                                </div>
+
+                                <!-- AJAX update code status -->
+                                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 sale-code" id="gifcode_daily_ajax_sum_money_id">
+                                    <h6><span class="alert-info"></span></h6>
                                 </div>
 
                             </div>
@@ -417,17 +427,14 @@
 
                                     <tr>
                                         <td colspan="2" class="continue">
-                                            <button class="btn btn-continue hidden" type="button"><a href="">Tiếp tục</a></button>
-                                            <button class="btn btn-continue" type="button">
                                                 <?php
                                                     echo $this->Html->link('Tiếp tục', array(
                                                         'controller' => 'cart',
                                                         'action' => 'checkout',
                                                     ),
-                                                        array('class' => '', 'escape' => false)
+                                                        array('class' => 'btn btn-continue', 'escape' => false)
                                                     );
                                                 ?>
-                                            </button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -435,17 +442,16 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="buy">
-                                            <button class="btn btn-buy hidden" type="button"> Mua thêm các dịch vụ </button>
-                                            <button class="btn btn-buy" type="button">
+
                                                 <?php
-                                                echo $this->Html->link('Mua thêm các dịch vụ', array(
-                                                    'controller' => 'cart',
-                                                    'action' => 'continuebuy',
-                                                ),
-                                                    array('class' => '', 'escape' => false)
-                                                );
+                                                    echo $this->Html->link('Mua thêm các dịch vụ', array(
+                                                        'controller' => 'cart',
+                                                        'action' => 'continuebuy',
+                                                    ),
+                                                        array('class' => 'btn btn-buy', 'escape' => false)
+                                                    );
                                                 ?>
-                                            </button>
+
 
                                         </td>
                                     </tr>
@@ -463,7 +469,7 @@
                                     </div>
 
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Số điện thoại" value="" name="phone_support" id="phone_support">
+                                        <input type="text" class="form-control" placeholder="" value="" name="phone_support" id="phone_support">
                                         <button class="btn btn-nhap" id="btn_supporters_ajax_id"> Cập nhật </button>
                                     </div>
                                 </div>
@@ -634,6 +640,35 @@
 
         </script>
 
+        <!-- [Fix] CSS/HTML hiển thị tiền thanh toán trong Giỏ hàng -->
+        <!-- [Fix] CSS/HTML hiển thị Mã giảm giá trong Giỏ hàng -->
+        <style type="text/css">
+
+            .total-money > tbody > tr > td,
+            .total-money > thead > tr > th {
+                height: 55px;
+            }
+
+            .ma-giam-gia {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            #ma-giam-gia input {
+                width: 125px;
+            }
+
+            #phone_gifcode {
+                margin-bottom: 0;
+            }
+
+            .total-money .btn-continue,
+            .total-money .btn-buy,
+            .total-money .btn-buy:hover {
+                line-height: 40px;
+            }
+
+        </style>
 
     <?php //echo $this->element('sql_dump'); ?>
 

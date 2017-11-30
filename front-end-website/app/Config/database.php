@@ -69,7 +69,7 @@ class DATABASE_CONFIG {
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
-        'host' => '192.168.1.146',
+        'host' => '192.168.1.171',
         'login' => 'vtc_user',
         'password' => '123456@',
         'database' => 'dev_vtc_cloud',
@@ -81,7 +81,7 @@ class DATABASE_CONFIG {
     public $test = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
-        'host' => '192.168.1.146',
+        'host' => '192.168.1.171',
         'login' => 'vtc_user',
         'password' => '123456@',
         'database' => 'db_vtc_cloud',
@@ -92,7 +92,7 @@ class DATABASE_CONFIG {
    public $db_vtc_cloud = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
-        'host' => '192.168.1.146',
+        'host' => '192.168.1.171',
         'login' => 'vtc_user',
         'password' => '123456@',
         'database' => 'db_vtc_cloud',
