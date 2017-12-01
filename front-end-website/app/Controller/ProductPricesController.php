@@ -79,13 +79,14 @@
 										$index++;
 									}
 								// check ten mien con lai theo duoi pho bien
-								if($data_val['ProductPrice']['domain_common'] == 1){
+								
+							}
+							if($data_val['ProductPrice']['domain_common'] == 1){
 									foreach($dm_post as $val){
 									$result[$index] = $this->check_avaiable($val.$data_val['ProductPrice']['product_name'],$data_val['ProductPrice']['domain_type']);
 									$result[$index]['ProductPrice']=$data_val['ProductPrice'];
 									$index++;
 									}
-								}
 							}
 						}
 				}
