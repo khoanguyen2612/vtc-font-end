@@ -43,24 +43,31 @@
 
 					$search_key = $this->data['suffix_key'];
 					// tao mang ten mien tim kiem va check toi api
-					$key = 0;
+					$index = 0;
+					//pr($suffix_exist);die;
+					foreach($suffix_exist as $sf_exist_key => $sf_exist_val){
+						foreach($data_dm as $key => $val){
+							if($val['ProductPrice']['product_name'] == $sf_exist_val){
+								$result[$index]= $this->check_avaiable($dm_post[$sf_exist_key].$sf_exist_val,$val['ProductPrice']['domain_type']);
+								$index ++;
+							}
+						}
+					}
 					foreach ($search_key as $search_key){
 						foreach($dm_post as $s_key => $row){
-							// if(isset($suffix_exist[$s_key])){
-							// 	$row = str_replace($suffix_exist[$s_key],'',$dm_post[$s_key]); // xoa cac duoi ten mien o nhap
-							// }
-							$data_search[$key]['domain_name'] = $row.$data_dm[$search_key]['ProductPrice']['product_name'];
+
+							$data_search[$index]['domain_name'] = $row.$data_dm[$search_key]['ProductPrice']['product_name'];
 							if($data_dm[$search_key]['ProductPrice']['domain_type'] == 0){
-								$data_search[$key]['domain_type'] = '1';
+								$data_search[$index]['domain_type'] = '1';
 							}else{
-								$data_search[$key]['domain_type'] = '0';
+								$data_search[$index]['domain_type'] = '0';
 							}
 							//pr($data_search[$key]['domain_name'] );
 							// lay trang thai api gui ve
-							$result[$key]= $this->check_avaiable($data_search[$key]['domain_name'],$data_search[$key]['domain_type']);
+							$result[$index]= $this->check_avaiable($data_search[$index]['domain_name'],$data_search[$index]['domain_type']);
 							 // lay thong tin gia san pham
-							$result[$key]['ProductPrice']=$data_dm[$search_key]['ProductPrice'];
-							$key ++;
+							$result[$index]['ProductPrice']=$data_dm[$search_key]['ProductPrice'];
+							$index ++;
 						}
 					}
 
@@ -79,14 +86,13 @@
 										$index++;
 									}
 								// check ten mien con lai theo duoi pho bien
-								
-							}
-							if($data_val['ProductPrice']['domain_common'] == 1){
+								if($data_val['ProductPrice']['domain_common'] == 1){
 									foreach($dm_post as $val){
 									$result[$index] = $this->check_avaiable($val.$data_val['ProductPrice']['product_name'],$data_val['ProductPrice']['domain_type']);
 									$result[$index]['ProductPrice']=$data_val['ProductPrice'];
 									$index++;
 									}
+								}
 							}
 						}
 				}
@@ -433,134 +439,6 @@
 
 		}
 
-
-		public function curl_register($rig_info){
-
-			//-----------------------------------------------------------------------
-						$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);
-
-						//pr($Login); die;
-						$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
-
-						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-						curl_setopt($ch, CURLOPT_POST, true);
-						curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
-
-						$output = curl_exec($ch);
-						$output = json_decode($output, true);
-						$token =  ($output['session']['token']);
-
-						curl_close($ch);
-			//-----------------------------------------------------------------------
-
-
-			//data demo
-			$organization=true;
-			if($organization){
-				$rig_info = array(
-					"name"=> "inet.vn",
-					"period"=> 1,
-					"customerId"=> 30582,
-					"registrar"=> "inet",
-					"nsList"=> array(
-						["hostname"=> "ns1.inet.vn"],
-						["hostname"=> "ns2.inet.vn"]
-						),
-					"contacts"=> array(
-						[
-						"fullname"=> "Công ty cổ phần iNET",
-						"organization"=> true,
-						"email"=> "tenmien@inet.vn",
-						"country"=> "VN",
-						"province"=> "HNI",
-						"address"=> "247 cau giay",
-						"phone"=> "0438385588",
-						"fax"=> "0438385588",
-						"type"=> "registrant",
-						"dataExtend"=> array(
-							"gender"=>"male",
-							"idNumber"=>"030810700",
-							"birthday"=>"19/05/1971"
-							)
-						],
-						[
-						"fullname"=> "Nguyễn Văn A",
-						"email"=> "abc@inet.vn",
-						"country"=> "VN",
-						"province"=> "HNI",
-						"address"=> "247 cau giay",
-						"phone"=> "0974019049",
-						"fax"=> "0974019049",
-						"type"=> "technique",
-						"dataExtend"=> array(
-							"gender"=>"male",
-							"idNumber"=>"030810700",
-							"birthday"=>"19/05/1971"
-							)
-						],
-						[
-						"fullname"=> "Nguyễn Văn A",
-						"email"=> "abc@inet.vn",
-						"country"=> "VN",
-						"province"=> "HNI",
-						"address"=> "247 cau giay",
-						"phone"=> "0974019049",
-						"fax"=> "0974019049",
-						"type"=> "billing",
-						"dataExtend"=> array(
-							"gender"=>"male",
-							"idNumber"=>"030810700",
-							"birthday"=>"19/05/1971"
-							)
-						]
-					)
-				);
-			}
-			else{
-				$rig_info = array(
-					"name"=> "inet.vn",
-					"period"=> 1,
-					"customerId"=> 30582,
-					"registrar"=> "inet",
-					"nsList"=> array(
-						["hostname"=> "ns1.inet.vn"],
-						["hostname"=> "ns2.inet.vn"]
-						),
-					"contacts"=> array(
-						[
-						"fullname"=> "Nguyễn Văn A",
-						"organization"=> false,
-						"email"=> "abc@inet.vn",
-						"country"=> "VN",
-						"province"=> "HNI",
-						"address"=> "247 cau giay",
-						"phone"=> "0974019049",
-						"fax"=> "0974019049",
-						"type"=> "admin",
-						"dataExtend"=> array(
-							"gender"=>"male",
-							"idNumber"=>"030810700",
-							"birthday"=>"19/05/1971"
-							)
-						],					)
-				);
-			}
-			//--------
-						$data_string = json_encode($rig_info);
-						$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/create");
-
-						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-						curl_setopt($ch, CURLOPT_POST, true);
-						curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_string));
-						curl_setopt($ch, CURLOPT_HTTPHEADER, array
-											(                                                                          
-												'Content-Type:application/json; charset=UTF-8',  
-												'token: '.$token                                                                             
-										    )                                                                       
-										);
-						curl_close($ch);
-
-		}
     }
 ?>
 
