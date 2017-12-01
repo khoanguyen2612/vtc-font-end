@@ -243,7 +243,7 @@ val.value = tst;
 								</li>
 							<?php } ?>
 						</ul>
-						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist#notificion'),true);?>" class="see_more">Xem thêm</a>
+						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist/news'),true);?>" class="see_more">Xem thêm</a>
 					</div>
 				</div>
 				<div class="line-devide hidden-xs hidden-sm"></div>
@@ -261,7 +261,7 @@ val.value = tst;
 								</li>
 							<?php } ?>
 						</ul>
-						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist','active' => '#news'),true);?>" class="see_more">Xem thêm</a>
+						<a href="<?php echo $this->Html->url(array('controller'=>'News','action'=>'news_menulist/noti'),true);?>" class="see_more">Xem thêm</a>
 					</div>
 				</div>
 			</div>

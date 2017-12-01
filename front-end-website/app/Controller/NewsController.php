@@ -8,9 +8,15 @@
 					'News',
 				);
 		
-		public function news_menulist()
+		public function news_menulist($data=null)
 		{
-
+			if(!empty($data)){
+				$tab=0;
+				if($data=='noti'){
+					$tab=1;
+				}
+			}
+			$this->set('tab',$tab);
 			$top_new=$this->News->find('all', array(
 				'conditions' => array( 'new_news_flg LIKE' => "0" ),
 				'order' => array( 'id' => 'DESC' ),

@@ -8,7 +8,7 @@
 	                </a>
 	            </li>
 	            <li>
-	                <a href="">Chuyển đổi nhà cung cấp</a>
+	                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'domain_transfer'), true); ?>">Chuyển đổi nhà cung cấp</a>
 	            </li>
 	            <li>
 	                <a href="<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'result_search'), true); ?>">
