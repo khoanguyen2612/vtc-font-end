@@ -3,15 +3,31 @@
     <div class="container">
       <div role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active">
+          <?php
+             if(isset($tab)){
+                if($tab==0){
+                  echo '<li role="presentation" class="active"><a href="#news" aria-controls="news" role="tab" data-toggle="tab">Tin tức</a></li>
+                      <li role="presentation"><a href="#notificion" aria-controls="tab" role="tab" data-toggle="tab">Thông báo</a></li>';
+                }
+                else{
+                  echo '<li role="presentation"><a href="#news" aria-controls="news" role="tab" data-toggle="tab">Tin tức</a></li>
+                      <li role="presentation" class="active"><a href="#notificion" aria-controls="tab" role="tab" data-toggle="tab">Thông báo</a></li>';
+                }
+              }
+              else{
+                echo '<li role="presentation" class="active"><a href="#news" aria-controls="news" role="tab" data-toggle="tab">Tin tức</a></li>
+                      <li role="presentation"><a href="#notificion" aria-controls="tab" role="tab" data-toggle="tab">Thông báo</a></li>';
+            }
+          ?>
+          <!-- <li role="presentation" class="active">
             <a href="#news" aria-controls="news" role="tab" data-toggle="tab">Tin tức</a>
           </li>
           <li role="presentation">
             <a href="#notificion" aria-controls="tab" role="tab" data-toggle="tab">Thông báo</a>
-          </li>
+          </li> -->
         </ul>
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="news">
+          <div role="tabpanel" class="tab-pane active css" id="news">
             <?php foreach ($top_new as $top) { ?>
               <div id="topnews" class="row">
                 <div class="img_news col-sm-8 col-md-8 col-lg-8">
@@ -46,7 +62,7 @@
               ?>
             </ul>
           </div>
-          <div role="tabpanel" class="tab-pane" id="notificion">
+          <div role="tabpanel" class="tab-pane css" id="notificion">
             <?php foreach ($top_new1 as $top) { ?>
               <div id="topnews" class="row">
                 <div class="img_news col-sm-8 col-md-8 col-lg-8">

@@ -14,9 +14,35 @@
 
         public function result_search()
 		{	
-			$data=$this->ProductPrice->find('all', array( 'conditions' => array( 'product_type LIKE' => "1" ) ));
-			
-			$this->set('data',$data);
+			//truy vấn domain phổ biến
+			$domain_common=$this->ProductPrice->find('all', 
+				array(
+				 'conditions' => array( 
+				 	'product_type LIKE' => "1",
+				 	'domain_common LIKE' => "1"
+				 )
+			));
+			//truy vấn domain quốc tế
+			$domain_international=$this->ProductPrice->find('all', 
+				array(
+				 'conditions' => array( 
+				 	'product_type LIKE' => "1",
+				 	'domain_type LIKE' => "0"
+				 )
+			));
+			//truy vấn domain việt nam
+			$domain_vn=$this->ProductPrice->find('all', 
+				array(
+				 'conditions' => array( 
+				 	'product_type LIKE' => "1",
+				 	'domain_type LIKE' => "1"
+				 )
+			));
+			//pr($domain_vn);die;
+			$this->set('domain_common',$domain_common);
+			$this->set('domain_international',$domain_international);
+			$this->set('domain_vn',$domain_vn);
+
 			
 			//-----------------------------------------------------------------------
 						$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);
@@ -37,90 +63,119 @@
 			if($this->request->is('post'))
 			{
 				$request = ($this->request->data);
-				//pr($request);die;	
-				$check = strstr( $request['search'], '.' );
-				if( ($data=$this->ProductPrice->find('all', array('conditions' => array( 'product_name LIKE' => "$check%" )))) &&  ($check != "") )
-					
+				//pr($request);die;
+				$arr = explode("\r\n", $request['search']);
+				//pr($arr);
+				$dem=0;
+				$check_domain_name = array();
+				$domain_common=$this->ProductPrice->find('all', array('conditions' => array( 'domain_common LIKE' => "1" )));
+
+				for ($a = 0;$a<count($arr);$a++)
+				{
+					$check_domain_name[$a] = strstr( $arr[$a], '.' );
+					//pr($check_domain_name);die;
+					$check1 = '%'.$check_domain_name[$a].'%';
+
+					if($check_domain_name[$a] == "")
 					{
-						$request1 = $request['search'];
-						//pr($request1);die;
-						$this->set('request1',$request1);
-						
-						//-------------------------------------------------------------------------
-						$checkDomain = array(  "name" => $request1, "registrar" => "inet");
-						
-						$data_string = json_encode($checkDomain);   
-
-
-						$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
-
-						curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-						//curl_setopt($ch, CURLOPT_POST, true);
-						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-						curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-						curl_setopt($ch, CURLOPT_HTTPHEADER, array
-							(                                                                          
-								'Content-Type:application/json; charset=UTF-8',  
-								'token: '.$token                                                                             
-						    )                                                                       
-						);       
-
-						$output = curl_exec($ch);
-						$output = json_decode($output, true);
-
-						$this->set('output',$output);
-					 	curl_close($ch);
-					 	
-					}
-				else
-					{
-						if(isset($request['product_id']))
+						for($i=0;$i<count($domain_common);$i++)
 						{
-							$prod_name=$this->ProductPrice->find('first',array(
-								'conditions'=> array('ProductPrice.id'=>$request['product_id'])));
-							$request2=$request['search'].$prod_name['ProductPrice']['product_name'];}
+							$request2[] = $arr[$a].$domain_common[$i]['ProductPrice']['product_name'];
+						}
 
-
-								//--------------------------------------------------------------------------------
-								if(isset($request2)){
-								
-								
-								$checkDomain = array(  "name" => $request2, "registrar" => "inet");
-					
-								$data_string = json_encode($checkDomain);   
-
-
-								$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
-
-								curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-								//curl_setopt($ch, CURLOPT_POST, true);
-								curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-								curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-								curl_setopt($ch, CURLOPT_HTTPHEADER, array
-									(                                                                          
-										'Content-Type:application/json; charset=UTF-8',  
-										'token: '.$token                                                                             
-								    )                                                                       
-								);       
-
-								$output = curl_exec($ch);
-								$output = json_decode($output, true);
-								$this->set('output',$output);
-							 	curl_close($ch);
-					}
-
-
-					 	if(!isset($request2)){
-								$this->Session->setFlash('Bạn chưa chọn đuôi tên miền. Làm ơn chọn đuôi tên miền cần kiểm tra!','default',array('class'=>'alert alert-danger'));
-							}else{
-
-								$this->set('prod_name',$prod_name);
-								$this->set('request2',$request2);
-							}
 					};
+					// if($check_domain_name != "" )
+					// {
+					// 	$request1 = $arr[$a];
+					// 	$this->set('request1',$request1);
+						
+					// 	//-------------------------------------------------------------------------
+					// 	$checkDomain = array(  "name" => $request1, "registrar" => "inet");
+						
+					// 	$data_string = json_encode($checkDomain);   
+
+					// 	$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+
+					// 	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+					// 	//curl_setopt($ch, CURLOPT_POST, true);
+					// 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+					// 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+					// 	curl_setopt($ch, CURLOPT_HTTPHEADER, array
+					// 		(                                                                          
+					// 			'Content-Type:application/json; charset=UTF-8',  
+					// 			'token: '.$token                                                                             
+					// 	    )                                                                       
+					// 	);       
+
+					// 	$output1 = curl_exec($ch);
+					// 	$outputdm[$a] = json_decode($output1, true);
+					//  	curl_close($ch);
+					// };
+					
+					// {
+					// 	if(isset($request['id']))
+					// 	{-
+					// 		$prod_name=$this->ProductPrice->find('first',array(
+					// 			'conditions'=> array('ProductPrice.id'=>$request['product_id'])));
+					// 		$request2=$request['search'].$prod_name['ProductPrice']['product_name'];}
+
+
+					// 			//--------------------------------------------------------------------------------
+					// 			if(isset($request2)){
+								
+								
+					// 			$checkDomain = array(  "name" => $request2, "registrar" => "inet");
+					
+					// 			$data_string = json_encode($checkDomain);   
+
+
+					// 			$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+
+					// 			curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+					// 			//curl_setopt($ch, CURLOPT_POST, true);
+					// 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+					// 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+					// 			curl_setopt($ch, CURLOPT_HTTPHEADER, array
+					// 				(                                                                          
+					// 					'Content-Type:application/json; charset=UTF-8',  
+					// 					'token: '.$token                                                                             
+					// 			    )                                                                       
+					// 			);       
+
+					// 			$output = curl_exec($ch);
+					// 			$output = json_decode($output, true);
+					// 			$this->set('output',$output);
+					// 		 	curl_close($ch);
+					// 	} 
+					// }
+					$dem++;
+					
+				}
+					//pr($request2[1]);
+					pr($request2);
+					count($domain_common);
+					count($request2);
+					
+					//pr(count($request2));
+					//pr(count($outputdm1));
+					//pr($outputdm1);die;
+					//$this->set('output',$outputdm);
+				//pr($dem); die;
+							// if(!isset($request2)){
+							// 	$this->Session->setFlash('Bạn chưa chọn đuôi tên miền. Làm ơn chọn đuôi tên miền cần kiểm tra!','default',array('class'=>'alert alert-danger'));
+							// }else{
+
+							// 	$this->set('prod_name',$prod_name);
+							// 	$this->set('request2',$request2);
+							// }
+					};
+					//pr($dem);
+					if(isset($dem)){
+						$this->set('dem',$dem);
+					}
+					//pr($output);die;
 					
 
-			};
 		}
         public function register_domain()
 		
@@ -436,11 +491,17 @@
 			}
 		}
 
+
+		public function domain_transfer()
+		{
+
+		}
 		public function price(){
 			$data=$this->ProductPrice->find('all', array( 
 				'conditions' => array( 'ProductPrice.product_type' => "1"),
 			));
 			$this->set('data',$data);
+
 
 		}
 
