@@ -50,31 +50,18 @@
     <!-- HERE IS THE CLICK FILTER -->
     <script type="text/javascript">
         $(document).ready(function () {
-
             $('.now_reg_storage hidden').bind("click", function (event) {
-
                 var id_select = (event.target.id).substr(0, 15);
                 var data = { };
-
-                alert(id_select);
-                alert("form#" + id_select);
-
-                //$("form#" + id_select).submit();
                 $("form#" + id_select).trigger('submit');
-                //submitDetailsForm(event.target.id);
+                console.log("ID click a href" + id_select);
 
-                //$('form[id='+ id_select + ']').submit();
-
-                Console.log("ID click a href" + id_select);
-                //event.preventDefault();
+                event.preventDefault();
                 return false;
-
             });
-
             function submitDetailsForm(id) {
                 $("#" + id).submit();
             }
-
         });
 
     </script>
@@ -203,7 +190,6 @@
                                 'value' => $all_storage[$_c]['ProductPrice']['price'],
                             )
                         );
-
                         echo $this->Form->input('l_capacity',
                             array(
                                 'id' => "id_l_capacity_$_c",
@@ -213,22 +199,16 @@
                                 'value' => (string) $all_storage[$_c]['ProductPrice']['product_description'],
                             )
                         );
-
                         echo $this->Form->end();
+
                         ?>
 
                     </div>
-
-
                     <!-- end foreach -->
-
-
                 </div>
             </div>
         </div>
     </div>
-
-
 
 
     <!--// content //-->
@@ -293,7 +273,6 @@
 
     <?php echo $this->Html->css('storage_service.css'); ?>
     <style type="text/css">
-
         .l_package {
             background-color: #f3f3f3;
         }
@@ -313,5 +292,4 @@
             text-decoration: none;
             background-color: #2a1aa3;
         }
-
     </style>
