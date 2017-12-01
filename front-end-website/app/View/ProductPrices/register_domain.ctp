@@ -62,7 +62,11 @@
                         </div>
                     </div>
                 </form>
-                <?php if (isset($request1)) { ?>
+                <?php if (isset($request1)) { 
+
+                        $i = 0;
+                        $do_id = 0;
+                        ?>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p class="p-add"> Kết quả kiểm tra</p>
                 </div>
@@ -136,7 +140,7 @@
 
                                 <td>
                                     <?php if ($output['status'] == 'available') { ?>
-                                        <input type="checkbox" class="add-domain-checkbox" name="">
+                                        <input type="checkbox" class="add-domain-checkbox" id="domain_item_id<?= $do_id ?>"  name="">
                                         <label for="demo" class="demoCheck demoCheckLabel"></label>
                                     <?php } ?>
                                 </td>
@@ -162,8 +166,6 @@
                                     <tbody>
 
                                     <?php
-                                    $i = 0;
-                                    $do_id = 0;
                                     foreach ($data as $item) { ?>
                                         <tr>
 
@@ -266,7 +268,7 @@
                             <!-- <button type="submit" class="btn btn-all"> Chuyển đến giỏ hàng</button> -->
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 add-continue">
-                            <button type="submit" class="btn btn-add-continue"> Chuyển đến giỏ hàng</button>
+                            <button type="submit" class="btn btn-add-continue" id='go_to_cart'> Chuyển đến giỏ hàng</button>
                         </div>
 
                         <div id="loading" style="display: none;">
@@ -409,7 +411,8 @@
                                 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 add-continue">
                                     <button type="submit" class="btn btn-add-continue" id="go_to_cart"> Chuyển đến giỏ hàng</button>
                                 </div>
-
+    
+                        <?php } ?>
                                 <?php
                                     // tue.phpmailer@gmail.com
                                     $str = $this->Html->scriptBlock('$(document).ready(function () {
@@ -432,7 +435,6 @@
                                 </div>
 
                             </div>
-                        <?php } ?>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 explain">
                             <p class="p-explain"> Bảng chú thích các kí hiệu</p>
                             <table class="table table-bordered">
