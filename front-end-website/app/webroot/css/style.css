@@ -164,6 +164,9 @@ div.personal-info .button-info{
 	font-weight: bold;
 	font-size: 12pt;
 }
+.dropdown-menu>li>a:hover {
+	color:#000 !important;
+}
 /*** slect_search_domain ***/
 .slect_search_domain{
 	padding: 20px 0px;

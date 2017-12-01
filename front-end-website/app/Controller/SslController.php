@@ -14,6 +14,7 @@
 				if($this->Auth->user()){
 						$user=$this->Auth->user();
 									$data['ServiceRequest']=array(
+										'account_id'=>$user['id'],
 										'order_type' => 3,
 										'name' => $user['name'],
 										'email' =>$user['email'],
@@ -60,6 +61,7 @@
 							if($user['Account']['status']==1){
 								if($this->Auth->login()){
 									$data['ServiceRequest']=array(
+										'account_id'=>$user['Account']['id'],
 										'order_type' => 3,
 										'name' => $user['Account']['name'],
 										'email' =>$user['Account']['email'],

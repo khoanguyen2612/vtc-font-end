@@ -142,8 +142,6 @@
 			<div class="row ssl-note">
 				<p>Nếu quý khách hàng có bất cứ thắc mắc nào về SSL, vui lòng gửi email đến hòm thư: ssl@VTC.vn để đc giải đáp</p>
 			</div>
-
-			<h2><a href="<?php echo $this->Html->url(array('controller' => 'ssl','action' => 'register'));?>" class="btn btn-ssl"><b>ĐĂNG KÝ NGAY</b></a><br></h2>
 		</div>	
 	</div>
 
