@@ -16,7 +16,7 @@
 
                     <!--// The above will output fast message for Note!-->
                     <div id="flashMessage" class="message alert">
-                        <?php echo $this->Session->flash(); ?>
+                        <code><?php echo $this->Session->flash(); ?></code>
                     </div>
 
                     <div class="row">
@@ -362,16 +362,16 @@
                                                         </td>
                                                     </tr>
 
-                                              <!--  <div class="row">
-                                                    <div class="col-xs-6">
-                                                        <h4><?php /*echo $hosting['product_name']; */?> </h4>
-                                                        <p>Giảm <?php /*echo $hosting['price_2']; */?> vnđ/năm</p>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <h2><?php /*echo $hosting['price_1']; */?> vnđ/năm</h2>
-                                                        <p class="p1"><?php /*echo $hosting['price']; */?>VND/năm</p>
-                                                    </div>
-                                                </div>-->
+                                                    <!--<div class="row">
+                                                        <div class="col-xs-6">
+                                                            <h4><?php /*echo $hosting['product_name']; */?> </h4>
+                                                            <p>Giảm <?php /*echo $hosting['price_2']; */?> vnđ/năm</p>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <h2><?php /*echo $hosting['price_1']; */?> vnđ/năm</h2>
+                                                            <p class="p1"><?php /*echo $hosting['price']; */?>VND/năm</p>
+                                                        </div>
+                                                    </div>-->
 
                                             <?php
                                                 $id_form ++;
@@ -427,17 +427,14 @@
 
                                     <tr>
                                         <td colspan="2" class="continue">
-                                            <button class="btn btn-continue hidden" type="button"><a href="">Tiếp tục</a></button>
-                                            <button class="btn btn-continue" type="button">
                                                 <?php
                                                     echo $this->Html->link('Tiếp tục', array(
                                                         'controller' => 'cart',
                                                         'action' => 'checkout',
                                                     ),
-                                                        array('class' => '', 'escape' => false)
+                                                        array('class' => 'btn btn-continue', 'escape' => false)
                                                     );
                                                 ?>
-                                            </button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -445,17 +442,16 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="buy">
-                                            <button class="btn btn-buy hidden" type="button"> Mua thêm các dịch vụ </button>
-                                            <button class="btn btn-buy" type="button">
+
                                                 <?php
-                                                echo $this->Html->link('Mua thêm các dịch vụ', array(
-                                                    'controller' => 'cart',
-                                                    'action' => 'continuebuy',
-                                                ),
-                                                    array('class' => '', 'escape' => false)
-                                                );
+                                                    echo $this->Html->link('Mua thêm các dịch vụ', array(
+                                                        'controller' => 'cart',
+                                                        'action' => 'continuebuy',
+                                                    ),
+                                                        array('class' => 'btn btn-buy', 'escape' => false)
+                                                    );
                                                 ?>
-                                            </button>
+
 
                                         </td>
                                     </tr>
@@ -648,7 +644,8 @@
         <!-- [Fix] CSS/HTML hiển thị Mã giảm giá trong Giỏ hàng -->
         <style type="text/css">
 
-            .total-money > tbody > tr > td, .total-money > thead > tr > th {
+            .total-money > tbody > tr > td,
+            .total-money > thead > tr > th {
                 height: 55px;
             }
 
@@ -678,8 +675,13 @@
             .sale-code .btn-ok {
                 height: 35px;
             }
-        </style>
+            .total-money .btn-continue,
+            .total-money .btn-buy,
+            .total-money .btn-buy:hover {
+                line-height: 40px;
+            }
 
+        </style>
 
     <?php //echo $this->element('sql_dump'); ?>
 

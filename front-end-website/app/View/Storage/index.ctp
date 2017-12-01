@@ -20,7 +20,7 @@
     </div>
 
     <!--// Storage menu //-->
-    <nav class="navbar navbar-default" id="menuNavbar">
+    <nav class="navbar navbar-default hidden" id="menuNavbar">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -80,249 +80,149 @@
     </script>
     <div class="cloud_storage">
         <div class="container">
+
             <div class="head text-center">
                 <h1>KHÔNG GIAN LƯU TRỮ AN TOÀN, TỐC ĐỘ CAO</h1>
                 <h3>Liên hệ Viettel IDC để được trải nghiệm dịch vụ lưu trữ trực tuyến hàng đầu tại Việt Nam</h3>
             </div>
+
             <div class="l_package">
                 <div class="row">
 
-                    <div class="col-md-3 col-lg-3">
-                        <?php
-                            //echo $this->Form->create(null, array('type' => 'POST',
-                            echo $this->Form->create('Storage',
-                                array('type' => 'POST',
-                                    'url' => array('controller' => 'storage', 'action' => 'chosen_capacity'),
-                                    'id' => "id_form_store_1",
-                                    'name' =>  "form_store_1",
-                                    'class' => 'storage_form',
-                                    'role' => 'form',
-                                )
-                            );
-                        ?>
+                    <?php
+                        $i = 0;
+                        $_c = count($all_storage) - 1;
+                    foreach ($all_storage as $value) {
+                        if ($_c == $i) break;
+                    ?>
+
+                        <div class="col-md-3 col-lg-3">
+                            <?php
+                                //echo $this->Form->create(null, array('type' => 'POST',
+                                echo $this->Form->create('Storage',
+                                    array('type' => 'POST',
+                                        'url' => array('controller' => 'storage', 'action' => 'chosen_capacity'),
+                                        'id' => "id_form_store_{$i}",
+                                        'name' =>  "form_store_{$i}",
+                                        'class' => 'storage_form',
+                                        'role' => 'form',
+                                    )
+                                );
+
+                            ?>
                             <div class="location_item">
-                                <h3>STORE 1</h3>
+                                <h3> <?php echo $value['ProductPrice']['product_name'] ;?> </h3>
                                 <p>
-                                    Dung lượng: 100 GB - 1 TB<br>
+                                    Dung lượng: <?php echo  $value['ProductPrice']['product_description'] ;?> <br>
                                     Đơn giá tính theo GB/tháng <br>
                                 </p>
 
-                                <p class="l_price"> <?php echo (string) number_format('1690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
-                                <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_1_link" class="now_reg_storage hidden"  > ĐĂNG KÝ NGAY</a>
-                            </div>
-
-                        <?php
-                            echo $this->Form->input('l_price',
-                                array(
-                                    'id' => "id_l_price_1",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_price',
-                                    'value' => 1690000,
-                                )
-                            );
-
-                            echo $this->Form->input('l_capacity',
-                                array(
-                                    'id' => "id_l_capacity_1",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_capacity',
-                                    'value' => '100 GB - 1 TB',
-                                )
-                            );
-
-                            echo $this->Form->end();
-                        ?>
-
-                    </div>
-
-                    <div class="col-md-3 col-lg-3">
-                        <?php
-                            echo $this->Form->create('Storage',
-                                array('type' => 'POST',
-                                    'url' => array('controller' => 'storage', 'action' => 'chosen_capacity'),
-                                    'id' => "id_form_store_2",
-                                    'name' =>  "form_store_2",
-                                    'class' => 'storage_form',
-                                    'role' => 'form',
-                                )
-                            );
-                        ?>
-                            <div class="location_item">
-                                <h3>STORE 2</h3>
-                                <p>
-                                    Dung lượng: 200 GB - 1 TB<br>
+                                <p class="hidden">
+                                    Dung lượng: <?php echo (string) round($value['ProductPrice']['except_hdd']/1024) . ' MB' ;?> <br>
                                     Đơn giá tính theo GB/tháng <br>
                                 </p>
-                                <p class="l_price"> <?php echo (string) number_format('2690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
-                                <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_2_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
-                            </div>
 
-                        <?php
-                            echo $this->Form->input('l_price',
-                                array(
-                                    'id' => "id_l_price_2",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_price',
-                                    'value' => 2690000,
-                                )
-                            );
-
-                            echo $this->Form->input('l_capacity',
-                                array(
-                                    'id' => "id_l_capacity_2",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_capacity',
-                                    'value' => '200 GB - 1 TB',
-                                )
-                            );
-
-                            echo $this->Form->end();
-                        ?>
-
-                    </div>
-
-                    <div class="col-md-3 col-lg-3">
-                        <?php
-                            echo $this->Form->create('Storage',
-                                array('type' => 'POST',
-                                    'url' => array('controller' => 'storage', 'action' => 'chosen_capacity'),
-                                    'id' => "id_form_store_3",
-                                    'name' =>  "form_store_3",
-                                    'class' => 'storage_form',
-                                    'role' => 'form',
-                                )
-                            );
-                        ?>
-                            <div class="location_item">
-                                <h3>STORE 3</h3>
-                                <p>
-                                    Dung lượng: 300 GB - 1 TB<br>
-                                    Đơn giá tính theo GB/tháng <br>
+                                <p class="l_price">
+                                    <?php echo (string) number_format($value['ProductPrice']['price'],0,',','.' ); ?> <span> VNĐ/THÁNG</span>
                                 </p>
-                                <p class="l_price"> <?php echo (string) number_format('3690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
+
                                 <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_3_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
+                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_<?=$i?>_link" class="now_reg_storage hidden"  > ĐĂNG KÝ NGAY</a>
+
                             </div>
 
-                        <?php
-                            echo $this->Form->input('l_price',
-                                array(
-                                    'id' => "id_l_price_3",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_price',
-                                    'value' => 3690000,
-                                )
-                            );
+                            <?php
 
-                            echo $this->Form->input('l_capacity',
-                                array(
-                                    'id' => "id_l_capacity_3",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_capacity',
-                                    'value' => '300 GB - 1 TB',
-                                )
-                            );
+                                echo $this->Form->input('l_price',
+                                    array(
+                                        'id' => "id_l_price_{$i}",
+                                        'type' => 'hidden',
+                                        //'name' => 'l_price',
+                                        'value' => $value['ProductPrice']['price'],
+                                    )
+                                );
 
-                            echo $this->Form->end();
-                        ?>
+                                echo $this->Form->input('l_capacity',
+                                    array(
+                                        'id' => "id_l_capacity_{$i}",
+                                        'type' => 'hidden',
+                                        //'name' => 'l_capacity',
+                                        //'value' =>  'Dung lượng: '. (string) round($value['ProductPrice']['except_hdd']/1024). ' MB',
+                                        'value' =>  'Dung lượng: '. (string) $value['ProductPrice']['product_description'],
+                                    )
+                                );
 
-                    </div>
+                                echo $this->Form->end();
 
-                    <div class="col-md-3 col-lg-3">
-                        <?php
-                            echo $this->Form->create('Storage',
-                                array('type' => 'POST',
-                                    'url' => array('controller' => 'storage', 'action' => 'chosen_capacity'),
-                                    'id' => "id_form_store_4",
-                                    'name' =>  "form_store_4",
-                                    'class' => 'storage_form',
-                                    'role' => 'form',
-                                )
-                            );
-                        ?>
-                            <div class="location_item">
-                                <h3>STORE 4</h3>
-                                <p>
-                                    Dung lượng: 400 GB - 1 TB<br>
-                                    Đơn giá tính theo GB/tháng <br>
-                                </p>
-                                <p class="l_price"> <?php echo (string) number_format('4690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
-                                <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_4_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
-                            </div>
+                            ?>
 
-                        <?php
-                            echo $this->Form->input('l_price',
-                                array(
-                                    'id' => "id_l_price_4",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_price',
-                                    'value' => 3690000,
-                                )
-                            );
+                        </div>
 
-                            echo $this->Form->input('l_capacity',
-                                array(
-                                    'id' => "id_l_capacity_4",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_capacity',
-                                    'value' => '400 GB - 1 TB',
-                                )
-                            );
+                    <?php
 
-                            echo $this->Form->end();
-                        ?>
-
-                    </div>
+                        $i ++; } ?>
 
                     <div class="col-md-12 col-lg-12">
                         <?php
+                            $_c = count($all_storage) - 1;
                             echo $this->Form->create('Storage',
                                 array('type' => 'POST',
                                     'url' => array('controller' => 'storage', 'action' => 'chosen_capacity'),
-                                    'id' => "id_form_store_5",
-                                    'name' =>  "form_store_5",
+                                    'id' => "id_form_store_$_c",
+                                    'name' =>  "form_store_$_c",
                                     'class' => 'storage_form',
                                     'role' => 'form',
                                 )
                             );
                         ?>
-                            <div class="location_item">
-                                <h3>STORE 5</h3>
-                                <p>
-                                    Dung lượng: 500 GB - 1 TB<br>
-                                    Đơn giá tính theo GB/tháng <br>
-                                </p>
-                                <p class="l_price"> <?php echo (string) number_format('5690000',0,',','.' ); ?> <span> VNĐ/THÁNG</span></p>
-                                <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_5_link" class="now_reg_storage hidden"> ĐĂNG KÝ NGAY</a>
-                            </div>
+                        <div class="location_item">
+                            <h3><?php echo $all_storage[$_c]['ProductPrice']['product_name'];?></h3>
+                            <p>
+                                Dung lượng: <?php echo (string) $all_storage[$_c]['ProductPrice']['product_description'];?> <br>
+                                Đơn giá tính theo GB/tháng <br>
+                            </p>
+
+                            <p class="hidden">
+                                Dung lượng: <?php echo (string) round($all_storage[$_c]['ProductPrice']['except_hdd']/1024) . ' MB' ;?> <br>
+                                Đơn giá tính theo GB/tháng <br>
+                            </p>
+                            <p class="l_price">
+                                <?php echo (string) number_format($all_storage[$_c]['ProductPrice']['price'],0,',','.' ); ?> <span> VNĐ/THÁNG</span>
+                            </p>
+
+                            <button type="submit"> ĐĂNG KÝ NGAY</button>
+                            <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_<?=$_c?>_link" class="now_reg_storage hidden"  > ĐĂNG KÝ NGAY</a>
+                        </div>
 
                         <?php
-                            echo $this->Form->input('l_price',
-                                array(
-                                    'id' => "id_l_price_4",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_price',
-                                    'value' => 5690000,
-                                )
-                            );
+                        echo $this->Form->input('l_price',
+                            array(
+                                'id' => "id_l_price_$_c",
+                                'type' => 'hidden',
+                                //'name' => 'l_price',
+                                'value' => $all_storage[$_c]['ProductPrice']['price'],
+                            )
+                        );
 
-                            echo $this->Form->input('l_capacity',
-                                array(
-                                    'id' => "id_l_capacity_4",
-                                    'type' => 'hidden',
-                                    //'name' => 'l_capacity',
-                                    'value' => '500 GB - 1 TB',
-                                )
-                            );
+                        echo $this->Form->input('l_capacity',
+                            array(
+                                'id' => "id_l_capacity_$_c",
+                                'type' => 'hidden',
+                                //'name' => 'l_capacity',
+                                //'value' => (string) round($all_storage[$_c]['ProductPrice']['except_hdd']/1024) . ' MB',
+                                'value' => (string) $all_storage[$_c]['ProductPrice']['product_description'],
+                            )
+                        );
 
-                            echo $this->Form->end();
+                        echo $this->Form->end();
                         ?>
 
                     </div>
+
+
+                    <!-- end foreach -->
+
+
                 </div>
             </div>
         </div>

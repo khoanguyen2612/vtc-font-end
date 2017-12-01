@@ -110,6 +110,7 @@ class InfocartsController extends AppController
                 $this->redirect(array('controller' => 'carts', 'action' => 'payment'));
         }else{
          $this->set('Errors',$this->Contact->validationErrors);
+         $this->set('ErrorsForm','tc');
      }
  }
 }
@@ -119,8 +120,6 @@ public function getSaveRecord()
     $data = $this->Contact->findById($_POST['record_id']);
     if (!empty($data)) {
         $data['status'] = '1';
-    } else {
-        $data['status'] = '0';
     }
     header('Content-Type: application/json');
     echo json_encode($data);
