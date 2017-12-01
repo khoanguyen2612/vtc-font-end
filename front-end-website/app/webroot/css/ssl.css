@@ -62,7 +62,7 @@
 		background-color: #f1f1f1;
 	}
 	.ssl-procedure h3{
-		padding : 50px;
+		padding : 10px;
 	}
 	.ssl-procedure>.container > h2{
 		text-align: center;
@@ -74,7 +74,7 @@
 	}
 	.ssl-procedure .row{
 		/*max-width: 900px;*/
-		margin: auto;
+		/*margin: auto;*/
 	}
 	.ssl-register .row{
 		margin-top: 20px;
@@ -127,6 +127,7 @@
 		padding: 15px 0px 7px 0px;
 		text-align: center;
 		margin-top: 15px;
+		margin-bottom: 15px;
 	}
 	.ssl-procedure .btn-ssl{
 		width: 250px;

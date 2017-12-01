@@ -15,19 +15,19 @@
 				</p>
 			</div>
 			<div class="row cloud_op">
-				<div class="col-lg-7">
-					<div class="row"  id="store_op">
-						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">
+				<div class="col-lg-3">
+					<!-- <div class="row"  id="store_op"> -->
+						<!-- <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">
 							<img src="img/store_icon.png">
 						</div>
 						<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" id="select_hdd">
 							<span style="width: 100%">
 								<input id="hdd" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="2000" data-slider-step="10" data-slider-value="0"/>
 							</span>
-						</div>
-					</div>
+						</div> -->
+					<!-- </div> -->
 				</div>
-				<div class="col-lg-5">
+				<div class="col-lg-6">
 					<div class="row" id="os_op">
 						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">
 							<img src="img/setting_os.png">
@@ -58,7 +58,7 @@
 							?>
 								<h4><?php echo $item['ProductPrice']['product_name']?></h4>
 								<div class="price" >
-									<h3 id="item-<?php echo $item['Plan']['id']?>" val = <?php echo number_format($item['ProductPrice']['price']);?>><?php echo number_format($item['ProductPrice']['price'])?><small>VND/THÁNG</small></h3>
+									<h3 id="item-<?php echo $item['Plan']['id']?>" val = <?php echo number_format($item['ProductPrice']['price']);?>><?php echo number_format($item['ProductPrice']['price'], 0, ',', '.')?><small>VND/THÁNG</small></h3>
 									
 								</div>
 								<?php 
@@ -93,7 +93,7 @@
 							?>
 								<h4><?php echo $item['ProductPrice']['product_name']?></h4>
 								<div class="price" >
-									<h3 id="item-<?php echo $item['Plan']['id']?>" val = <?php echo $item['ProductPrice']['price']?>><?php echo number_format($item['ProductPrice']['price'])?><small>VND/THÁNG</small></h3>
+									<h3 id="item-<?php echo $item['Plan']['id']?>" val = <?php echo $item['ProductPrice']['price']?>><?php echo number_format($item['ProductPrice']['price'], 0, ',', '.')?><small>VND/THÁNG</small></h3>
 									
 								</div>
 								<?php 
