@@ -79,10 +79,10 @@
 												if($item['ProductPrice']['domain_type']==1){
 										?>
 													<tr>
-														<td><?php echo 'xyz'.$item['ProductPrice']['product_name'];?> </td>
-														<td><?php if($item['ProductPrice']['price_start']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price_start'];}?></td>
-														<td><?php if($item['ProductPrice']['price']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price'];}?></td>
-														<td><?php if($item['ProductPrice']['price_transfer']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price_transfer'];}?></td>
+														<td><?php echo ''.$item['ProductPrice']['product_name'];?> </td>
+														<td><?php if($item['ProductPrice']['price_start']==0){echo $this->Html->image('icon-free.png');}else{ echo number_format($item['ProductPrice']['price_start'], 0, ',', '.').' VNĐ';}?></td>
+														<td><?php if($item['ProductPrice']['price']==0){echo $this->Html->image('icon-free.png');}else{ echo number_format($item['ProductPrice']['price'], 0, ',', '.').' VNĐ';}?></td>
+														<td><?php if($item['ProductPrice']['price_transfer']==0){echo $this->Html->image('icon-free.png');}else{ echo number_format($item['ProductPrice']['price_transfer'], 0, ',', '.').' VNĐ';}?></td>
 														<td><button type="button" class="btn btn-register"> Đăng kí </button></td>
 													</tr>	
 										<?php
@@ -111,10 +111,10 @@
 												if($item['ProductPrice']['domain_type']==0){
 										?>
 													<tr>
-														<td><?php echo 'xyz'.$item['ProductPrice']['product_name'];?> </td>
-														<td><?php if($item['ProductPrice']['price_start']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price_start'];}?></td>
-														<td><?php if($item['ProductPrice']['price']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price'];}?></td>
-														<td><?php if($item['ProductPrice']['price_transfer']==0){echo $this->Html->image('icon-free.png');}else{ echo $item['ProductPrice']['price_transfer'];}?></td>
+														<td><?php echo ''.$item['ProductPrice']['product_name'];?> </td>
+														<td><?php if($item['ProductPrice']['price_start']==0){echo $this->Html->image('icon-free.png');}else{ echo number_format($item['ProductPrice']['price_start'], 0, ',', '.').' VNĐ';}?></td>
+														<td><?php if($item['ProductPrice']['price']==0){echo $this->Html->image('icon-free.png');}else{ echo number_format($item['ProductPrice']['price'], 0, ',', '.').' VNĐ';}?></td>
+														<td><?php if($item['ProductPrice']['price_transfer']==0){echo $this->Html->image('icon-free.png');}else{ echo number_format($item['ProductPrice']['price_transfer'], 0, ',', '.').' VNĐ';}?></td>
 														<td><button type="button" class="btn btn-register"> Đăng kí </button></td>
 													</tr>	
 										<?php
