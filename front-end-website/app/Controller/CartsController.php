@@ -71,14 +71,11 @@ class CartsController extends AppController
         //$order = $order_schema['Order'];
         // load count sum element of item
         //$this->Session->delete('order_code');
-
         $_tmp = $this->Session->read('order_code');
         //Debugger::dump($_tmp);
         if ( !isset($_tmp) || is_null($_tmp) ) {
             $this->Session->write('order_code', 'MSHĐ_A'. rand(11111111, 22222222). 'Z'. rand(11111111, 22222222));
         }
-
-
     }
 
     public function add()
@@ -475,14 +472,12 @@ class CartsController extends AppController
 
     public function accept_payment()
     {
-
         // Check product in cart shopping
         $n_item_cart = $this->Cart->getCount();
 
         if ( is_null($n_item_cart) || $n_item_cart == 0 ) {
 
             //$this->autoRender = false;
-
             // In the controller cart .
             $this->Session->setFlash('Lets by sell own\' production, please !');
 
@@ -490,18 +485,15 @@ class CartsController extends AppController
                     "action" => "view",
                 )
             );
-
         }
 
         $id_acc = $this->Auth->User('id');
         $user_info = $this->Account->findById($id_acc);
         $name = $user_info['Account']['name'];
-
         $res = $this->request->data;
 
         // add current input money
         $add_curent_money = (isset( $res['Payment']) )? $res['Payment']['add_curent_money'] : 0;
-
         if ($this->request->is('post') || $this->request->is('get')) {
 
             $order_code = $this->Session->read('order_code');
@@ -513,9 +505,7 @@ class CartsController extends AppController
             $this->set(compact('add_curent_money'));
             $this->set(compact('order_code'));
             $this->set(compact('total_payment'));
-
         }
-
     }
 
     public function vtc_payment()
@@ -557,15 +547,9 @@ class CartsController extends AppController
             $language = htmlentities($res["txtParamLanguage"]);
 
             $destinationUrl = $destinationUrl . $data;
-
             echo "||||" . $destinationUrl;
-
             $this->redirect($destinationUrl);
-
-            //header('Location: ' . $destinationUrl);
-
         }
-
     }
 
     public function finish()
@@ -591,16 +575,13 @@ class CartsController extends AppController
 
             $id_acc = $this->Auth->User('id');
             $user_info = $this->Account->findById($id_acc);
-
             $u_name = $email = $cmtnd = $phone = '';
 
             if (count($user_info) > 0) {
-
                 $u_name = $user_info['Account']['name'];
                 $email = $user_info['Account']['email'];
                 $cmtnd = $user_info['Account']['CMTND'];
                 $phone = $user_info['Account']['phonenumber'];
-
             }
 
             $cart = $this->Cart->readCart();
@@ -621,13 +602,11 @@ class CartsController extends AppController
                 $this->set(compact('email'));
                 $this->set(compact('cmtnd'));
                 $this->set(compact('phone'));
-
                 $this->set(compact('products'));
                 $this->set(compact('order_code'));
                 $this->set(compact('total_money'));
                 $this->set(compact('total_payment'));
                 $this->set(compact('total_vat'));
-
                 $this->set(compact('date_day'));
                 $this->set(compact('time_h'));
 
@@ -637,9 +616,7 @@ class CartsController extends AppController
                 } catch (Exception $e) {
                     $this->Session->setFlash('Lỗi database MySQL: ' . $e->getMessage());
                 }
-
             }
-
         } else {
             // In the controller cart .
             $this->Session->setFlash('Không nhận được phản hồi từ cổng thanh toán trực tuyến, vui lòng xem lại thông tin mua hàng hoặc liên hệ support.');
@@ -648,7 +625,6 @@ class CartsController extends AppController
                 )
             );
         }
-
     }
 
     public function remove()
@@ -670,7 +646,6 @@ class CartsController extends AppController
 
     public function del_ajax_it()
     {
-
         $this->autoRender = false;
         $this->request->onlyAllow('ajax'); // No direct access via browser URL
 
@@ -686,7 +661,6 @@ class CartsController extends AppController
 
     public function update_ajax_it()
     {
-
         $this->autoRender = false;
         $this->request->onlyAllow('ajax'); // No direct access via browser URL
 
@@ -697,13 +671,10 @@ class CartsController extends AppController
                 $this->render('ajax_up_i_cart', 'ajax_cart');
             }
         }
-
-
     }
 
     public function update_ajax_sum_money()
     {
-
         $this->autoRender = false;
         $this->request->onlyAllow('ajax'); // No direct access via browser URL
 
@@ -732,7 +703,6 @@ class CartsController extends AppController
 
                 $this->Session->delete('total_money');
                 $this->Session->write('total_money', $total_money);
-
                 $total_money_vat = round($total_money * 10 / 100);
                 $total_money_finish = $total_money - $total_money_vat;
 
@@ -744,7 +714,6 @@ class CartsController extends AppController
 
                 $this->response->send();
                 $this->_stop();
-
             }
         }
     }
@@ -766,7 +735,6 @@ class CartsController extends AppController
             if ($this->request->is('post')) {
 
                 $cart = $this->Cart->readCart();
-
                 if (isset($cart['list']))
                     $all_item = array_shift($cart);  // shift an element off the beginning of array
                 else
@@ -780,16 +748,12 @@ class CartsController extends AppController
                         $total_money += $it['price'] * $it['quantity'];
                     }
                 }
-
                 //total money for number year product
                 $cost = $resp['price'];
                 $year = $resp['year'];
-
-                $total_money = $total_money;
-
+                //$total_money = $total_money;
                 $this->Session->delete('total_money');
                 $this->Session->write('total_money', $total_money);
-
                 $total_money_vat = round($total_money * 10 / 100);
                 $total_money_finish = $total_money - $total_money_vat;
 
@@ -801,7 +765,6 @@ class CartsController extends AppController
 
                 $this->response->send();
                 $this->_stop();
-
             }
         }
     }
@@ -820,7 +783,6 @@ class CartsController extends AppController
         if ($this->RequestHandler->isAjax()) {
 
             if ($this->request->is('post')) {
-
                 if (isset($res['phone']))
                     $phone = $res['phone'];
                 else
@@ -836,10 +798,8 @@ class CartsController extends AppController
 
                 $this->response->send();
                 $this->_stop();
-
             }
         }
-
     }
 
     public function supporters_ajax()
@@ -853,22 +813,14 @@ class CartsController extends AppController
             Configure::write('debug', 2);
         }
 
-        //Debugger::dump($this->request->is('post'));
-        //Debugger::dump($this->RequestHandler->isAjax());
-        //Debugger::dump($res);
-
         if ($this->RequestHandler->isAjax()) {
-
             if ($this->request->is('post')) {
-
                 if (isset($res['phone']))
                     $phone = $res['phone'];
                 else
                     $phone = 'Lỗi số phone support';
-
                 $l_phone[] = $phone;
                 $this->Session->write('phone_support', $l_phone);
-
                 $this->response->body(json_encode(array(
                     'phone_support' => $phone,
                     'status' => '0',
@@ -876,51 +828,38 @@ class CartsController extends AppController
 
                 $this->response->send();
                 $this->_stop();
-
             }
         }
-
     }
     
     /*  ***************************** */
     /*  **  Write log to system   **  */
     /*  ** tue.phpmailer@gmail.com ** */
     /*  ***************************** */
-    
     private function _log ($logs = array()) {
-        
-        
         /**
          * Configures default file logging options
          */
-        
         App::uses('CakeLog', 'Log');
-    
         // Configure tmp/logs/cart.log to receive the two configured types (log levels), but only
         // those with `orders` and `payments` as scope
         CakeLog::config('cart', array(
-            
             'engine' => 'FileLog',
             'types' => array('warning', 'error'),
             'scopes' => array('orders', 'payments'),
             'file' => 'cart.log',
             
         ));
-
         // Configure tmp/logs/payments.log to receive the two configured types, but only
         // those with `payments` as scope
         CakeLog::config('payment', array(
-            
             'engine' => 'SysLog',
             'types' => array('info', 'error', 'warning'),
             'scopes' => array('payment'),
-            
         ));
-    
         CakeLog::warning('This gets written only to cart stream', 'orders');
         CakeLog::warning('This gets written to both cart and payments streams', 'payment');
         CakeLog::warning('This gets written to both cart and payments streams', 'unknown');
-    
         // CakeLog::emergency($message, $scope = array());
         // CakeLog::alert($message, $scope = array());
         // CakeLog::critical($message, $scope = array());
@@ -929,16 +868,12 @@ class CartsController extends AppController
         // CakeLog::notice($message, $scope = array());
         // CakeLog::info($message, $scope = array());
         // CakeLog::debug($message, $scope = array());
-        
-        
     }
 
     public function checkout()
     {
-
         $this->autoRender = false;
         //$this->Cart->saveDbCart();
-
         $this->redirect(array("controller" => "carts",
                 "action" => "register",
                 //"param1" => "val1",

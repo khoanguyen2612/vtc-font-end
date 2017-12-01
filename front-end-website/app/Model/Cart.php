@@ -240,6 +240,14 @@ class Cart extends AppModel
                 $order_detail['ketoan_update'] = $date_getmoney;  // datetime
                 $order_detail['note_ketoan'] = 'Ghi nhớ cho kế toán'; // string
 
+                //add for expired
+                if ($item['product']['year_exp'] > 0) {
+                    $order_detail['flg_expired'] = 1;
+                    $order_detail['expired'] = $item['product']['year_exp'];
+                } else {
+                    $order_detail['expired'] = $item['product']['month_exp'];
+                }
+
                 try {
                     App::import('Model', 'OrderDetail');
                     $OrderDetail = new OrderDetail();
