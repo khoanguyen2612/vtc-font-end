@@ -59,7 +59,8 @@
 
             $all_storage = $this->ProductPrice->find('all',
                 array ( 'fields' => array('product_id', 'product_key', 'product_type', 'product_name', 'product_description', 'price', 'except_hdd'),
-                        'conditions' => array('product_name LIKE' => '%STORAGE%', 'product_type =' => '5'),
+                        //'conditions' => array('product_name LIKE' => '%STORAGE%', 'product_type =' => '5'),
+                        'conditions' => array('product_name LIKE' => '%%', 'product_type =' => '5'),
                         'recursive' => 0,
                 )
             );
@@ -71,12 +72,14 @@
         /*  index view  */
         public function view()
         {
+
             Configure::write('debug', 2);
             $this->layout = "home";
 
             $all_storage = $this->ProductPrice->find('all',
                 array ( 'fields' => array('product_id', 'product_key', 'product_type', 'product_name', 'product_description', 'price', 'except_hdd'),
-                    'conditions' => array('product_name LIKE' => '%STORAGE%', 'product_type =' => '5'),
+                    //'conditions' => array('product_name LIKE' => '%STORAGE%', 'product_type =' => '5'),
+                    'conditions' => array('product_type =' => '5'),
                     'recursive' => 0,
                 )
             );

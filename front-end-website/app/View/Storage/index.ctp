@@ -90,77 +90,77 @@
                 <div class="row">
 
                     <?php
-                        $i = 0;
-                        $_c = count($all_storage) - 1;
-                    foreach ($all_storage as $value) {
-                        if ($_c == $i) break;
+                        // fix  UNDEFINED OFFSET: -1 [APP/VIEW/STORAGE/INDEX.CTP
+                        if (count($all_storage) > 0)   {
+                            $i = 0; $_c = count($all_storage) - 1;
+                        foreach ($all_storage as $value) {
+                            if ($_c == $i) break;
                     ?>
 
-                        <div class="col-md-3 col-lg-3">
-                            <?php
-                                //echo $this->Form->create(null, array('type' => 'POST',
-                                echo $this->Form->create('Storage',
-                                    array('type' => 'POST',
-                                        'url' => array('controller' => 'storage', 'action' => 'chosen_capacity'),
-                                        'id' => "id_form_store_{$i}",
-                                        'name' =>  "form_store_{$i}",
-                                        'class' => 'storage_form',
-                                        'role' => 'form',
-                                    )
-                                );
+                            <div class="col-md-3 col-lg-3">
+                                <?php
+                                    //echo $this->Form->create(null, array('type' => 'POST',
+                                    echo $this->Form->create('Storage',
+                                        array('type' => 'POST',
+                                            'url' => array('controller' => 'storage', 'action' => 'chosen_capacity'),
+                                            'id' => "id_form_store_{$i}",
+                                            'name' =>  "form_store_{$i}",
+                                            'class' => 'storage_form',
+                                            'role' => 'form',
+                                        )
+                                    );
 
-                            ?>
-                            <div class="location_item">
-                                <h3> <?php echo $value['ProductPrice']['product_name'] ;?> </h3>
-                                <p>
-                                    Dung lượng: <?php echo  $value['ProductPrice']['product_description'] ;?> <br>
-                                    Đơn giá tính theo GB/tháng <br>
-                                </p>
+                                ?>
+                                <div class="location_item">
+                                    <h3> <?php echo $value['ProductPrice']['product_name'] ;?> </h3>
+                                    <p>
+                                        Dung lượng: <?php echo  $value['ProductPrice']['product_description'] ;?> <br>
+                                        Đơn giá tính theo GB/tháng <br>
+                                    </p>
 
-                                <p class="hidden">
-                                    Dung lượng: <?php echo (string) round($value['ProductPrice']['except_hdd']/1024) . ' MB' ;?> <br>
-                                    Đơn giá tính theo GB/tháng <br>
-                                </p>
+                                    <p class="hidden">
+                                        Dung lượng: <?php echo (string) round($value['ProductPrice']['except_hdd']/1024) . ' MB' ;?> <br>
+                                        Đơn giá tính theo GB/tháng <br>
+                                    </p>
 
-                                <p class="l_price">
-                                    <?php echo (string) number_format($value['ProductPrice']['price'],0,',','.' ); ?> <span> VNĐ/THÁNG</span>
-                                </p>
+                                    <p class="l_price">
+                                        <?php echo (string) number_format($value['ProductPrice']['price'],0,',','.' ); ?> <span> VNĐ/THÁNG</span>
+                                    </p>
 
-                                <button type="submit"> ĐĂNG KÝ NGAY</button>
-                                <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_<?=$i?>_link" class="now_reg_storage hidden"  > ĐĂNG KÝ NGAY</a>
+                                    <button type="submit"> ĐĂNG KÝ NGAY</button>
+                                    <a href="<?php echo $this->Html->url('/storage/chosen_capacity'); ?>" id="id_form_store_<?=$i?>_link" class="now_reg_storage hidden"  > ĐĂNG KÝ NGAY</a>
 
+                                </div>
+
+                                <?php
+
+                                    echo $this->Form->input('l_price',
+                                        array(
+                                            'id' => "id_l_price_{$i}",
+                                            'type' => 'hidden',
+                                            //'name' => 'l_price',
+                                            'value' => $value['ProductPrice']['price'],
+                                        )
+                                    );
+
+                                    echo $this->Form->input('l_capacity',
+                                        array(
+                                            'id' => "id_l_capacity_{$i}",
+                                            'type' => 'hidden',
+                                            //'name' => 'l_capacity',
+                                            //'value' =>  'Dung lượng: '. (string) round($value['ProductPrice']['except_hdd']/1024). ' MB',
+                                            'value' =>  'Dung lượng: '. (string) $value['ProductPrice']['product_description'],
+                                        )
+                                    );
+
+                                    echo $this->Form->end();
+
+                                ?>
                             </div>
-
-                            <?php
-
-                                echo $this->Form->input('l_price',
-                                    array(
-                                        'id' => "id_l_price_{$i}",
-                                        'type' => 'hidden',
-                                        //'name' => 'l_price',
-                                        'value' => $value['ProductPrice']['price'],
-                                    )
-                                );
-
-                                echo $this->Form->input('l_capacity',
-                                    array(
-                                        'id' => "id_l_capacity_{$i}",
-                                        'type' => 'hidden',
-                                        //'name' => 'l_capacity',
-                                        //'value' =>  'Dung lượng: '. (string) round($value['ProductPrice']['except_hdd']/1024). ' MB',
-                                        'value' =>  'Dung lượng: '. (string) $value['ProductPrice']['product_description'],
-                                    )
-                                );
-
-                                echo $this->Form->end();
-
-                            ?>
-
-                        </div>
-
-                    <?php
-
-                        $i ++; } ?>
+                        <?php
+                            $i ++; }
+                        }
+                    ?>
 
                     <div class="col-md-12 col-lg-12">
                         <?php
