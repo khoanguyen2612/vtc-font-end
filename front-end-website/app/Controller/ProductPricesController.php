@@ -2,205 +2,136 @@
 	include_once ('../Config/constants.php');
 	class ProductPricesController extends AppController
 	{	
-		public $use = array
-		(
-			'ProductPrice',
-		);
+		public $use = array('ProductPrice',);
 
-		//use helper for Javascript && Session cart //
-		//tue.phpmailer@gmail.com //
-		/*****************************/
-        public $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Session');
+        public $helpers = array('Html', 'Form', 'Session');
 
+        private $token = '';
         public function result_search()
 		{	
-			//truy vấn domain phổ biến
-			$domain_common=$this->ProductPrice->find('all', 
-				array(
-				 'conditions' => array( 
-				 	'product_type LIKE' => "1",
-				 	'domain_common LIKE' => "1"
-				 )
-			));
-			//truy vấn domain quốc tế
-			$domain_international=$this->ProductPrice->find('all', 
-				array(
-				 'conditions' => array( 
-				 	'product_type LIKE' => "1",
-				 	'domain_type LIKE' => "0"
-				 )
-			));
-			//truy vấn domain việt nam
-			$domain_vn=$this->ProductPrice->find('all', 
-				array(
-				 'conditions' => array( 
-				 	'product_type LIKE' => "1",
-				 	'domain_type LIKE' => "1"
-				 )
-			));
-			//pr($domain_vn);die;
-			$this->set('domain_common',$domain_common);
-			$this->set('domain_international',$domain_international);
-			$this->set('domain_vn',$domain_vn);
+			$data_dm = $this->ProductPrice->find('all',array('conditions'=>array('product_type' => "1")));
+			$this->set('data_dm',$data_dm);
 
-			
-			//-----------------------------------------------------------------------
-						$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);
-
-						//pr($Login); die;
-						$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
-
-						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-						curl_setopt($ch, CURLOPT_POST, true);
-						curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
-
-						$output = curl_exec($ch);
-						$output = json_decode($output, true);
-						$token =  ($output['session']['token']);
-
-						curl_close($ch);
-
-			if($this->request->is('post'))
+			/* login lay chuoi json tu api*/
+			$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);
+			$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
+			$output = curl_exec($ch);
+			$output = json_decode($output, true);
+			$this->token =  ($output['session']['token']);
+			curl_close($ch);
+			/**********/
+			if($this->request->is('post')) // neu co data tu form gui len
 			{
-				$request = ($this->request->data);
-				//pr($request);die;
-				$arr = explode("\r\n", $request['search']);
-				//pr($arr);
-				$dem=0;
-				$check_domain_name = array();
-				$domain_common=$this->ProductPrice->find('all', array('conditions' => array( 'domain_common LIKE' => "1" )));
+				$dm_post = explode("\r\n", $this->data['dm_input']); // tach cac domain xuong dong
 
-				for ($a = 0;$a<count($arr);$a++)
-				{
-					$check_domain_name[$a] = strstr( $arr[$a], '.' );
-					//pr($check_domain_name);die;
-					$check1 = '%'.$check_domain_name[$a].'%';
-
-					if($check_domain_name[$a] == "")
-					{
-						for($i=0;$i<count($domain_common);$i++)
-						{
-							$request2[] = $arr[$a].$domain_common[$i]['ProductPrice']['product_name'];
+				foreach($dm_post as $key => $val){
+						$dm_post[$key] =preg_replace('/\s+/','',$val);;//xoa khoang trang trong data gui len
+						$suffix_exist[$key] = strstr($dm_post[$key], '.' ); //ten mien search nhap duoi thi tach duoi ten mien 
+						$dm_post[$key] = str_replace($suffix_exist[$key],'',$dm_post[$key]); // xoa duoi ten mien
+						if(empty($dm_post[$key])){ // khong nhap  ten mien thi unset bien
+							unset($dm_post[$key]);
+							unset($suffix_exist[$key]);
+						}else if(empty($suffix_exist[$key])){
+							unset($suffix_exist[$key]);
 						}
-
-					};
-					// if($check_domain_name != "" )
-					// {
-					// 	$request1 = $arr[$a];
-					// 	$this->set('request1',$request1);
-						
-					// 	//-------------------------------------------------------------------------
-					// 	$checkDomain = array(  "name" => $request1, "registrar" => "inet");
-						
-					// 	$data_string = json_encode($checkDomain);   
-
-					// 	$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
-
-					// 	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-					// 	//curl_setopt($ch, CURLOPT_POST, true);
-					// 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-					// 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-					// 	curl_setopt($ch, CURLOPT_HTTPHEADER, array
-					// 		(                                                                          
-					// 			'Content-Type:application/json; charset=UTF-8',  
-					// 			'token: '.$token                                                                             
-					// 	    )                                                                       
-					// 	);       
-
-					// 	$output1 = curl_exec($ch);
-					// 	$outputdm[$a] = json_decode($output1, true);
-					//  	curl_close($ch);
-					// };
-					
-					// {
-					// 	if(isset($request['id']))
-					// 	{-
-					// 		$prod_name=$this->ProductPrice->find('first',array(
-					// 			'conditions'=> array('ProductPrice.id'=>$request['product_id'])));
-					// 		$request2=$request['search'].$prod_name['ProductPrice']['product_name'];}
-
-
-					// 			//--------------------------------------------------------------------------------
-					// 			if(isset($request2)){
-								
-								
-					// 			$checkDomain = array(  "name" => $request2, "registrar" => "inet");
-					
-					// 			$data_string = json_encode($checkDomain);   
-
-
-					// 			$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
-
-					// 			curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-					// 			//curl_setopt($ch, CURLOPT_POST, true);
-					// 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-					// 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-					// 			curl_setopt($ch, CURLOPT_HTTPHEADER, array
-					// 				(                                                                          
-					// 					'Content-Type:application/json; charset=UTF-8',  
-					// 					'token: '.$token                                                                             
-					// 			    )                                                                       
-					// 			);       
-
-					// 			$output = curl_exec($ch);
-					// 			$output = json_decode($output, true);
-					// 			$this->set('output',$output);
-					// 		 	curl_close($ch);
-					// 	} 
-					// }
-					$dem++;
-					
-				}
-					//pr($request2[1]);
-					pr($request2);
-					count($domain_common);
-					count($request2);
-					
-					//pr(count($request2));
-					//pr(count($outputdm1));
-					//pr($outputdm1);die;
-					//$this->set('output',$outputdm);
-				//pr($dem); die;
-							// if(!isset($request2)){
-							// 	$this->Session->setFlash('Bạn chưa chọn đuôi tên miền. Làm ơn chọn đuôi tên miền cần kiểm tra!','default',array('class'=>'alert alert-danger'));
-							// }else{
-
-							// 	$this->set('prod_name',$prod_name);
-							// 	$this->set('request2',$request2);
-							// }
-					};
-					//pr($dem);
-					if(isset($dem)){
-						$this->set('dem',$dem);
 					}
-					//pr($output);die;
+				if(isset($this->data['suffix_key'])){
+					// neu tich chon loai ten mien
+
+					$search_key = $this->data['suffix_key'];
+					// tao mang ten mien tim kiem va check toi api
+					$key = 0;
+					foreach ($search_key as $search_key){
+						foreach($dm_post as $s_key => $row){
+							// if(isset($suffix_exist[$s_key])){
+							// 	$row = str_replace($suffix_exist[$s_key],'',$dm_post[$s_key]); // xoa cac duoi ten mien o nhap
+							// }
+							$data_search[$key]['domain_name'] = $row.$data_dm[$search_key]['ProductPrice']['product_name'];
+							if($data_dm[$search_key]['ProductPrice']['domain_type'] == 0){
+								$data_search[$key]['domain_type'] = '1';
+							}else{
+								$data_search[$key]['domain_type'] = '0';
+							}
+							//pr($data_search[$key]['domain_name'] );
+							// lay trang thai api gui ve
+							$result[$key]= $this->check_avaiable($data_search[$key]['domain_name'],$data_search[$key]['domain_type']);
+							 // lay thong tin gia san pham
+							$result[$key]['ProductPrice']=$data_dm[$search_key]['ProductPrice'];
+							$key ++;
+						}
+					}
+
 					
+				}else{
+					// xu ly khong tich chon ten mien
+								$index = 0;
+								// check ten mien theo duoi gui len
+								foreach($data_dm as $data_key => $data_val){
+									for($i=0;$i < count($dm_post);$i++){
+									if(isset($suffix_exist[$i]) && $suffix_exist[$i]== $data_val['ProductPrice']['product_name']){
+										$result[$index] = $this->check_avaiable($dm_post[$i].$suffix_exist[$i],$data_val['ProductPrice']['domain_type']);
+										$result[$index]['ProductPrice']=$data_val['ProductPrice'];
+										unset($dm_post[$i]);
+										unset($suffix_exist[$i]);
+										$index++;
+									}
+								// check ten mien con lai theo duoi pho bien
+								if($data_val['ProductPrice']['domain_common'] == 1){
+									foreach($dm_post as $val){
+									$result[$index] = $this->check_avaiable($val.$data_val['ProductPrice']['product_name'],$data_val['ProductPrice']['domain_type']);
+									$result[$index]['ProductPrice']=$data_val['ProductPrice'];
+									$index++;
+									}
+								}
+							}
+						}
+				}
+				$this->set('result',$result);
+			};
 
 		}
-        public function register_domain()
-		
-        {
-        	
+
+		private function check_avaiable($dm_name = null,$dm_type = null){
+			$registrar = ($dm_type == '0')?'inet':'inet-global';
+			$dm_check = array("name" => $dm_name, "registrar" => $registrar);
+			$data_json = json_encode($dm_check);  
+			$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+			curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array
+				(                                                                          
+				'Content-Type:application/json; charset=UTF-8',  
+				'token: '.$this->token                                                                             
+			    )                                                                       
+			);
+			$output = curl_exec($ch);
+			$output = json_decode($output, true);
+			curl_close($ch);
+			return $output;
+		}
+
+
+        public function register_domain(){
         	$data=$this->ProductPrice->find('all', array(
 				'conditions' => array( 'product_type LIKE' => "1" )
 			));
 			$this->set('data',$data);
 			//LOGIN
-				$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);
-				
+				$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);			
 				$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
-
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 				curl_setopt($ch, CURLOPT_POST, true);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
-
 				$output = curl_exec($ch);
 				$output = json_decode($output, true);
 				$token =  ($output['session']['token']);
 				curl_close($ch);
         	if($this->request->is('post'))
         	{
-
         		//pr($this->request->data);die;
         		if(isset($this->request->data['Data']))
 
@@ -461,16 +392,12 @@
 
 										 	
 										}
-
 										$this->set('output1',$output1);
 										curl_close($ch);
-									//
 								};
         			}
         	}
-
         }
-
         public function whois_domain(){
         	if($this->request->is('post')){
         		$this->layout = 'ajax';
@@ -491,11 +418,11 @@
 			}
 		}
 
-
 		public function domain_transfer()
 		{
 
 		}
+
 		public function price(){
 			$data=$this->ProductPrice->find('all', array( 
 				'conditions' => array( 'ProductPrice.product_type' => "1"),
