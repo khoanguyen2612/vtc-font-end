@@ -1,4 +1,11 @@
- <!--// Storage menu //-->
+    <?php
+        echo $this->Html->script('jquery.validate.min.js');
+        echo $this->Html->script('additional-methods.min.js');
+        echo $this->Html->script('jquery.numbervalidation.min.js');
+    ?>
+
+
+<!--// Storage menu //-->
     <nav class="navbar navbar-default hidden" id="menuNavbar">
         <div class="container">
             <div class="navbar-header">
@@ -51,26 +58,40 @@
 
                 <div class="clearfix"></div>
 
-                <?php
-                    //echo $this->Form->create(null, array('type' => 'POST',
-                    echo $this->Form->create('Storage',
-                        array('type' => 'POST',
-                            'url' => array('controller' => 'storage', 'action' => 'add_to_cart'),
-                            'id' => "id_form_store",
-                            'name' =>  "form_store",
-                            'class' => 'storage_form',
-                            'role' => 'form',
-                        )
-                    );
-                ?>
+
+
+                    <?php
+                        //echo $this->Form->create(null, array('type' => 'POST',
+                        echo $this->Form->create('Storage',
+                            array('type' => 'POST',
+                                'url' => array('controller' => 'storage', 'action' => 'add_to_cart'),
+                                'id' => "id_form_store",
+                                'name' =>  "form_store",
+                                'class' => 'storage_form form-horizontal',
+                                'role' => 'form',
+                            )
+                        );
+                    ?>
                     <div class="col-lg-6">
                         <h4><i></i><span>Dịch vụ bổ sung</span></h4>
+
+                        <div class="row text">
+                            <div id="alertSuccess" class="alert alert-success alert-dismissable" style="display:none;">
+                                <button id="buttonAlertSuccess" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Success!</strong> Giá trị nhập vào phù hợp!
+                            </div>
+                            <div id="alertDanger" class="alert alert-danger alert-dismissable" style="display:none;">
+                                <button id="buttonAlertDanger" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Error!</strong> Giá trị nhập vào không phù hợp!
+                            </div>
+                        </div>
+
                         <div class="row text">
                             <div class="col-lg-6">
                                 <span>Dung lượng:</span>
                             </div>
                             <div class="col-lg-6">
-                                <!--<input type="text" name="l_capacity" value="<?php /*echo $storage['l_capacity'] ;*/?>" id="id_l_capacity" >-->
+
                                 <?php
                                     echo $this->Form->input('l_capacity', array(
                                         'type'=>'text',
@@ -78,8 +99,9 @@
                                         'label' => false,
                                         'value'=> $storage['l_capacity'],
                                         'id'=> 'id_l_capacity',
-                                        'class'=> 'input_capacity',
+                                        'class'=> 'form-control',
                                         'div'=> false,
+                                        //'required' => 'required',
                                     ));
                                 ?>
                             </div>
@@ -102,7 +124,7 @@
                                         'options'=> $data,
                                         'value'=> 1,
                                         'id'=> 'id_opt_select',
-                                        'class'=> 'opt_select',
+                                        'class'=> 'opt_select form-control',
                                     ));
 
                                 ?>
@@ -143,7 +165,7 @@
 
                             echo "\n";
                         ?>
-                        <button type="submit" class="btn btn-default" name="submit" value="kích-hoạt">Kích hoạt</button>
+                        <button type="submit" class="btn btn-default" name="submit" value="kích-hoạt" id="btn_form_store_submit">Kích hoạt</button>
                     </p>
 
                 <?php
@@ -153,22 +175,83 @@
             </div>
         </div>
     </div>
-    <!-- content -->
 
-    <!-- HERE IS THE SELECT FILTER -->
     <?php
+        // tuent.phpmailer@gmail.com //
         $opt_url =  Router::url(array('controller' => 'storage', 'action' => 'change_money'));
     ?>
 
-    <!--// tuent.phpmailer@gmail.com //-->
+    <script type="text/javascript">
+
+        function closeAlerts() {
+            $("#alertSuccess").css("display", "none");
+            $("#alertDanger").css("display", "none");
+        }
+
+        function openAlert(valid) {
+            valid ? $("#alertSuccess").css("display", "block") : $("#alertDanger").css("display", "block");
+        }
+
+        $(document).ready(function () {
+
+             $("#id_l_capacity").masknumber({
+                rules: {
+                    type: 'integer',
+                    required: true,
+                    minvalue: <?=$min ?>,
+                    maxvalue: <?=$max ?>,
+                },
+                messages: {
+                    type: "Gía trị field phải là số",
+                    required: "Field không được để trống",
+                    minvalue: "Giá trị tối thiểu là <?=$min ?>",
+                    maxvalue: "Giá trị tối đa là <?=$max ?>"
+
+                },
+                settingserror: {
+                    tooltipplacement: "right",
+                }
+            })
+
+            $("#btn_form_store_submit").bind("click", function (event) {
+                closeAlerts();
+                if ($("#id_l_capacity").validnumber()) {
+                    var gb = $("#id_l_capacity").val();
+                    $("#id_l_capacity").val(gb + ' GB');
+                    $("#id_form_store").submit();
+                    return true;
+                }
+                else {
+                    //alert(JSON.stringify($("#id_l_capacity").validnumber()));
+                    openAlert(false);
+                    event.preventDefault();
+                    return false;
+                }
+                return true;
+            })
+
+            $("#buttonAlertSuccess").click(function () {
+                closeAlerts();
+            })
+
+            $("#buttonAlertDanger").click(function () {
+                closeAlerts();
+            })
+
+    })
+
+
+    </script>
+
+    <!-- HERE IS THE SELECT FILTER -->
     <script type="text/javascript">
 
         $(document).ready(function () {
 
-            var l_price = $('#id_l_price').val();
-            var tmp = l_price;
+             var l_price = $('#id_l_price').val();
+             var tmp = l_price;
 
-            $(".opt_select").bind("change keyup", function (event) {
+             $(".opt_select").bind("change keyup", function (event) {
 
                 var id_select = event.target.id;
                 var month = $("#id_opt_select").val();
@@ -187,9 +270,9 @@
                     async: true,
                     cache: false,
                     type: "POST",
-                    url: "<?=$opt_url?>", // This one should sent data to index action of the typology controller for processing
-                    data: JSON.stringify(data), // 1 param for money, // get all the select opt id data..
-                    // You will get all the select data..
+                    url: "<?=$opt_url?>",   // This one should sent data to index action of the typology controller for processing
+                    data: JSON.stringify(data),   // 1 param for money,  get all the select opt id data.. ,  You will get all the select data..
+
                     dataType: "json",
                     contentType: "application/json",
                     success: function ( resp, textStatus) {
@@ -198,16 +281,21 @@
                         $("#total_l_price").html(resp.total_l_price + ' VNĐ');
                         console.log(textStatus);
                         console.log(jQuery.parseJSON(resp));
-                    }
-                });
-
+                    },
+                })
                 event.preventDefault();
                 return false;
-
-            });
-
+             })
         })
+
+        $("#id_l_capacity").on("click", function() {
+            $(this).val("");
+        })
+
     </script>
+
+
+
 
 
     <?php echo $this->Html->css('storage_service.css');?>
@@ -216,4 +304,19 @@
         .l_package {
             background-color: #f3f3f3;
         }
+        #id_l_capacity {
+            opacity: 0.6;
+        }
+        #id_opt_select {
+            text-transform: uppercase;
+        }
+
+        .tooltip {
+            width: 250px;
+            height: 35px;
+        }
+
+
+
     </style>
+

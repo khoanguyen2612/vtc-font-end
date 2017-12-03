@@ -91,49 +91,43 @@
         /*  storage chosen capacity view  */
         public function chosen_capacity()
         {
-            $this->layout = "home";
+             $this->layout = "home";
 
-            $request = $this->request->data;
-            $storage = isset($request['Storage']) ? $request['Storage']: array();
+             $request = $this->request->data;
+             $storage = isset($request['Storage']) ? $request['Storage']: array();
 
-            if ($this->request->is('post')) {
+             $matches = preg_match_all("/((\d+)[gb]+)/i", strtolower($storage['l_capacity']), $_capacity_gb);
 
+             if (count($_capacity_gb) == 3 && $matches) {
+                $min = $_capacity_gb[2][0];
+                $max = $_capacity_gb[2][1];
+             } else {
+                 $min = 0;
+                 $max = 100;
+             };
+
+             if ($this->request->is('post')) {
+
+                $this->set(compact('min'));
+                $this->set(compact('max'));
                 $this->set(compact('storage'));
-            } else {
+             } else {
                 $this->redirect('/storage/');
-            }
+             }
 
         }
-
         /*  storage chosen capacity view  */
         public function add_to_cart()
         {
             $this->layout = "home";
             $request = $this->request->data;
+
             $storage = isset($request['Storage']) ? $request['Storage'] : array();
-
-            /*
-            $cart = $this->Cart->readCart();
-            if (isset($cart['list']))
-                // shift an element off the beginning of array
-                $all_item = array_shift($cart);
-            else
-                $all_item = $cart;
-            $products = $all_item;
-            */
-
-            /*$cart = $this->Cart->readCart();
-            Debugger::dump($cart);
-            $this->Session->delete('cart');
-            die();*/
-
             $cart = array();
+
             if ($this->request->is('post')) {
-
                 if ( !empty($request) && count($request) > 0 && count($storage) > 0 ) {
-                    // Debugger::dump($cart);
                     // define 1 product in order detail item to add on to cart,
-
                     // for Database
                     $order_detail['id'] = rand(95000, 99999);  // new id for item in OrderDetail on to session Cart
                     // detail for Order detail
@@ -191,7 +185,6 @@
                             $p_type = 'Other';
                             break;
                     }
-
                     $order_detail['product_type'] = 5;
                     $order_detail['product_name'] =  $storage['l_capacity'];
                     // for view layout
@@ -203,7 +196,6 @@
                     //add product to cart
                     $cart['product'] = $order_detail;
                 }
-
                 $this->Cart->addProduct($cart);
             }
 
@@ -212,14 +204,12 @@
             } else {
                 $this->redirect('/cart/');
             }
-
             $this->redirect('/cart/');
         }
 
         /*  money currency chosen capacity view  */
         public function change_money()
         {
-
             $this->autoRender = false;
             $this->request->onlyAllow('ajax'); // No direct access via browser URL
 
@@ -237,10 +227,8 @@
                         'l_price' =>  $total_l_price,
                         'total_l_price' =>  number_format( $total_l_price,0,',','.'),
                     )));
-
                     $this->response->send();
                     $this->_stop();
-
                 }
             }
         }
@@ -282,7 +270,6 @@
 
             $controller = ucfirst($this->request->controller) . 'Controller';
             $action = $this->request->action;
-
             $content_type = $this->request->header('Accept');
 
             $processing_by = sprintf("\n Processing by %s#%s as %s", $controller, $action, $content_type);
