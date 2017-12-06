@@ -268,7 +268,7 @@
 					if(isset($filename)){
 						move_uploaded_file($tmp_name,$filename);
 					}
-					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
+					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success text-center'));
 		            $this->redirect(array('controller'=>'members','action'=>'profile_group'));
 				}
 
@@ -302,7 +302,7 @@
 					if(isset($filename)){
 	          			move_uploaded_file($tmp_name,$filename);
 	          		}
-					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success'));
+					$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success text-center'));
 		            $this->redirect(array('controller'=>'members','action'=>'profile_user'));
 				}
 
