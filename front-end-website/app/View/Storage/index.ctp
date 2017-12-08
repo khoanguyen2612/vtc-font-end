@@ -272,24 +272,24 @@
     </div>
 
     <?php echo $this->Html->css('storage_service.css'); ?>
-    <style type="text/css">
-        .l_package {
-            background-color: #f3f3f3;
-        }
-        button {
-            font-size: 16px;
-            margin-top: 45px;
-            display: block;
-            background: #f37636;
-            color: #fff;
-            padding: 24px 0px 17px 0px;
+        <style type="text/css">
+            .l_package {
+                background-color: #f3f3f3;
+            }
+            button {
+                font-size: 16px;
+                margin-top: 45px;
+                display: block;
+                background: #f37636;
+                color: #fff;
+                padding: 24px 0px 17px 0px;
 
-            width: 100%;
-            border-radius: 2px;
-            border: none;
-        }
-        button:hover {
-            text-decoration: none;
-            background-color: #2a1aa3;
-        }
-    </style>
+                width: 100%;
+                border-radius: 2px;
+                border: none;
+            }
+            button:hover {
+                text-decoration: none;
+                background-color: #2a1aa3;
+            }
+        </style>
