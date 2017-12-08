@@ -87,12 +87,11 @@
 									<div class="col-lg-8">
 										<select name="data[Account][country]" class="form-control" id="prf_country" required>
 											<option value>Chọn quốc gia</option>
-											<option value="VN" <?php echo ($user['Account']['country'] == 'VN')?'selected':''; ?>>Việt Nam</option>
-											<option value="US" <?php echo ($user['Account']['country'] == 'US')?'selected':''; ?>>United States</option>
+											<option value="VN" <?php echo (isset($user['Account']['country']) && $user['Account']['country'] == 'VN')?'selected':''; ?>>Việt Nam</option>
+											<option value="US" <?php echo (isset($user['Account']['country']) && $user['Account']['country'] == 'US')?'selected':''; ?>>United States</option>
 										</select>
 									</div>
 								</div>
-								
 							</td>
 						</tr>
 						<tr>

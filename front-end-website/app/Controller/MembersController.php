@@ -4,7 +4,7 @@ App::uses('CakeEmail', 'Network/Email');
 include_once ('../Config/constants.php');
 class MembersController extends AppController{
 	public $uses = array('Account','Organization');
-	public $components = array('Email','LoginAccount','Computing');
+	public $components = array('Email','LoginAccount','Computing','RequestHandler');
 
 	public function login($token=null){
 		$this->set('title_for_layout', 'Đăng nhập');
@@ -224,9 +224,8 @@ class MembersController extends AppController{
 		}
 	}	
 	public function profile_group(){
-		$user=$this->Account->find('first', array('conditions' => ['Account.id'=>$this->Auth->user('id')], ));
-		$province = Configure::read('province');		
-		$this->set(array('user'=>$user,'province'=>$province));
+		$user=$this->Account->find('first', array('conditions' => ['Account.id'=>$this->Auth->user('id')], ));		
+		$this->set('user',$user);
 		if($this->request->is('post')){
 			$this->Account->create();
 
@@ -258,7 +257,8 @@ class MembersController extends AppController{
 				if(isset($filename)){
 					move_uploaded_file($tmp_name,$filename);
 				}
-				$this->Session->setFlash('Thông tin Tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success text-center'));
+				$this->create_account();
+				$this->Session->setFlash('Cập nhật thành công, mời bạn tiếp tục các thao tác đang thực hiện','default',array('class'=>'alert alert-success text-center'));
 				$this->redirect(array('controller'=>'members','action'=>'profile_group'));
 			}
 
@@ -287,43 +287,52 @@ class MembersController extends AppController{
 			if($this->request->data['Account']['email']==$user['Account']['email']){unset($this->request->data['Account']['email']);}
 
 			if($this->Account->save($this->request->data)){
-				$this->create_account(); // create account to api vtc
+
 				if(isset($filename)){
 					move_uploaded_file($tmp_name,$filename);
 				}
-				$this->Session->setFlash('Thông tin tài khoản của bạn đã được thay đổi','default',array('class'=>'alert alert-success text-center'));
+				$this->create_account(); 
+				$this->Session->setFlash('Cập nhật thành công, mời bạn tiếp tục các thao tác đang thực hiện','default',array('class'=>'alert alert-success text-center'));
 				$this->redirect(array('controller'=>'members','action'=>'profile_user'));
 			}
 
 		}
 
 	}
+
 	public function set_info(){
-		if(isset($this->params->query['account']) && $this->params->query['account'] == 'person'){
+		
+		if($this->params->query['account'] == 'person'){
+			$user_login = $this->Account->find('first',array('conditions'=>array('Account.id'=>$this->params->query['id'])));
+			$this->Auth->login($user_login['Account']);	
 			$this->Session->setFlash('Bạn cần cập nhật thông tin tài khoản để thực hiện thao tác này','default',array('class'=>'alert alert-warning text-center'));
 			return $this->redirect(array('action'=>'profile_user'));
 		}else 
-		if(isset($this->params->query['account']) && $this->params->query['account'] == 'group'){
+		if($this->params->query['account'] == 'group'){
+			$user_login = $this->Account->find('first',array('conditons'=>array('Account.id'=>$this->params->query['id'])));
+			$this->Auth->login($user_login['Account']);
 			$this->Session->setFlash('Bạn cần cập nhật thông tin tài khoản để thực hiện thao tác này','default',array('class'=>'alert alert-warning text-center'));
 			return $this->redirect(array('action'=>'profile_group'));
 		}else{
 			return $this->redirect(array('controller'=>'home','action'=>'index'));
 		}
 	}
-	public function create_account(){
+
+	private function create_account(){
 		Configure::load('config', 'default');
 		$user = $this->Account->find('first',array('conditions'=> array('Account.id'=>$this->Auth->user('id'))));
 		$result1 = $this->Computing->curl('getListCountry','');
 		$data1 = array('countryCode' => $user['Account']['country']);
 		$url1 = $this->Computing->convert1($data1);
 		$result2 = $this->Computing->curl('getListCityByCountry',$url1);
-		//pr($result2);die;
-		if(isset($result2->data) && !empty($result2->data)){
+		//pr($user);die;
+		if(!empty($result2->data) && !empty($user['Account']['address'])){
 			foreach($result2->data as $key => $row){
-			if($row->value == $user['Account']['add_contact']){
-				$user['Account']['city_code'] = $row->code;
+				if($row->value == $user['Account']['address']){
+
+					$user['Account']['city_code'] = $row->code;
+				}
 			}
-		}
 		}else{
 			$user['Account']['city_code'] = '';
 		}
@@ -343,7 +352,7 @@ class MembersController extends AppController{
 			'domainId' => $result3->data,
 			'code' => Configure::read('capcha')
 		);
-		pr($data3);die;
+		//pr($data3);die;
 		$url3 = $this->Computing->convert1($data3);
 		//pr($url3);die;
 		$result4 =  $this->Computing->curl('createAccount',$url3);
@@ -352,18 +361,18 @@ class MembersController extends AppController{
 
 	function get_city(){
 		// echo $this->request->data['country'];die;
-		if($this->request->is('post')){
+		if($this->RequestHandler->isAjax()){
 			$data = array('countryCode'=>$this->request->data['country']);
 			$url = $this->Computing->convert1($data);
 			$result = $this->Computing->curl('getListCityByCountry',$url);
 			//pr($result);die;
 			if(!empty($result->data)){
-				echo '<option value"">Chọn tỉnh/thành phố </option>';
+				echo '<option value>Chọn tỉnh/thành phố </option>';
 				foreach ($result->data as $key => $value) {
 					echo '<option value="'.$value->value.'">'.$value->value.'</option>';
 				}
 			}else{
-				echo '<option value"">Chọn tỉnh/thành phố</option>';
+				echo '<option value>Chọn tỉnh/thành phố</option>';
 			}
 		}			
 		$this->autoRender = false;

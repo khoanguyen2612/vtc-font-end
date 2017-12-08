@@ -128,11 +128,12 @@
 								</td>
 								<td>
 									<div class="form-group">
-										<label class="col-lg-3 control-label"> Tỉnh/Thành phố: </label>
+										<label class="col-lg-3 control-label"> Quốc gia </label>
 										<div class="col-lg-8">
-											<select name="data[Account][address]" class="form-control">
-												<option>Chọn tỉnh thành</option>
-												<option></option>
+											<select name="data[Account][country]" class="form-control" id="prf_country" required>
+												<option value>Chọn quốc gia</option>
+												<option value="VN" <?php echo (isset($user['Account']['country']) && $user['Account']['country'] == 'VN')?'selected':''; ?>>Việt Nam</option>
+												<option value="US" <?php echo (isset($user['Account']['country']) && $user['Account']['country'] == 'US')?'selected':''; ?>>United States</option>
 											</select>
 										</div>
 									</div>
@@ -155,15 +156,18 @@
 									</div></td>
 									<td>
 										<div class="form-group">
-											<label class="col-lg-3 control-label"> Quốc gia </label>
+											<label class="col-lg-3 control-label"> Tỉnh/Thành phố: </label>
 											<div class="col-lg-8">
-												<select name="data[Account][country]" class="form-control" required="">
-													<option>Chọn Quốc Gia</option>
-													<option value="VN" <?php echo ($user["country"] == 'VN')?'selected':'';?>>Việt Nam</option>
-													<option value="US" <?php echo ($user["country"] == 'US')?'selected':'';?>>United States</option>
+												<select name="data[Account][address]" class="form-control" id="choice_ct">
+													<?php if(!empty($user['Account']['address'])): ?>
+														<option value="<?php echo $user['Account']['address'] ?>"><?php echo $user['Account']['address'] ?></option>
+													<?php else:?>
+														<option value>Chọn tỉnh/thành phố</option>
+													<?php endif;?>
 												</select>
 											</div>
 										</div>
+
 									</td>
 								</tr>
 							</table>
@@ -240,5 +244,18 @@
 	layoutTemplates: {main2: '{preview} {remove} {browse}'},
 	allowedFileExtensions: ["jpg", "png", "gif"]
 });
-</script>
-<?php echo $this->fetch('script'); ?>
+
+		$('#prf_country').on('change', function() {
+			$.ajax({
+				url: "<?php echo $this->Html->url(array("controller" => "Members","action" => "get_city")); ?>",
+				type: 'POST',
+				dataType: 'html',
+				data: {country: $(this).val()},
+			})
+			.done(function(data) {
+				console.log(data);
+				$('#choice_ct').html(data);
+			});	
+		});
+	</script>
+	<?php echo $this->fetch('script'); ?>
