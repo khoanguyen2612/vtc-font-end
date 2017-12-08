@@ -116,7 +116,7 @@
                         <input name="txtCustomerMobile" type="text" value="<?php echo "0916298481" ?>" id="txtCustomerMobile"/>
                         <input name="txtParamExt" type="text" value="" id="txtParamExt"/>
                         <input name="txtParamLanguage" type="text" value="vi" id="txtParamLanguage"/>
-                        <input name="txtUrlReturn" type="text" value="<?php echo "http://vtc.codelovers.vn/carts/finish/" ?>" id="txtUrlReturn"/>
+                        <input name="txtUrlReturn" type="text" value="<?php echo Router::fullbaseUrl(). "/carts/finish/" ?>" id="txtUrlReturn"/>
                         <input name="txtSecret" type="text" value="<?php echo "VtcPay_Codelovers_2017" ?>" id="txtSecret"/>
                         <input name="txtTotalAmount" type="text" value="<?php echo round($total_payment) ?>" id="txtTotalAmount"/>
                         <input name="txtCurency" type="text" value="VND" id="txtCurency"/> &nbsp;<i>VND/USD</i>
