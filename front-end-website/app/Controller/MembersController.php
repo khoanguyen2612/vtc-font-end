@@ -309,19 +309,20 @@
 			}
 
 		}
-		// public function filedemo(){
-		// 		$whois = array("domainName" => "thang.com");
-		// 		$ch = curl_init("https://dms.inet.vn/api/public/whois/v1/whois/directly");
+		public function set_info(){
+			if(isset($this->params->query['account']) && $this->params->query['account'] == 'person'){
+				$this->Session->setFlash('Bạn cần cập nhật thông tin tài khoản để thực hiện thao tác này','default',array('class'=>'alert alert-warning text-center'));
+				return $this->redirect(array('action'=>'profile_user'));
+			}else 
+			if(isset($this->params->query['account']) && $this->params->query['account'] == 'group'){
+				$this->Session->setFlash('Bạn cần cập nhật thông tin tài khoản để thực hiện thao tác này','default',array('class'=>'alert alert-warning text-center'));
+				return $this->redirect(array('action'=>'profile_group'));
+			}else{
+				return $this->redirect(array('controller'=>'home','action'=>'index'));
+			}
+		}
+		private function creat_account(){
 
-		// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		// 		curl_setopt($ch, CURLOPT_POST, true);
-		// 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($whois));
-
-		// 		$data = curl_exec($ch);
-		// 		$data = json_decode($data, true);
-		// 		pr($data);die;
-
-		// 		$this->set('data',$data);
-		// }
+		}
 	}
 ?>
