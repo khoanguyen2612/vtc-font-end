@@ -84,8 +84,9 @@ div.personal-info .button-info{
 	padding-left: 30px;
 }
 .topnav ul.menu-user{
+	border-radius: 0px !important;
 	background-color: #2A363F;
-	left: 30px;
+	left: -2px;
 	margin: 9px 0 0;
 }
 .topnav ul.menu-user li{
