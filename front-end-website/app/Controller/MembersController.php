@@ -3,9 +3,11 @@ App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 include_once ('../Config/constants.php');
 class MembersController extends AppController{
+	public function beforeFilter() {
+		parent::beforeFilter();
+	}
 	public $uses = array('Account','Organization');
 	public $components = array('Email','LoginAccount','Computing','RequestHandler');
-
 	public function login($token=null){
 		$this->set('title_for_layout', 'Đăng nhập');
 		if($this->Auth->user()) return $this->redirect($this->Auth->redirectUrl());
@@ -224,6 +226,7 @@ class MembersController extends AppController{
 		}
 	}	
 	public function profile_group(){
+		if(!$this->Auth->loggedIn()) return $this->redirect($this->Auth->loginAction);
 		$user=$this->Account->find('first', array('conditions' => ['Account.id'=>$this->Auth->user('id')], ));		
 		$this->set('user',$user);
 		if($this->request->is('post')){
@@ -257,7 +260,10 @@ class MembersController extends AppController{
 				if(isset($filename)){
 					move_uploaded_file($tmp_name,$filename);
 				}
-				$this->create_account();
+				if($this->Session->check('update_first')){
+					$this->create_account();
+					$this->Session->delete('update_first');
+				}
 				$this->Session->setFlash('Cập nhật thành công, mời bạn tiếp tục các thao tác đang thực hiện','default',array('class'=>'alert alert-success text-center'));
 				$this->redirect(array('controller'=>'members','action'=>'profile_group'));
 			}
@@ -266,6 +272,7 @@ class MembersController extends AppController{
 
 	}
 	public function profile_user(){
+		if(!$this->Auth->loggedIn()) return $this->redirect($this->Auth->loginAction);
 		$user=$this->Account->find('first', array('conditions' => ['Account.id'=>$this->Auth->user('id')], ));
 		$this->set('user',$user['Account']);
 		if($this->request->is('post')){
@@ -291,7 +298,10 @@ class MembersController extends AppController{
 				if(isset($filename)){
 					move_uploaded_file($tmp_name,$filename);
 				}
-				$this->create_account(); 
+				if($this->Session->check('update_first')){
+					$this->create_account();
+					$this->Session->delete('update_first');
+				}
 				$this->Session->setFlash('Cập nhật thành công, mời bạn tiếp tục các thao tác đang thực hiện','default',array('class'=>'alert alert-success text-center'));
 				$this->redirect(array('controller'=>'members','action'=>'profile_user'));
 			}
@@ -301,16 +311,17 @@ class MembersController extends AppController{
 	}
 
 	public function set_info(){
-		
 		if($this->params->query['account'] == 'person'){
 			$user_login = $this->Account->find('first',array('conditions'=>array('Account.id'=>$this->params->query['id'])));
 			$this->Auth->login($user_login['Account']);	
+			$this->Session->write('update_first',true);
 			$this->Session->setFlash('Bạn cần cập nhật thông tin tài khoản để thực hiện thao tác này','default',array('class'=>'alert alert-warning text-center'));
 			return $this->redirect(array('action'=>'profile_user'));
 		}else 
 		if($this->params->query['account'] == 'group'){
 			$user_login = $this->Account->find('first',array('conditons'=>array('Account.id'=>$this->params->query['id'])));
 			$this->Auth->login($user_login['Account']);
+			$this->Session->write('update_first',true);
 			$this->Session->setFlash('Bạn cần cập nhật thông tin tài khoản để thực hiện thao tác này','default',array('class'=>'alert alert-warning text-center'));
 			return $this->redirect(array('action'=>'profile_group'));
 		}else{
@@ -359,7 +370,7 @@ class MembersController extends AppController{
 		//pr($result4);die;
 	}
 
-	function get_city(){
+	public function get_city(){
 		// echo $this->request->data['country'];die;
 		if($this->RequestHandler->isAjax()){
 			$data = array('countryCode'=>$this->request->data['country']);
