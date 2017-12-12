@@ -107,19 +107,17 @@
 					<hr>
 					<?php if(isset($result)): ?>
 						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="col-lg-12 add-domain-domain">
 								<p><span>4</span>Kết quả kiểm tra tên miền</p>
-								<div class="table-responsive result">
-									<table class="table table-hover">
+								<div class="table-responsive result add-on">
+									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
+												<th class="dm_head_result"></th>
 												<th class="dm_head_result">Tên miền</th>
-												<th class="dm_head_result">Tình trạng</th>
-												<th class="dm_head_result">Phí đăng ký đầu năm</th>
-												<th class="dm_head_result">Phí gia hạn</th>
-												<th class="dm_head_result">Phí chuyển tên miền</th>
-												<th class="dm_head_result">Nút đăng ký</th>
-												<th class="dm_head_result">Thêm vào giỏ hàng</th>
+												<th class="dm_head_result">Phí duy trì</th>
+												<th class="dm_head_result">Phí đăng kí</th>
+												<th class="dm_head_result">Thông tin Whois</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -127,29 +125,48 @@
 
 												<?php if ($row['status'] == 'available'): ?>
 													<tr>
-														<td><?php echo $row['name']; ?></td>
-														<td><?php echo "Có thể đăng ký"; ?></td>
-														<td class="mn_count"><?php echo number_format($row['ProductPrice']['price'], 0, ',', '.'); ?> VND</td>
-														<td class="mn_count"><?php echo number_format($row['ProductPrice']['bk_price'], 0, ',', '.'); ?> VND</td>
 														<td>
-															<?php echo number_format( $row['ProductPrice']['price_transfer'], 0, ',', '.'); ?> VND
+															<?php echo "<img src='../app/webroot/img/icon-check.png'>"; ?>
 														</td>
-														<td><a class="btn btn-success" href="#" role="button">Đặt mua</a></td>
-														<td><a href=""><?php echo $this->Html->image("cart_btn.png") ?></a></td>
+														<td>
+															<?php echo $row['name']; ?>
+														</td>
+														<td class="mn_count">
+															<?php echo number_format($row['ProductPrice']['price'], 0, ',', '.'); ?> VND
+														</td>
+														<td class="mn_count">
+															<?php echo number_format($row['ProductPrice']['bk_price'], 0, ',', '.'); ?> VND
+														</td>
+														<td>
+														</td>
 													</tr>
 												<?php else: ?>
-													<tr style="background-color:#b1b1b1">
-														<td><?php echo $row['name']; ?></td>
-														<td><?php echo "Không thể đăng ký"; ?></td>
-														<td class="mn_count"><?php echo number_format($row['ProductPrice']['price'], 0, ',', '.'); ?> VND</td>
-														<td class="mn_count"><?php echo number_format($row['ProductPrice']['bk_price'], 0, ',', '.'); ?> VND</td>
+													<tr>
 														<td>
-															<?php echo number_format( $row['ProductPrice']['price_transfer'], 0, ',', '.'); ?> VND
+															<?php echo "<img src='../app/webroot/img/icon-del.png'>"; ?>
 														</td>
 														<td>
-															<a class="btn btn-success search_owner" href="#" role="button">Tra WHOIS</a>
+															<?php echo $row['name']; ?>
 														</td>
-														<td style="background-color: #fff"></td>
+														<td class="mn_count">
+															<?php echo number_format($row['ProductPrice']['price'], 0, ',', '.'); ?> VND
+														</td>
+														<td class="mn_count">
+															<?php echo number_format($row['ProductPrice']['bk_price'], 0, ',', '.'); ?> VND
+														</td>
+														<td>
+															<input type="hidden" class="domain_name" name="domain_name" value="<?php echo $row['name']; ?>">
+															<div class='btn btn-danger button1' data-toggle="modal" data-target="#myModal">
+																Whois 
+																<img src='../app/webroot/img/icon-whois.png'>
+															</div>
+															<div class="modal fade" id="myModal" role="dialog">
+																<div class="modal-dialog modal-lg">
+																	<div class="modal-content md-cn" id="demo">
+																	</div>
+																</div>
+															</div>
+														</td>
 													</tr>
 												<?php endif; ?>
 
@@ -174,6 +191,23 @@
 				$(this).find('input[type=radio]').prop('checked', true);
 			});
 		});
+
+		$(document).ready(function () {
+			$('.button1').click(function () {
+				console.log($(this).parent().children(".domain_name").val());
+				$.ajax({
+					url: "<?php echo $this->Html->url(array('controller' => 'ProductPrices', 'action' => 'whois_domain'))?>",
+					type: "post",
+					dataType: "html",
+					data: {
+						domain_name: $(this).parent().children(".domain_name").val(),
+					},
+					success: function (result) {
+						$('#demo').html(result);
+					}
+				});
+			});
+		});
 	</script>
 	<style type="text/css">
 	.result a:hover{
@@ -186,31 +220,6 @@
 	}
 	.mn_count{
 		color: #0060af;
-	}
-	.result tbody tr{
-		border-right: solid 1px #73777a;
-	}
-	.result tbody tr:last-child{
-		border-bottom: solid 1px #73777a;
-	}
-	.result tr .dm_head_result{
-		border-top:solid 1px #005faf;
-		border-bottom:solid 1px #005faf;
-		border-right:solid 1px #2a7fc2;
-		border-left:solid 1px #2a7fc2;
-		text-align: center;
-		background-color: #005faf;
-		color: #fdfbfb;
-		font-weight: 500;
-	}
-	.result tr td{
-		border-left: solid 1px #2f3032;
-		border-color: #2f3336;
-	}
-
-	.result tr td{
-		border-top:0px !important;
-		border-bottom: none;
 	}
 	.result a[role="button"]{
 		border-radius: 0px;
@@ -261,5 +270,55 @@
 	.domain_name li{
 		width: 20%;
 		float: left !important;
+	}
+
+	/**/
+	.md-cn {
+		width: 100%;
+		padding: 0%;
+		height: auto;
+	}
+
+	.modal-lg {
+		padding: unset;
+	}
+
+	.modal-header {
+		padding: 20px;
+		background: #e67237;
+		color: #fff;
+	}
+
+	.whois-body {
+		margin: 10px 50px;
+		text-align: left;
+
+	}
+
+	.whois-section {
+		margin-bottom: 15px;
+
+	}
+
+	.whois-item {
+		background: #005faf;
+		color: #fff;
+		padding: 10px;
+		font-size: 24px;
+	}
+
+	.whois-content {
+		line-height: 30px;
+		padding-top: 10px;
+	}
+
+	.whois-content-1 {
+		line-height: 15px;
+		padding-top: 20px;
+	}
+
+	.dcol {
+		float: left;
+		width: 50%;
 	}
 </style>

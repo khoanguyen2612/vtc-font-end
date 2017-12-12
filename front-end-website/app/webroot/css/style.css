@@ -967,12 +967,6 @@ tr.unable,tr.unable td:nth-child(5){
 	background-color: #fff !important;
 	color: #c2c2c2 !important;
 }
-#check tr td:nth-child(5){
-	color: #34b139;
-}
-#check tr td:first-child{
-	text-align: left;
-}
 div.cart div.content{
 	padding-bottom: 40px;
 	background-color: #f1f1f1;

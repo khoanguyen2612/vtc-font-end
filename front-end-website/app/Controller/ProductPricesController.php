@@ -1,28 +1,29 @@
 <?php 
-	include_once ('../Config/constants.php');
-	class ProductPricesController extends AppController
+include_once ('../Config/constants.php');
+class ProductPricesController extends AppController
+{	
+	public $use = array('ProductPrice',);
+
+	public $helpers = array('Html', 'Form', 'Session');
+
+	private $token = '';
+	public function result_search()
 	{	
-		public $use = array('ProductPrice',);
+		$this->set('title_for_layout','Kiểm Tra Tên Miền');
+		$data_dm = $this->ProductPrice->find('all',array('conditions'=>array('product_type' => "1")));
+		$this->set('data_dm',$data_dm);
 
-        public $helpers = array('Html', 'Form', 'Session');
-
-        private $token = '';
-        public function result_search()
-		{	
-			$data_dm = $this->ProductPrice->find('all',array('conditions'=>array('product_type' => "1")));
-			$this->set('data_dm',$data_dm);
-
-			/* login lay chuoi json tu api*/
-			$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);
-			$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
-			$output = curl_exec($ch);
-			$output = json_decode($output, true);
-			$this->token =  ($output['session']['token']);
-			curl_close($ch);
-			/**********/
+		/* login lay chuoi json tu api*/
+		$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);
+		$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($Login));
+		$output = curl_exec($ch);
+		$output = json_decode($output, true);
+		$this->token =  ($output['session']['token']);
+		curl_close($ch);
+		/**********/
 			if($this->request->is('post')) // neu co data tu form gui len
 			{
 				$dm_post = explode("\r\n", $this->data['dm_input']); // tach cac domain xuong dong
@@ -38,95 +39,97 @@
 							unset($suffix_exist[$key]);
 						}
 					}
-				if(isset($this->data['suffix_key'])){
+					if(isset($this->data['suffix_key'])){
 					// neu tich chon loai ten mien
 
-					$search_key = $this->data['suffix_key'];
+						$search_key = $this->data['suffix_key'];
 					// tao mang ten mien tim kiem va check toi api
-					$index = 0;
+						$index = 0;
 					//pr($suffix_exist);die;
-					foreach($suffix_exist as $sf_exist_key => $sf_exist_val){
-						foreach($data_dm as $key => $val){
-							if($val['ProductPrice']['product_name'] == $sf_exist_val){
-								$result[$index]= $this->check_avaiable($dm_post[$sf_exist_key].$sf_exist_val,$val['ProductPrice']['domain_type']);
+						foreach($suffix_exist as $sf_exist_key => $sf_exist_val){
+							foreach($data_dm as $key => $val){
+								if($val['ProductPrice']['product_name'] == $sf_exist_val){
+									$result[$index]= $this->check_avaiable($dm_post[$sf_exist_key].$sf_exist_val,$val['ProductPrice']['domain_type']);
+									$index ++;
+								}
+							}
+						}
+						foreach ($search_key as $search_key){
+							foreach($dm_post as $s_key => $row){
+
+								$data_search[$index]['domain_name'] = $row.$data_dm[$search_key]['ProductPrice']['product_name'];
+								if($data_dm[$search_key]['ProductPrice']['domain_type'] == 0){
+									$data_search[$index]['domain_type'] = '1';
+								}else{
+									$data_search[$index]['domain_type'] = '0';
+								}
+							//pr($data_search[$key]['domain_name'] );
+							// lay trang thai api gui ve
+								$result[$index]= $this->check_avaiable($data_search[$index]['domain_name'],$data_search[$index]['domain_type']);
+							 // lay thong tin gia san pham
+								$result[$index]['ProductPrice']=$data_dm[$search_key]['ProductPrice'];
 								$index ++;
 							}
 						}
-					}
-					foreach ($search_key as $search_key){
-						foreach($dm_post as $s_key => $row){
 
-							$data_search[$index]['domain_name'] = $row.$data_dm[$search_key]['ProductPrice']['product_name'];
-							if($data_dm[$search_key]['ProductPrice']['domain_type'] == 0){
-								$data_search[$index]['domain_type'] = '1';
-							}else{
-								$data_search[$index]['domain_type'] = '0';
-							}
-							//pr($data_search[$key]['domain_name'] );
-							// lay trang thai api gui ve
-							$result[$index]= $this->check_avaiable($data_search[$index]['domain_name'],$data_search[$index]['domain_type']);
-							 // lay thong tin gia san pham
-							$result[$index]['ProductPrice']=$data_dm[$search_key]['ProductPrice'];
-							$index ++;
-						}
-					}
-
-					
-				}else{
+						
+					}else{
 					// xu ly khong tich chon ten mien
-								$index = 0;
+						$index = 0;
 								// check ten mien theo duoi gui len
-								foreach($data_dm as $data_key => $data_val){
-									for($i=0;$i < count($dm_post);$i++){
-									if(isset($suffix_exist[$i]) && $suffix_exist[$i]== $data_val['ProductPrice']['product_name']){
-										$result[$index] = $this->check_avaiable($dm_post[$i].$suffix_exist[$i],$data_val['ProductPrice']['domain_type']);
-										$result[$index]['ProductPrice']=$data_val['ProductPrice'];
-										unset($dm_post[$i]);
-										unset($suffix_exist[$i]);
-										$index++;
-									}
+						foreach($data_dm as $data_key => $data_val){
+							for($i=0;$i < count($dm_post);$i++){
+								if(isset($suffix_exist[$i]) && $suffix_exist[$i]== $data_val['ProductPrice']['product_name']){
+									$result[$index] = $this->check_avaiable($dm_post[$i].$suffix_exist[$i],$data_val['ProductPrice']['domain_type']);
+									$result[$index]['ProductPrice']=$data_val['ProductPrice'];
+									unset($dm_post[$i]);
+									unset($suffix_exist[$i]);
+									$index++;
+								}
 								// check ten mien con lai theo duoi pho bien
 								if($data_val['ProductPrice']['domain_common'] == 1){
 									foreach($dm_post as $val){
-									$result[$index] = $this->check_avaiable($val.$data_val['ProductPrice']['product_name'],$data_val['ProductPrice']['domain_type']);
-									$result[$index]['ProductPrice']=$data_val['ProductPrice'];
-									$index++;
+										$result[$index] = $this->check_avaiable($val.$data_val['ProductPrice']['product_name'],$data_val['ProductPrice']['domain_type']);
+										$result[$index]['ProductPrice']=$data_val['ProductPrice'];
+										$index++;
 									}
 								}
 							}
 						}
-				}
-				$this->set('result',$result);
-			};
+					}
+					//pr($result);
+					$this->set('title_for_layout','Kết Quả Tìm Kiếm Tên Miền');
+					$this->set('result',$result);
+				};
 
-		}
+			}
 
-		private function check_avaiable($dm_name = null,$dm_type = null){
-			$registrar = ($dm_type == '0')?'inet':'inet-global';
-			$dm_check = array("name" => $dm_name, "registrar" => $registrar);
-			$data_json = json_encode($dm_check);  
-			$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
-			curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, array
-				(                                                                          
-				'Content-Type:application/json; charset=UTF-8',  
-				'token: '.$this->token                                                                             
-			    )                                                                       
-			);
-			$output = curl_exec($ch);
-			$output = json_decode($output, true);
-			curl_close($ch);
-			return $output;
-		}
+			private function check_avaiable($dm_name = null,$dm_type = null){
+				$registrar = ($dm_type == '0')?'inet':'inet-global';
+				$dm_check = array("name" => $dm_name, "registrar" => $registrar);
+				$data_json = json_encode($dm_check);  
+				$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+				curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
+				curl_setopt($ch, CURLOPT_HTTPHEADER, array
+					(                                                                          
+						'Content-Type:application/json; charset=UTF-8',  
+						'token: '.$this->token                                                                             
+					)                                                                       
+				);
+				$output = curl_exec($ch);
+				$output = json_decode($output, true);
+				curl_close($ch);
+				return $output;
+			}
 
 
-        public function register_domain(){
-        	$data=$this->ProductPrice->find('all', array(
-				'conditions' => array( 'product_type LIKE' => "1" )
-			));
-			$this->set('data',$data);
+			public function register_domain(){
+				$data=$this->ProductPrice->find('all', array(
+					'conditions' => array( 'product_type LIKE' => "1" )
+				));
+				$this->set('data',$data);
 			//LOGIN
 				$Login = array("email" => INET_API_USERNAME, "password" => INET_API_PASSWORD);			
 				$ch = curl_init("https://dms.inet.vn/api/sso/v1/user/signin");
@@ -137,310 +140,310 @@
 				$output = json_decode($output, true);
 				$token =  ($output['session']['token']);
 				curl_close($ch);
-        	if($this->request->is('post'))
-        	{
+				if($this->request->is('post'))
+				{
         		//pr($this->request->data);die;
-        		if(isset($this->request->data['Data']))
+					if(isset($this->request->data['Data']))
 
-	        		{
-	        			$request = ($this->request->data['Data']);
+					{
+						$request = ($this->request->data['Data']);
 	        			//pr($request); die;
-	        			$check = strstr($request['add_doamin'], '.');
-	        			$str = str_replace( $check, '', $request['add_doamin'] );
-	        			$this->set('check',$check);
-	        			        			
+						$check = strstr($request['add_doamin'], '.');
+						$str = str_replace( $check, '', $request['add_doamin'] );
+						$this->set('check',$check);
+						
 						if 
 							(
 								( $data=$this->ProductPrice->find('all', array('conditions' => array( 'product_name LIKE' => "$check%" ))) ) &&  ( $check != "") 
 							) 
-								{
-									$data1=$this->ProductPrice->find('all');
-									$this->set('data1',$data1);
-									$request1 = $request['add_doamin'];
-									$this->set('request1',$request1);
+						{
+							$data1=$this->ProductPrice->find('all');
+							$this->set('data1',$data1);
+							$request1 = $request['add_doamin'];
+							$this->set('request1',$request1);
 									//--------------------------------------------------------------------------
-										$checkDomain = array(  "name" => $request1, "registrar" => "inet");
-								
-										$data_string = json_encode($checkDomain);   
+							$checkDomain = array(  "name" => $request1, "registrar" => "inet");
+							
+							$data_string = json_encode($checkDomain);   
 
 
-										$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+							$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
 
-										curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+							curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 										//curl_setopt($ch, CURLOPT_POST, true);
-										curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-										curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-										curl_setopt($ch, CURLOPT_HTTPHEADER, array
-											(                                                                          
-												'Content-Type:application/json; charset=UTF-8',  
-												'token: '.$token                                                                             
-										    )                                                                       
-										);       
+							curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+							curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+							curl_setopt($ch, CURLOPT_HTTPHEADER, array
+								(                                                                          
+									'Content-Type:application/json; charset=UTF-8',  
+									'token: '.$token                                                                             
+								)                                                                       
+							);       
 
-										$output = curl_exec($ch);
-										$output = json_decode($output, true);
-										$this->set('output',$output);
-									 	curl_close($ch);
+							$output = curl_exec($ch);
+							$output = json_decode($output, true);
+							$this->set('output',$output);
+							curl_close($ch);
 									//------------------------------------------------------------
-									 	$request3 = $str ;
-										$this->set('request3',$request3);
+							$request3 = $str ;
+							$this->set('request3',$request3);
 									//------------------------------------------------------------
-										$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
-										$this->set('data1',$data1);
-										$i=0;
-										foreach($data1 as $item)
-										{
-											$test = $str.$item['ProductPrice']['product_name'];
+							$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
+							$this->set('data1',$data1);
+							$i=0;
+							foreach($data1 as $item)
+							{
+								$test = $str.$item['ProductPrice']['product_name'];
 											//pr($test);die;
 											//CHECK
-											$checkDomain = array(  "name" => $test, "registrar" => "inet");
-							
-											$data_string = json_encode($checkDomain);   
+								$checkDomain = array(  "name" => $test, "registrar" => "inet");
+								
+								$data_string = json_encode($checkDomain);   
 
 
-											$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+								$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
 
-											curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+								curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 											//curl_setopt($ch, CURLOPT_POST, true);
-											curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-											curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-											curl_setopt($ch, CURLOPT_HTTPHEADER, array
-												(                                                                          
-													'Content-Type:application/json; charset=UTF-8',  
-													'token: '.$token                                                                             
-											    )                                                                       
-											);       
+								curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+								curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+								curl_setopt($ch, CURLOPT_HTTPHEADER, array
+									(                                                                          
+										'Content-Type:application/json; charset=UTF-8',  
+										'token: '.$token                                                                             
+									)                                                                       
+								);       
 
-											$output1 = curl_exec($ch);
-											$output1 = json_decode($output1, true);
-											$output2[$i]=$output1;
+								$output1 = curl_exec($ch);
+								$output1 = json_decode($output1, true);
+								$output2[$i]=$output1;
 
-											$i++;
-											
+								$i++;
+								
 
-										 	
-										}
+								
+							}
 
-										$this->set('output2',$output2);
-										curl_close($ch);
-						 		}
+							$this->set('output2',$output2);
+							curl_close($ch);
+						}
 						else
-								{
-									$request2 = ($this->request->data['Data']) ;
-									$this->set('request2',$request2);
+						{
+							$request2 = ($this->request->data['Data']) ;
+							$this->set('request2',$request2);
 									//------------------------------------------------------------
-										$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
-										$this->set('data1',$data1);
-										$i=0;
-										
-										foreach($data1 as $item)
-										{
-											$test = $request['add_doamin'].$item['ProductPrice']['product_name'];
+							$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
+							$this->set('data1',$data1);
+							$i=0;
+							
+							foreach($data1 as $item)
+							{
+								$test = $request['add_doamin'].$item['ProductPrice']['product_name'];
 											//pr($test); die;
 											//CHECK
-											$checkDomain = array(  "name" => $test, "registrar" => "inet");
-							
-											$data_string = json_encode($checkDomain);   
+								$checkDomain = array(  "name" => $test, "registrar" => "inet");
+								
+								$data_string = json_encode($checkDomain);   
 
 
-											$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+								$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
 
-											curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+								curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 											//curl_setopt($ch, CURLOPT_POST, true);
-											curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-											curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-											curl_setopt($ch, CURLOPT_HTTPHEADER, array
-												(                                                                          
-													'Content-Type:application/json; charset=UTF-8',  
-													'token: '.$token                                                                             
-											    )                                                                       
-											);       
+								curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+								curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+								curl_setopt($ch, CURLOPT_HTTPHEADER, array
+									(                                                                          
+										'Content-Type:application/json; charset=UTF-8',  
+										'token: '.$token                                                                             
+									)                                                                       
+								);       
 
-											$output = curl_exec($ch);
-											$output = json_decode($output, true);
-											$output1[$i]=$output;
-											$i++;
-											
+								$output = curl_exec($ch);
+								$output = json_decode($output, true);
+								$output1[$i]=$output;
+								$i++;
+								
 
-										 	
-										}
+								
+							}
 
-										$this->set('output1',$output1);
-										curl_close($ch);
+							$this->set('output1',$output1);
+							curl_close($ch);
 									//
-								};
+						};
 
-	        		}
-        		else 
-        			{
-        				$request = ($this->request->data);
-        				$check = strstr($request['add_doamin'], '.');
-        				$str = str_replace( $check, '', $request['add_doamin'] );
-        				$this->set('check',$check);
+					}
+					else 
+					{
+						$request = ($this->request->data);
+						$check = strstr($request['add_doamin'], '.');
+						$str = str_replace( $check, '', $request['add_doamin'] );
+						$this->set('check',$check);
 
-        				if 
+						if 
 							(
 								( $data=$this->ProductPrice->find('all', array('conditions' => array( 'product_name LIKE' => "$check%" ))) ) &&  ( $check != "") 
 							)
-							{
-									$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
-									$this->set('data1',$data1);
-									$request1 = $request['add_doamin'];
-									$this->set('request1',$request1);
-									
+						{
+							$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
+							$this->set('data1',$data1);
+							$request1 = $request['add_doamin'];
+							$this->set('request1',$request1);
+							
 									//--------------------------------------------------------------------------
-										$checkDomain = array(  "name" => $request1, "registrar" => "inet");
-								
-										$data_string = json_encode($checkDomain);   
+							$checkDomain = array(  "name" => $request1, "registrar" => "inet");
+							
+							$data_string = json_encode($checkDomain);   
 
 
-										$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+							$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
 
-										curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+							curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 										//curl_setopt($ch, CURLOPT_POST, true);
-										curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-										curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-										curl_setopt($ch, CURLOPT_HTTPHEADER, array
-											(                                                                          
-												'Content-Type:application/json; charset=UTF-8',  
-												'token: '.$token                                                                             
-										    )                                                                       
-										);       
+							curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+							curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+							curl_setopt($ch, CURLOPT_HTTPHEADER, array
+								(                                                                          
+									'Content-Type:application/json; charset=UTF-8',  
+									'token: '.$token                                                                             
+								)                                                                       
+							);       
 
-										$output = curl_exec($ch);
-										$output = json_decode($output, true);
-										$this->set('output',$output);
-									 	curl_close($ch);
+							$output = curl_exec($ch);
+							$output = json_decode($output, true);
+							$this->set('output',$output);
+							curl_close($ch);
 									 //------------------------------------------------------------------------------
 
 
-									 	$request3 = $str ;
-										$this->set('request3',$request3);
+							$request3 = $str ;
+							$this->set('request3',$request3);
 									//------------------------------------------------------------
-										$data1=$this->ProductPrice->find('all',array(
-											'conditions' => array( 'product_type LIKE' => "1" )
-										));
-										$this->set('data1',$data1);
-										$i=0;
-										foreach($data1 as $item)
-										{
-											$test = $str.$item['ProductPrice']['product_name'];
+							$data1=$this->ProductPrice->find('all',array(
+								'conditions' => array( 'product_type LIKE' => "1" )
+							));
+							$this->set('data1',$data1);
+							$i=0;
+							foreach($data1 as $item)
+							{
+								$test = $str.$item['ProductPrice']['product_name'];
 											//pr($test);die;
 											//CHECK
-											$checkDomain = array(  "name" => $test, "registrar" => "inet");
-							
-											$data_string = json_encode($checkDomain);   
+								$checkDomain = array(  "name" => $test, "registrar" => "inet");
+								
+								$data_string = json_encode($checkDomain);   
 
 
-											$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+								$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
 
-											curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+								curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 											//curl_setopt($ch, CURLOPT_POST, true);
-											curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-											curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-											curl_setopt($ch, CURLOPT_HTTPHEADER, array
-												(                                                                          
-													'Content-Type:application/json; charset=UTF-8',  
-													'token: '.$token                                                                             
-											    )                                                                       
-											);       
+								curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+								curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+								curl_setopt($ch, CURLOPT_HTTPHEADER, array
+									(                                                                          
+										'Content-Type:application/json; charset=UTF-8',  
+										'token: '.$token                                                                             
+									)                                                                       
+								);       
 
-											$output1 = curl_exec($ch);
-											$output1 = json_decode($output1, true);
-											$output2[$i]=$output1;
+								$output1 = curl_exec($ch);
+								$output1 = json_decode($output1, true);
+								$output2[$i]=$output1;
 
-											$i++;
-											
+								$i++;
+								
 
-										 	
-										}
-
-										$this->set('output2',$output2);
-										curl_close($ch);
-
+								
 							}
+
+							$this->set('output2',$output2);
+							curl_close($ch);
+
+						}
 						else
-							{
-									$request2 = ($this->request->data); 
+						{
+							$request2 = ($this->request->data); 
 									//pr($request2); die;
-									$this->set('request2',$request2);
+							$this->set('request2',$request2);
 									//------------------------------------------------------------
-										$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
-										$this->set('data1',$data1);
-										$i=0;
-										foreach($data1 as $item)
-										{
-											$test = $request['add_doamin'].$item['ProductPrice']['product_name'];
+							$data1=$this->ProductPrice->find('all',array('conditions' => array( 'product_type LIKE' => "1" )));
+							$this->set('data1',$data1);
+							$i=0;
+							foreach($data1 as $item)
+							{
+								$test = $request['add_doamin'].$item['ProductPrice']['product_name'];
 
 											//CHECK
-											$checkDomain = array(  "name" => $test, "registrar" => "inet");
-							
-											$data_string = json_encode($checkDomain);   
+								$checkDomain = array(  "name" => $test, "registrar" => "inet");
+								
+								$data_string = json_encode($checkDomain);   
 
 
-											$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
+								$ch = curl_init("https://dms.inet.vn/api/rms/v1/domain/checkavailable");
 
-											curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+								curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 											//curl_setopt($ch, CURLOPT_POST, true);
-											curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
-											curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-											curl_setopt($ch, CURLOPT_HTTPHEADER, array
-												(                                                                          
-													'Content-Type:application/json; charset=UTF-8',  
-													'token: '.$token                                                                             
-											    )                                                                       
-											);       
+								curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");   
+								curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+								curl_setopt($ch, CURLOPT_HTTPHEADER, array
+									(                                                                          
+										'Content-Type:application/json; charset=UTF-8',  
+										'token: '.$token                                                                             
+									)                                                                       
+								);       
 
-											$output = curl_exec($ch);
-											$output = json_decode($output, true);
-											$output1[$i]=$output;
-											$i++;
-											
+								$output = curl_exec($ch);
+								$output = json_decode($output, true);
+								$output1[$i]=$output;
+								$i++;
+								
 
-										 	
-										}
-										$this->set('output1',$output1);
-										curl_close($ch);
-								};
-        			}
-        	}
-        }
-        public function whois_domain(){
-        	if($this->request->is('post')){
-        		$this->layout = 'ajax';
-        		// pr($this->request->data);die;
-        		$domain_name=$this->request->data['domain_name'];
-				$whois = array("domainName" => $domain_name);
-				$ch = curl_init("https://dms.inet.vn/api/public/whois/v1/whois/directly");
-
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_POST, true);
-				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($whois));
-
-				$datadomain = curl_exec($ch);
-				$datadomain = json_decode($datadomain, true);
-				// pr($datadomain);die;
-				$this->set('datadomain',$datadomain);
-				curl_close($ch);
+								
+							}
+							$this->set('output1',$output1);
+							curl_close($ch);
+						};
+					}
+				}
 			}
+			public function whois_domain(){
+				if($this->request->is('post')){
+					$this->layout = 'ajax';
+        		// pr($this->request->data);die;
+					$domain_name=$this->request->data['domain_name'];
+					$whois = array("domainName" => $domain_name);
+					$ch = curl_init("https://dms.inet.vn/api/public/whois/v1/whois/directly");
+
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($ch, CURLOPT_POST, true);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($whois));
+
+					$datadomain = curl_exec($ch);
+					$datadomain = json_decode($datadomain, true);
+				// pr($datadomain);die;
+					$this->set('datadomain',$datadomain);
+					curl_close($ch);
+				}
+			}
+
+			public function domain_transfer()
+			{
+
+			}
+
+			public function price(){
+				$data=$this->ProductPrice->find('all', array( 
+					'conditions' => array( 'ProductPrice.product_type' => "1"),
+				));
+				$this->set('data',$data);
+
+
+			}
+
 		}
-
-		public function domain_transfer()
-		{
-
-		}
-
-		public function price(){
-			$data=$this->ProductPrice->find('all', array( 
-				'conditions' => array( 'ProductPrice.product_type' => "1"),
-			));
-			$this->set('data',$data);
-
-
-		}
-
-    }
-?>
+		?>
 
 
 
