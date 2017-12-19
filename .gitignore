@@ -1,0 +1,4 @@
+/staff-website/app/tmp/*
+#/staff-website/app/Config/core.php
+/staff-website/app/Config/database.php
+/staff-website/vendors/*
