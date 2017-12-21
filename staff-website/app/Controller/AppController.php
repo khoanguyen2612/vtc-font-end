@@ -31,4 +31,10 @@ App::uses('Controller', 'Controller');
  * @link		https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    var $components = array('Session', 'Cookie', 'Paginator', 'Email');
+    public $helpers = array('Session', 'Html', 'Form');
+    public function beforeFilter(){
+        $this->layout = "home";
+    }
+
 }
